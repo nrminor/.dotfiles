@@ -1,0 +1,9 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Nicholas Minor
+	email = nrminor@wisc.edu
+
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main

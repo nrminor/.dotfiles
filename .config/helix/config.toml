@@ -1,0 +1,36 @@
+theme = "custom"
+
+[editor]
+line-number = "relative"
+mouse = true
+auto-pairs = false
+rulers = [88]
+cursorline = true
+cursorcolumn = false
+bufferline = "always"
+
+[editor.soft-wrap]
+enable = true
+wrap-at-text-width = false
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.indent-guides]
+character = "╎"
+render = true
+
+[editor.file-picker]
+hidden = false
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+
+[editor.statusline]
+left = ["mode", "spinner", "version-control", "file-name"]
+
+[keys.normal]
+esc = ["collapse_selection", "keep_primary_selection"]

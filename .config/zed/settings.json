@@ -1,0 +1,159 @@
+{
+    "theme": "Catppuccin Macchiato",
+    "ui_font_size": 15,
+    "buffer_font_size": 13,
+    "project_panel": { "dock": "right" },
+    "ui_font_family": "Zed Plex Mono",
+    "restore_on_startup": "none",
+    "base_keymap": "VSCode",
+    "vim_mode": false,
+
+    "preview_tabs": {
+        "enabled": false,
+        "enable_preview_from_file_finder": false
+    },
+
+    "tab_bar": {
+        "show": true,
+        "show_nav_history_buttons": false
+    },
+
+    "tabs": { "file_icons": true },
+
+    "autosave": "off",
+    "format_on_save": "on",
+    "formatter": "auto",
+    "relative_line_numbers": false,
+
+    "tab_size": 4,
+    "preferred_line_length": 88,
+    "soft_wrap": "preferred_line_length",
+    "indent_guides": {
+        "enabled": true,
+        "line_width": 1,
+        "coloring": "fixed",
+        "background_coloring": "disabled"
+    },
+
+    "assistant": {
+        "default_model": {
+            "provider": "zed.dev",
+            "model": "claude-3-5-sonnet-latest"
+        },
+        "version": "2"
+    },
+
+    "inlay_hints": {
+        "enabled": true,
+        "show_type_hints": true,
+        "show_parameter_hints": true,
+        "show_other_hints": true
+    },
+
+    "git": {
+        "git_gutter": "tracked_files",
+        "inline_blame": {
+            "enabled": false
+        }
+    },
+
+    "lsp": {
+        "rust-analyzer": {
+            "initialization_options": {
+                "checkOnSave": {
+                    "command": "clippy"
+                },
+                "inlayHints": {
+                    "maxLength": null,
+                    "lifetimeElisionHints": {
+                        "enable": "skip_trivial",
+                        "useParameterNames": true
+                    },
+                    "closureReturnTypeHints": {
+                        "enable": "always"
+                    }
+                }
+            }
+        },
+        "pyright": {
+            "python": {
+                "pythonPath": ".venv/bin/python",
+                "venvPath": ".",
+                "venv": ".venv"
+            },
+            "settings": {
+                "python.analysis": {
+                    "typeCheckingMode": "strict"
+                }
+            }
+        },
+        "ruff": {
+            "initialization_options": {
+                "settings": {
+                    "lineLength": 88,
+                    "showSyntaxErrors": true,
+                    "lint": {
+                        "select": ["ALL"],
+                        "ignore": ["D", "S101", "E501", "PTH123"]
+                    }
+                }
+            }
+        }
+    },
+
+    "languages": {
+        "Rust": {
+            "preferred_line_length": 120,
+            "show_wrap_guides": false,
+            "soft_wrap": "none"
+        },
+        "Ocaml": {
+            "tab_size": 2,
+            "formatter": {
+                "external": {
+                    "command": "entr",
+                    "arguments": ["-p", "ocamlformat", "--inplace", "/_"]
+                }
+            }
+        },
+        "Gleam": {
+            "tab_size": 2,
+            "language_servers": ["gleam"]
+        },
+        "Python": {
+            "language_servers": ["ruff", "pyright"],
+            "formatter": [
+                {
+                    "code_actions": {
+                        "source.organizeImports.ruff": true,
+                        "source.fixAll.ruff": true
+                    }
+                },
+                {
+                    "language_server": {
+                        "name": "ruff"
+                    }
+                }
+            ]
+        },
+        "Groovy": {
+            "preferred_line_length": 200
+        }
+    },
+
+    "file_types": {
+        "Rust": ["rs", "ers"],
+        "Groovy": ["nf", "config"],
+        "Dockerfile": ["Dockerfile*"],
+        "YAML": ["pixi.lock"],
+        "Markdown": ["md", "qmd"],
+        "Shell Script": ["sub"]
+    },
+
+    "detect_venv": {
+        "on": {
+            "directories": [".env", "env", ".venv", "venv", "devenv"],
+            "activate_script": "default"
+        }
+    }
+}

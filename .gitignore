@@ -1,0 +1,54 @@
+*
+
+# don't ignore changes to the gitignore!
+!.gitignore
+
+# dotter dotfile management files
+!/.dotter
+!/.dotter/global.toml
+
+# git configuration files
+!.gitconfig
+
+# zsh configuration files
+!.zshrc
+!.zprofile
+
+# configurations for the warp terminal emulator
+!/.warp
+!/.warp/themes
+!/.warp/themes/*.yml
+!/.warp/keybindings.yaml
+!/.warp/launch_configurations
+!/.warp/launch_configurations/config.yaml
+
+# allowing the general .config directory
+!/.config
+
+# NixOS and nix-darwin configurations
+!/.config/nix
+!/.config/nix-darwin
+!/.config/nix-darwin/flake.nix
+!/.config/nix-darwin/flake.lock
+
+# allowing configuration files for the helix editor to be tracked
+!/.config/helix
+!/.config/helix/config.toml
+!/.config/helix/languages.toml
+!/.config/helix/runtime
+!/.config/helix/runtime/themes
+!/.config/helix/runtime/themes/*.toml
+
+# allowing configuration files for the Zed editor to be tracked
+!/.config/zed
+!/.config/zed/settings.json
+!/.config/zed/themes
+
+# allowing configuration files for the btop resource usage dashboard
+!/.config/btop
+!/.config/btop/themes
+!/.config/btop/btop.conf
+
+# configuration for the marimo python notebook system
+!.marimo.toml
+
