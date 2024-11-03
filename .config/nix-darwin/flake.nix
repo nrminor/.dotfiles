@@ -128,7 +128,7 @@
         system.activationScripts.deployDotfiles = {
           text = ''
             # clone my dotfiles repo if it's not already present
-            if [ ! 0d "$HOME/.dotfiles" ]; then
+            if [ ! -d "$HOME/.dotfiles" ]; then
               echo "Cloning dotfiles repository..."
               git clone https://github.com/nrminor/.dotfiles.git "$HOME/.dotfiles"
             fi
