@@ -1,1 +1,34 @@
+[zsh.files]
+".zshrc" = "~/.zshrc"
+".zprofile" = "~/.zprofile"
+
+[git.files]
+".gitconfig" = "~/.gitconfig"
+
+[nix.files]
+".config/nix-darwin/flake.nix" = "~/.config/nix-darwin/flake.nix"
+".config/nix-darwin/flake.lock" = "~/.config/nix-darwin/flake.lock"
+
+[helix.files]
+".config/helix/config.toml" = "~/.config/helix/config.toml"
+".config/helix/languages.toml" = "~/.config/helix/languages.toml"
+".config/helix/runtime/themes/custom.toml" = "~/.config/helix/runtime/themes/custom.toml"
+".config/helix/runtime/themes/catppuccin_macchiato.toml" = "~/.config/helix/runtime/themes/catppuccin_macchiato.toml"
+".config/helix/runtime/themes/catppuccin_mocha.toml" = "~/.config/helix/runtime/themes/catppuccin_mocha.toml"
+
+[warp.files]
+".warp/keybindings.yaml" = "~/.warp/keybindings.yaml"
+".warp/themes/catppuccin_frappe.yml" = "~/.warp/themes/catppuccin_frappe.yml"
+".warp/themes/catppuccin_mocha.yml" = "~/.warp/themes/catppuccin_mocha.yml"
+".warp/themes/catppuccin_macchiato.yml" = "~/.warp/themes/catppuccin_macchiato.yml"
+".warp/launch_configurations/config.yaml" = "~/.warp/launch_configurations/config.yaml"
+
+[zed.files]
+".config/zed/settings.json" = "~/.config/zed/settings.json"
+
+[btop.files]
+".config/btop/btop.conf" = "~/.config/btop/btop.conf"
+
+[marimo.files]
+".marimo.toml" = "~/.marimo.toml"
 
