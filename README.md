@@ -10,7 +10,7 @@ If you do bioinformatics and data science and use these tools on Apple computers
 
 ### Setup on a new Apple machine
 
-The point of this repository is to make setting up my development environment on different machines easy. The do so, I use [NixOS](https://nixos.org/), and ultimately [nix-darwin](https://github.com/LnL7/nix-darwin), to install packages from the Nix Package Repository, from Homebrew, and from the Mac App Store. It also handles downloading and deploying my dotfiles with [dotter](https://github.com/SuperCuber/dotter). With these tools, we can take a very tedious series of manual installs, all of which tend toward bloat, and reduce them to just a few commands on a new machine.
+The point of this repository is to make setting up my development environment on different machines easy. To do so, I use [NixOS](https://nixos.org/), and ultimately [nix-darwin](https://github.com/LnL7/nix-darwin), to install packages from the Nix Package Repository, from Homebrew, and from the Mac App Store. Nix also handles downloading and deploying my dotfiles (which is to say this repo) with [dotter](https://github.com/SuperCuber/dotter). With these tools, we can take a very tedious series of manual installs, all of which tend toward bloat, and reduce them to just a few commands on a new machine.
 
 First, assuming you've fired up a Terminal window on a new apple computer, we first need these dotfiles, which include a Nix flake:
 
