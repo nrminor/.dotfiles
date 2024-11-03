@@ -27,7 +27,7 @@ sh <(curl -L https://nixos.org/nix/install)
 And finally, we'll run the installer:
 
 ```bash
-nix run nix-darwin --extra-experimental-features "nix-command flakes"  -- switch --flake ~/.config/nix-darwin#starter
+nix run nix-darwin --extra-experimental-features "nix-command flakes"  -- switch --flake ~/.dotfiles/.config/nix-darwin#starter
 ```
 
 That's it! And to apply any changes to the OS that have been committed to this repo, run:
