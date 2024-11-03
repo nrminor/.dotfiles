@@ -3,6 +3,10 @@
 # don't ignore changes to the gitignore!
 !.gitignore
 
+# allow a readme and a license
+!README.md
+!LICENSE
+
 # dotter dotfile management files
 !/.dotter
 !/.dotter/global.toml
