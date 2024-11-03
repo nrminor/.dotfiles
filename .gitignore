@@ -6,6 +6,8 @@
 # dotter dotfile management files
 !/.dotter
 !/.dotter/global.toml
+!/.dotter/macos.toml
+!/.dotter/local.toml
 
 # git configuration files
 !.gitconfig

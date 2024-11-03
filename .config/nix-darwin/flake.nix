@@ -68,6 +68,8 @@
           pkgs.gleam
           pkgs.elixir
           pkgs.elixir-ls
+          pkgs.ocaml
+          pkgs.dune_3
           pkgs.dotter
           pkgs.marksman
           pkgs.seqkit
@@ -121,6 +123,22 @@
           name = "system-applications";
           paths = config.environment.systemPackages;
           pathsToLink = "/Applications";
+        };
+
+        system.activationScripts.deployDotfiles = {
+          text = ''
+            # clone my dotfiles repo if it's not already present
+            if [ ! 0d "$HOME/.dotfiles" ]; then
+              echo "Cloning dotfiles repository..."
+              git clone https://github.com/nrminor/.dotfiles.git "$HOME/.dotfiles"
+            fi
+
+            # deploy the dotfiles
+            cd "$HOME/.dotfiles"
+            echo "Deploying dotfiles with dotter:"
+            "${pkgs.dotter}/bin/dotter" deploy -f -y -v
+
+          '';
         };
 
       darwinConfigurations.macbook = {
@@ -284,7 +302,7 @@
   in
   {
     # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#PATH-DESK-2222
+    # $ darwin-rebuild build --flake .#starter
     darwinConfigurations."starter" = nix-darwin.lib.darwinSystem {
       modules = [
         configuration
@@ -302,5 +320,6 @@
 
     # Expose the package set, including overlays, for convenience.
     darwinPackages = self.darwinConfigurations."starter".pkgs;
+
   };
 }
