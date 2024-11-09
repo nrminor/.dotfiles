@@ -75,7 +75,7 @@
                 }
             }
         },
-        "pyright": {
+        "basedpyright": {
             "python": {
                 "pythonPath": ".venv/bin/python",
                 "venvPath": ".",
@@ -121,7 +121,7 @@
             "language_servers": ["gleam"]
         },
         "Python": {
-            "language_servers": ["ruff", "pyright"],
+            "language_servers": ["ruff", "basedpyright"],
             "formatter": [
                 {
                     "code_actions": {

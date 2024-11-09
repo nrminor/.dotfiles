@@ -62,7 +62,7 @@
           pkgs.python3
           pkgs.uv
           pkgs.ruff
-          pkgs.pyright
+          pkgs.basedpyright
           pkgs.rustc
           pkgs.rustfmt
           pkgs.cargo
