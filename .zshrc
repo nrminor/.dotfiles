@@ -25,7 +25,7 @@ function yy() {
 
 # OTHER
 # -------------------------------------------------------------------------------------
-# . "$HOME/.cargo/env"
+. "$HOME/.cargo/env"
 # source $ZSH/oh-my-zsh.sh
 plugins=(
     colorize
@@ -47,6 +47,8 @@ alias lg="lazygit"
 alias gst="git status"
 alias h="hx"
 alias h.="hx ."
+alias z.="zed ."
+alias dots="dotter deploy -f -v -y"
 alias bfx="z ~/Documents/bioinformatics"
 alias ls="eza -1a"
 alias cat="bat -pP"
