@@ -25,8 +25,8 @@ function yy() {
 
 # OTHER
 # -------------------------------------------------------------------------------------
-. "$HOME/.cargo/env"
-source $ZSH/oh-my-zsh.sh
+# . "$HOME/.cargo/env"
+# source $ZSH/oh-my-zsh.sh
 plugins=(
     colorize
     dotenv

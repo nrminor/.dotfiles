@@ -75,6 +75,8 @@
             pkgs.rust-analyzer
             pkgs.rust-script
             pkgs.maturin
+            pkgs.openjdk
+            pkgs.jdk
             pkgs.julia-bin
             pkgs.erlang
             pkgs.gleam
@@ -281,16 +283,19 @@
                 if [ ! -d "/Users/nickminor/Documents/bioinformatics" ]; then
                   echo "Creating bioinformatics directory..." >&2
                   mkdir -p "/Users/nickminor/Documents/bioinformatics"
+                  chown -R nickminor:staff /Userss/nickminor/Documents/bioinformatics
                 fi
 
                 if [ ! -d "/Users/nickminor/Documents/hacking" ]; then
                   echo "Creating hacking directory..." >&2
                   mkdir -p "/Users/nickminor/Documents/hacking"
+                  chown -R nickminor:staff /Users/nickminor/Documents/hacking
                 fi
 
                 if [ ! -d "/Users/nickminor/Documents/screenshots" ]; then
                   echo "Creating screenshots directory..." >&2
                   mkdir -p "/Users/nickminor/Documents/screenshots"
+                  chown -R nickminor:staff /Users/nickminor/Documents/screenshots
                 fi
 
                 echo "Looking for dotfiles directory..."
