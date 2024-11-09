@@ -31,75 +31,72 @@
         { pkgs, config, ... }:
         {
 
-      nixpkgs.config.allowUnfree = true;
-      
-      nix = {
-        extraOptions = ''
-          experimental-features = nix-command flakes
-        '';
-      };
-    
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
-      environment.systemPackages =
-        [ 
-          pkgs.cmake
-          pkgs.clang
-          pkgs.neovim
-      	  pkgs.helix
-          pkgs.tmux
-          pkgs.screen
-          pkgs.zoxide
-          pkgs.fastfetch
-          pkgs.oh-my-zsh
-          pkgs.nushell
-          pkgs.du-dust
-          pkgs.zellij
-          pkgs.bat
-          pkgs.fzf
-          pkgs.yazi
-          pkgs.ripgrep
-          pkgs.zoxide
-          pkgs.btop
-          pkgs.just
-          pkgs.ouch
-          pkgs.watchexec
-          pkgs.git
-          pkgs.lazygit
-          pkgs.zstd
-          pkgs.curl
-          pkgs.wget
-          pkgs.lychee
-          pkgs.python3
-          pkgs.uv
-          pkgs.ruff
-          pkgs.basedpyright
-          pkgs.rustc
-          pkgs.rustfmt
-          pkgs.cargo
-          pkgs.rust-analyzer
-          pkgs.rust-script
-          pkgs.maturin
-          pkgs.julia-bin
-          pkgs.erlang
-          pkgs.gleam
-          pkgs.elixir
-          pkgs.elixir-ls
-          pkgs.ocaml
-          pkgs.dune_3
-          pkgs.dotter
-          pkgs.marksman
-          pkgs.seqkit
-          pkgs.minimap2
-          pkgs.bedtools
-          pkgs.samtools
-          pkgs.bcftools
-          pkgs.prqlc
-          pkgs.nextflow
-          pkgs.duckdb
-          pkgs.marimo
-          pkgs.warp-terminal
-        ];
+          # List packages installed in system profile. To search by name, run:
+          # $ nix-env -qaP | grep wget
+          environment.systemPackages = [
+            pkgs.nixd
+            pkgs.nixfmt-rfc-style
+            pkgs.mkalias
+            pkgs.cmake
+            pkgs.clang
+            pkgs.openssl
+            pkgs.neovim
+            pkgs.helix
+            pkgs.tmux
+            pkgs.screen
+            pkgs.zoxide
+            pkgs.fastfetch
+            pkgs.nushell
+            pkgs.du-dust
+            pkgs.zellij
+            pkgs.bat
+            pkgs.fzf
+            pkgs.yazi
+            pkgs.ripgrep
+            pkgs.zoxide
+            pkgs.btop
+            pkgs.just
+            pkgs.ouch
+            pkgs.watchexec
+            pkgs.git
+            pkgs.lazygit
+            pkgs.zstd
+            pkgs.eza
+            pkgs.curl
+            pkgs.wget
+            pkgs.lychee
+            pkgs.python3
+            pkgs.uv
+            pkgs.ruff
+            pkgs.pyright
+            pkgs.rustc
+            pkgs.rustfmt
+            pkgs.cargo
+            pkgs.rust-analyzer
+            pkgs.rust-script
+            pkgs.maturin
+            pkgs.openjdk
+            pkgs.jdk
+            pkgs.julia-bin
+            pkgs.erlang
+            pkgs.gleam
+            pkgs.elixir
+            pkgs.elixir-ls
+            pkgs.ocaml
+            pkgs.dune_3
+            pkgs.dotter
+            pkgs.marksman
+            pkgs.seqkit
+            pkgs.minimap2
+            pkgs.bedtools
+            pkgs.samtools
+            pkgs.bcftools
+            pkgs.prqlc
+            pkgs.nextflow
+            pkgs.duckdb
+            pkgs.marimo
+            pkgs.warp-terminal
+          ];
 
           homebrew = {
 
