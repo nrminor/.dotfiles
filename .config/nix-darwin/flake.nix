@@ -120,6 +120,9 @@
             masApps = {
               "Bear" = 1091189122;
               "Spark" = 1176895641;
+              "HazeOver" = 430798174;
+              "Amphetamine" = 937984704;
+              "Bartender" = 441258766;
             };
 
             onActivation.cleanup = "zap";
