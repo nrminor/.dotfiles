@@ -1,4 +1,4 @@
 [nix-darwin.files]
-".config/nix-darwin/flake.nix" = "~/.config/nix-darwin/flake.nix"
-".config/nix-darwin/flake.lock" = "~/.config/nix-darwin/flake.lock"
+".config/nix-darwin/flake.nix" = "/Users/nickminor/.config/nix-darwin/flake.nix"
+".config/nix-darwin/flake.lock" = "/Users/nickminor/.config/nix-darwin/flake.lock"
 
