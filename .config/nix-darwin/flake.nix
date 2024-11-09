@@ -114,7 +114,7 @@
               "slack"
               "basecamp"
               "docker"
-
+              "zoom"
             ];
 
             masApps = {
