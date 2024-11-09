@@ -3,7 +3,7 @@ theme = "custom"
 [editor]
 line-number = "relative"
 mouse = true
-auto-pairs = false
+auto-pairs = true
 rulers = [88]
 cursorline = true
 cursorcolumn = false

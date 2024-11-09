@@ -7,3 +7,5 @@
 	rebase = false
 [init]
 	defaultBranch = main
+[safe]
+	directory = /Users/nickminor/Documents/bioinformatics

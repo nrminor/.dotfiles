@@ -138,6 +138,12 @@
         },
         "Groovy": {
             "preferred_line_length": 200
+        },
+        "Nix": {
+            "tab_size": 2
+        },
+        "Markdown": {
+            "soft_wrap": "editor_width"
         }
     },
 
