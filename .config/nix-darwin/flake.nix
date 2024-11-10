@@ -67,10 +67,7 @@
             pkgs.uv
             pkgs.ruff
             pkgs.pyright
-            pkgs.rustc
-            pkgs.rustfmt
-            pkgs.cargo
-            pkgs.rust-analyzer
+            pkgs.rustup
             pkgs.rust-script
             pkgs.maturin
             pkgs.openjdk
