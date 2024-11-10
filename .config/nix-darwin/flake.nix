@@ -37,10 +37,6 @@
             pkgs.nixd
             pkgs.nixfmt-rfc-style
             pkgs.mkalias
-            pkgs.cmake
-            pkgs.clang
-            pkgs.openssl
-            pkgs.libiconv
             pkgs.neovim
             pkgs.helix
             pkgs.tmux
@@ -126,6 +122,8 @@
               "HazeOver" = 430798174;
               "Amphetamine" = 937984704;
               "Bartender" = 441258766;
+              "Smart Countdown Timer" = 1410709951;
+              "Xcode" = 497799835;
             };
 
             onActivation.cleanup = "zap";
@@ -284,6 +282,9 @@
                   echo "copying $src" >&2
                   ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
                 done
+
+                # accepting xcode license
+                sudo xcodebuild -license accept
 
                 echo "Setting up directories..." >&2
                 if [ ! -d "/Users/nickminor/Documents/bioinformatics" ]; then

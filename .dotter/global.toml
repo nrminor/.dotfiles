@@ -22,8 +22,13 @@
 [zed.files]
 ".config/zed/settings.json" = "/Users/nickminor/.config/zed/settings.json"
 
+# [positron.files]
+
 [btop.files]
 ".config/btop/btop.conf" = "/Users/nickminor/.config/btop/btop.conf"
+
+[julia.files]
+".config/julia/startup.jl" = "/Users/nickminor/.config/julia/startup.jl"
 
 [marimo.files]
 ".marimo.toml" = "/Users/nickminor/.marimo.toml"

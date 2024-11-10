@@ -33,6 +33,8 @@
 
 # NixOS and nix-darwin configurations
 !/.config/nix
+!/.config/nix/shell.nix
+!/.config/nix/home.nix
 !/.config/nix-darwin
 !/.config/nix-darwin/flake.nix
 !/.config/nix-darwin/flake.lock
