@@ -317,10 +317,20 @@
                 echo "Deploying dotfiles with dotter..."
                 sudo -u nickminor "${pkgs.dotter}/bin/dotter" deploy -f -y -v
 
-                # install vscode/positron extensions
-                cat .config/positron/extensions.txt \
-                | xargs -L 1 /Applications/Positron.app/Contents/Resources/app/bin/code \
-                --install-extension --force
+                # setup positron application directory
+                # echo "Making positron directory..."
+                # sudo -u nickminor mkdir -p "/Users/nickminor/Library/Application Support/Positron"
+                # chown -R nickminor:staff "/Users/nickminor/Library/Application Support/Positron"
+                # sudo -u nickminor chmod +rw "/Users/nickminor/Library/Application Support/Positron"
+                # sudo -u nickminor mkdir -p /Users/nickminor/.positron/extensions
+                # chown -R nickminor:staff /Users/nickminor/.positron/extensions
+                # sudo -u nickminor chmod +rw /Users/nickminor/.positron/extensions
+
+                # # install vscode/positron extensions
+                # echo "Installing positron extensions..."
+                # cat .config/positron/extensions.txt \
+                # | xargs -L 1 sudo -u nickminor /Applications/Positron.app/Contents/Resources/app/bin/code \
+                # --force --install-extension
               '';
 
           };

@@ -60,5 +60,4 @@ alias jl="julia"
 alias db="duckdb"
 alias ff="fastfetch"
 alias y="yazi"
-alias positron="/Applications/Positron.app/Contents/Resources/app/bin/code"
 

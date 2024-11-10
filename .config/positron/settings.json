@@ -1,5 +1,4 @@
 {
-
   // editor appearance settings
   "workbench.colorTheme": "Catppuccin Macchiato",
   "editor.fontFamily": "Menlo",
@@ -49,6 +48,4 @@
     "editor.formatOnSave": false
   },
   "nextflow.formatting.harshilAlignment": true
-
 }
-

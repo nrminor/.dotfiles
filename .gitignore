@@ -3,6 +3,9 @@
 # don't ignore changes to the gitignore!
 !.gitignore
 
+# allow a justfile
+!justfile
+
 # allow a readme and a license
 !README.md
 !LICENSE
