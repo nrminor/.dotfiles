@@ -6,6 +6,7 @@ export PATH=/usr/local/bin:/Users/nickminor/.pixi/bin:/opt/homebrew/opt/libiconv
 export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib
 export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
+export JULIA_DEPOT_PATH="~/.config/julia"
 
 
 # ENVIRONMENT VARIABLES

@@ -28,7 +28,7 @@
 ".config/btop/btop.conf" = "/Users/nickminor/.config/btop/btop.conf"
 
 [julia.files]
-".config/julia/startup.jl" = "/Users/nickminor/.config/julia/startup.jl"
+".config/julia/config/startup.jl" = "/Users/nickminor/.config/julia/config/startup.jl"
 
 [marimo.files]
 ".marimo.toml" = "/Users/nickminor/.marimo.toml"
