@@ -1,7 +1,7 @@
 {
     "theme": "Catppuccin Macchiato",
-    "ui_font_size": 15,
-    "buffer_font_size": 13,
+    "ui_font_size": 14.5,
+    "buffer_font_size": 12.5,
     "project_panel": { "dock": "right" },
     "ui_font_family": "Zed Plex Mono",
     "restore_on_startup": "none",

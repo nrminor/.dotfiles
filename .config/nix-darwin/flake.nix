@@ -40,6 +40,7 @@
             pkgs.cmake
             pkgs.clang
             pkgs.openssl
+            pkgs.libiconv
             pkgs.neovim
             pkgs.helix
             pkgs.tmux
@@ -104,6 +105,8 @@
             brews = [
               "mas"
               "gcc"
+              "llvm"
+              "libiconv"
             ];
 
             casks = [

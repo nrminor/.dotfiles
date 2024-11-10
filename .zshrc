@@ -3,7 +3,10 @@
 export ZSH="$HOME/.oh-my-zsh"
 path=('$HOME/.juliaup/bin' $path)
 export JAVA_HOME=$(/usr/libexec/java_home)
-export PATH=$PATH:/Users/nickminor/.pixi/bin
+export PATH=/Users/nickminor/.pixi/bin:/opt/homebrew/opt/libiconv/bin:$(brew --prefix)/lib:/opt/homebrew/opt/libiconv/lib:$PATH
+export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib
+export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
 
 
 # ENVIRONMENT VARIABLES
