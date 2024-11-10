@@ -55,6 +55,11 @@
 !/.config/btop/themes
 !/.config/btop/btop.conf
 
+# julia stuff
+!/.julia
+!/.julia/config
+!/.julia/config/startup.jl
+
 # configuration for the marimo python notebook system
 !.marimo.toml
 
