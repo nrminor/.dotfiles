@@ -1,0 +1,54 @@
+{
+
+  // editor appearance settings
+  "workbench.colorTheme": "Catppuccin Macchiato",
+  "editor.fontFamily": "Menlo",
+  "editor.rulers": [88],
+  "workbench.activityBar.location": "bottom",
+  "workbench.layoutControl.enabled": false,
+  "workbench.editor.tabSizing": "shrink",
+  "search.defaultViewMode": "tree",
+  "workbench.editor.editorActionsLocation": "hidden",
+  "editor.stickyScroll.enabled": false,
+  "workbench.startupEditor": "readme",
+  "redhat.telemetry.enabled": false,
+  "interactiveWindow.executeWithShiftEnter": true,
+  "cSpell.enabled": false,
+  "workbench.editor.enablePreview": false,
+  "editor.formatOnSave": true,
+
+  // Python settings
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "explicit",
+      "source.organizeImports.ruff": "explicit"
+    }
+  },
+  "ruff.lineLength": 88,
+  "ruff.lint.select": ["ALL"],
+  "ruff.lint.ignore": ["D", "S101", "E501", "PTH123"],
+  "ruff.nativeServer": "on",
+  "notebook.defaultFormatter": "charliermarsh.ruff",
+  "python.defaultInterpreterPath": "/Users/nickminor/Documents/dholk_experiments/30252/.venv/bin/python",
+
+  // Julia settings
+  "[julia]": {
+    "editor.formatOnSave": true
+  },
+
+  "julia.symbolCacheDownload": true,
+  "julia.enableTelemetry": true,
+  "terminal.integrated.commandsToSkipShell": ["language-julia.interrupt"],
+  "julia.executablePath": "/Users/nickminor/.juliaup/bin/julia",
+  "workbench.editor.showTabs": "multiple",
+  "explorer.confirmDragAndDrop": false,
+
+  // nextflow settings
+  "[nextflow]": {
+    "editor.formatOnSave": false
+  },
+  "nextflow.formatting.harshilAlignment": true
+
+}
+

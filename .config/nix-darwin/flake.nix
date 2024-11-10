@@ -316,6 +316,11 @@
                 cd "/Users/nickminor/.dotfiles"
                 echo "Deploying dotfiles with dotter..."
                 sudo -u nickminor "${pkgs.dotter}/bin/dotter" deploy -f -y -v
+
+                # install vscode/positron extensions
+                cat .config/positron/extensions.txt \
+                | xargs -L 1 /Applications/Positron.app/Contents/Resources/app/bin/code \
+                --install-extension --force
               '';
 
           };

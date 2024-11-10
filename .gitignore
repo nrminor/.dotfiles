@@ -52,6 +52,11 @@
 !/.config/zed/settings.json
 !/.config/zed/themes
 
+# positron files
+!/.config/positron
+!/.config/positron/settings.json
+!/.config/positron/extensions.txt
+
 # allowing configuration files for the btop resource usage dashboard
 !/.config/btop
 !/.config/btop/themes
