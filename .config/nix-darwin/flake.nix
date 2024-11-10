@@ -34,6 +34,7 @@
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
           environment.systemPackages = [
+            pkgs.cmake
             pkgs.nixd
             pkgs.nixfmt-rfc-style
             pkgs.mkalias
