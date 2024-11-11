@@ -4,6 +4,7 @@ bungcip.better-toml
 catppuccin.catppuccin-vsc
 charliermarsh.ruff
 danielgjackson.auto-dark-mode-windows
+detachhead.basedpyright
 drcika.apc-extension
 editorconfig.editorconfig
 enkia.tokyo-night
@@ -19,7 +20,7 @@ julialang.language-julia
 mechatroner.rainbow-csv
 mkhl.mkhl-just
 ms-azuretools.vscode-docker
-ms-pyright.pyright
+ms-python.mypy-type-checker
 ms-toolsai.jupyter
 ms-vscode.test-adapter-converter
 nefrob.vscode-just-syntax
@@ -38,3 +39,4 @@ streetsidesoftware.code-spell-checker
 swellaby.vscode-rust-test-adapter
 tamasfe.even-better-toml
 tomoki1207.pdf
+wardbrian.vscode-stan-extension
