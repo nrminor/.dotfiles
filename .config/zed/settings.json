@@ -94,7 +94,7 @@
                     "showSyntaxErrors": true,
                     "lint": {
                         "select": ["ALL"],
-                        "ignore": ["D", "S101", "E501", "PTH123"]
+                        "ignore": ["D", "S101", "E501", "PTH123", "TD003"]
                     }
                 }
             }
