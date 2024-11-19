@@ -7,6 +7,7 @@
     "restore_on_startup": "none",
     "base_keymap": "VSCode",
     "vim_mode": true,
+    "relative_line_numbers": true,
 
     "preview_tabs": {
         "enabled": false,
@@ -23,7 +24,6 @@
     "autosave": "off",
     "format_on_save": "on",
     "formatter": "auto",
-    "relative_line_numbers": false,
 
     "tab_size": 4,
     "preferred_line_length": 88,
