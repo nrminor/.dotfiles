@@ -78,12 +78,11 @@
         "basedpyright": {
             "python": {
                 "pythonPath": ".venv/bin/python",
-                "venvPath": ".",
-                "venv": ".venv"
+                "venvPath": "."
             },
-            "settings": {
-                "python.analysis": {
-                    "typeCheckingMode": "strict"
+            "basedpyright": {
+                "analysis": {
+                    "typeCheckingMode": "basic"
                 }
             }
         },

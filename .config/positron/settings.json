@@ -30,6 +30,7 @@
   "ruff.nativeServer": "on",
   "notebook.defaultFormatter": "charliermarsh.ruff",
   "python.defaultInterpreterPath": "/Users/nickminor/Documents/dholk_experiments/30252/.venv/bin/python",
+  "basedpyright.analysis.typeCheckingMode": "basic",
 
   // Julia settings
   "[julia]": {
@@ -47,5 +48,5 @@
   "[nextflow]": {
     "editor.formatOnSave": false
   },
-  "nextflow.formatting.harshilAlignment": true
+  "nextflow.formatting.harshilAlignment": true,
 }

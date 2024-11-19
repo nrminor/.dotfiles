@@ -21,18 +21,3 @@
 #          commands:
 #            - exec: code .
 
----
-name: Config
-windows:
-  - tabs:
-      - title: local) _
-        layout:
-          cwd: /Users/nickminor/Documents/bioinformatics/give-a-sheet
-      - layout:
-          cwd: /Users/nickminor/Documents/bioinformatics/Rosalind-problems
-      - title: "remote) HPC: region assembly"
-        layout:
-          cwd: ""
-      - title: "remote) HPC: pangenome"
-        layout:
-          cwd: ""

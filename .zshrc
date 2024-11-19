@@ -1,5 +1,6 @@
 # EXPORTS
 # -------------------------------------------------------------------------------------
+export EDITOR=hx
 export ZSH="$HOME/.oh-my-zsh"
 export JAVA_HOME=$(/usr/libexec/java_home)
 export PATH=/usr/local/bin:/Users/nickminor/.pixi/bin:/opt/homebrew/opt/libiconv/bin:$(brew --prefix)/lib:/opt/homebrew/opt/libiconv/lib:$PATH
