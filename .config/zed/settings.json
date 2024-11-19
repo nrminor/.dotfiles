@@ -6,7 +6,7 @@
     "ui_font_family": "Zed Plex Mono",
     "restore_on_startup": "none",
     "base_keymap": "VSCode",
-    "vim_mode": false,
+    "vim_mode": true,
 
     "preview_tabs": {
         "enabled": false,

@@ -53,6 +53,7 @@
 # allowing configuration files for the Zed editor to be tracked
 !/.config/zed
 !/.config/zed/settings.json
+!/.config/zed/keymap.json
 !/.config/zed/themes
 
 # positron files
