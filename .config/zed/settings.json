@@ -144,6 +144,18 @@
         },
         "Markdown": {
             "soft_wrap": "editor_width"
+        },
+        "CSV": {
+            "soft_wrap": "none"
+        },
+        "TSV": {
+            "soft_wrap": "none"
+        },
+        "Rainbow CSV": {
+            "soft_wrap": "none"
+        },
+        "Rainbow TSV": {
+            "soft_wrap": "none"
         }
     },
 

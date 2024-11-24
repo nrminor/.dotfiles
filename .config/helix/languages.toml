@@ -26,7 +26,6 @@ file-types = ["rs", "ers"]
 [language-server.rust-analyzer.config.check]
 command = "clippy"
 
-
 [language-server.rust-analyzer.config.settings]
 closureReturnTypeHints.enable = "always"
 
@@ -52,17 +51,17 @@ name = "markdown"
 scope = "source.md"
 injection-regex = "md|markdown"
 file-types = [
-    "md",
-    "markdown",
-    "PULLREQ_EDITMSG",
-    "mkd",
-    "mdwn",
-    "mdown",
-    "markdn",
-    "mdtxt",
-    "mdtext",
-    "qmd",
-    "workbook",
+  "md",
+  "markdown",
+  "PULLREQ_EDITMSG",
+  "mkd",
+  "mdwn",
+  "mdown",
+  "markdn",
+  "mdtxt",
+  "mdtext",
+  "qmd",
+  "workbook",
 ]
 roots = [".marksman.toml"]
 language-servers = ["marksman"]
