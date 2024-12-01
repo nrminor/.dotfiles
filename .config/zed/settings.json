@@ -6,7 +6,7 @@
     "ui_font_family": "Zed Plex Mono",
     "restore_on_startup": "none",
     "base_keymap": "VSCode",
-    "vim_mode": true,
+    "vim_mode": false,
     "relative_line_numbers": true,
     "cursor_blink": false,
 
@@ -104,8 +104,8 @@
     "languages": {
         "Rust": {
             "preferred_line_length": 120,
-            "show_wrap_guides": false,
-            "soft_wrap": "none"
+            "show_wrap_guides": true,
+            "soft_wrap": "bounded"
         },
         "Ocaml": {
             "tab_size": 2,

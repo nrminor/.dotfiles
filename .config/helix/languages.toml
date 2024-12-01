@@ -8,7 +8,7 @@ command = "ruff"
 args = ["server"]
 
 [language-server.ruff.config.settings]
-lineLength = 88
+lineLength = 120
 
 [language-server.ruff.config.settings.lint]
 select = ["ALL"]
@@ -22,6 +22,7 @@ name = "rust"
 language-servers = ["rust-analyzer"]
 auto-format = true
 file-types = ["rs", "ers"]
+rulers = [120]
 
 [language-server.rust-analyzer.config.check]
 command = "clippy"
