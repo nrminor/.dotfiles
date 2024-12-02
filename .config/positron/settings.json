@@ -1,7 +1,9 @@
 {
   // editor appearance settings
   "workbench.colorTheme": "Catppuccin Macchiato",
-  "editor.fontFamily": "Menlo",
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontSize": 12,
+  "editor.fontLigatures": true,
   "editor.rulers": [88],
   "workbench.activityBar.location": "bottom",
   "workbench.layoutControl.enabled": false,
@@ -46,7 +48,7 @@
 
   // nextflow settings
   "[nextflow]": {
-    "editor.formatOnSave": false
+    "editor.formatOnSave": true
   },
   "nextflow.formatting.harshilAlignment": true,
 

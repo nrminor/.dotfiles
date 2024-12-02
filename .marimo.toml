@@ -1,38 +1,39 @@
-[formatting]
-line_length = 79
+[keymap]
+preset = "default"
 
-[save]
-format_on_save = true
-autosave_delay = 1000
-autosave = "after_delay"
-
-[display]
-code_editor_font_size = 12
-theme = "system"
-cell_output = "below"
-dataframes = "rich"
-default_width = "medium"
+[keymap.overrides]
 
 [completion]
-copilot = false
 activate_on_typing = true
+copilot = false
 
-[ai.open_ai]
+[display]
+default_width = "medium"
+dataframes = "rich"
+theme = "system"
+cell_output = "below"
+code_editor_font_size = 12
+
+[server]
+browser = "default"
+follow_symlink = false
+
+[experimental]
 
 [package_management]
 manager = "uv"
 
-[experimental]
-
-[keymap]
-preset = "default"
-[keymap.overrides]
-
-[server]
-follow_symlink = false
-browser = "default"
+[save]
+autosave = "after_delay"
+format_on_save = true
+autosave_delay = 1000
 
 [runtime]
+auto_reload = "autorun"
+auto_instantiate = true
 on_cell_change = "autorun"
-auto_reload = "lazy"
-auto_instantiate = false
+
+[ai.open_ai]
+
+[formatting]
+line_length = 79
