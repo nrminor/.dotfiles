@@ -75,6 +75,22 @@ auto-format = true
 
 [[language]]
 name = "groovy"
-file-types = ["groovy", "nf", "config"]
+file-types = ["groovy", "config", "nf"]
 indent = { tab-width = 4, unit = "    " }
 
+# [[language]]
+# file-types = ["nf"]
+# language-servers = ["nextflow-language-server"]
+# name = "nextflow"
+# scope = "source.nextflow"
+# roots = ["nextflow.config", "main.nf"]
+# grammar = "groovy"
+
+# [language-server.nextflow-language-server]
+# command = "nextflow-language-server"
+
+# [language-server.nextflow-language-server.config.nextflow]
+# debug = true
+
+# [language-server.nextflow-language-server.config.nextflow.files]
+# exclude = [".git", ".nf-test", "work"]

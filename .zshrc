@@ -61,4 +61,5 @@ alias jl="julia"
 alias db="duckdb"
 alias ff="fastfetch"
 alias y="yazi"
+alias zel="zellij"
 
