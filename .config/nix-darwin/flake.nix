@@ -41,6 +41,7 @@
             pkgs.neovim
             pkgs.helix
             pkgs.tmux
+            pkgs.tree
             pkgs.screen
             pkgs.zoxide
             pkgs.fastfetch
@@ -63,6 +64,7 @@
             pkgs.curl
             pkgs.wget
             pkgs.lychee
+            pkgs.bash-language-server
             pkgs.python3
             pkgs.uv
             pkgs.ruff
@@ -110,6 +112,7 @@
               "positron"
               "slack"
               "basecamp"
+              "discord"
               "docker"
               "zoom"
             ];
@@ -142,6 +145,7 @@
                 "/Applications/Spark.app"
                 "/Applications/Basecamp 3.app"
                 "/Applications/Slack.app"
+                "/Applications/Discord.app"
                 "/Applications/Warp.app"
                 "/Applications/Zed.app"
               ];

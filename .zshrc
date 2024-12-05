@@ -13,6 +13,14 @@ export JULIA_DEPOT_PATH="~/.config/julia"
 # ENVIRONMENT VARIABLES
 # -------------------------------------------------------------------------------------
 ZSH_THEME="robbyrussell"
+plugins=(
+    colorize
+    dotenv
+    eza
+    fzf
+    git
+    rsync
+)
 
 
 # CUSTOM FUNCTIONS
@@ -25,20 +33,28 @@ function yy() {
 	fi
 	rm -f -- "$tmp"
 }
+fcd() {
+  local dir
+  dir=$(find "${1:-.}" -type d 2> /dev/null | fzf --preview='tree -C {} | head -200') && cd "$dir"
+}
+fh() {
+  eval "$(history | fzf --height 40% --reverse --tiebreak=index | sed 's/ *[0-9]* *//')"
+}
+fkill() {
+  ps -ef | sed 1d | fzf --height 40% --reverse --preview 'echo {}' | awk '{print $2}' | xargs -r kill -9
+}
+fgb() {
+  git branch --all | grep -v HEAD | sed 's/remotes\/origin\///' | sort -u | fzf --height 40% --reverse | xargs git checkout
+}
+fco() {
+  git log --pretty=oneline --abbrev-commit | fzf --height 40% --reverse | cut -d ' ' -f 1 | xargs git checkout
+}
 
 
-# OTHER
+# SOURCES
 # -------------------------------------------------------------------------------------
 . "$HOME/.cargo/env"
-# source $ZSH/oh-my-zsh.sh
-plugins=(
-    colorize
-    dotenv
-    eza
-    fzf
-    git
-    rsync
-)
+source $ZSH/oh-my-zsh.sh
 eval "$(zoxide init zsh)"
 source <(fzf --zsh)
 
@@ -50,18 +66,36 @@ alias cd="z"
 alias cat="bat -pP"
 alias lg="lazygit"
 alias gst="git status"
+alias curll='curl -L'
 alias h="hx"
 alias h.="hx ."
 alias z.="zed ."
 alias dots="dotter deploy -f -v -y"
 alias bfx="z ~/Documents/bioinformatics"
 alias ls="eza -1a"
+alias ll="eza -la --group-directories-first --icons"
 alias cat="bat -pP"
 alias py="python3"
 alias jl="julia"
 alias db="duckdb"
 alias ff="fastfetch"
 alias y="yazi"
-alias zel="zellij"
+alias zj="zellij"
+alias zjs="zellij ls"
+alias zja="zellij a"
+alias zjd="zellij d"
+alias f="fzf"
 alias fzo='hx $(fzf -m --preview="bat -P {} --color=always")'
+alias fh=fh
+alias fkill=fkill
+alias fgb=fgb
+alias fco=fco
+alias uvv='uv sync && source activate .venv/bin/activate'
+alias sq='seqkit'
+alias mm='minimap2'
+alias bt='bedtools'
+alias st='samtools'
+alias bcf='bcftools'
+alias nf='nextflow'
+
 
