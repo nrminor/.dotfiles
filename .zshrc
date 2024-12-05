@@ -33,20 +33,20 @@ function yy() {
 	fi
 	rm -f -- "$tmp"
 }
-fcd() {
+function fcd() {
   local dir
   dir=$(find "${1:-.}" -type d 2> /dev/null | fzf --preview='tree -C {} | head -200') && cd "$dir"
 }
-fh() {
-  eval "$(history | fzf --height 40% --reverse --tiebreak=index | sed 's/ *[0-9]* *//')"
+function fh() {
+  history | fzf --height 40% --reverse --tiebreak=index | sed 's/ *[0-9]* *//'
 }
-fkill() {
+function fkill() {
   ps -ef | sed 1d | fzf --height 40% --reverse --preview 'echo {}' | awk '{print $2}' | xargs -r kill -9
 }
-fgb() {
+function fgb() {
   git branch --all | grep -v HEAD | sed 's/remotes\/origin\///' | sort -u | fzf --height 40% --reverse | xargs git checkout
 }
-fco() {
+function fco() {
   git log --pretty=oneline --abbrev-commit | fzf --height 40% --reverse | cut -d ' ' -f 1 | xargs git checkout
 }
 
@@ -54,7 +54,7 @@ fco() {
 # SOURCES
 # -------------------------------------------------------------------------------------
 . "$HOME/.cargo/env"
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh # loading this is quite slow
 eval "$(zoxide init zsh)"
 source <(fzf --zsh)
 
