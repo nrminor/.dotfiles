@@ -40,6 +40,7 @@ plugins=(
     rsync
 )
 eval "$(zoxide init zsh)"
+source <(fzf --zsh)
 
 
 # ALIASES
@@ -62,4 +63,5 @@ alias db="duckdb"
 alias ff="fastfetch"
 alias y="yazi"
 alias zel="zellij"
+alias fzo='hx $(fzf -m --preview="bat -P {} --color=always")'
 

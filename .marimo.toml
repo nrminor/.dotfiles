@@ -1,37 +1,40 @@
+[server]
+follow_symlink = false
+browser = "default"
+
 [keymap]
 preset = "default"
 
 [keymap.overrides]
+
+[experimental]
+
+[runtime]
+auto_instantiate = true
+on_cell_change = "autorun"
+auto_reload = "autorun"
+
+[save]
+format_on_save = true
+autosave = "after_delay"
+autosave_delay = 1000
 
 [completion]
 activate_on_typing = true
 copilot = false
 
 [display]
-default_width = "medium"
-dataframes = "rich"
-theme = "system"
 cell_output = "below"
 code_editor_font_size = 12
-
-[server]
-browser = "default"
-follow_symlink = false
-
-[experimental]
+theme = "system"
+dataframes = "rich"
+default_width = "medium"
 
 [package_management]
 manager = "uv"
 
-[save]
-autosave = "after_delay"
-format_on_save = true
-autosave_delay = 1000
-
-[runtime]
-auto_reload = "autorun"
-auto_instantiate = true
-on_cell_change = "autorun"
+[ai]
+rules = ""
 
 [ai.open_ai]
 
