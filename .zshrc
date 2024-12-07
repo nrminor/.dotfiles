@@ -37,17 +37,25 @@ function fcd() {
   local dir
   dir=$(find "${1:-.}" -type d 2> /dev/null | fzf --preview='tree -C {} | head -200') && cd "$dir"
 }
+function fopen() {
+  local items
+  items=$(find "${1:-.}" 2> /dev/null | fzf -m --height 50% --reverse \
+    --preview='[ -d {} ] && tree -C {} || bat -pP {} --color=always')
+  if [[ -n "$items" ]]; then
+    echo "$items" | xargs open
+  fi
+}
 function fh() {
-  history | fzf --height 40% --reverse --tiebreak=index | sed 's/ *[0-9]* *//'
+  history | fzf --height 50% --reverse --tiebreak=index | sed 's/ *[0-9]* *//'
 }
 function fkill() {
-  ps -ef | sed 1d | fzf -m --height 40% --reverse --preview 'echo {}' | awk '{print $2}' | xargs -r kill -9
+  ps -ef | sed 1d | fzf -m --height 50% --reverse --preview 'echo {}' | awk '{print $2}' | xargs -r kill -9
 }
 function fgb() {
-  git branch --all | grep -v HEAD | sed 's/remotes\/origin\///' | sort -u | fzf --height 40% --reverse | xargs git checkout
+  git branch --all | grep -v HEAD | sed 's/remotes\/origin\///' | sort -u | fzf --height 50% --reverse | xargs git checkout
 }
 function fco() {
-  git log --pretty=oneline --abbrev-commit | fzf --height 40% --reverse | cut -d ' ' -f 1 | xargs git checkout
+  git log --pretty=oneline --abbrev-commit | fzf --height 50% --reverse | cut -d ' ' -f 1 | xargs git checkout
 }
 
 
@@ -88,6 +96,7 @@ alias zjd="zellij d"
 alias f="fzf"
 alias fzo='hx $(fzf -m --preview="bat -P {} --color=always")' # fuzzy-find then open multiple files in helix
 alias fh=fh # fuzzy-find through command history
+alias fopen=fopen # fuzzy find files and directories, select them, and open them with MacOS's `open`
 alias fkill=fkill # fuzzy-find through processes to kill one
 alias fgb=fgb # fuzzy-find through git branches
 alias fco=fco # fuzzy-find through git commits
