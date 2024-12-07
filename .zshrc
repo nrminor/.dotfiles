@@ -41,7 +41,7 @@ function fh() {
   history | fzf --height 40% --reverse --tiebreak=index | sed 's/ *[0-9]* *//'
 }
 function fkill() {
-  ps -ef | sed 1d | fzf --height 40% --reverse --preview 'echo {}' | awk '{print $2}' | xargs -r kill -9
+  ps -ef | sed 1d | fzf -m --height 40% --reverse --preview 'echo {}' | awk '{print $2}' | xargs -r kill -9
 }
 function fgb() {
   git branch --all | grep -v HEAD | sed 's/remotes\/origin\///' | sort -u | fzf --height 40% --reverse | xargs git checkout
