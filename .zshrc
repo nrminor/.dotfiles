@@ -109,5 +109,5 @@ alias bt='bedtools'
 alias st='samtools'
 alias bcf='bcftools'
 alias nf='nextflow'
-
+alias k="clear"
 

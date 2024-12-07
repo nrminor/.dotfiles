@@ -11,12 +11,14 @@
   "search.defaultViewMode": "tree",
   "workbench.editor.editorActionsLocation": "hidden",
   "editor.stickyScroll.enabled": false,
-  "workbench.startupEditor": "readme",
+  "workbench.startupEditor": "none",
   "redhat.telemetry.enabled": false,
   "interactiveWindow.executeWithShiftEnter": true,
   "cSpell.enabled": false,
-  "workbench.editor.enablePreview": false,
   "editor.formatOnSave": true,
+  "workbench.editor.enablePreview": false,
+  "editor.minimap.enabled": false,
+  "editor.minimap.autohide": true,
 
   // Python settings
   "[python]": {
@@ -56,5 +58,5 @@
 
   "[sql]": {
     "editor.formatOnSave": false
-  }
+  },
 }
