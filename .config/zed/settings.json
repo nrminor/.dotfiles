@@ -145,6 +145,9 @@
         "Markdown": {
             "soft_wrap": "editor_width"
         },
+        "Plain Text": {
+            "soft_wrap": "none"
+        },
         "CSV": {
             "soft_wrap": "none"
         },

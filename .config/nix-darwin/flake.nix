@@ -69,6 +69,7 @@
             pkgs.uv
             pkgs.ruff
             pkgs.pyright
+            pkgs.
             pkgs.rustup
             pkgs.rust-script
             pkgs.maturin
@@ -90,6 +91,7 @@
             pkgs.bcftools
             pkgs.prqlc
             pkgs.nextflow
+            pkgs.snakemake
             pkgs.duckdb
             pkgs.marimo
             pkgs.warp-terminal
@@ -103,6 +105,8 @@
               "gcc"
               "llvm"
               "libiconv"
+              "snakefmt"
+              "python-lsp-server"
             ];
 
             casks = [

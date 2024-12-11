@@ -1,6 +1,5 @@
 # EXPORTS
 # -------------------------------------------------------------------------------------
-export EDITOR=hx
 export ZSH="$HOME/.oh-my-zsh"
 export JAVA_HOME=$(/usr/libexec/java_home)
 export PATH=/usr/local/bin:/Users/nickminor/.pixi/bin:/opt/homebrew/opt/libiconv/bin:$(brew --prefix)/lib:/opt/homebrew/opt/libiconv/lib:$PATH:$HOME/.nextflow-lsp
@@ -8,6 +7,7 @@ export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libi
 export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
 export JULIA_DEPOT_PATH="~/.config/julia"
+export JULIA_NUM_THREADS=auto
 
 
 # ENVIRONMENT VARIABLES
@@ -25,6 +25,9 @@ plugins=(
 
 # CUSTOM FUNCTIONS
 # -------------------------------------------------------------------------------------
+function mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
 function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"
@@ -101,6 +104,7 @@ alias fopen=fopen # fuzzy find files and directories, select them, and open them
 alias fkill=fkill # fuzzy-find through processes to kill one
 alias fgb=fgb # fuzzy-find through git branches
 alias fco=fco # fuzzy-find through git commits
+alias mkcd=mkcd # make a directory and change into it
 alias uvv='uv sync && source .venv/bin/activate'
 alias uvs='uv sync'
 alias d='deactivate'

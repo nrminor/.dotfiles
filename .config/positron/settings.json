@@ -50,9 +50,16 @@
 
   // nextflow settings
   "[nextflow]": {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
   },
   "nextflow.formatting.harshilAlignment": true,
+  "nextflow.files.exclude": [
+    ".git",
+    ".nf-test",
+    "work",
+    ".pixi"
+  ],
+
 
   "sqlfluff.dialect": "postgres",
 
