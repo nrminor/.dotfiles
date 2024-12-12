@@ -9,3 +9,5 @@
 	defaultBranch = main
 [safe]
 	directory = /Users/nickminor/Documents/bioinformatics
+[http]
+	postBuffer = 157286400
