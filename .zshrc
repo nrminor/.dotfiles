@@ -38,7 +38,7 @@ function yy() {
 }
 function fcd() {
   local dir
-  dir=$(find "${1:-.}" -type d 2> /dev/null | fzf --preview='tree -C {} | head -200') && cd "$dir"
+  dir=$(find "${1:-.}" -type d 2> /dev/null | fzf --height 50% --preview='tree -C {} | head -200') && cd "$dir"
 }
 function fopen() {
   local items
@@ -59,6 +59,9 @@ function fgb() {
 }
 function fco() {
   git log --pretty=oneline --abbrev-commit | fzf --height 50% --reverse | cut -d ' ' -f 1 | xargs git checkout
+}
+function fzo() {
+  hx $(find "${1:-.}" 2> /dev/null | fzf --height 50% -m --preview="bat -P {} --color=always")
 }
 
 
@@ -84,6 +87,7 @@ alias z.="zed ."
 alias dots="dotter deploy -f -v -y"
 alias bfx="z ~/Documents/bioinformatics"
 alias books="z ~/Documents/books"
+alias dholk="z ~/Documents/dholk_experiments"
 alias ls="eza -1a"
 alias ll="eza -la --group-directories-first --icons"
 alias cat="bat -pP"
@@ -98,7 +102,7 @@ alias zjls="zellij ls"
 alias zja="zellij a"
 alias zjd="zellij d"
 alias f="fzf"
-alias fzo='hx $(fzf -m --preview="bat -P {} --color=always")' # fuzzy-find then open multiple files in helix
+alias fzo=fzo # fuzzy-find then open multiple files in helix
 alias fh=fh # fuzzy-find through command history
 alias fopen=fopen # fuzzy find files and directories, select them, and open them with MacOS's `open`
 alias fkill=fkill # fuzzy-find through processes to kill one
