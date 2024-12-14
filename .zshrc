@@ -45,7 +45,9 @@ function fopen() {
   items=$(find "${1:-.}" 2> /dev/null | fzf -m --height 50% --reverse \
     --preview='[ -d {} ] && tree -C {} || bat -pP {} --color=always')
   if [[ -n "$items" ]]; then
-    echo "$items" | xargs open
+    while IFS= read -r line; do
+      open "$line"
+    done <<< "$items"
   fi
 }
 function fh() {
@@ -62,6 +64,38 @@ function fco() {
 }
 function fzo() {
   hx $(find "${1:-.}" 2> /dev/null | fzf --height 50% -m --preview="bat -P {} --color=always")
+}
+function fseq() {
+
+  local infile="$1"
+  local outfile="$2"
+
+  if [[ -z "$infile" ]]; then
+    echo "Usage: fseq <file.fasta|file.fastq> [output_file]"
+    return 1
+  fi
+
+  # Get the list of IDs and allow fuzzy selection of multiple IDs
+  local ids
+  ids=$(seqkit seq -i -n "$infile" | fzf --height 50% --multi \
+    --preview="seqkit grep -p {} '$infile' | bat --wrap=auto --style=numbers,grid --color=always --theme=ansi") || return
+
+  # If no IDs were selected, just return
+  if [[ -z "$ids" ]]; then
+    return 0
+  fi
+
+  # Create a comma-delimited list of chosen IDs
+  local comma_list
+  comma_list=$(echo "$ids" | paste -sd ',' -)
+
+  # If outfile is given, write to it, otherwise print to stdout
+  if [[ -n "$outfile" ]]; then
+    seqkit grep -p "$comma_list" "$infile" -o "$outfile"
+  else
+    seqkit grep -p "$comma_list" "$infile"
+  fi
+  
 }
 
 
@@ -109,6 +143,7 @@ alias fkill=fkill # fuzzy-find through processes to kill one
 alias fgb=fgb # fuzzy-find through git branches
 alias fco=fco # fuzzy-find through git commits
 alias mkcd=mkcd # make a directory and change into it
+alias fseq=fseq # query a FASTA or FASTQ for specific IDs
 alias uvv='uv sync && source .venv/bin/activate'
 alias uvs='uv sync'
 alias d='deactivate'
@@ -120,4 +155,6 @@ alias bcf='bcftools'
 alias nf='nextflow'
 alias k="clear"
 alias zr="source $HOME/.zshrc"
+alias zrl="source $HOME/.zshrc"
+alias zshrc="source $HOME/.zshrc"
 
