@@ -107,7 +107,8 @@ function frm() {
   # Use find to list files (and directories if you want) from the given path or current dir
   # Adjust find arguments to suit your needs (e.g., just files, recursive, etc.)
   local files
-  files=$(find "${1:-.}" -mindepth 1 -maxdepth 1 2>/dev/null | fzf --multi --height 50%) || return
+  files=$(find "${1:-.}" -mindepth 1 -maxdepth 1 2>/dev/null | fzf --multi --height 75% \
+    --preview='[ -d {} ] && tree -C {} || bat -pP {} --color=always') || return
 
   # If no selection was made, exit
   [[ -z "$files" ]] && return 0
@@ -168,6 +169,7 @@ alias fseq=fseq # query a FASTA or FASTQ for specific IDs
 alias fzeq=fseq
 alias frm=frm # fuzzy find and move files into trash
 alias fzrm=frm
+alias z-="z -"
 alias uvv='uv sync && source .venv/bin/activate'
 alias uvs='uv sync'
 alias d='deactivate'
