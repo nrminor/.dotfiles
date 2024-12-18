@@ -68,8 +68,7 @@
             pkgs.python3
             pkgs.uv
             pkgs.ruff
-            pkgs.pyright
-            pkgs.
+            pkgs.basedpyright
             pkgs.rustup
             pkgs.rust-script
             pkgs.maturin
@@ -77,6 +76,7 @@
             pkgs.jdk
             pkgs.julia-bin
             pkgs.erlang
+            pkgs.rebar3
             pkgs.gleam
             pkgs.elixir
             pkgs.elixir-ls
@@ -93,6 +93,7 @@
             pkgs.nextflow
             pkgs.snakemake
             pkgs.duckdb
+            pkgs.datafusion-cli
             pkgs.marimo
             pkgs.warp-terminal
           ];
@@ -147,9 +148,7 @@
                 "/Applications/Arc.app"
                 "/Applications/Bear.app"
                 "/Applications/Spark.app"
-                "/Applications/Basecamp 3.app"
                 "/Applications/Slack.app"
-                "/Applications/Discord.app"
                 "/Applications/Warp.app"
                 "/Applications/Zed.app"
               ];
