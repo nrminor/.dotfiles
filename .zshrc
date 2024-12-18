@@ -64,7 +64,8 @@ function fco() {
 }
 function fzo() {
   local files
-  files=$(find "${1:-.}" 2> /dev/null | fzf --height 50% -m --preview="bat -P {} --color=always") || return
+  files=$(find "${1:-.}" 2> /dev/null | fzf --height 50% -m \
+    --preview='[ -d {} ] && tree -C {} || bat -pP {} --color=always') || return
 
   # If no selection was made, return with exit code 0
   [[ -z "$files" ]] && return 0
