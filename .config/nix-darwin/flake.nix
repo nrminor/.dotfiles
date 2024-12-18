@@ -106,8 +106,7 @@
               "gcc"
               "llvm"
               "libiconv"
-              "snakefmt"
-              "python-lsp-server"
+              "trash"
             ];
 
             casks = [

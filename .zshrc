@@ -63,7 +63,13 @@ function fco() {
   git log --pretty=oneline --abbrev-commit | fzf --height 50% --reverse | cut -d ' ' -f 1 | xargs git checkout
 }
 function fzo() {
-  hx $(find "${1:-.}" 2> /dev/null | fzf --height 50% -m --preview="bat -P {} --color=always")
+  local files
+  files=$(find "${1:-.}" 2> /dev/null | fzf --height 50% -m --preview="bat -P {} --color=always") || return
+
+  # If no selection was made, return with exit code 0
+  [[ -z "$files" ]] && return 0
+
+  hx $files
 }
 function fseq() {
 
@@ -96,6 +102,20 @@ function fseq() {
     seqkit grep -p "$comma_list" "$infile"
   fi
   
+}
+function frm() {
+  # Use find to list files (and directories if you want) from the given path or current dir
+  # Adjust find arguments to suit your needs (e.g., just files, recursive, etc.)
+  local files
+  files=$(find "${1:-.}" -mindepth 1 -maxdepth 1 2>/dev/null | fzf --multi --height 50%) || return
+
+  # If no selection was made, exit
+  [[ -z "$files" ]] && return 0
+
+  # Move each selected file to the trash
+  while IFS= read -r file; do
+    trash "$file"
+  done <<< "$files"
 }
 
 
@@ -145,6 +165,9 @@ alias fgb=fgb # fuzzy-find through git branches
 alias fco=fco # fuzzy-find through git commits
 alias mkcd=mkcd # make a directory and change into it
 alias fseq=fseq # query a FASTA or FASTQ for specific IDs
+alias fzeq=fseq
+alias frm=frm # fuzzy find and move files into trash
+alias fzrm=frm
 alias uvv='uv sync && source .venv/bin/activate'
 alias uvs='uv sync'
 alias d='deactivate'
