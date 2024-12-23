@@ -6,8 +6,6 @@ export PATH=/usr/local/bin:/Users/nickminor/.pixi/bin:/opt/homebrew/opt/libiconv
 export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib
 export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
-export JULIA_DEPOT_PATH="~/.config/julia"
-export JULIA_NUM_THREADS=auto
 
 
 # ENVIRONMENT VARIABLES
@@ -140,6 +138,7 @@ alias curll='curl -L' # curl but follow redirects
 alias h="hx"
 alias h.="hx ."
 alias z.="zed ."
+alias o.="open ." # open the current directory in Finder on MacOS
 alias dots="dotter deploy -f -v -y"
 alias bfx="z ~/Documents/bioinformatics"
 alias books="z ~/Documents/books"
@@ -148,9 +147,7 @@ alias ls="eza -1a"
 alias ll="eza -la --group-directories-first --icons"
 alias cat="bat -pP"
 alias py="python3"
-alias jl="julia"
 alias db="duckdb"
-alias df="datafusion-cli"
 alias ff="fastfetch"
 alias y="yazi"
 alias zj="zellij"

@@ -40,9 +40,7 @@
             pkgs.mkalias
             pkgs.neovim
             pkgs.helix
-            pkgs.tmux
             pkgs.tree
-            pkgs.screen
             pkgs.zoxide
             pkgs.fastfetch
             pkgs.nushell
@@ -52,7 +50,6 @@
             pkgs.fzf
             pkgs.yazi
             pkgs.ripgrep
-            pkgs.zoxide
             pkgs.btop
             pkgs.just
             pkgs.ouch
@@ -63,18 +60,22 @@
             pkgs.eza
             pkgs.curl
             pkgs.wget
+            pkgs.dotter
             pkgs.lychee
             pkgs.bash-language-server
+            pkgs.warp-terminal
+            pkgs.duckdb
             pkgs.python3
             pkgs.uv
             pkgs.ruff
             pkgs.basedpyright
+            pkgs.marimo
             pkgs.rustup
             pkgs.rust-script
             pkgs.maturin
             pkgs.openjdk
             pkgs.jdk
-            pkgs.julia-bin
+            pkgs.nextflow
             pkgs.erlang
             pkgs.rebar3
             pkgs.gleam
@@ -82,7 +83,6 @@
             pkgs.elixir-ls
             pkgs.ocaml
             pkgs.dune_3
-            pkgs.dotter
             pkgs.marksman
             pkgs.seqkit
             pkgs.minimap2
@@ -90,12 +90,6 @@
             pkgs.samtools
             pkgs.bcftools
             pkgs.prqlc
-            pkgs.nextflow
-            pkgs.snakemake
-            pkgs.duckdb
-            pkgs.datafusion-cli
-            pkgs.marimo
-            pkgs.warp-terminal
           ];
 
           homebrew = {
@@ -110,7 +104,6 @@
             ];
 
             casks = [
-              "warp"
               "arc"
               "zed"
               "positron"
@@ -145,8 +138,8 @@
               orientation = "left";
               persistent-apps = [
                 "/Applications/Arc.app"
-                "/Applications/Bear.app"
                 "/Applications/Spark.app"
+                "/Applications/Bear.app"
                 "/Applications/Slack.app"
                 "/Applications/Warp.app"
                 "/Applications/Zed.app"
@@ -155,7 +148,7 @@
               wvous-tl-corner = 1;
               wvous-br-corner = 1;
               wvous-bl-corner = 1;
-              tilesize = 32;
+              tilesize = 28;
               show-recents = false;
               show-process-indicators = true;
               persistent-others = [
