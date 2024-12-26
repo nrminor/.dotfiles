@@ -42,6 +42,13 @@
 !/.config/nix-darwin/flake.nix
 !/.config/nix-darwin/flake.lock
 
+# ghostty configuration
+!/.config/ghostty
+!/.config/ghostty/config
+
+# starship configurations
+!/.config/starship.toml
+
 # allowing configuration files for the helix editor to be tracked
 !/.config/helix
 !/.config/helix/config.toml

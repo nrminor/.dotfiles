@@ -1,0 +1,22 @@
+# font configurations
+font-family = "Jetbrains Mono"
+font-size = 12
+
+# window configurations
+theme = catppuccin-macchiato
+background-opacity = 0.9
+background-blur-radius = 20
+window-inherit-font-size = false
+window-width = 185
+window-height = 60
+cursor-click-to-move = true
+window-decoration = true
+shell-integration-features = true
+
+# macos-specific configurations
+macos-option-as-alt = true
+macos-icon = custom-style
+
+# 
+shell-integration = zsh
+

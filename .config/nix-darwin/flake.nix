@@ -43,6 +43,8 @@
             pkgs.tree
             pkgs.zoxide
             pkgs.fastfetch
+            pkgs.starship
+            pkgs.atuin
             pkgs.nushell
             pkgs.du-dust
             pkgs.zellij
