@@ -1,25 +1,12 @@
-# EXPORTS
+# ENVIRONMENT VARIABLES
 # -------------------------------------------------------------------------------------
-export ZSH="$HOME/.oh-my-zsh"
-export JAVA_HOME=$(/usr/libexec/java_home)
 export PATH=/usr/local/bin:/Users/nickminor/.pixi/bin:/opt/homebrew/opt/libiconv/bin:$(brew --prefix)/lib:/opt/homebrew/opt/libiconv/lib:$PATH:$HOME/.nextflow-lsp
 export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib
 export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
 export XDG_CONFIG_HOME="$HOME/.config"
-
-
-# ENVIRONMENT VARIABLES
+export JAVA_HOME=$(/usr/libexec/java_home)
 # -------------------------------------------------------------------------------------
-ZSH_THEME="robbyrussell"
-plugins=(
-    colorize
-    dotenv
-    eza
-    fzf
-    git
-    rsync
-)
 
 
 # CUSTOM FUNCTIONS
@@ -27,6 +14,7 @@ plugins=(
 function mkcd() {
   mkdir -p "$1" && cd "$1"
 }
+
 function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"
@@ -35,10 +23,12 @@ function yy() {
 	fi
 	rm -f -- "$tmp"
 }
+
 function fcd() {
   local dir
   dir=$(find "${1:-.}" -type d 2> /dev/null | fzf --height 50% --preview='tree -C {} | head -200') && cd "$dir"
 }
+
 function fopen() {
   local items
   items=$(find "${1:-.}" 2> /dev/null | fzf -m --height 50% --reverse \
@@ -49,18 +39,23 @@ function fopen() {
     done <<< "$items"
   fi
 }
+
 function fh() {
   history | fzf --height 50% --reverse --tiebreak=index | sed 's/ *[0-9]* *//'
 }
+
 function fkill() {
   ps -ef | sed 1d | fzf -m --height 50% --reverse --preview 'echo {}' | awk '{print $2}' | xargs -r kill -9
 }
+
 function fgb() {
   git branch --all | grep -v HEAD | sed 's/remotes\/origin\///' | sort -u | fzf --height 50% --reverse | xargs git checkout
 }
+
 function fco() {
   git log --pretty=oneline --abbrev-commit | fzf --height 50% --reverse | cut -d ' ' -f 1 | xargs git checkout
 }
+
 function fzo() {
   local files
   files=$(find "${1:-.}" 2> /dev/null | fzf --height 50% -m \
@@ -71,6 +66,7 @@ function fzo() {
 
   hx $files
 }
+
 function fseq() {
 
   local infile="$1"
@@ -103,6 +99,7 @@ function fseq() {
   fi
   
 }
+
 function frm() {
   # Use find to list files (and directories if you want) from the given path or current dir
   # Adjust find arguments to suit your needs (e.g., just files, recursive, etc.)
@@ -118,15 +115,17 @@ function frm() {
     trash "$file"
   done <<< "$files"
 }
+# -------------------------------------------------------------------------------------
 
 
-# SOURCES
+# SOURCES AND EVALS
 # -------------------------------------------------------------------------------------
 . "$HOME/.cargo/env"
 # source $ZSH/oh-my-zsh.sh # loading this is quite slow
 eval "$(zoxide init zsh)"
 source <(fzf --zsh)
 eval "$(starship init zsh)"
+# -------------------------------------------------------------------------------------
 
 
 # ALIASES
@@ -193,4 +192,5 @@ alias k="clear"
 alias zr="source $HOME/.zshrc"
 alias zrl="source $HOME/.zshrc"
 alias zshrc="source $HOME/.zshrc"
+# -------------------------------------------------------------------------------------
 
