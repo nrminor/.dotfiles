@@ -133,6 +133,7 @@ function frm() {
 eval "$(zoxide init zsh)"
 source <(fzf --zsh)
 eval "$(starship init zsh)"
+eval "$(atuin init zsh)"
 # -------------------------------------------------------------------------------------
 
 
