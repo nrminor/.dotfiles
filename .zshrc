@@ -5,7 +5,6 @@ export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libi
 export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
 export XDG_CONFIG_HOME="$HOME/.config"
-export JAVA_HOME=$(/usr/libexec/java_home)
 # -------------------------------------------------------------------------------------
 
 
@@ -16,7 +15,13 @@ function mkcd() {
 }
 
 function trash() {
-  mv "$1" $HOME/.Trash/
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    # On macOS, move to user's Trash folder
+    mv "$@" "$HOME/.Trash/"
+  else
+    # On Linux (or other OS), permanently remove
+    rm "$@"
+  fi
 }
 
 function yy() {
@@ -125,7 +130,6 @@ function frm() {
 # SOURCES AND EVALS
 # -------------------------------------------------------------------------------------
 . "$HOME/.cargo/env"
-# source $ZSH/oh-my-zsh.sh # loading this is quite slow
 eval "$(zoxide init zsh)"
 source <(fzf --zsh)
 eval "$(starship init zsh)"
@@ -145,9 +149,6 @@ alias h.="hx ."
 alias z.="zed ."
 alias o.="open ." # open the current directory in Finder on MacOS
 alias dots="dotter deploy -f -v -y"
-alias bfx="z ~/Documents/bioinformatics"
-alias books="z ~/Documents/books"
-alias dholk="z ~/Documents/dholk_experiments"
 alias ls="eza -1a"
 alias ll="eza -la --group-directories-first --icons"
 alias cat="bat -pP"
@@ -196,5 +197,15 @@ alias k="clear"
 alias zr="source $HOME/.zshrc"
 alias zrl="source $HOME/.zshrc"
 alias zshrc="source $HOME/.zshrc"
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  alias bfx="z $HOME/Documents/bioinformatics"
+  alias books="z $HOME/Documents/books"
+  alias dholk="z $HOME/Documents/dholk_experiments"
+else
+  alias bfx="z $HOME/bioinformatics"
+  alias books="z $HOME/books"
+  alias dholk="z $HOME/dholk_experiments"
+
+fi
 # -------------------------------------------------------------------------------------
 
