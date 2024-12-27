@@ -102,7 +102,6 @@
               "gcc"
               "llvm"
               "libiconv"
-              "trash"
             ];
 
             casks = [

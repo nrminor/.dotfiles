@@ -15,6 +15,10 @@ function mkcd() {
   mkdir -p "$1" && cd "$1"
 }
 
+function trash() {
+  mv "$1" $HOME/.Trash/
+}
+
 function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"
