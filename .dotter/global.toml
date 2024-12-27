@@ -19,6 +19,9 @@
 ".warp/themes/catppuccin_macchiato.yml" = "/Users/nickminor/.warp/themes/catppuccin_macchiato.yml"
 ".warp/launch_configurations/config.yaml" = "/Users/nickminor/.warp/launch_configurations/config.yaml"
 
+[ghostty.files]
+".config/ghostty/config" = "/Users/nickminor/Library/Application Support/com.mitchellh.ghostty/config"
+
 [zed.files]
 ".config/zed/settings.json" = "/Users/nickminor/.config/zed/settings.json"
 ".config/zed/keymap.json" = "/Users/nickminor/.config/zed/keymap.json"

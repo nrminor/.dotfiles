@@ -29,7 +29,7 @@ quick-terminal-screen = main
 # macos-specific configurations
 macos-option-as-alt = true
 macos-icon = custom-style
-macos-titlebar-style = hidden
+# macos-titlebar-style = hidden
 
 # miscellaneous
 shell-integration = zsh

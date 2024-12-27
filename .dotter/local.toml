@@ -5,6 +5,7 @@ packages = [
   "nix-darwin",
   "zed",
   "warp",
+  "ghostty",
   "helix",
   "marimo",
   "btop",
