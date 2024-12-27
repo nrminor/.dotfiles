@@ -11,12 +11,29 @@ window-width = 185
 window-height = 60
 cursor-click-to-move = true
 window-decoration = true
-shell-integration-features = true
+window-padding-balance = true
+window-save-state = always
+adjust-cell-height = 10%
+
+# mouse and cursor configurations
+mouse-hide-while-typing = true
+cursor-style = block
+cursor-click-to-move = true
+mouse-scroll-multiplier = 2
+copy-on-select = clipboard
+cursor-style-blink = false
+
+# quick term settings
+quick-terminal-position = right
+quick-terminal-screen = main
 
 # macos-specific configurations
 macos-option-as-alt = true
 macos-icon = custom-style
+macos-titlebar-style = hidden
 
-# 
+# miscellaneous
 shell-integration = zsh
+shell-integration-features = title
+quit-after-last-window-closed = true
 
