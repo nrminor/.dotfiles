@@ -164,7 +164,7 @@
 
     "file_types": {
         "Rust": ["rs", "ers"],
-        "Groovy": ["nf", "config"],
+        "Groovy": ["nf"],
         "Dockerfile": ["Dockerfile*"],
         "YAML": ["pixi.lock"],
         "Markdown": ["md", "qmd"],

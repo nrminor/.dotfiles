@@ -55,6 +55,12 @@
             pkgs.fzf
             pkgs.yazi
             pkgs.ripgrep
+            pkgs.poppler
+            pkgs.ffmpeg
+            pkgs.imagemagick
+            pkgs.xclip
+            pkgs.fd
+            pkgs.jq
             pkgs.btop
             pkgs.just
             pkgs.ouch
@@ -107,6 +113,8 @@
               "gcc"
               "llvm"
               "libiconv"
+              "sevenzip"
+              "font-symbols-only-nerd-font"
             ];
 
             casks = [

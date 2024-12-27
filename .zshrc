@@ -35,12 +35,12 @@ function yy() {
 
 function fcd() {
   local dir
-  dir=$(find "${1:-.}" -type d 2> /dev/null | fzf --height 50% --preview='tree -C {} | head -200') && cd "$dir"
+  dir=$(find "${1:-.}" -type d 2> /dev/null | fzf --height 70% --preview='tree -C {} | head -200') && cd "$dir"
 }
 
 function fopen() {
   local items
-  items=$(find "${1:-.}" 2> /dev/null | fzf -m --height 50% --reverse \
+  items=$(find "${1:-.}" 2> /dev/null | fzf -m --height 70% --reverse \
     --preview='[ -d {} ] && tree -C {} || bat -pP {} --color=always')
   if [[ -n "$items" ]]; then
     while IFS= read -r line; do
@@ -50,24 +50,24 @@ function fopen() {
 }
 
 function fh() {
-  history | fzf --height 50% --reverse --tiebreak=index | sed 's/ *[0-9]* *//'
+  history | fzf --height 70% --reverse --tiebreak=index | sed 's/ *[0-9]* *//'
 }
 
 function fkill() {
-  ps -ef | sed 1d | fzf -m --height 50% --reverse --preview 'echo {}' | awk '{print $2}' | xargs -r kill -9
+  ps -ef | sed 1d | fzf -m --height 70% --reverse --preview 'echo {}' | awk '{print $2}' | xargs -r kill -9
 }
 
 function fgb() {
-  git branch --all | grep -v HEAD | sed 's/remotes\/origin\///' | sort -u | fzf --height 50% --reverse | xargs git checkout
+  git branch --all | grep -v HEAD | sed 's/remotes\/origin\///' | sort -u | fzf --height 70% --reverse | xargs git checkout
 }
 
 function fco() {
-  git log --pretty=oneline --abbrev-commit | fzf --height 50% --reverse | cut -d ' ' -f 1 | xargs git checkout
+  git log --pretty=oneline --abbrev-commit | fzf --height 70% --reverse | cut -d ' ' -f 1 | xargs git checkout
 }
 
 function fzo() {
   local files
-  files=$(find "${1:-.}" 2> /dev/null | fzf --height 50% -m \
+  files=$(find "${1:-.}" 2> /dev/null | fzf --height 70% -m \
     --preview='[ -d {} ] && tree -C {} || bat -pP {} --color=always') || return
 
   # If no selection was made, return with exit code 0
@@ -102,7 +102,7 @@ function fseq() {
 
   # Get the list of IDs and allow fuzzy selection of multiple IDs
   local ids
-  ids=$(seqkit seq -i -n "$infile" | fzf --height 50% --multi \
+  ids=$(seqkit seq -i -n "$infile" | fzf --height 70% --multi \
     --preview="seqkit grep -p {} '$infile' | bat --wrap=auto --style=numbers,grid --color=always --theme=ansi") || return
 
   # If no IDs were selected, just return
