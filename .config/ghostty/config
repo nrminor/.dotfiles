@@ -9,7 +9,6 @@ background-blur-radius = 20
 window-inherit-font-size = false
 window-width = 185
 window-height = 60
-cursor-click-to-move = true
 window-decoration = true
 window-padding-balance = true
 window-save-state = always
