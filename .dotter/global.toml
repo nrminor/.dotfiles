@@ -36,3 +36,6 @@
 [marimo.files]
 ".marimo.toml" = "/Users/nickminor/.marimo.toml"
 
+[starship.files]
+".config/starship.toml" = "/Users/nickminor/.config/starship.toml"
+
