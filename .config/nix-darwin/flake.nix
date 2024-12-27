@@ -65,6 +65,8 @@
             pkgs.dotter
             pkgs.lychee
             pkgs.bash-language-server
+            pkgs.docker-ls
+            pkgs.yaml-language-server
             pkgs.warp-terminal
             pkgs.duckdb
             pkgs.python3

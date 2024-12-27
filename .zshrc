@@ -76,6 +76,20 @@ function fzo() {
   hx $files
 }
 
+function hxs() {
+	RG_PREFIX="rg -i --files-with-matches"
+	local files
+	files="$(
+		FZF_DEFAULT_COMMAND_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
+			fzf --multi 3 --print0 --sort --preview="[[ ! -z {} ]] && rg --pretty --ignore-case --context 5 {q} {}" \
+				--phony -i -q "$1" \
+				--bind "change:reload:$RG_PREFIX {q}" \
+				--preview-window="70%:wrap" \
+				--bind 'ctrl-a:select-all'
+	)"
+	[[ "$files" ]] && hx --vsplit $(echo $files | tr \\0 " ")
+}
+
 function fseq() {
 
   local infile="$1"
@@ -180,6 +194,7 @@ alias fbranches=fgb
 alias fzbranches=fgb
 alias fco=fco # fuzzy-find through git commits
 alias mkcd=mkcd # make a directory and change into it
+alias hxs=hxs
 alias fseq=fseq # query a FASTA or FASTQ for specific IDs
 alias fzeq=fseq
 alias frm=frm # fuzzy find and move files into trash
