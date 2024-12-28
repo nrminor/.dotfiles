@@ -63,6 +63,12 @@
 !/.config/zed/keymap.json
 !/.config/zed/themes
 
+# allow yazi configurations
+!/.config/yazi
+!/.config/yazi/yazi.toml
+!/.config/yazi/keymap.toml
+!/.config/yazi/theme.toml
+
 # positron files
 !/.config/positron
 !/.config/positron/settings.json

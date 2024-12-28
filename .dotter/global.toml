@@ -26,6 +26,9 @@
 ".config/zed/settings.json" = "/Users/nickminor/.config/zed/settings.json"
 ".config/zed/keymap.json" = "/Users/nickminor/.config/zed/keymap.json"
 
+[yazi.files]
+".config/yazi/yazi.toml" = "/Users/nickminor/.config/yazi/yazi.toml"
+
 [positron.files]
 ".config/positron/settings.json" = "/Users/nickminor/Library/Application Support/Positron/User/settings.json"
 ".config/positron/extensions.txt" = "/Users/nickminor/.config/positron/extensions.txt"

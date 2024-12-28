@@ -7,8 +7,8 @@ theme = catppuccin-macchiato
 background-opacity = 0.95
 background-blur-radius = 20
 window-inherit-font-size = false
-window-width = 185
-window-height = 60
+window-width = 165
+window-height = 50
 window-decoration = true
 window-padding-balance = true
 window-save-state = always
@@ -35,4 +35,3 @@ macos-icon = custom-style
 shell-integration = zsh
 shell-integration-features = title
 quit-after-last-window-closed = true
-
