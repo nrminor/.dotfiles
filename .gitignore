@@ -73,6 +73,10 @@
 !/.config/zellij
 !/.config/zellij/config.kdl
 
+# skhd configuration
+!/.config/skhd
+!/.config/skhd/skhdrc
+
 # positron files
 !/.config/positron
 !/.config/positron/settings.json

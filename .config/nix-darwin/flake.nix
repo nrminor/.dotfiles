@@ -48,6 +48,8 @@
             pkgs.fastfetch
             pkgs.starship
             pkgs.atuin
+            pkgs.carapace
+            pkgs.skhd
             pkgs.nushell
             pkgs.du-dust
             pkgs.zellij

@@ -32,6 +32,9 @@
 [zellij.files]
 ".config/zellij/config.kdl" = "/Users/nickminor/.config/zellij/config.kdl"
 
+[skhd.files]
+".config/skhd/skhdrc" = "/Users/nickminor/.config/skhd/skhdrc"
+
 [positron.files]
 ".config/positron/settings.json" = "/Users/nickminor/Library/Application Support/Positron/User/settings.json"
 ".config/positron/extensions.txt" = "/Users/nickminor/.config/positron/extensions.txt"

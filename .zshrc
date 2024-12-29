@@ -5,6 +5,7 @@ export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libi
 export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
 export XDG_CONFIG_HOME="$HOME/.config"
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 # -------------------------------------------------------------------------------------
 
 
@@ -148,6 +149,10 @@ eval "$(zoxide init zsh)"
 source <(fzf --zsh)
 eval "$(starship init zsh)"
 eval "$(atuin init zsh)"
+autoload -Uz compinit
+compinit
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
 # -------------------------------------------------------------------------------------
 
 

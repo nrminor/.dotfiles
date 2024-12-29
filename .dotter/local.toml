@@ -9,6 +9,7 @@ packages = [
   "helix",
   "yazi",
   "zellij",
+  "skhd",
   "marimo",
   "btop",
   "julia",
