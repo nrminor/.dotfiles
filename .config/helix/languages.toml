@@ -24,6 +24,14 @@ auto-format = true
 file-types = ["rs", "ers"]
 rulers = [120]
 
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
+'<' = '>'
+
 [language-server.rust-analyzer.config.check]
 command = "clippy"
 
@@ -72,6 +80,17 @@ indent = { tab-width = 2, unit = "  " }
 name = "ocaml"
 file-types = ["ml", "mli"]
 auto-format = true
+indent = { tab-width = 2, unit = "  " }
+formatter = { command = "entr", args = [
+  "-p",
+  "ocamlformat",
+  "--inplace",
+  "/_",
+] }
+
+[[language]]
+name = "nix"
+formatter = { command = "nixpkgs-fmt" }
 
 [[language]]
 name = "groovy"

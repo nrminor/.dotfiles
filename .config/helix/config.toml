@@ -8,6 +8,14 @@ rulers = [88]
 cursorline = true
 cursorcolumn = false
 bufferline = "always"
+end-of-line-diagnostics = "hint"
+
+[editor.inline-diagnostics]
+# Minimum severity to show a diagnostic on the primary cursor's line.
+# Note that `cursor-line` diagnostics are hidden in insert mode.
+cursor-line = "hint"
+# Minimum severity to show a diagnostic on other lines:
+other-lines = "error"
 
 [editor.soft-wrap]
 enable = true

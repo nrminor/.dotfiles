@@ -157,8 +157,8 @@
                 "/Applications/Spark.app"
                 "/Applications/Bear.app"
                 "/Applications/Slack.app"
+                # "/Applications/Ghostty.app"
                 "/Applications/Warp.app"
-                "/Applications/Zed.app"
               ];
               wvous-tr-corner = 1;
               wvous-tl-corner = 1;

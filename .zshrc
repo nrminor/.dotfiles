@@ -15,6 +15,25 @@ function mkcd() {
   mkdir -p "$1" && cd "$1"
 }
 
+function gitcc() {
+  if [[ -z "$1" ]]; then
+    echo "Usage: ghcc <Git repository URL>"
+    return 1
+  fi
+
+  local url="$1"
+  # Extract the last path component, e.g. "myrepo.git" or "myrepo"
+  local base
+  base=$(basename "$url")
+
+  # Remove a trailing ".git" if present
+  local repo
+  repo=${base%.git}
+
+  # Clone and change into the repo directory if successful
+  git clone "$url" && cd "$repo"
+}
+
 function trash() {
   if [[ "$(uname -s)" == "Darwin" ]]; then
     # On macOS, move to user's Trash folder
@@ -153,6 +172,7 @@ autoload -Uz compinit
 compinit
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace)
+eval $(opam env)
 # -------------------------------------------------------------------------------------
 
 
@@ -199,6 +219,7 @@ alias fbranches=fgb
 alias fzbranches=fgb
 alias fco=fco # fuzzy-find through git commits
 alias mkcd=mkcd # make a directory and change into it
+alias gitcc=gitcc # git clone a repository and cd into it
 alias hxs=hxs
 alias fseq=fseq # query a FASTA or FASTQ for specific IDs
 alias fzeq=fseq

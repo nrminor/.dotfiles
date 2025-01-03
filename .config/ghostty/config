@@ -28,10 +28,16 @@ quick-terminal-screen = main
 
 # macos-specific configurations
 macos-option-as-alt = true
+macos-icon-frame = chrome
 macos-icon = custom-style
+# macos-icon-ghost-color = green
+# macos-icon-screen-color = green
 # macos-titlebar-style = hidden
 
 # miscellaneous
 shell-integration = zsh
 shell-integration-features = title
 quit-after-last-window-closed = true
+
+# keybindings
+keybind = cmd+/=toggle_quick_terminal

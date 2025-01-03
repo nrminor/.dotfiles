@@ -106,5 +106,8 @@
 # ]
 
 # open terminal, blazingly fast compared to iTerm/Hyper
-cmd - return : open /Applications/Ghostty.app
+# cmd - return : open /Applications/Ghostty.app
+
+# open Arc
+# cmd + shift - return : open /Applications/Arc.app
 
