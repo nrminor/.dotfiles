@@ -228,6 +228,7 @@ alias fzrm=frm
 alias z-="z -"
 alias uvv='uv sync && source .venv/bin/activate'
 alias uvs='uv sync'
+alias a='source .venv/bin/activate'
 alias d='deactivate'
 alias sq='seqkit'
 alias mm='minimap2'
