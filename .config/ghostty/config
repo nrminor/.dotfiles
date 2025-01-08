@@ -40,4 +40,4 @@ shell-integration-features = title
 quit-after-last-window-closed = true
 
 # keybindings
-keybind = cmd+/=toggle_quick_terminal
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
