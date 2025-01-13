@@ -158,6 +158,13 @@ function frm() {
     trash "$file"
   done <<< "$files"
 }
+
+function bam2fq() {
+  for bam in *.bam; do
+    BASENAME=${bam%.*}
+    samtools fastq "${bam}" | bgzip -c > "${BASENAME}.fastq.gz"
+  done
+}
 # -------------------------------------------------------------------------------------
 
 

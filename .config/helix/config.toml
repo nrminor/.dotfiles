@@ -11,9 +11,9 @@ bufferline = "always"
 end-of-line-diagnostics = "hint"
 
 [editor.inline-diagnostics]
-cursor-line = "hint"
+cursor-line = "error"
 other-lines = "disable"
-max-diagnostics	= 2
+max-diagnostics	= 10
 
 [editor.soft-wrap]
 enable = true
