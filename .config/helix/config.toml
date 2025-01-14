@@ -11,7 +11,7 @@ bufferline = "always"
 end-of-line-diagnostics = "hint"
 
 [editor.inline-diagnostics]
-cursor-line = "error"
+cursor-line = "hint"
 other-lines = "disable"
 max-diagnostics	= 10
 
@@ -41,4 +41,4 @@ left = ["mode", "spinner", "version-control", "file-name"]
 
 [keys.normal]
 esc = ["collapse_selection", "keep_primary_selection"]
-n = ":new"
+# n = ":new"
