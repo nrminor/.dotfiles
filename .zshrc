@@ -227,14 +227,15 @@ alias fzbranches=fgb
 alias fco=fco # fuzzy-find through git commits
 alias mkcd=mkcd # make a directory and change into it
 alias gitcc=gitcc # git clone a repository and cd into it
+alias gitcd=gitcc
 alias hxs=hxs
 alias fseq=fseq # query a FASTA or FASTQ for specific IDs
 alias fzeq=fseq
 alias frm=frm # fuzzy find and move files into trash
 alias fzrm=frm
 alias z-="z -"
-alias uvv='uv sync && source .venv/bin/activate'
-alias uvs='uv sync'
+alias uvv='uv sync --all-extras && source .venv/bin/activate'
+alias uvs='uv sync --all-extras'
 alias a='source .venv/bin/activate'
 alias d='deactivate'
 alias sq='seqkit'
@@ -257,5 +258,8 @@ else
   alias dholk="z $HOME/dholk_experiments"
 
 fi
+alias l="ls"
+alias s="ls"
+alias ks="ls"
 # -------------------------------------------------------------------------------------
 
