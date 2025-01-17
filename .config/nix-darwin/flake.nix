@@ -78,6 +78,7 @@
             pkgs.bash-language-server
             pkgs.docker-ls
             pkgs.yaml-language-server
+            pkgs.ghostty
             pkgs.warp-terminal
             pkgs.duckdb
             pkgs.python3
@@ -91,6 +92,8 @@
             pkgs.openjdk
             pkgs.jdk
             pkgs.nextflow
+            pkgs.vscode-langservers-extracted
+            pkgs.superhtml
             pkgs.erlang
             pkgs.rebar3
             pkgs.gleam
