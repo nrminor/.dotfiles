@@ -165,6 +165,29 @@ function bam2fq() {
     samtools fastq "${bam}" | bgzip -c > "${BASENAME}.fastq.gz"
   done
 }
+
+function exp() {
+    # Check if first argument is a number
+    if [[ ! "$1" =~ ^[0-9]+$ ]]; then
+        echo "Error: An experiment number must be provided."
+        return 1
+    fi
+
+    local number="$1"
+    local target_dir=""
+
+    # Check for -t or --tcf flag
+    if [[ "$2" == "-t" || "$2" == "--tcf" ]]; then
+        target_dir="/Volumes/Data-pathfs09EXP1/dholk/doit-tcf/experiments/$number/@files"
+    else
+        target_dir="/Volumes/Data-pathfs09EXP1/dholk/doit-drive-oconnorlab/labkey/files/experiments/$number/@files"
+    fi
+
+    # Change to the target directory
+    cd "$target_dir" || return 1
+    echo "Changed to directory: $target_dir"
+  
+}
 # -------------------------------------------------------------------------------------
 
 
