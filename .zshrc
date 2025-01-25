@@ -1,11 +1,26 @@
+# SOURCES AND EVALS (the slow stuff)
+# -------------------------------------------------------------------------------------
+. "$HOME/.cargo/env"
+eval "$(zoxide init zsh)"
+source <(fzf --zsh)
+eval "$(starship init zsh)"
+eval "$(atuin init zsh)"
+autoload -Uz compinit
+compinit
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
+# -------------------------------------------------------------------------------------
+
+
 # ENVIRONMENT VARIABLES
 # -------------------------------------------------------------------------------------
-export PATH=/usr/local/bin:/Users/nickminor/.pixi/bin:/opt/homebrew/opt/libiconv/bin:$(brew --prefix)/lib:/opt/homebrew/opt/libiconv/lib:$PATH:$HOME/.moon/bin
-export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib
+export BREW_PREFIX=$(brew --prefix)
+export PATH=/usr/local/bin:/Users/nickminor/.pixi/bin:/opt/homebrew/opt/libiconv/bin:$BREW_PREFIX/lib:/opt/homebrew/opt/libiconv/lib:$PATH:$HOME/.moon/bin
+export LIBRARY_PATH=$LIBRARY_PATH:$BREW_PREFIX/lib:$BREW_PREFIX/opt/libiconv/lib
 export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
 export XDG_CONFIG_HOME="$HOME/.config"
-export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+export CARAPACE_BRIDGES='zsh,bash,clap,click'
 # -------------------------------------------------------------------------------------
 
 
@@ -188,21 +203,6 @@ function exp() {
     echo "Changed to directory: $target_dir"
   
 }
-# -------------------------------------------------------------------------------------
-
-
-# SOURCES AND EVALS
-# -------------------------------------------------------------------------------------
-. "$HOME/.cargo/env"
-eval "$(zoxide init zsh)"
-source <(fzf --zsh)
-eval "$(starship init zsh)"
-eval "$(atuin init zsh)"
-autoload -Uz compinit
-compinit
-zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-source <(carapace _carapace)
-eval $(opam env)
 # -------------------------------------------------------------------------------------
 
 
