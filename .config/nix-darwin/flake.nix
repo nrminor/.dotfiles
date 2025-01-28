@@ -107,6 +107,7 @@
             pkgs.bedtools
             pkgs.samtools
             pkgs.bcftools
+            pkgs.csvtk
             pkgs.prqlc
           ];
 
