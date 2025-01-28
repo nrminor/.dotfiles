@@ -181,6 +181,10 @@ function bam2fq() {
   done
 }
 
+function seqstats() {
+  seqkit stats -b -a -T *.fa* --quiet | csvtk pretty --style 3line -d $'\t'
+}
+
 function exp() {
     # Check if first argument is a number
     if [[ ! "$1" =~ ^[0-9]+$ ]]; then
