@@ -182,7 +182,12 @@ function bam2fq() {
 }
 
 function seqstats() {
-  seqkit stats -b -a -T *.fa* --quiet | csvtk pretty --style 3line -d $'\t'
+    local output_file="$1"
+    if [ -n "$output_file" ]; then
+        seqkit stats -b -a -T *.fa* --quiet > "$output_file"
+    else
+        seqkit stats -b -a -T *.fa* --quiet | csvtk pretty --style 3line -d $'\t'
+    fi
 }
 
 function exp() {
