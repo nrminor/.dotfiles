@@ -30,6 +30,8 @@ quick-terminal-screen = main
 macos-option-as-alt = true
 macos-icon-frame = chrome
 macos-icon = custom-style
+keybind = alt+left=unbind
+keybind = alt+right=unbind
 # macos-icon-ghost-color = green
 # macos-icon-screen-color = green
 # macos-titlebar-style = hidden
