@@ -15,7 +15,7 @@ source <(carapace _carapace)
 # ENVIRONMENT VARIABLES
 # -------------------------------------------------------------------------------------
 export BREW_PREFIX=$(brew --prefix)
-export PATH=/usr/local/bin:/Users/nickminor/.pixi/bin:/opt/homebrew/opt/libiconv/bin:$BREW_PREFIX/lib:/opt/homebrew/opt/libiconv/lib:$PATH:$HOME/.moon/bin
+export PATH=/usr/local/bin:$HOME/.pixi/bin:/opt/homebrew/opt/libiconv/bin:$BREW_PREFIX/lib:/opt/homebrew/opt/libiconv/lib:$PATH:$HOME/.moon/bin
 export LIBRARY_PATH=$LIBRARY_PATH:$BREW_PREFIX/lib:$BREW_PREFIX/opt/libiconv/lib
 export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
