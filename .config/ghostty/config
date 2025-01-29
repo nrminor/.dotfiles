@@ -38,6 +38,7 @@ macos-icon = custom-style
 shell-integration = zsh
 shell-integration-features = title
 quit-after-last-window-closed = true
+shell-integration-features = sudo
 
 # keybindings
 keybind = global:ctrl+grave_accent=toggle_quick_terminal

@@ -212,6 +212,16 @@ function exp() {
     echo "Changed to directory: $target_dir"
   
 }
+
+function allow_ghostty() {
+  local location="$1"
+  if [[ -z "$location" ]]; then
+    echo "Usage: allow_ghostty USERNAME@ADDRESS"
+    return 1
+  fi
+  
+  infocmp -x | ssh $location -- tic -x -
+}
 # -------------------------------------------------------------------------------------
 
 
