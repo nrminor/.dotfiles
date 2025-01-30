@@ -14,9 +14,6 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
   };
 
   outputs =
@@ -43,6 +40,7 @@
             pkgs.mkalias
             pkgs.neovim
             pkgs.helix
+            pkgs.ghostty
             pkgs.tree
             pkgs.zoxide
             pkgs.fastfetch
@@ -78,7 +76,6 @@
             pkgs.bash-language-server
             pkgs.docker-ls
             pkgs.yaml-language-server
-            pkgs.ghostty
             pkgs.warp-terminal
             pkgs.duckdb
             pkgs.python3
@@ -162,8 +159,7 @@
                 "/Applications/Spark.app"
                 "/Applications/Bear.app"
                 "/Applications/Slack.app"
-                # "/Applications/Ghostty.app"
-                "/Applications/Warp.app"
+                "/Applications/Ghostty.app"
               ];
               wvous-tr-corner = 1;
               wvous-tl-corner = 1;
