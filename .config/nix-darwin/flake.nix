@@ -132,6 +132,7 @@
               "discord"
               "docker"
               "zoom"
+              "raycast"
             ];
 
             masApps = {
