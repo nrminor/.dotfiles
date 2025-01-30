@@ -182,12 +182,42 @@ function bam2fq() {
 }
 
 function seqstats() {
-    local output_file="$1"
-    if [ -n "$output_file" ]; then
-        seqkit stats -b -a -T *.fa* --quiet > "$output_file"
-    else
-        seqkit stats -b -a -T *.fa* --quiet | csvtk pretty --style 3line -d $'\t'
-    fi
+  local dir="."
+  local output_file=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+      case "$1" in
+          -o)
+              output_file="$2"
+              shift 2
+              ;;
+          *)
+              dir="$1"
+              shift
+              ;;
+      esac
+  done
+
+  # Check if directory exists
+  if [ ! -d "$dir" ]; then
+      echo "Error: Directory '$dir' does not exist" >&2
+      return 1
+  fi
+
+  local files=("$dir"/*.(fa|fasta|fq|fastq)(.gz|))
+
+  # If there are no matching files, let the user know and exit
+  if (( $#files == 0 )); then
+      echo "No FASTA/FASTQ files found in '$dir'." >&2
+      return 1
+  fi
+
+  if [ -n "$output_file" ]; then
+      seqkit stats -b -a -T "${files[@]}" --quiet > "$output_file"
+  else
+      seqkit stats -b -a -T "${files[@]}" --quiet | csvtk pretty --style 3line -d $'\t'
+  fi
 }
 
 function exp() {
