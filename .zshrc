@@ -193,8 +193,13 @@ function seqstats() {
               shift 2
               ;;
           *)
-              dir="$1"
-              shift
+              if [[ "$1" != -* ]]; then
+                  dir="$1"
+                  shift
+              else
+                  echo "Unknown option: $1" >&2
+                  return 1
+              fi
               ;;
       esac
   done
