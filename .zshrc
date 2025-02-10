@@ -21,6 +21,7 @@ export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
 export XDG_CONFIG_HOME="$HOME/.config"
 export CARAPACE_BRIDGES='zsh,bash,clap,click'
+export HOMEBREW_NO_AUTO_UPDATE=1
 # -------------------------------------------------------------------------------------
 
 
