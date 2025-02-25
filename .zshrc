@@ -1,3 +1,16 @@
+# ENVIRONMENT VARIABLES
+# -------------------------------------------------------------------------------------
+export BREW_PREFIX=$(brew --prefix)
+export PATH=/usr/local/bin:$HOME/.pixi/bin:/opt/homebrew/opt/libiconv/bin:$BREW_PREFIX/lib:/opt/homebrew/opt/libiconv/lib:$PATH:$HOME/.moon/bin
+export LIBRARY_PATH=$LIBRARY_PATH:$BREW_PREFIX/lib:$BREW_PREFIX/opt/libiconv/lib
+export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
+export XDG_CONFIG_HOME="$HOME/.config"
+export CARAPACE_BRIDGES='zsh,bash,clap,click'
+export HOMEBREW_NO_AUTO_UPDATE=1
+# -------------------------------------------------------------------------------------
+
+
 # SOURCES AND EVALS (the slow stuff)
 # -------------------------------------------------------------------------------------
 . "$HOME/.cargo/env"
@@ -9,19 +22,6 @@ autoload -Uz compinit
 compinit
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace)
-# -------------------------------------------------------------------------------------
-
-
-# ENVIRONMENT VARIABLES
-# -------------------------------------------------------------------------------------
-export BREW_PREFIX=$(brew --prefix)
-export PATH=/usr/local/bin:$HOME/.pixi/bin:/opt/homebrew/opt/libiconv/bin:$BREW_PREFIX/lib:/opt/homebrew/opt/libiconv/lib:$PATH:$HOME/.moon/bin
-export LIBRARY_PATH=$LIBRARY_PATH:$BREW_PREFIX/lib:$BREW_PREFIX/opt/libiconv/lib
-export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
-export XDG_CONFIG_HOME="$HOME/.config"
-export CARAPACE_BRIDGES='zsh,bash,clap,click'
-export HOMEBREW_NO_AUTO_UPDATE=1
 # -------------------------------------------------------------------------------------
 
 
