@@ -59,6 +59,7 @@
             pkgs.ffmpeg
             pkgs.imagemagick
             pkgs.xclip
+            pkgs.p7zip
             pkgs.fd
             pkgs.jq
             pkgs.btop
