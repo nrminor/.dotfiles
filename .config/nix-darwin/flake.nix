@@ -89,6 +89,7 @@
             pkgs.maturin
             pkgs.openjdk
             pkgs.jdk
+            pkgs.jdtls
             pkgs.nextflow
             pkgs.vscode-langservers-extracted
             pkgs.superhtml
