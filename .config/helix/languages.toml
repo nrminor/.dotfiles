@@ -29,7 +29,6 @@ rulers = [120]
 '{' = '}'
 '[' = ']'
 '"' = '"'
-'`' = '`'
 '<' = '>'
 
 [language-server.rust-analyzer.config.check]
@@ -49,11 +48,6 @@ language-servers = ["LanguageServer"]
 [[language]]
 name = "toml"
 formatter = { command = "taplo", args = ["fmt", "-"] }
-
-[[languages]]
-name = "go"
-auto-format = true
-formatter = { command = "goimports" }
 
 [[language]]
 name = "markdown"

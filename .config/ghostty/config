@@ -5,7 +5,7 @@ font-size = 12
 # window configurations
 theme = catppuccin-macchiato
 background-opacity = 0.95
-background-blur-radius = 20
+background-blur-radius = 40
 window-inherit-font-size = false
 window-width = 165
 window-height = 50

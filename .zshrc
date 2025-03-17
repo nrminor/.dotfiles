@@ -220,9 +220,9 @@ function seqstats() {
   fi
 
   if [ -n "$output_file" ]; then
-      seqkit stats -b -a -T "${files[@]}" --quiet > "$output_file"
+      seqkit stats  -b -a -T -j 1 "${files[@]}" > "$output_file"
   else
-      seqkit stats -b -a -T "${files[@]}" --quiet | csvtk pretty --style 3line -d $'\t'
+      seqkit stats -b -a -T -j 1 "${files[@]}" | csvtk pretty -t --style 3line
   fi
 }
 
