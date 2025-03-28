@@ -75,11 +75,17 @@
             pkgs.dotter
             pkgs.lychee
             pkgs.bash-language-server
+            pkgs.awk-languge-server
+            pkgs.fortls
             pkgs.docker-ls
             pkgs.yaml-language-server
-            pkgs.warp-terminal
+            pkgs.lua
+            pkgs.luau
+            pkgs.luajit
+            pkgs.lua-language-server
             pkgs.duckdb
             pkgs.python3
+            pkgs.pypy3
             pkgs.uv
             pkgs.ruff
             pkgs.basedpyright
@@ -101,13 +107,17 @@
             pkgs.ocaml
             pkgs.dune_3
             pkgs.marksman
+            pkgs.typst
+            pkgs.typstfmt
+            pkgs.typst-lsp
+            pkgs.tinymist
+            pkgs.quarto
             pkgs.seqkit
             pkgs.minimap2
             pkgs.bedtools
             pkgs.samtools
             pkgs.bcftools
             pkgs.csvtk
-            pkgs.prqlc
           ];
 
           homebrew = {

@@ -43,11 +43,38 @@ auto-format = true
 
 [[language]]
 name = "julia"
-language-servers = ["LanguageServer"]
+scope = "source.julia"
+injection-regex = "julia"
+file-types = ["jl"]
+shebangs = ["julia"]
+roots = ["Manifest.toml", "Project.toml"]
+comment-token = "#"
+block-comment-tokens = { start = "#=", end = "=#" }
+language-servers = [ "julia" ]
+indent = { tab-width = 4, unit = "    " }
+
+[[grammar]]
+name = "julia"
+source = { git = "https://github.com/tree-sitter/tree-sitter-julia", rev = "e84f10db8eeb8b9807786bfc658808edaa1b4fa2" }
+
+[language-server]
+julia = { command = "julia", timeout = 60, args = [
+  "--project=.",
+  "--startup-file=yes",
+  "--history-file=no",
+  "--quiet",
+  "-e",
+  "using LanguageServer; runserver()",
+] }
 
 [[language]]
 name = "toml"
 formatter = { command = "taplo", args = ["fmt", "-"] }
+
+[[language]]
+name = "html"
+language-servers = [{ name = "superhtml" }]
+auto-format = true
 
 [[language]]
 name = "markdown"
@@ -87,23 +114,38 @@ name = "nix"
 formatter = { command = "nixpkgs-fmt" }
 
 [[language]]
+name = "java"
+scope = "source.java"
+injection-regex = "java"
+file-types = ["java"]
+roots = ["pom.xml", "build.gradle", ]
+indent = { tab-width = 4, unit = "    " }
+language-servers = [ "jdtls" ]
+
+[language-server.jdtls.config.java.inlayHints]
+parameterNames.enabled = "all"
+
+[[language]]
 name = "groovy"
-file-types = ["groovy", "config", "nf"]
+file-types = ["groovy", "config"]
 indent = { tab-width = 4, unit = "    " }
 
-# [[language]]
-# file-types = ["nf"]
-# language-servers = ["nextflow-language-server"]
-# name = "nextflow"
-# scope = "source.nextflow"
-# roots = ["nextflow.config", "main.nf"]
-# grammar = "groovy"
+[[language]]
+file-types = ["nf", "nf.test", {glob = "nextflow.conffig"}]
+language-servers = ["nextflow-language-server"]
+name = "nextflow"
+grammar = "groovy"
+scope = "source.nextflow"
+indent = { tab-width = 4, unit = "    " }
 
-# [language-server.nextflow-language-server]
-# command = "nextflow-language-server"
+[language-server.nextflow-language-server]
+command = "nextflow-language-server"
 
-# [language-server.nextflow-language-server.config.nextflow]
-# debug = true
+[language-server.nextflow-language-server.config.nextflow]
+debug = true
 
-# [language-server.nextflow-language-server.config.nextflow.files]
-# exclude = [".git", ".nf-test", "work"]
+[language-server.nextflow-language-server.config.nextflow.files]
+exclude = [".git", ".nf-test", "work"]
+
+[language-server.nextflow-language-server.config.nextflow.formatting]
+harshilAlignment = true
