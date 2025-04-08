@@ -50,7 +50,7 @@
 
   // nextflow settings
   "[nextflow]": {
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
   },
   "nextflow.formatting.harshilAlignment": true,
   "nextflow.files.exclude": [
@@ -59,9 +59,6 @@
     "work",
     ".pixi"
   ],
-
-
-  "sqlfluff.dialect": "postgres",
 
   "[sql]": {
     "editor.formatOnSave": false
