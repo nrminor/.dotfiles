@@ -77,6 +77,13 @@
             pkgs.bash-language-server
             pkgs.awk-languge-server
             pkgs.fortls
+            pkgs.go
+            pkgs.gpls
+            pkgs.gotools
+            pkgs.golangci-lint
+            pkgs.golangci-lint-langserver
+            pkgs.zig
+            pkgs.zls
             pkgs.docker-ls
             pkgs.yaml-language-server
             pkgs.lua
@@ -105,6 +112,8 @@
             pkgs.elixir
             pkgs.elixir-ls
             pkgs.ocaml
+            pkgs.opam
+            pkgs.ocamlformat_0_26_1
             pkgs.dune_3
             pkgs.marksman
             pkgs.typst
