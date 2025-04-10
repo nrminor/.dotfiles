@@ -22,7 +22,7 @@ name = "rust"
 language-servers = ["rust-analyzer"]
 auto-format = true
 file-types = ["rs", "ers"]
-rulers = [120]
+rulers = [100]
 
 [language.auto-pairs]
 '(' = ')'
