@@ -8,7 +8,7 @@ command = "ruff"
 args = ["server"]
 
 [language-server.ruff.config.settings]
-lineLength = 120
+lineLength = 100
 
 [language-server.ruff.config.settings.lint]
 select = ["ALL"]
