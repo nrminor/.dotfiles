@@ -24,6 +24,7 @@ autoload -Uz compinit
 compinit
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace)
+[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 # -------------------------------------------------------------------------------------
 
 
@@ -342,6 +343,5 @@ fi
 alias l="ls"
 alias s="ls"
 alias ks="ls"
-alias nextflow-language-server="java -jar $HOME/Documents/hacking/language-server/build/libs/language-server-all.jar"
 # -------------------------------------------------------------------------------------
 

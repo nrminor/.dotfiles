@@ -29,6 +29,7 @@ rulers = [100]
 '{' = '}'
 '[' = ']'
 '"' = '"'
+'<' = '>'
 
 [language-server.rust-analyzer.config.check]
 command = "clippy"
@@ -50,6 +51,16 @@ auto-format = true
 name = "go"
 auto-format = true
 formatter = { command = "goimports" }
+
+[[language]]
+name = "zig"
+auto-format = true
+scope = "source.zig"
+injection-regex = "zig"
+file-types = ["zig"]
+roots = ["build.zig"]
+language-servers = [ "zls" ]
+indent = { tab-width = 4, unit = "    " }
 
 [[language]]
 name = "julia"
@@ -112,11 +123,10 @@ name = "ocaml"
 file-types = ["ml", "mli"]
 auto-format = true
 indent = { tab-width = 2, unit = "  " }
-formatter = { command = "entr", args = [
-  "-p",
-  "ocamlformat",
-  "--inplace",
-  "/_",
+formatter = { command = "ocamlformat", args = [
+  "-",
+  "--impl",
+  # "--enable-outside-detected-project", # Enable only if you want to format files outside of projects
 ] }
 
 [[language]]
@@ -136,26 +146,22 @@ language-servers = [ "jdtls" ]
 parameterNames.enabled = "all"
 
 [[language]]
-name = "groovy"
-file-types = ["groovy", "config", "nf"]
+file-types = ["nf", "nf.test", {glob = "nextflow.config"}]
+auto-format = true
+language-servers = ["nextflow-language-server"]
+name = "nextflow"
+grammar = "groovy"
+scope = "source.nextflow"
 indent = { tab-width = 4, unit = "    " }
 
-# [[language]]
-# file-types = ["nf", "nf.test", {glob = "nextflow.conffig"}]
-# language-servers = ["nextflow-language-server"]
-# name = "nextflow"
-# grammar = "groovy"
-# scope = "source.nextflow"
-# indent = { tab-width = 4, unit = "    " }
+[language-server.nextflow-language-server]
+command = "nextflow-language-server"
 
-# [language-server.nextflow-language-server]
-# command = "nextflow-language-server"
+[language-server.nextflow-language-server.config.nextflow]
+debug = true
 
-# [language-server.nextflow-language-server.config.nextflow]
-# debug = true
+[language-server.nextflow-language-server.config.nextflow.files]
+exclude = [".git", ".nf-test", "work"]
 
-# [language-server.nextflow-language-server.config.nextflow.files]
-# exclude = [".git", ".nf-test", "work"]
-
-# [language-server.nextflow-language-server.config.nextflow.formatting]
-# harshilAlignment = true
+[language-server.nextflow-language-server.config.nextflow.formatting]
+harshilAlignment = true
