@@ -76,7 +76,10 @@
             pkgs.lychee
             pkgs.bash-language-server
             pkgs.awk-languge-server
-            pkgs.fortls
+            pkgs.terraform
+            pkgs.terraform-ls
+            pkgs.hclfmt
+            pkgs.hxl2json
             pkgs.go
             pkgs.gpls
             pkgs.gotools

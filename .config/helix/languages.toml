@@ -147,11 +147,13 @@ parameterNames.enabled = "all"
 
 [[language]]
 file-types = ["nf", "nf.test", {glob = "nextflow.config"}]
-auto-format = true
+auto-format = false
 language-servers = ["nextflow-language-server"]
 name = "nextflow"
 grammar = "groovy"
 scope = "source.nextflow"
+comment-tokens = ["//"]
+block-comment-tokens = { start = "/*", end = "*/"}
 indent = { tab-width = 4, unit = "    " }
 
 [language-server.nextflow-language-server]
@@ -161,7 +163,7 @@ command = "nextflow-language-server"
 debug = true
 
 [language-server.nextflow-language-server.config.nextflow.files]
-exclude = [".git", ".nf-test", "work"]
+exclude = [".pixi", ".git", ".nf-test", "work"]
 
 [language-server.nextflow-language-server.config.nextflow.formatting]
 harshilAlignment = true

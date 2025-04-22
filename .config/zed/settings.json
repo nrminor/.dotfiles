@@ -28,7 +28,7 @@
 
     "tab_size": 4,
     "preferred_line_length": 88,
-    "soft_wrap": "preferred_line_length",
+    "soft_wrap": "editor_width",
     "indent_guides": {
         "enabled": true,
         "line_width": 1,
@@ -98,12 +98,23 @@
                     }
                 }
             }
+        },
+        "nextflow-language-server": {
+            "command": "nextflow-language-server",
+            "config": {
+                "nextflow": {
+                    "debug": true,
+                    "formatting": {
+                        "harshilAlignment": true
+                    }
+                }
+            }
         }
     },
 
     "languages": {
         "Rust": {
-            "preferred_line_length": 120,
+            "preferred_line_length": 100,
             "show_wrap_guides": true,
             "soft_wrap": "bounded"
         },
@@ -111,14 +122,20 @@
             "tab_size": 2,
             "formatter": {
                 "external": {
-                    "command": "entr",
-                    "arguments": ["-p", "ocamlformat", "--inplace", "/_"]
+                    "command": "ocamlformat",
+                    "arguments": ["-", "--impl"]
                 }
             }
         },
         "Gleam": {
             "tab_size": 2,
             "language_servers": ["gleam"]
+        },
+        "Nextflow": {
+            "tab_size": 4,
+            "preferred_line_length": 100,
+            "format_on_save": "on",
+            "language_servers": ["nextflow-language-server"]
         },
         "Python": {
             "language_servers": ["ruff", "basedpyright"],
@@ -135,9 +152,6 @@
                     }
                 }
             ]
-        },
-        "Groovy": {
-            "preferred_line_length": 200
         },
         "Nix": {
             "tab_size": 2
@@ -164,7 +178,7 @@
 
     "file_types": {
         "Rust": ["rs", "ers"],
-        "Groovy": ["nf"],
+        "Nextflow": ["nf", "nextflow", "nextflow.config"],
         "Dockerfile": ["Dockerfile*"],
         "YAML": ["pixi.lock"],
         "Markdown": ["md", "qmd"],
