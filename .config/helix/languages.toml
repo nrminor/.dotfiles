@@ -1,3 +1,5 @@
+# PYTHON
+# **************************************************************************************
 [[language]]
 name = "python"
 language-servers = ["ruff", "basedpyright"]
@@ -17,6 +19,8 @@ ignore = ["D", "S101", "E501", "PTH123", "TD003"]
 [language-server.basedpyright.config]
 typeCheckingMode = "basic"
 
+# RUST
+# **************************************************************************************
 [[language]]
 name = "rust"
 language-servers = ["rust-analyzer"]
@@ -43,15 +47,50 @@ inlayHints.enable = true
 inlayHints.lifetimeElisionHints.enable = true
 inlayHints.lifetimeElisionHints.useParameterNames = true
 
-[[language]]
-name = "gleam"
-auto-format = true
-
+# GO
+# **************************************************************************************
 [[language]]
 name = "go"
 auto-format = true
 formatter = { command = "goimports" }
 
+# LUA
+# **************************************************************************************
+[[language]]
+name = "lua"
+auto-format = true
+indent = { tab-width = 4, unit = "    " }
+formatter = { command = "stylua", args = ["--syntax", "All", "-"] }
+rulers = [80]
+
+# BASH
+# **************************************************************************************
+[[language]]
+name = "bash"
+auto-format = true
+formatter = { command = "shfmt" }
+
+# GLEAM
+# **************************************************************************************
+[[language]]
+name = "gleam"
+auto-format = true
+
+# OCAML
+# **************************************************************************************
+[[language]]
+name = "ocaml"
+file-types = ["ml", "mli"]
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+formatter = { command = "ocamlformat", args = [
+  "-",
+  "--impl",
+  # "--enable-outside-detected-project", # Enable only if you want to format files outside of projects
+] }
+
+# ZIG
+# **************************************************************************************
 [[language]]
 name = "zig"
 auto-format = true
@@ -59,9 +98,21 @@ scope = "source.zig"
 injection-regex = "zig"
 file-types = ["zig"]
 roots = ["build.zig"]
-language-servers = [ "zls" ]
+language-servers = ["zls"]
 indent = { tab-width = 4, unit = "    " }
 
+# SCHEME LISP
+# **************************************************************************************
+[[language]]
+name = "scheme"
+language-servers = ["steel-language-server"]
+
+[language-server.steel-language-server]
+command = "steel-language-server"
+args = []
+
+# JULIA
+# **************************************************************************************
 [[language]]
 name = "julia"
 scope = "source.julia"
@@ -71,7 +122,7 @@ shebangs = ["julia"]
 roots = ["Manifest.toml", "Project.toml"]
 comment-token = "#"
 block-comment-tokens = { start = "#=", end = "=#" }
-language-servers = [ "julia" ]
+language-servers = ["julia"]
 indent = { tab-width = 4, unit = "    " }
 
 [[grammar]]
@@ -88,6 +139,8 @@ julia = { command = "julia", timeout = 60, args = [
   "using LanguageServer; runserver()",
 ] }
 
+# MISCELLANEOUS CONFIGURATION, MARKUP, AND DOMAIN-SPECIFIC LANGS
+# **************************************************************************************
 [[language]]
 name = "toml"
 formatter = { command = "taplo", args = ["fmt", "-"] }
@@ -119,41 +172,18 @@ language-servers = ["marksman"]
 indent = { tab-width = 2, unit = "  " }
 
 [[language]]
-name = "ocaml"
-file-types = ["ml", "mli"]
-auto-format = true
-indent = { tab-width = 2, unit = "  " }
-formatter = { command = "ocamlformat", args = [
-  "-",
-  "--impl",
-  # "--enable-outside-detected-project", # Enable only if you want to format files outside of projects
-] }
-
-[[language]]
 name = "nix"
 formatter = { command = "nixpkgs-fmt" }
 
 [[language]]
-name = "java"
-scope = "source.java"
-injection-regex = "java"
-file-types = ["java"]
-roots = ["pom.xml", "build.gradle", ]
-indent = { tab-width = 4, unit = "    " }
-language-servers = [ "jdtls" ]
-
-[language-server.jdtls.config.java.inlayHints]
-parameterNames.enabled = "all"
-
-[[language]]
-file-types = ["nf", "nf.test", {glob = "nextflow.config"}]
+file-types = ["nf", "nf.test", { glob = "nextflow.config" }]
 auto-format = false
 language-servers = ["nextflow-language-server"]
 name = "nextflow"
 grammar = "groovy"
 scope = "source.nextflow"
 comment-tokens = ["//"]
-block-comment-tokens = { start = "/*", end = "*/"}
+block-comment-tokens = { start = "/*", end = "*/" }
 indent = { tab-width = 4, unit = "    " }
 
 [language-server.nextflow-language-server]

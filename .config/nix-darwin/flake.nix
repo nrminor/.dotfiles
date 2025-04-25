@@ -75,6 +75,7 @@
             pkgs.dotter
             pkgs.lychee
             pkgs.bash-language-server
+            pkgs.shfmt
             pkgs.awk-languge-server
             pkgs.terraform
             pkgs.terraform-ls
@@ -93,6 +94,7 @@
             pkgs.luau
             pkgs.luajit
             pkgs.lua-language-server
+            pkgs.stylua
             pkgs.duckdb
             pkgs.python3
             pkgs.pypy3
@@ -112,8 +114,6 @@
             pkgs.erlang
             pkgs.rebar3
             pkgs.gleam
-            pkgs.elixir
-            pkgs.elixir-ls
             pkgs.ocaml
             pkgs.opam
             pkgs.ocamlformat_0_26_1
