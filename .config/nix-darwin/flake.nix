@@ -107,7 +107,7 @@
             pkgs.maturin
             pkgs.openjdk
             pkgs.jdk
-            pkgs.jdtls
+            pkgs.jdt-language-server
             pkgs.nextflow
             pkgs.vscode-langservers-extracted
             pkgs.superhtml
