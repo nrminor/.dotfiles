@@ -121,7 +121,6 @@
             pkgs.marksman
             pkgs.typst
             pkgs.typstfmt
-            pkgs.typst-lsp
             pkgs.tinymist
             pkgs.quarto
             pkgs.seqkit
@@ -129,7 +128,6 @@
             pkgs.bedtools
             pkgs.samtools
             pkgs.bcftools
-            pkgs.csvtk
           ];
 
           homebrew = {
