@@ -1,4 +1,9 @@
 [nix-darwin.files]
-".config/nix-darwin/flake.nix" = "/Users/nickminor/.config/nix-darwin/flake.nix"
-".config/nix-darwin/flake.lock" = "/Users/nickminor/.config/nix-darwin/flake.lock"
+".config/nix-darwin/flake.nix" = "~/.config/nix-darwin/flake.nix"
+".config/nix-darwin/flake.lock" = "~/.config/nix-darwin/flake.lock"
 
+[ghostty.files]
+".config/ghostty/config" = "~/Library/Application Support/com.mitchellh.ghostty/config"
+
+[skhd.files]
+".config/skhd/skhdrc" = "~/.config/skhd/skhdrc"

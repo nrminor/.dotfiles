@@ -13,6 +13,5 @@ packages = [
   "marimo",
   "btop",
   "julia",
-  "positron",
   "starship",
 ]

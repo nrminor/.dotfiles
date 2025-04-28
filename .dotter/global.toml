@@ -1,53 +1,43 @@
 [zsh.files]
-".zshrc" = "/Users/nickminor/.zshrc"
-".zprofile" = "/Users/nickminor/.zprofile"
+".zshrc" = "~/.zshrc"
+".zprofile" = "~/.zprofile"
 
 [git.files]
-".gitconfig" = "/Users/nickminor/.gitconfig"
+".gitconfig" = "~/.gitconfig"
 
 [helix.files]
-".config/helix/config.toml" = "/Users/nickminor/.config/helix/config.toml"
-".config/helix/languages.toml" = "/Users/nickminor/.config/helix/languages.toml"
-".config/helix/runtime/themes/custom.toml" = "/Users/nickminor/.config/helix/runtime/themes/custom.toml"
-".config/helix/runtime/themes/catppuccin_macchiato.toml" = "/Users/nickminor/.config/helix/runtime/themes/catppuccin_macchiato.toml"
-".config/helix/runtime/themes/catppuccin_mocha.toml" = "/Users/nickminor/.config/helix/runtime/themes/catppuccin_mocha.toml"
+".config/helix/config.toml" = "~/.config/helix/config.toml"
+".config/helix/languages.toml" = "~/.config/helix/languages.toml"
+".config/helix/runtime/themes/custom.toml" = "~/.config/helix/runtime/themes/custom.toml"
+".config/helix/runtime/themes/catppuccin_macchiato.toml" = "~/.config/helix/runtime/themes/catppuccin_macchiato.toml"
+".config/helix/runtime/themes/catppuccin_mocha.toml" = "~/.config/helix/runtime/themes/catppuccin_mocha.toml"
 
 [warp.files]
-".warp/keybindings.yaml" = "/Users/nickminor/.warp/keybindings.yaml"
-".warp/themes/catppuccin_frappe.yml" = "/Users/nickminor/.warp/themes/catppuccin_frappe.yml"
-".warp/themes/catppuccin_mocha.yml" = "/Users/nickminor/.warp/themes/catppuccin_mocha.yml"
-".warp/themes/catppuccin_macchiato.yml" = "/Users/nickminor/.warp/themes/catppuccin_macchiato.yml"
-".warp/launch_configurations/config.yaml" = "/Users/nickminor/.warp/launch_configurations/config.yaml"
-
-[ghostty.files]
-".config/ghostty/config" = "/Users/nickminor/Library/Application Support/com.mitchellh.ghostty/config"
+".warp/keybindings.yaml" = "~/.warp/keybindings.yaml"
+".warp/themes/catppuccin_frappe.yml" = "~/.warp/themes/catppuccin_frappe.yml"
+".warp/themes/catppuccin_mocha.yml" = "~/.warp/themes/catppuccin_mocha.yml"
+".warp/themes/catppuccin_macchiato.yml" = "~/.warp/themes/catppuccin_macchiato.yml"
+".warp/launch_configurations/config.yaml" = "~/.warp/launch_configurations/config.yaml"
 
 [zed.files]
-".config/zed/settings.json" = "/Users/nickminor/.config/zed/settings.json"
-".config/zed/keymap.json" = "/Users/nickminor/.config/zed/keymap.json"
+".config/zed/settings.json" = "~/.config/zed/settings.json"
+".config/zed/keymap.json" = "~/.config/zed/keymap.json"
 
 [yazi.files]
-".config/yazi/yazi.toml" = "/Users/nickminor/.config/yazi/yazi.toml"
+".config/yazi/yazi.toml" = "~/.config/yazi/yazi.toml"
 
 [zellij.files]
-".config/zellij/config.kdl" = "/Users/nickminor/.config/zellij/config.kdl"
-
-[skhd.files]
-".config/skhd/skhdrc" = "/Users/nickminor/.config/skhd/skhdrc"
-
-[positron.files]
-".config/positron/settings.json" = "/Users/nickminor/Library/Application Support/Positron/User/settings.json"
-".config/positron/extensions.txt" = "/Users/nickminor/.config/positron/extensions.txt"
+".config/zellij/config.kdl" = "~/.config/zellij/config.kdl"
 
 [btop.files]
-".config/btop/btop.conf" = "/Users/nickminor/.config/btop/btop.conf"
+".config/btop/btop.conf" = "~/.config/btop/btop.conf"
 
 [julia.files]
-".config/julia/config/startup.jl" = "/Users/nickminor/.config/julia/config/startup.jl"
+".config/julia/config/startup.jl" = "~/.config/julia/config/startup.jl"
 
 [marimo.files]
-".marimo.toml" = "/Users/nickminor/.marimo.toml"
+".marimo.toml" = "~/.marimo.toml"
 
 [starship.files]
-".config/starship.toml" = "/Users/nickminor/.config/starship.toml"
+".config/starship.toml" = "~/.config/starship.toml"
 

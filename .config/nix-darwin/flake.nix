@@ -147,7 +147,7 @@
             casks = [
               "arc"
               "zed"
-              "positron"
+              "vscode"
               "slack"
               "basecamp"
               "discord"
