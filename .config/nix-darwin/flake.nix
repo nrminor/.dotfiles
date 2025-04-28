@@ -80,7 +80,7 @@
             pkgs.terraform
             pkgs.terraform-ls
             pkgs.hclfmt
-            pkgs.hxl2json
+            pkgs.hcl2json
             pkgs.go
             pkgs.gpls
             pkgs.gotools
