@@ -82,7 +82,7 @@
             pkgs.hclfmt
             pkgs.hcl2json
             pkgs.go
-            pkgs.gpls
+            pkgs.gopls
             pkgs.gotools
             pkgs.golangci-lint
             pkgs.golangci-lint-langserver
