@@ -76,7 +76,7 @@
             pkgs.lychee
             pkgs.bash-language-server
             pkgs.shfmt
-            pkgs.awk-languge-server
+            pkgs.awk-language-server
             pkgs.terraform
             pkgs.terraform-ls
             pkgs.hclfmt
@@ -265,7 +265,7 @@
           };
 
           # Auto upgrade nix package and the daemon service.
-          services.nix-daemon.enable = true;
+          # services.nix-daemon.enable = true;
           # nix.package = pkgs.nix;
 
           # allow closed-source install
