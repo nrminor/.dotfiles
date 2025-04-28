@@ -293,7 +293,7 @@
 
           # install the jetbrains font
           fonts.packages = [
-            (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+            pkgs.nerd-fonts.JetBrainsMono
           ];
 
           # run some activation scripts post-setup
