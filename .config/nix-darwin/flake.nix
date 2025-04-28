@@ -138,13 +138,12 @@
               "llvm"
               "libiconv"
               "sevenzip"
-              "font-symbols-only-nerd-font"
             ];
 
             casks = [
               "arc"
               "zed"
-              "vscode"
+              "visual-studio-code"
               "slack"
               "basecamp"
               "discord"
@@ -152,6 +151,7 @@
               "zoom"
               "raycast"
               "ghostty"
+              "font-symbols-only-nerd-font"
             ];
 
             masApps = {
