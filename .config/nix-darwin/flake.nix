@@ -97,7 +97,6 @@
             pkgs.stylua
             pkgs.duckdb
             pkgs.python3
-            pkgs.pypy3
             pkgs.uv
             pkgs.ruff
             pkgs.basedpyright
@@ -152,6 +151,7 @@
               "docker"
               "zoom"
               "raycast"
+              "ghostty"
             ];
 
             masApps = {
@@ -293,7 +293,7 @@
 
           # install the jetbrains font
           fonts.packages = [
-            pkgs.nerd-fonts.JetBrainsMono
+            pkgs.nerd-fonts.jetbrains-mono
           ];
 
           # run some activation scripts post-setup
