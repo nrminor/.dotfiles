@@ -40,7 +40,7 @@
             pkgs.mkalias
             pkgs.neovim
             pkgs.helix
-            pkgs.ghostty
+            # pkgs.ghostty
             pkgs.tree
             pkgs.zoxide
             pkgs.fastfetch
