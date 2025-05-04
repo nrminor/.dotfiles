@@ -86,6 +86,7 @@
             pkgs.gotools
             pkgs.golangci-lint
             pkgs.golangci-lint-langserver
+            pkgs.goreleaser
             pkgs.zig
             pkgs.zls
             pkgs.docker-ls
@@ -156,6 +157,7 @@
 
             masApps = {
               "Bear" = 1091189122;
+              "Instapaper" = 288545208;
               "Spark" = 1176895641;
               "HazeOver" = 430798174;
               "Amphetamine" = 937984704;
@@ -179,6 +181,7 @@
               persistent-apps = [
                 "/Applications/Arc.app"
                 "/Applications/Spark.app"
+                "/Applications/Instapaper.app"
                 "/Applications/Bear.app"
                 "/Applications/Slack.app"
                 "/Applications/Ghostty.app"
@@ -237,9 +240,9 @@
               };
 
               # tracking settings
-              "com.apple.AdLib" = {
-                allowApplePersonalizedAdvertising = false;
-              };
+              # "com.apple.AdLib" = {
+              #  allowApplePersonalizedAdvertising = false;
+              # };
 
               # no, you don't need to keep the printer app open when I'm done printing
               "com.apple.print.PrintingPrefs" = {
@@ -326,7 +329,7 @@
                 if [ ! -d "/Users/nickminor/Documents/bioinformatics" ]; then
                   echo "Creating bioinformatics directory..." >&2
                   mkdir -p "/Users/nickminor/Documents/bioinformatics"
-                  chown -R nickminor:staff /Userss/nickminor/Documents/bioinformatics
+                  chown -R nickminor:staff /Users/nickminor/Documents/bioinformatics
                 fi
 
                 if [ ! -d "/Users/nickminor/Documents/hacking" ]; then

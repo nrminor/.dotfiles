@@ -3,7 +3,7 @@
 export VISUAL=hx
 export EDITOR="$VISUAL"
 export BREW_PREFIX=$(brew --prefix)
-export PATH=/usr/local/bin:$HOME/.pixi/bin:/opt/homebrew/opt/libiconv/bin:$BREW_PREFIX/lib:/opt/homebrew/opt/libiconv/lib:$PATH:$HOME/.moon/bin:$HOME/.juliaup/bin:$HOME/go/bin
+export PATH=/usr/local/bin:$HOME/.cargo/bin:$HOME/.pixi/bin:/opt/homebrew/opt/libiconv/bin:$BREW_PREFIX/lib:/opt/homebrew/opt/libiconv/lib:$PATH:$HOME/go/bin
 export LIBRARY_PATH=$LIBRARY_PATH:$BREW_PREFIX/lib:$BREW_PREFIX/opt/libiconv/lib
 export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
@@ -15,7 +15,6 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 
 # SOURCES AND EVALS (the slow stuff)
 # -------------------------------------------------------------------------------------
-. "$HOME/.cargo/env"
 eval "$(zoxide init zsh)"
 source <(fzf --zsh)
 eval "$(starship init zsh)"
