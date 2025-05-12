@@ -23,6 +23,9 @@
 !.zshrc
 !.zprofile
 
+# allow global direnv configuration
+!.direnvrc
+
 # configurations for the warp terminal emulator
 !/.warp
 !/.warp/themes
@@ -41,6 +44,10 @@
 !/.config/nix-darwin
 !/.config/nix-darwin/flake.nix
 !/.config/nix-darwin/flake.lock
+
+# nix-direnv configurations
+!/.config/nix-direnv
+!/.config/nix-direnv/config.toml
 
 # ghostty configuration
 !/.config/ghostty

@@ -2,7 +2,7 @@
 # **************************************************************************************
 [[language]]
 name = "python"
-language-servers = ["ruff", "basedpyright"]
+language-servers = ["ruff", "basedpyright", "ty"]
 auto-format = true
 
 [language-server.ruff]
@@ -18,6 +18,10 @@ ignore = ["D", "S101", "E501", "PTH123", "TD003"]
 
 [language-server.basedpyright.config]
 typeCheckingMode = "basic"
+
+[language-server.ty]
+command = "ty"
+args = ["server"]
 
 # RUST
 # **************************************************************************************

@@ -24,6 +24,7 @@ compinit
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace)
 [[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 # -------------------------------------------------------------------------------------
 
 
@@ -343,4 +344,3 @@ alias l="ls"
 alias s="ls"
 alias ks="ls"
 # -------------------------------------------------------------------------------------
-

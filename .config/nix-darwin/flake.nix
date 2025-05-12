@@ -29,7 +29,12 @@
     let
       configuration =
         { pkgs, config, ... }:
+
         {
+          programs.direnv = {
+            enable = true;
+            nix-direnv.enable = true;
+          };
 
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
@@ -64,16 +69,19 @@
             pkgs.jq
             pkgs.btop
             pkgs.just
+            pkgs.direnv
             pkgs.ouch
             pkgs.watchexec
             pkgs.git
             pkgs.lazygit
+            pkgs.pre-commit
             pkgs.zstd
             pkgs.eza
             pkgs.curl
             pkgs.wget
             pkgs.dotter
             pkgs.lychee
+            pkgs.gnuplot
             pkgs.bash-language-server
             pkgs.shfmt
             pkgs.awk-language-server
@@ -81,6 +89,7 @@
             pkgs.terraform-ls
             pkgs.hclfmt
             pkgs.hcl2json
+            pkgs.taplo
             pkgs.go
             pkgs.gopls
             pkgs.gotools
@@ -116,6 +125,8 @@
             pkgs.gleam
             pkgs.ocaml
             pkgs.opam
+            pkgs.ocamlPackages.ocaml-lsp
+            pkgs.ocamlPackages.utop
             pkgs.ocamlformat_0_26_1
             pkgs.dune_3
             pkgs.marksman
@@ -180,6 +191,7 @@
               orientation = "left";
               persistent-apps = [
                 "/Applications/Arc.app"
+                "/Applications/ChatGPT.app"
                 "/Applications/Spark.app"
                 "/Applications/Instapaper.app"
                 "/Applications/Bear.app"
