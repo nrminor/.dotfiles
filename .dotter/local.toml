@@ -3,6 +3,7 @@ packages = [
   "zsh",
   "git",
   "nix-darwin",
+  "direnv",
   "zed",
   "warp",
   "ghostty",
