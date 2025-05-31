@@ -39,7 +39,11 @@
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
           environment.systemPackages = [
+
+            # system and command line utilities
             pkgs.cmake
+            pkgs.clang
+            pkgs.gettext
             pkgs.nixd
             pkgs.nixfmt-rfc-style
             pkgs.mkalias
@@ -82,64 +86,131 @@
             pkgs.dotter
             pkgs.lychee
             pkgs.gnuplot
+
+            # bash
             pkgs.bash-language-server
             pkgs.shfmt
+
+            # awk
             pkgs.awk-language-server
+
+            # terraform
             pkgs.terraform
             pkgs.terraform-ls
             pkgs.hclfmt
             pkgs.hcl2json
+
+            # toml
             pkgs.taplo
+
+            # go
             pkgs.go
             pkgs.gopls
             pkgs.gotools
-            pkgs.golangci-lint
-            pkgs.golangci-lint-langserver
+            # pkgs.golangci-lint
+            # pkgs.golangci-lint-langserver
             pkgs.goreleaser
+
+            # zig
             pkgs.zig
             pkgs.zls
+
+            # docker
             pkgs.docker-ls
+
+            # yaml
             pkgs.yaml-language-server
+
+            # lua
             pkgs.lua
             pkgs.luau
             pkgs.luajit
             pkgs.lua-language-server
             pkgs.stylua
+
+            # sql stuff
             pkgs.duckdb
-            pkgs.python3
-            pkgs.uv
+
+            # python
+            pkgs.python313
+            # pkgs.uv
+            pkgs.pixi
             pkgs.ruff
+            # pkgs.ty
             pkgs.basedpyright
+            pkgs.pylyzer
             pkgs.marimo
+            # pkgs.python313Packages.radian
+            pkgs.python313Packages.ipython
+            pkgs.python313Packages.marimo
+            pkgs.python313Packages.jupyter-core
+            pkgs.python313Packages.polars
+            pkgs.python313Packages.biopython
+
+            # rust
             pkgs.rustup
             pkgs.rust-script
             pkgs.maturin
+
+            # R
+            # pkgs.R
+            pkgs.rstudio-server
+            pkgs.rstudio
+            pkgs.rPackages.languageserver
+            pkgs.air-formatter
+            pkgs.rPackages.tidyverse
+
+            # java (and also nextflow)
             pkgs.openjdk
             pkgs.jdk
             pkgs.jdt-language-server
             pkgs.nextflow
+
+            # HTML, JS/TS, and other web stuff
             pkgs.vscode-langservers-extracted
             pkgs.superhtml
-            pkgs.erlang
-            pkgs.rebar3
-            pkgs.gleam
+            pkgs.typescript
+            pkgs.typescript-language-server
+            pkgs.javascript-typescript-langserver
+            pkgs.nodejs_23
+            pkgs.deno
+            pkgs.bun
+
+            # OCaml
             pkgs.ocaml
             pkgs.opam
             pkgs.ocamlPackages.ocaml-lsp
             pkgs.ocamlPackages.utop
             pkgs.ocamlformat_0_26_1
             pkgs.dune_3
+
+            # BEAM VM ecosystem
+            pkgs.erlang
+            pkgs.rebar3
+            pkgs.gleam
+
+            # authoring tools (e.g. typst, latex, quarto, markdown)
             pkgs.marksman
             pkgs.typst
             pkgs.typstfmt
             pkgs.tinymist
-            pkgs.quarto
+            # pkgs.quarto
+
+            # bioinformatics tools
             pkgs.seqkit
             pkgs.minimap2
             pkgs.bedtools
             pkgs.samtools
             pkgs.bcftools
           ];
+
+          
+
+  environment.variables = {
+    LIBRARY_PATH = "${pkgs.gettext}/lib";
+    LDFLAGS = "-L${pkgs.gettext}/lib -lintl";
+    CFLAGS = "-I${pkgs.gettext}/include";
+  };
 
           homebrew = {
 
@@ -157,7 +228,7 @@
               "zed"
               "visual-studio-code"
               "slack"
-              "basecamp"
+              # "basecamp"
               "discord"
               "docker"
               "zoom"
@@ -195,7 +266,7 @@
                 "/Applications/Spark.app"
                 "/Applications/Instapaper.app"
                 "/Applications/Bear.app"
-                "/Applications/Slack.app"
+                # "/Applications/Slack.app"
                 "/Applications/Ghostty.app"
               ];
               wvous-tr-corner = 1;

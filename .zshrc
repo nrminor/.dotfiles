@@ -3,7 +3,7 @@
 export VISUAL=hx
 export EDITOR="$VISUAL"
 export BREW_PREFIX=$(brew --prefix)
-export PATH=/usr/local/bin:$HOME/.cargo/bin:$HOME/.pixi/bin$BREW_PREFIX/lib:$PATH:$HOME/go/bin
+export PATH=/usr/local/bin:$HOME/.cargo/bin:$HOME/.pixi/bin:$BREW_PREFIX/lib:$PATH:$HOME/go/bin
 # :/opt/homebrew/opt/libiconv/bin:/opt/homebrew/opt/libiconv/lib:
 export LIBRARY_PATH=$LIBRARY_PATH:$BREW_PREFIX/lib
 # :$BREW_PREFIX/opt/libiconv/lib
@@ -286,8 +286,10 @@ alias ls="eza -1a"
 alias ll="eza -la --group-directories-first --icons"
 alias cat="bat -pP"
 alias py="python3"
-alias r="radian"
-alias R="radian"
+if [ -x "$(which radian)" ]; then
+  alias r="radian"
+  alias R="radian"
+fi
 alias u="utop"
 alias jl="julia"
 alias db="duckdb"
