@@ -2,7 +2,9 @@
 
 module Startup
 
-using PrecompileTools
+try using PrecompileTools
+    catch _ using Pkg && Pkg.add("PrecompileTools")
+end
 
 @setup_workload begin
     @compile_workload begin
@@ -19,7 +21,6 @@ using PrecompileTools
                 @eval using Revise
                 @eval using JuliaFormatter
                 @eval using JET
-                @eval using DataToolkit
             catch e
                 @warn "error while importing OhMyREPL, Revise, Julia Formatter, or JET:" e
             end
@@ -27,4 +28,8 @@ using PrecompileTools
     end
 end
 
+
+try using OhMyREPL, Revise, JuliaFormatter finally using Pkg end
+
 end
+

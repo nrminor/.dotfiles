@@ -2,7 +2,13 @@
 # **************************************************************************************
 [[language]]
 name = "python"
-language-servers = ["ruff", "basedpyright", "pylyzer", "ty"]
+language-servers = [
+  "basedpyright",
+  "ruff",
+  "ty",
+  # "pyrefly",
+  # "pylyzer",
+]
 auto-format = true
 
 [language-server.ruff]
@@ -26,6 +32,10 @@ args = ["--server"]
 [language-server.ty]
 command = "ty"
 args = ["server"]
+
+[language-server.pyrefly]
+command = "pyrefly"
+args = ["lsp"]
 
 # RUST
 # **************************************************************************************
@@ -52,13 +62,6 @@ inlayHints.enable = true
 inlayHints.lifetimeElisionHints.enable = true
 inlayHints.lifetimeElisionHints.useParameterNames = true
 
-# GO
-# **************************************************************************************
-[[language]]
-name = "go"
-auto-format = true
-formatter = { command = "goimports" }
-
 # LUA
 # **************************************************************************************
 [[language]]
@@ -75,11 +78,106 @@ name = "bash"
 auto-format = true
 formatter = { command = "shfmt" }
 
-# GLEAM
+# R
 # **************************************************************************************
 [[language]]
-name = "gleam"
+name = "r"
+language-servers = ["air", "r"]
 auto-format = true
+rulers = [80]
+
+[language-server.air]
+command = "air"
+args = ["language-server"]
+
+
+# JS/TS
+# **************************************************************************************
+[[language]]
+name = "javascript"
+language-servers = [
+  "deno-lsp",
+  "typescript-language-server",
+  "vscode-eslint-language-server",
+]
+roots = ["deno.json", "deno.jsonc", "package.json", "bunfig.toml"]
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "js" ] }
+auto-format = true
+
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'<' = '>'
+'`' = '`'
+
+[[language]]
+name = "typescript"
+language-servers = [
+  "deno-lsp",
+  "typescript-language-server",
+  "vscode-eslint-language-server",
+]
+roots = ["deno.json", "deno.jsonc", "package.json", "bunfig.toml"]
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "ts" ] }
+auto-format = true
+
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'<' = '>'
+'`' = '`'
+
+[[language]]
+name = "jsx"
+language-servers = [
+  "deno-lsp",
+  "typescript-language-server",
+  "vscode-eslint-language-server",
+]
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "jsx" ] }
+auto-format = true
+
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'<' = '>'
+'`' = '`'
+
+[[language]]
+name = "tsx"
+language-servers = [
+  "deno-lsp",
+  "typescript-language-server",
+  "vscode-eslint-language-server",
+]
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "tsx" ] }
+auto-format = true
+
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'<' = '>'
+'`' = '`'
+
+[language-server.deno-lsp]
+command = "deno"
+args = ["lsp"]
+config.deno.enable = true
+
+# GO
+# **************************************************************************************
+[[language]]
+name = "go"
+auto-format = true
+formatter = { command = "goimports" }
 
 # OCAML
 # **************************************************************************************
@@ -93,6 +191,12 @@ formatter = { command = "ocamlformat", args = [
   "--impl",
   "--enable-outside-detected-project", # Enable only if you want to format files outside of projects
 ] }
+
+# GLEAM
+# **************************************************************************************
+[[language]]
+name = "gleam"
+auto-format = true
 
 # ZIG
 # **************************************************************************************
@@ -144,18 +248,6 @@ julia = { command = "julia", timeout = 60, args = [
   "using LanguageServer; runserver()",
 ] }
 
-# R
-# **************************************************************************************
-[[language]]
-name = "r"
-language-servers = ["air", "r"]
-auto-format = true
-rulers = [80]
-
-[language-server.air]
-command = "air"
-args = ["language-server"]
-
 # MISCELLANEOUS CONFIGURATION, MARKUP, AND DOMAIN-SPECIFIC LANGS
 # **************************************************************************************
 [[language]]
@@ -187,10 +279,13 @@ file-types = [
 roots = [".marksman.toml"]
 language-servers = ["marksman"]
 indent = { tab-width = 2, unit = "  " }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md" ] }
+auto-format = true
 
 [[language]]
 name = "nix"
-formatter = { command = "nixpkgs-fmt" }
+formatter = { command = "nixfmt" }
+auto-format = true
 
 [[language]]
 file-types = ["nf", "nf.test", { glob = "nextflow.config" }]
@@ -214,3 +309,19 @@ exclude = [".pixi", ".git", ".nf-test", "work"]
 
 [language-server.nextflow-language-server.config.nextflow.formatting]
 harshilAlignment = true
+
+[[language]]
+name = "just"
+auto-format = true
+formatter = { command = "just", args = ['--justfile', '/dev/stdin', '--dump'] }
+
+[[language]]
+name = "json"
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "json" ] }
+auto-format = true
+
+[[language]]
+name = "jsonc"
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "jsonc" ] }
+auto-format = true
+

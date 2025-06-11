@@ -3,12 +3,10 @@
 export VISUAL=hx
 export EDITOR="$VISUAL"
 export BREW_PREFIX=$(brew --prefix)
-export PATH=/usr/local/bin:$HOME/.cargo/bin:$HOME/.pixi/bin:$BREW_PREFIX/lib:$PATH:$HOME/go/bin
-# :/opt/homebrew/opt/libiconv/bin:/opt/homebrew/opt/libiconv/lib:
-export LIBRARY_PATH=$LIBRARY_PATH:$BREW_PREFIX/lib
-# :$BREW_PREFIX/opt/libiconv/lib
-# export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
-# export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
+export PATH=/usr/local/bin:$HOME/.cargo/bin:$HOME/.pixi/bin:$BREW_PREFIX/lib:$PATH:$HOME/go/bin:$HOME/.juliaup/bin:/opt/homebrew/opt/libiconv/bin:/opt/homebrew/opt/libiconv/lib:
+export LIBRARY_PATH=$LIBRARY_PATH:$BREW_PREFIX/lib:/opt/homebrew/opt/libiconv/lib:$BREW_PREFIX/opt/libiconv/lib
+export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
 export XDG_CONFIG_HOME="$HOME/.config"
 export CARAPACE_BRIDGES='zsh,bash,clap,click'
 export HOMEBREW_NO_AUTO_UPDATE=1
@@ -26,7 +24,7 @@ eval "$(atuin init zsh)"
 autoload -Uz compinit
 compinit
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-source <(carapace _carapace)
+# source <(carapace _carapace)
 [[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 . "$HOME/.local/bin/env"
@@ -279,6 +277,7 @@ alias gst="git status"
 alias curll='curl -L' # curl but follow redirects
 alias h="hx"
 alias h.="hx ."
+alias x="hx"
 alias z.="zed ."
 alias o.="open ." # open the current directory in Finder on MacOS
 alias dots="dotter deploy -f -v -y"
@@ -286,6 +285,7 @@ alias ls="eza -1a"
 alias ll="eza -la --group-directories-first --icons"
 alias cat="bat -pP"
 alias py="python3"
+alias mo="marimo"
 if [ -x "$(which radian)" ]; then
   alias r="radian"
   alias R="radian"

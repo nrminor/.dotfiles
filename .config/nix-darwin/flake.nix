@@ -43,6 +43,8 @@
             # system and command line utilities
             pkgs.cmake
             pkgs.clang
+            pkgs.libiconv
+            pkgs.pkg-config
             pkgs.gettext
             pkgs.nixd
             pkgs.nixfmt-rfc-style
@@ -55,6 +57,7 @@
             pkgs.fastfetch
             pkgs.starship
             pkgs.atuin
+            pkgs.hyperfine
             pkgs.carapace
             pkgs.skhd
             pkgs.nushell
@@ -64,15 +67,19 @@
             pkgs.fzf
             pkgs.yazi
             pkgs.ripgrep
+            pkgs.ripgrep-all
+            pkgs.tokei
             pkgs.poppler
             pkgs.ffmpeg
             pkgs.imagemagick
             pkgs.xclip
             pkgs.p7zip
+            pkgs.ncspot
             pkgs.fd
             pkgs.jq
             pkgs.btop
             pkgs.just
+            pkgs.mask
             pkgs.direnv
             pkgs.ouch
             pkgs.watchexec
@@ -86,6 +93,7 @@
             pkgs.dotter
             pkgs.lychee
             pkgs.gnuplot
+            pkgs.wiki-tui
 
             # bash
             pkgs.bash-language-server
@@ -130,6 +138,7 @@
 
             # sql stuff
             pkgs.duckdb
+            pkgs.fselect
 
             # python
             pkgs.python313
@@ -151,6 +160,8 @@
             pkgs.rustup
             pkgs.rust-script
             pkgs.maturin
+            pkgs.bacon
+            pkgs.rusty-man
 
             # R
             # pkgs.R
@@ -194,7 +205,9 @@
             pkgs.typst
             pkgs.typstfmt
             pkgs.tinymist
+            pkgs.typstyle
             # pkgs.quarto
+            pkgs.presenterm
 
             # bioinformatics tools
             pkgs.seqkit
@@ -203,14 +216,6 @@
             pkgs.samtools
             pkgs.bcftools
           ];
-
-          
-
-  environment.variables = {
-    LIBRARY_PATH = "${pkgs.gettext}/lib";
-    LDFLAGS = "-L${pkgs.gettext}/lib -lintl";
-    CFLAGS = "-I${pkgs.gettext}/include";
-  };
 
           homebrew = {
 
@@ -234,6 +239,7 @@
               "zoom"
               "raycast"
               "ghostty"
+              "hammerspoon"
               "font-symbols-only-nerd-font"
             ];
 

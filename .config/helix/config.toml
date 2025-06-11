@@ -9,6 +9,13 @@ cursorline = true
 cursorcolumn = false
 bufferline = "always"
 end-of-line-diagnostics = "hint"
+color-modes = true
+popup-border = "all"
+idle-timeout = 1
+completion-timeout = 1
+# completion-replace = true
+undercurl = true
+indent-heuristic = "tree-sitter"
 
 [editor.inline-diagnostics]
 cursor-line = "hint"
@@ -30,6 +37,9 @@ render = true
 
 [editor.file-picker]
 hidden = false
+follow-symlinks = true
+# git-ignore = false
+parents = false # ignore .gitignore files in parent directories
 
 [editor.lsp]
 auto-signature-help = false
