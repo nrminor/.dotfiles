@@ -97,11 +97,10 @@ args = ["language-server"]
 name = "javascript"
 language-servers = [
   "deno-lsp",
-  "typescript-language-server",
-  "vscode-eslint-language-server",
+  # "vscode-eslint-language-server",
 ]
 roots = ["deno.json", "deno.jsonc", "package.json", "bunfig.toml"]
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "js" ] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "js"] }
 auto-format = true
 
 [language.auto-pairs]
@@ -115,12 +114,16 @@ auto-format = true
 [[language]]
 name = "typescript"
 language-servers = [
+  # { name = "typescript-language-server", except-features = [
+  #   "format",
+  # ] },
   "deno-lsp",
-  "typescript-language-server",
-  "vscode-eslint-language-server",
+  "biome",
+  # "vscode-eslint-language-server",
+  "tailwindcss-ls",
 ]
 roots = ["deno.json", "deno.jsonc", "package.json", "bunfig.toml"]
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "ts" ] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "ts"] }
 auto-format = true
 
 [language.auto-pairs]
@@ -135,10 +138,11 @@ auto-format = true
 name = "jsx"
 language-servers = [
   "deno-lsp",
-  "typescript-language-server",
-  "vscode-eslint-language-server",
+  # "biome",
+  # "vscode-eslint-language-server",
+  "tailwindcss-ls",
 ]
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "jsx" ] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "jsx"] }
 auto-format = true
 
 [language.auto-pairs]
@@ -153,10 +157,14 @@ auto-format = true
 name = "tsx"
 language-servers = [
   "deno-lsp",
-  "typescript-language-server",
-  "vscode-eslint-language-server",
+  # { name = "typescript-language-server", except-features = [
+  #   "format",
+  # ] },
+  # "biome",
+  # "vscode-eslint-language-server",
+  "tailwindcss-ls",
 ]
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "tsx" ] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "tsx"] }
 auto-format = true
 
 [language.auto-pairs]
@@ -167,10 +175,92 @@ auto-format = true
 '<' = '>'
 '`' = '`'
 
+[language-server.astro-ls]
+command = "astro-ls"
+args = ["--stdio"]
+config = {typescript = {tsdk = "/Users/nickminor/.bun/install/global/node_modules/typescript/lib"}, environment = "node"}
+
+[[language]]
+name = "astro"
+scope = "source.astro"
+injection-regex = "astro"
+file-types = ["astro"]
+roots = ["package.json", "astro.config.mjs"]
+auto-format = true
+formatter = { command = "prettier", args = ["--plugin", "prettier-plugin-astro", "--parser", "astro"] }
+language-servers = [
+  "astro-ls",
+  # "biome",
+  # "vscode-eslint-language-server",
+]
+
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'<' = '>'
+'`' = '`'
+
+[language-server.vuels]
+command = "vue-language-server"
+args = ["--stdio"]
+# config = { vue = { hybridMode = false }, typescript = { tsdk = "~/.config/nvm/versions/node/v23.11.1/lib/node_modules/typescript/lib/" } }
+
+[[language]]
+name = "vue"
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "vue"] }
+language-servers = [
+  "vuels",
+  # "typescript-language-server",
+  # "emmet-lsp",
+]
+
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'<' = '>'
+'`' = '`'
+
+[[language-server.typescript-language-server.config.plugins]]
+name = "@vue/typescript-plugin"
+location = "~/.config/nvm/versions/node/v23.11.1/lib/node_modules/@vue/typescript-plugin"
+languages = ["vue"]
+
 [language-server.deno-lsp]
 command = "deno"
 args = ["lsp"]
-config.deno.enable = true
+
+[language-server.deno-lsp.config]
+deno.enable = true
+
+[language-server.deno-lsp.config.javascript.inlayHints]
+parameterNames.enabled = { enabled = "none", suppressWhenArgumentMatchesName = true }
+parameterTypes.enabled = false
+variableTypes.enabled = false
+propertyDeclarationTypes.enabled = false
+functionLikeReturnTypes.enabled = false
+enumMemberValues.enabled = false
+
+[language-server.deno-lsp.config.typescript.inlayHints]
+parameterNames.enabled = { enabled = "none", suppressWhenArgumentMatchesName = true }
+parameterTypes.enabled = false
+variableTypes.enabled = false
+propertyDeclarationTypes.enabled = false
+functionLikeReturnTypes.enabled = false
+enumMemberValues.enabled = false
+
+[language-server.biome]
+command = "biome"
+args = ["lsp-proxy"]
+
+[language-server.emmet-lsp]
+command = "emmet-language-server"
+args = ["--stdio"]
+
 
 # GO
 # **************************************************************************************
@@ -220,34 +310,6 @@ language-servers = ["steel-language-server"]
 command = "steel-language-server"
 args = []
 
-# JULIA
-# **************************************************************************************
-[[language]]
-name = "julia"
-scope = "source.julia"
-injection-regex = "julia"
-file-types = ["jl"]
-shebangs = ["julia"]
-roots = ["Manifest.toml", "Project.toml"]
-comment-token = "#"
-block-comment-tokens = { start = "#=", end = "=#" }
-language-servers = ["julia"]
-indent = { tab-width = 4, unit = "    " }
-
-[[grammar]]
-name = "julia"
-source = { git = "https://github.com/tree-sitter/tree-sitter-julia", rev = "e84f10db8eeb8b9807786bfc658808edaa1b4fa2" }
-
-[language-server]
-julia = { command = "julia", timeout = 60, args = [
-  "--project=.",
-  "--startup-file=yes",
-  "--history-file=no",
-  "--quiet",
-  "-e",
-  "using LanguageServer; runserver()",
-] }
-
 # MISCELLANEOUS CONFIGURATION, MARKUP, AND DOMAIN-SPECIFIC LANGS
 # **************************************************************************************
 [[language]]
@@ -256,8 +318,15 @@ formatter = { command = "taplo", args = ["fmt", "-"] }
 
 [[language]]
 name = "html"
-language-servers = [{ name = "superhtml" }]
+language-servers = [{ name = "superhtml" }, { name = "tailwindcss-ls" }]
 auto-format = true
+
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'<' = '>'
 
 [[language]]
 name = "markdown"
@@ -279,8 +348,17 @@ file-types = [
 roots = [".marksman.toml"]
 language-servers = ["marksman"]
 indent = { tab-width = 2, unit = "  " }
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md" ] }
+# formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md"] }
 auto-format = true
+
+[[language]]
+name = "css"
+auto-format = false
+language-servers = ["vscode-css-language-server", "tailwindcss-ls"]
+
+[language-server.tailwindcss-ls]
+command = "tailwindcss-language-server"
+args = ["--stdio"]
 
 [[language]]
 name = "nix"
@@ -317,11 +395,10 @@ formatter = { command = "just", args = ['--justfile', '/dev/stdin', '--dump'] }
 
 [[language]]
 name = "json"
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "json" ] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "json"] }
 auto-format = true
 
 [[language]]
 name = "jsonc"
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "jsonc" ] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "jsonc"] }
 auto-format = true
-

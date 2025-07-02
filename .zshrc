@@ -2,8 +2,9 @@
 # -------------------------------------------------------------------------------------
 export VISUAL=hx
 export EDITOR="$VISUAL"
+export GIT_EDITOR=hx
 export BREW_PREFIX=$(brew --prefix)
-export PATH=/usr/local/bin:$HOME/.cargo/bin:$HOME/.pixi/bin:$BREW_PREFIX/lib:$PATH:$HOME/go/bin:$HOME/.juliaup/bin:/opt/homebrew/opt/libiconv/bin:/opt/homebrew/opt/libiconv/lib:
+export PATH=/usr/local/bin:$HOME/.cargo/bin:$HOME/.pixi/bin:$BREW_PREFIX/lib:$PATH:$HOME/.deno/bin:$HOME/.bun/bin:$HOME/go/bin:$HOME/.juliaup/bin:/opt/homebrew/opt/libiconv/bin:/opt/homebrew/opt/libiconv/lib:
 export LIBRARY_PATH=$LIBRARY_PATH:$BREW_PREFIX/lib:/opt/homebrew/opt/libiconv/lib:$BREW_PREFIX/opt/libiconv/lib
 export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
@@ -12,6 +13,8 @@ export CARAPACE_BRIDGES='zsh,bash,clap,click'
 export HOMEBREW_NO_AUTO_UPDATE=1
 export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
+export NVM_DIR="$HOME/.config/nvm"
+export BAT_THEME="OneHalfDark"
 # -------------------------------------------------------------------------------------
 
 
@@ -23,11 +26,14 @@ eval "$(starship init zsh)"
 eval "$(atuin init zsh)"
 autoload -Uz compinit
 compinit
-zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+# zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 # source <(carapace _carapace)
 [[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 . "$HOME/.local/bin/env"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 # -------------------------------------------------------------------------------------
 
 
@@ -284,14 +290,13 @@ alias dots="dotter deploy -f -v -y"
 alias ls="eza -1a"
 alias ll="eza -la --group-directories-first --icons"
 alias cat="bat -pP"
-alias py="python3"
+alias py="uvx --with polars --with biopython --with pysam python"
 alias mo="marimo"
 if [ -x "$(which radian)" ]; then
   alias r="radian"
   alias R="radian"
 fi
 alias u="utop"
-alias jl="julia"
 alias db="duckdb"
 alias ff="fastfetch"
 alias y="yazi"
@@ -353,4 +358,7 @@ fi
 alias l="ls"
 alias s="ls"
 alias ks="ls"
+alias cld="claude"
+alias cl="claude"
 # -------------------------------------------------------------------------------------
+

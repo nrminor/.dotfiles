@@ -151,14 +151,19 @@
             pkgs.marimo
             # pkgs.python313Packages.radian
             pkgs.python313Packages.ipython
+            pkgs.python313Packages.notebook
             pkgs.python313Packages.marimo
             pkgs.python313Packages.jupyter-core
+            pkgs.python313Packages.jupyterlab
+            pkgs.python313Packages.ipykernel
             pkgs.python313Packages.polars
             pkgs.python313Packages.biopython
+            pkgs.python313Packages.pysam
 
             # rust
             pkgs.rustup
             pkgs.rust-script
+            pkgs.evcxr
             pkgs.maturin
             pkgs.bacon
             pkgs.rusty-man
@@ -170,6 +175,7 @@
             pkgs.rPackages.languageserver
             pkgs.air-formatter
             pkgs.rPackages.tidyverse
+            pkgs.rPackages.BiocManager
 
             # java (and also nextflow)
             pkgs.openjdk
@@ -180,12 +186,13 @@
             # HTML, JS/TS, and other web stuff
             pkgs.vscode-langservers-extracted
             pkgs.superhtml
-            pkgs.typescript
-            pkgs.typescript-language-server
-            pkgs.javascript-typescript-langserver
-            pkgs.nodejs_23
-            pkgs.deno
-            pkgs.bun
+            # pkgs.nodejs_23
+            # pkgs.deno
+            # pkgs.bun
+            # pkgs.typescript
+            # pkgs.typescript-language-server
+            # pkgs.javascript-typescript-langserver
+            # pkgs.biome
 
             # OCaml
             pkgs.ocaml
@@ -230,12 +237,12 @@
 
             casks = [
               "arc"
-              "zed"
+              # "zed"
               "visual-studio-code"
               "slack"
               # "basecamp"
               "discord"
-              "docker"
+              # "docker"
               "zoom"
               "raycast"
               "ghostty"
