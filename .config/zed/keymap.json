@@ -3,9 +3,9 @@
         "context": "Editor && (showing_code_actions || showing_completions)",
         "bindings": {
             "ctrl-j": "editor::ContextMenuNext",
-            "ctrl-k": "editor::ContextMenuPrev",
+            "ctrl-k": "editor::ContextMenuPrevious",
             "tab": "editor::ContextMenuNext",
-            "shift-tab": "editor::ContextMenuPrev"
+            "shift-tab": "editor::ContextMenuPrevious"
         }
     },
     {
@@ -17,10 +17,10 @@
             "ctrl-shift-alt-e": "vim::NextWordEnd",
             // Goto mode
             "g n": "pane::ActivateNextItem",
-            "g p": "pane::ActivatePrevItem",
+            "g p": "pane::ActivatePreviousItem",
             // "tab": "pane::ActivateNextItem",
             // "shift-tab": "pane::ActivatePrevItem",
-            "H": "pane::ActivatePrevItem",
+            "H": "pane::ActivatePreviousItem",
             "L": "pane::ActivateNextItem",
             "g l": "vim::EndOfLine",
             "g h": "vim::StartOfLine",
@@ -38,10 +38,10 @@
             "d": "vim::DeleteRight",
             "x": "editor::SelectLine",
             // Window mode
-            "space w h": ["workspace::ActivatePaneInDirection", "Left"],
-            "space w l": ["workspace::ActivatePaneInDirection", "Right"],
-            "space w k": ["workspace::ActivatePaneInDirection", "Up"],
-            "space w j": ["workspace::ActivatePaneInDirection", "Down"],
+            "space w h": "workspace::ActivatePaneLeft",
+            "space w l": "workspace::ActivatePaneRight",
+            "space w k": "workspace::ActivatePaneUp",
+            "space w j": "workspace::ActivatePaneDown",
             "space w q": "pane::CloseActiveItem",
             "space w s": "pane::SplitRight",
             "space w r": "pane::SplitRight",
@@ -105,10 +105,10 @@
         "context": "Dock",
         "bindings": {
             // Window mode
-            "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
-            "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
-            "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
-            "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
+            "ctrl-w h": "workspace::ActivatePaneLeft",
+            "ctrl-w l": "workspace::ActivatePaneRight",
+            "ctrl-w k": "workspace::ActivatePaneUp",
+            "ctrl-w j": "workspace::ActivatePaneDown"
         }
     }
 ]

@@ -1,13 +1,21 @@
 {
-    "theme": "Catppuccin Macchiato (Blue Blur+)",
+    "outline_panel": {
+        "dock": "left"
+    },
+    "theme": {
+        "mode": "system",
+        "light": "Rosé Pine Dawn",
+        "dark": "Rosé Pine Moon"
+    },
     "ui_font_size": 14,
     "buffer_font_size": 12,
     "project_panel": { "dock": "right" },
     "ui_font_family": "Zed Plex Mono",
     "restore_on_startup": "none",
     "base_keymap": "VSCode",
+    "helix_mode": true,
     "vim_mode": false,
-    "relative_line_numbers": false,
+    "relative_line_numbers": true,
     "cursor_blink": false,
 
     "preview_tabs": {
@@ -36,12 +44,13 @@
         "background_coloring": "disabled"
     },
 
-    "assistant": {
+    "agent": {
+        "dock": "right",
+        "default_profile": "ask",
         "default_model": {
             "provider": "zed.dev",
-            "model": "claude-3-5-sonnet-latest"
-        },
-        "version": "2"
+            "model": "claude-sonnet-4"
+        }
     },
 
     "inlay_hints": {
@@ -61,9 +70,7 @@
     "lsp": {
         "rust-analyzer": {
             "initialization_options": {
-                "checkOnSave": {
-                    "command": "clippy"
-                },
+                "checkOnSave": true,
                 "inlayHints": {
                     "maxLength": null,
                     "lifetimeElisionHints": {
@@ -77,7 +84,7 @@
             }
         },
         "basedpyright": {
-            "python": {
+            "Python": {
                 "pythonPath": ".venv/bin/python",
                 "venvPath": "."
             },
@@ -100,30 +107,25 @@
             }
         },
         "nextflow-language-server": {
-            "command": "nextflow-language-server",
-            "config": {
-                "nextflow": {
-                    "debug": true,
-                    "formatting": {
-                        "harshilAlignment": true
-                    }
-                }
+            "binary": {
+                "ignore_system_version": false,
+                "path": "nextflow-language-server"
             }
         }
     },
 
     "languages": {
         "Rust": {
-            "preferred_line_length": 100,
+            "preferred_line_length": 120,
             "show_wrap_guides": true,
             "soft_wrap": "bounded"
         },
-        "Ocaml": {
+        "OCaml": {
             "tab_size": 2,
             "formatter": {
                 "external": {
                     "command": "ocamlformat",
-                    "arguments": ["-", "--impl"]
+                    "arguments": ["-", "--impl", "--enable-outside-detected-project"]
                 }
             }
         },
@@ -165,9 +167,6 @@
         "CSV": {
             "soft_wrap": "none"
         },
-        "TSV": {
-            "soft_wrap": "none"
-        },
         "Rainbow CSV": {
             "soft_wrap": "none"
         },
@@ -178,17 +177,10 @@
 
     "file_types": {
         "Rust": ["rs", "ers"],
-        "Nextflow": ["nf", "nextflow", "nextflow.config"],
+        // "Nextflow": ["nf", "nextflow", "nextflow.config"],
         "Dockerfile": ["Dockerfile*"],
         "YAML": ["pixi.lock"],
         "Markdown": ["md", "qmd"],
         "Shell Script": ["sub"]
-    },
-
-    "detect_venv": {
-        "on": {
-            "directories": [".env", "env", ".venv", "venv", "devenv"],
-            "activate_script": "default"
-        }
     }
 }

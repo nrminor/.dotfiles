@@ -27,7 +27,7 @@ max-wrap = 40
 [editor.soft-wrap]
 enable = true
 wrap-at-text-width = false
-wrap-indicator = ""
+wrap-indicator = "  "
 
 [editor.cursor-shape]
 insert = "bar"
@@ -45,7 +45,7 @@ follow-symlinks = true
 parents = false # ignore .gitignore files in parent directories
 
 [editor.smart-tab]
-enable = false
+enable = true
 
 [editor.lsp]
 auto-signature-help = false
@@ -66,4 +66,12 @@ C-g = [
     ":reload-all"
 ]
 C-s = ":w"
+Cmd-s = ":write"
 "ret" = "goto_word"
+tab = "move_parent_node_end"
+S-tab = "move_parent_node_start"
+
+[keys.select]
+"ret" = "goto_word"
+tab = "extend_parent_node_end"
+S-tab = "extend_parent_node_start"

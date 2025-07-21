@@ -114,11 +114,8 @@ auto-format = true
 [[language]]
 name = "typescript"
 language-servers = [
-  # { name = "typescript-language-server", except-features = [
-  #   "format",
-  # ] },
   "deno-lsp",
-  "biome",
+  # "biome",
   # "vscode-eslint-language-server",
   "tailwindcss-ls",
 ]
@@ -178,7 +175,7 @@ auto-format = true
 [language-server.astro-ls]
 command = "astro-ls"
 args = ["--stdio"]
-config = {typescript = {tsdk = "/Users/nickminor/.bun/install/global/node_modules/typescript/lib"}, environment = "node"}
+config = { typescript = { tsdk = "/Users/nickminor/.bun/install/global/node_modules/typescript/lib" }, environment = "node" }
 
 [[language]]
 name = "astro"
@@ -187,7 +184,13 @@ injection-regex = "astro"
 file-types = ["astro"]
 roots = ["package.json", "astro.config.mjs"]
 auto-format = true
-formatter = { command = "prettier", args = ["--plugin", "prettier-plugin-astro", "--parser", "astro"] }
+formatter = { command = 'deno', args = [
+  "fmt",
+  "-",
+  "--ext",
+  "astro",
+  "--unstable-component",
+] }
 language-servers = [
   "astro-ls",
   # "biome",
@@ -210,7 +213,13 @@ args = ["--stdio"]
 [[language]]
 name = "vue"
 auto-format = true
-formatter = { command = "prettier", args = ["--parser", "vue"] }
+formatter = { command = 'deno', args = [
+  "fmt",
+  "-",
+  "--ext",
+  "astro",
+  "--unstable-component",
+] }
 language-servers = [
   "vuels",
   # "typescript-language-server",
@@ -238,7 +247,7 @@ args = ["lsp"]
 deno.enable = true
 
 [language-server.deno-lsp.config.javascript.inlayHints]
-parameterNames.enabled = { enabled = "none", suppressWhenArgumentMatchesName = true }
+parameterNames.enabled = { enabled = "all", suppressWhenArgumentMatchesName = true }
 parameterTypes.enabled = false
 variableTypes.enabled = false
 propertyDeclarationTypes.enabled = false
@@ -246,7 +255,7 @@ functionLikeReturnTypes.enabled = false
 enumMemberValues.enabled = false
 
 [language-server.deno-lsp.config.typescript.inlayHints]
-parameterNames.enabled = { enabled = "none", suppressWhenArgumentMatchesName = true }
+parameterNames.enabled = { enabled = "all", suppressWhenArgumentMatchesName = true }
 parameterTypes.enabled = false
 variableTypes.enabled = false
 propertyDeclarationTypes.enabled = false
@@ -261,6 +270,23 @@ args = ["lsp-proxy"]
 command = "emmet-language-server"
 args = ["--stdio"]
 
+# SQL
+# **************************************************************************************
+[[language]]
+name = "sql"
+auto-format = true
+formatter = { command = 'deno', args = [
+  "fmt",
+  "-",
+  "--ext",
+  "sql",
+  "--unstable-sql",
+] }
+language-servers = [ "sql-language-server" ]
+
+[language-server.sql-language-server]
+command = "sql-language-server"
+args = ["up", "--method", "stdio"]
 
 # GO
 # **************************************************************************************
@@ -318,7 +344,13 @@ formatter = { command = "taplo", args = ["fmt", "-"] }
 
 [[language]]
 name = "html"
-language-servers = [{ name = "superhtml" }, { name = "tailwindcss-ls" }]
+language-servers = [
+  { name = "superhtml", except-features = [
+    "format",
+  ] },
+  "vscode-html-language-server",
+  { name = "tailwindcss-ls" },
+]
 auto-format = true
 
 [language.auto-pairs]
@@ -342,13 +374,13 @@ file-types = [
   "markdn",
   "mdtxt",
   "mdtext",
-  "qmd",
+  # "qmd",
   "workbook",
 ]
 roots = [".marksman.toml"]
 language-servers = ["marksman"]
 indent = { tab-width = 2, unit = "  " }
-# formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md"] }
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md"] }
 auto-format = true
 
 [[language]]
@@ -388,9 +420,13 @@ exclude = [".pixi", ".git", ".nf-test", "work"]
 [language-server.nextflow-language-server.config.nextflow.formatting]
 harshilAlignment = true
 
+[language-server.just-lsp]
+command = "just-lsp"
+
 [[language]]
 name = "just"
 auto-format = true
+language-servers = ["just-lsp"]
 formatter = { command = "just", args = ['--justfile', '/dev/stdin', '--dump'] }
 
 [[language]]

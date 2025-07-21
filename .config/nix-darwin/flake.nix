@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
@@ -21,6 +22,7 @@
       self,
       nix-darwin,
       nixpkgs,
+      nixpkgs-stable,
       nix-homebrew,
       homebrew-core,
       homebrew-cask,
@@ -52,6 +54,7 @@
             pkgs.neovim
             pkgs.helix
             # pkgs.ghostty
+            pkgs.less
             pkgs.tree
             pkgs.zoxide
             pkgs.fastfetch
@@ -85,6 +88,8 @@
             pkgs.watchexec
             pkgs.git
             pkgs.lazygit
+            pkgs.difftastic
+            pkgs.delta
             pkgs.pre-commit
             pkgs.zstd
             pkgs.eza
@@ -96,17 +101,11 @@
             pkgs.wiki-tui
 
             # bash
-            pkgs.bash-language-server
+            nixpkgs-stable.legacyPackages.${pkgs.system}.bash-language-server
             pkgs.shfmt
 
             # awk
             pkgs.awk-language-server
-
-            # terraform
-            pkgs.terraform
-            pkgs.terraform-ls
-            pkgs.hclfmt
-            pkgs.hcl2json
 
             # toml
             pkgs.taplo
@@ -115,8 +114,6 @@
             pkgs.go
             pkgs.gopls
             pkgs.gotools
-            # pkgs.golangci-lint
-            # pkgs.golangci-lint-langserver
             pkgs.goreleaser
 
             # zig
@@ -170,7 +167,6 @@
 
             # R
             # pkgs.R
-            pkgs.rstudio-server
             pkgs.rstudio
             pkgs.rPackages.languageserver
             pkgs.air-formatter
@@ -193,6 +189,7 @@
             # pkgs.typescript-language-server
             # pkgs.javascript-typescript-langserver
             # pkgs.biome
+            # pkgs.rescript-language-server
 
             # OCaml
             pkgs.ocaml
@@ -267,6 +264,7 @@
 
           };
 
+          system.primaryUser = "nickminor";
           system.defaults = {
             # dock settings
             dock = {
@@ -277,10 +275,11 @@
                 "/Applications/Arc.app"
                 "/Applications/ChatGPT.app"
                 "/Applications/Spark.app"
-                "/Applications/Instapaper.app"
+                # "/Applications/Instapaper.app"
                 "/Applications/Bear.app"
                 # "/Applications/Slack.app"
                 "/Applications/Ghostty.app"
+                "/Applications/Zed.app"
               ];
               wvous-tr-corner = 1;
               wvous-tl-corner = 1;
