@@ -5,7 +5,7 @@ name = "python"
 language-servers = [
   "basedpyright",
   "ruff",
-  "ty",
+  # "ty",
   # "pyrefly",
   # "pylyzer",
 ]
@@ -96,11 +96,12 @@ args = ["language-server"]
 [[language]]
 name = "javascript"
 language-servers = [
-  "deno-lsp",
-  # "vscode-eslint-language-server",
+  { name = "typescript-language-server", except-features = ["format"] },
+  "biome",
+  # "deno-lsp",
+  "vscode-eslint-language-server",
 ]
 roots = ["deno.json", "deno.jsonc", "package.json", "bunfig.toml"]
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "js"] }
 auto-format = true
 
 [language.auto-pairs]
@@ -114,13 +115,12 @@ auto-format = true
 [[language]]
 name = "typescript"
 language-servers = [
-  "deno-lsp",
-  # "biome",
+  { name = "typescript-language-server", except-features = ["format"] },
+  "biome",
   # "vscode-eslint-language-server",
   "tailwindcss-ls",
 ]
 roots = ["deno.json", "deno.jsonc", "package.json", "bunfig.toml"]
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "ts"] }
 auto-format = true
 
 [language.auto-pairs]
@@ -134,12 +134,11 @@ auto-format = true
 [[language]]
 name = "jsx"
 language-servers = [
-  "deno-lsp",
-  # "biome",
+  { name = "typescript-language-server", except-features = ["format"] },
+  "biome",
   # "vscode-eslint-language-server",
   "tailwindcss-ls",
 ]
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "jsx"] }
 auto-format = true
 
 [language.auto-pairs]
@@ -153,15 +152,11 @@ auto-format = true
 [[language]]
 name = "tsx"
 language-servers = [
-  "deno-lsp",
-  # { name = "typescript-language-server", except-features = [
-  #   "format",
-  # ] },
-  # "biome",
+  { name = "typescript-language-server", except-features = ["format"] },
+  "biome",
   # "vscode-eslint-language-server",
   "tailwindcss-ls",
 ]
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "tsx"] }
 auto-format = true
 
 [language.auto-pairs]
@@ -282,7 +277,7 @@ formatter = { command = 'deno', args = [
   "sql",
   "--unstable-sql",
 ] }
-language-servers = [ "sql-language-server" ]
+language-servers = ["sql-language-server"]
 
 [language-server.sql-language-server]
 command = "sql-language-server"
@@ -376,6 +371,7 @@ file-types = [
   "mdtext",
   # "qmd",
   "workbook",
+  "mdx",
 ]
 roots = [".marksman.toml"]
 language-servers = ["marksman"]
@@ -394,6 +390,7 @@ args = ["--stdio"]
 
 [[language]]
 name = "nix"
+language-servers = ["nil"]
 formatter = { command = "nixfmt" }
 auto-format = true
 

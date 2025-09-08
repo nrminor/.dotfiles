@@ -18,7 +18,7 @@ undercurl = true
 indent-heuristic = "tree-sitter"
 
 [editor.inline-diagnostics]
-cursor-line = "warning"
+cursor-line = "hint"
 other-lines = "disable"
 max-diagnostics	= 10
 prefix-len = 2

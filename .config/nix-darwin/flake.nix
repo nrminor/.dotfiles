@@ -47,15 +47,19 @@
             pkgs.clang
             pkgs.libiconv
             pkgs.pkg-config
+            pkgs.pkgconf
+            pkgs.zlib
             pkgs.gettext
             pkgs.nixd
             pkgs.nixfmt-rfc-style
+            pkgs.nil
             pkgs.mkalias
             pkgs.neovim
             pkgs.helix
             # pkgs.ghostty
             pkgs.less
             pkgs.tree
+            pkgs.parallel
             pkgs.zoxide
             pkgs.fastfetch
             pkgs.starship
@@ -136,6 +140,7 @@
             # sql stuff
             pkgs.duckdb
             pkgs.fselect
+            pkgs.tabiew
 
             # python
             pkgs.python313
@@ -159,6 +164,7 @@
 
             # rust
             pkgs.rustup
+            pkgs.mdbook
             pkgs.rust-script
             pkgs.evcxr
             pkgs.maturin
@@ -180,7 +186,7 @@
             pkgs.nextflow
 
             # HTML, JS/TS, and other web stuff
-            pkgs.vscode-langservers-extracted
+            # pkgs.vscode-langservers-extracted
             pkgs.superhtml
             # pkgs.nodejs_23
             # pkgs.deno
@@ -193,16 +199,20 @@
 
             # OCaml
             pkgs.ocaml
-            pkgs.opam
-            pkgs.ocamlPackages.ocaml-lsp
-            pkgs.ocamlPackages.utop
-            pkgs.ocamlformat_0_26_1
-            pkgs.dune_3
+
+            # Haskell
+
+            # Lean 4
+            pkgs.lean4
 
             # BEAM VM ecosystem
             pkgs.erlang
             pkgs.rebar3
             pkgs.gleam
+            pkgs.beam28Packages.elixir
+            pkgs.beam28Packages.elixir-ls
+            pkgs.next-ls
+            pkgs.livebook
 
             # authoring tools (e.g. typst, latex, quarto, markdown)
             pkgs.marksman
@@ -229,7 +239,10 @@
               "gcc"
               "llvm"
               "libiconv"
+              "zlib"
+              "pkgconf"
               "sevenzip"
+              "opam"
             ];
 
             casks = [
@@ -250,6 +263,7 @@
             masApps = {
               "Bear" = 1091189122;
               "Instapaper" = 288545208;
+              "Artykul" = 1618798027;
               "Spark" = 1176895641;
               "HazeOver" = 430798174;
               "Amphetamine" = 937984704;
@@ -275,11 +289,11 @@
                 "/Applications/Arc.app"
                 "/Applications/ChatGPT.app"
                 "/Applications/Spark.app"
-                # "/Applications/Instapaper.app"
+                "/Applications/Artykul.app"
                 "/Applications/Bear.app"
-                # "/Applications/Slack.app"
+                "/Applications/Instapaper.app"
                 "/Applications/Ghostty.app"
-                "/Applications/Zed.app"
+                # "/Applications/Zed.app"
               ];
               wvous-tr-corner = 1;
               wvous-tl-corner = 1;
@@ -478,16 +492,16 @@
       # $ darwin-rebuild build --flake .#starter
       darwinConfigurations."starter" = nix-darwin.lib.darwinSystem {
         modules = [
-          configuration
           nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
               enable = true;
-              enableRosetta = true;
+              enableRosetta = false;
               user = "nickminor";
               autoMigrate = true;
             };
           }
+          configuration
         ];
       };
 
