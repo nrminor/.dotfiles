@@ -58,6 +58,7 @@
             pkgs.helix
             # pkgs.ghostty
             pkgs.less
+            pkgs.tailspin
             pkgs.tree
             pkgs.parallel
             pkgs.zoxide
@@ -95,7 +96,9 @@
             pkgs.difftastic
             pkgs.delta
             pkgs.pre-commit
+            pkgs.xz
             pkgs.zstd
+            pkgs.bzip2
             pkgs.eza
             pkgs.curl
             pkgs.wget
@@ -109,6 +112,7 @@
             pkgs.shfmt
 
             # awk
+            pkgs.gawk
             pkgs.awk-language-server
 
             # toml
@@ -201,6 +205,9 @@
             pkgs.ocaml
 
             # Haskell
+            # pkgs.haskellPackages.ghcup
+            # pkgs.haskell-language-server
+            pkgs.stylish-haskell
 
             # Lean 4
             pkgs.lean4
@@ -222,6 +229,7 @@
             pkgs.typstyle
             # pkgs.quarto
             pkgs.presenterm
+            pkgs.d2
 
             # bioinformatics tools
             pkgs.seqkit
@@ -239,8 +247,10 @@
               "gcc"
               "llvm"
               "libiconv"
-              "zlib"
-              "pkgconf"
+              # "zlib"
+              # "pkgconf"
+              # "xz"
+              # "bzip2"
               "sevenzip"
               "opam"
             ];
@@ -501,6 +511,33 @@
               autoMigrate = true;
             };
           }
+          (
+            { pkgs, ... }:
+            {
+              # Make pkg-config see Nix .pc files: use *dev* outputs
+              environment.variables.PKG_CONFIG_PATH = pkgs.lib.makeSearchPathOutput "dev" "lib/pkgconfig" [
+                pkgs.xz
+                pkgs.zstd
+                pkgs.libiconv
+              ];
+
+              # bzip2 typically has no .pc — feed the Nix cc wrapper the lib paths
+              environment.variables.NIX_LDFLAGS = pkgs.lib.concatStringsSep " " [
+                "-L${pkgs.bzip2}/lib"
+                "-L${pkgs.xz}/lib"
+                "-L${pkgs.zstd}/lib"
+                "-L${pkgs.libiconv}/lib"
+              ];
+
+              # (Optional) headers for C-using crates
+              environment.variables.NIX_CFLAGS_COMPILE = pkgs.lib.concatStringsSep " " [
+                "-I${pkgs.xz.dev}/include"
+                "-I${pkgs.zstd.dev}/include"
+                "-I${pkgs.libiconv.dev}/include"
+              ];
+            }
+
+          )
           configuration
         ];
       };

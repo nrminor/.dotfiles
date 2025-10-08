@@ -11,8 +11,8 @@ bufferline = "always"
 end-of-line-diagnostics = "error"
 color-modes = true
 popup-border = "all"
-idle-timeout = 1
-completion-timeout = 1
+idle-timeout = 250                # 250 is the default
+completion-timeout = 5            # time for auto-completion to appear. 5 is instant, 250 is the default
 # completion-replace = true
 undercurl = true
 indent-heuristic = "tree-sitter"
@@ -20,7 +20,7 @@ indent-heuristic = "tree-sitter"
 [editor.inline-diagnostics]
 cursor-line = "hint"
 other-lines = "disable"
-max-diagnostics	= 10
+max-diagnostics = 10
 prefix-len = 2
 max-wrap = 40
 
@@ -53,25 +53,56 @@ display-messages = true
 display-inlay-hints = true
 
 [editor.statusline]
-left = ["mode", "spinner", "version-control", "file-name"]
+left = [
+  "mode",
+  "spinner",
+  "version-control",
+  "file-name",
+  "read-only-indicator",
+  "file-modification-indicator",
+]
+center = []
+right = [
+  "diagnostics",
+  "selections",
+  # "register",
+  "position",
+  "position-percentage",
+  "total-line-numbers",
+  "file-encoding",
+  # "file-line-ending",
+  "file-type",
+]
 
 [keys.normal]
 esc = ["collapse_selection", "keep_primary_selection"]
 C-g = [
-    ":write-all",
-    ":new",
-    ":insert-output lazygit",
-    ":buffer-close!",
-    ":redraw",
-    ":reload-all"
+  ":write-all",
+  ":new",
+  ":insert-output lazygit",
+  ":buffer-close!",
+  ":redraw",
+  ":reload-all",
 ]
 C-s = ":w"
 Cmd-s = ":write"
 "ret" = "goto_word"
 tab = "move_parent_node_end"
 S-tab = "move_parent_node_start"
+# the following settings keep the LSP from yelling at you about invalid syntax
+# before you're done typing
+i = [":toggle-option end-of-line-diagnostics disable", "insert_mode"]
+I = [":toggle-option end-of-line-diagnostics disable", "insert_at_line_start"]
+a = [":toggle-option end-of-line-diagnostics disable", "append_mode"]
+A = [":toggle-option end-of-line-diagnostics disable", "insert_at_line_end"]
+o = [":toggle-option end-of-line-diagnostics disable", "open_below"]
+O = [":toggle-option end-of-line-diagnostics disable", "open_above"]
+c = [":toggle-option end-of-line-diagnostics disable", "change_selection"]
 
 [keys.select]
 "ret" = "goto_word"
 tab = "extend_parent_node_end"
 S-tab = "extend_parent_node_start"
+
+[keys.insert]
+esc = [":toggle-option end-of-line-diagnostics error", "normal_mode"]

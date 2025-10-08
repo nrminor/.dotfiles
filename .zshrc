@@ -4,7 +4,7 @@ export VISUAL=hx
 export EDITOR="$VISUAL"
 export GIT_EDITOR=hx
 export BREW_PREFIX=$(brew --prefix)
-export PATH=/usr/local/bin:$HOME/.cargo/bin:$HOME/.pixi/bin:$BREW_PREFIX/lib:$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$PATH:$HOME/.deno/bin:$HOME/.bun/bin:$HOME/go/bin:$HOME/.juliaup/bin #:/opt/homebrew/opt/libiconv/bin:/opt/homebrew/opt/libiconv/lib
+export PATH=/usr/local/bin:$HOME/.cargo/bin:$HOME/.pixi/bin:$BREW_PREFIX/lib:$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$PATH:$HOME/.deno/bin:$HOME/.bun/bin:$HOME/go/bin #:$HOME/.juliaup/bin #:/opt/homebrew/opt/libiconv/bin:/opt/homebrew/opt/libiconv/lib
 export LIBRARY_PATH=$LIBRARY_PATH:$BREW_PREFIX/lib:/opt/homebrew/opt/libiconv/lib:$BREW_PREFIX/opt/libiconv/lib:$BREW_PREFIX/opt/zlib/lib
 export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib -L$BREW_PREFIX/opt/zlib/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include -I$BREW_PREFIX/opt/zlib/include"
@@ -31,6 +31,7 @@ autoload -Uz compinit
 compinit -u
 # zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 # source <(carapace _carapace)
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
 [[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source "$HOME/.opam/opam-init/init.zsh" >/dev/null 2>/dev/null
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 . "$HOME/.local/bin/env"
@@ -298,8 +299,8 @@ alias ll="eza -la --group-directories-first --icons --color=always"
 alias la="ll"
 alias less="less -R"
 alias cat="bat -pP"
-alias py="RUST_LOG=warn uvx --with polars --with biopython --with pysam python"                               # run a uv-managed version of the python repl with some of my go to libs
-alias mo="RUST_LOG=warn uvx --with polars --with biopython --with pysam --with altair marimo edit scratch.py" # run a scratch-space marimo notebook with some of my fave data science libs
+alias py="RUST_LOG=warn uvx --with polars --with biopython --with pysam --with polars-bio python"                               # run a uv-managed version of the python repl with some of my go to libs
+alias mo="RUST_LOG=warn uvx --with polars --with biopython --with pysam --with polars-bio --with altair marimo edit scratch.py" # run a scratch-space marimo notebook with some of my fave data science libs
 if [ -x "$(which radian)" ]; then
 	alias r="radian"
 	alias R="radian"

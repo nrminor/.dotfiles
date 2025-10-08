@@ -3,7 +3,7 @@ font-family = "Berkeley Mono"
 font-size = 11
 
 # window configurations
-theme = catppuccin-macchiato
+theme = Catppuccin Macchiato
 background-opacity = 0.97
 background-blur-radius = 10
 window-inherit-font-size = false
@@ -38,7 +38,7 @@ keybind = alt+right=unbind
 
 # miscellaneous
 shell-integration = zsh
-shell-integration-features = title
+shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo
 quit-after-last-window-closed = true
 shell-integration-features = sudo
 

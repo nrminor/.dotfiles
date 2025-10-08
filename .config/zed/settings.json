@@ -2,13 +2,14 @@
     "outline_panel": {
         "dock": "left"
     },
-    "theme": {
-        "mode": "system",
-        "light": "Rosé Pine Dawn",
-        "dark": "Rosé Pine Moon"
-    },
-    "ui_font_size": 14,
-    "buffer_font_size": 12,
+    // "theme": {
+    //     "mode": "system",
+    //     "light": "Quiet Light",
+    //     "dark": "Rosé Pine Moon"
+    // },
+    "theme": "Catppuccin Frappé (Blue Blur+)",
+    "ui_font_size": 13,
+    "buffer_font_size": 11,
     "project_panel": { "dock": "right" },
     "ui_font_family": "Berkeley Mono",
     "buffer_font_family": "Berkeley Mono",

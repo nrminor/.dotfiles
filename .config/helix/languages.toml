@@ -78,6 +78,13 @@ name = "bash"
 auto-format = true
 formatter = { command = "shfmt" }
 
+# AWK
+# **************************************************************************************
+[[language]]
+name = "awk"
+formatter = { command = "gawk", timeout = 5, args = [ "--file=/dev/stdin", "--pretty-print=/dev/stdout" ] }
+auto-format = true
+
 # R
 # **************************************************************************************
 [[language]]
@@ -290,6 +297,19 @@ name = "go"
 auto-format = true
 formatter = { command = "goimports" }
 
+
+# HASKELL
+# **************************************************************************************
+[[language]]
+name = "haskell"
+formatter = { command = "stylish-haskell", args = [] }
+auto-format = true
+
+# [[language]]
+# name = "haskell"
+# formatter = { command = "zsh", args = ["-c", "fourmolu --stdin-input-file $(pwd)" ] }
+# auto-format = true
+
 # OCAML
 # **************************************************************************************
 [[language]]
@@ -377,6 +397,15 @@ roots = [".marksman.toml"]
 language-servers = ["marksman"]
 indent = { tab-width = 2, unit = "  " }
 formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md"] }
+auto-format = true
+
+[[language]]
+name = "typst"
+formatter.command = "typstyle"
+auto-format = true
+
+[[language]]
+name = "slint"
 auto-format = true
 
 [[language]]
