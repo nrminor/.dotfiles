@@ -27,14 +27,14 @@ quick-terminal-position = right
 quick-terminal-screen = main
 
 # macos-specific configurations
-macos-option-as-alt = true
+macos-option-as-alt = left
 macos-icon-frame = chrome
 macos-icon = custom-style
 keybind = alt+left=unbind
 keybind = alt+right=unbind
-# macos-icon-ghost-color = green
-# macos-icon-screen-color = green
-# macos-titlebar-style = hidden
+window-decoration = auto
+macos-titlebar-style = tabs
+macos-titlebar-proxy-icon = visible
 
 # miscellaneous
 shell-integration = zsh

@@ -49,6 +49,7 @@
             pkgs.pkg-config
             pkgs.pkgconf
             pkgs.zlib
+            pkgs.llvm
             pkgs.gettext
             pkgs.nixd
             pkgs.nixfmt-rfc-style
@@ -245,6 +246,7 @@
             brews = [
               "mas"
               "gcc"
+              "lld"
               "llvm"
               "libiconv"
               # "zlib"
@@ -273,7 +275,6 @@
             masApps = {
               "Bear" = 1091189122;
               "Instapaper" = 288545208;
-              "Artykul" = 1618798027;
               "Spark" = 1176895641;
               "HazeOver" = 430798174;
               "Amphetamine" = 937984704;
@@ -299,7 +300,6 @@
                 "/Applications/Arc.app"
                 "/Applications/ChatGPT.app"
                 "/Applications/Spark.app"
-                "/Applications/Artykul.app"
                 "/Applications/Bear.app"
                 "/Applications/Instapaper.app"
                 "/Applications/Ghostty.app"

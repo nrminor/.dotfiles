@@ -82,7 +82,10 @@ formatter = { command = "shfmt" }
 # **************************************************************************************
 [[language]]
 name = "awk"
-formatter = { command = "gawk", timeout = 5, args = [ "--file=/dev/stdin", "--pretty-print=/dev/stdout" ] }
+formatter = { command = "gawk", timeout = 5, args = [
+  "--file=/dev/stdin",
+  "--pretty-print=/dev/stdout",
+] }
 auto-format = true
 
 # R
@@ -108,7 +111,14 @@ language-servers = [
   # "deno-lsp",
   "vscode-eslint-language-server",
 ]
-roots = ["deno.json", "deno.jsonc", "package.json", "bunfig.toml"]
+roots = [
+  "biome.json",
+  "biome.jsonc",
+  "deno.json",
+  "deno.jsonc",
+  "package.json",
+  "bunfig.toml",
+]
 auto-format = true
 
 [language.auto-pairs]
@@ -127,7 +137,7 @@ language-servers = [
   # "vscode-eslint-language-server",
   "tailwindcss-ls",
 ]
-roots = ["deno.json", "deno.jsonc", "package.json", "bunfig.toml"]
+roots = ["biome.json", "biome.jsonc", "deno.json", "deno.jsonc", "package.json"]
 auto-format = true
 
 [language.auto-pairs]

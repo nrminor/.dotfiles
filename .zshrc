@@ -369,4 +369,9 @@ alias s="ls"
 alias ks="ls"
 alias cld="claude"
 alias cl="claude"
+alias oc="opencode"
+alias code="opencode"
 # -------------------------------------------------------------------------------------
+
+# bun completions
+[ -s "/Users/nickminor/.bun/_bun" ] && source "/Users/nickminor/.bun/_bun"

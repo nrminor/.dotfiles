@@ -135,12 +135,12 @@
             "tab_size": 2,
             "language_servers": ["gleam"]
         },
-        "Nextflow": {
-            "tab_size": 4,
-            "preferred_line_length": 100,
-            "format_on_save": "on",
-            "language_servers": ["nextflow-language-server"]
-        },
+        // "Nextflow": {
+        //     "tab_size": 4,
+        //     "preferred_line_length": 100,
+        //     "format_on_save": "on",
+        //     "language_servers": ["nextflow-language-server"]
+        // },
         "Python": {
             "language_servers": ["ruff", "basedpyright"],
             "formatter": [
