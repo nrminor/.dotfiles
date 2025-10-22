@@ -1,7 +1,7 @@
 theme "catppuccin-macchiato"
 pane_frames false
-default_layout "default"
-// default_layout "compact"
+// default_layout "default"
+default_layout "compact"
 
 env {
     RUST_BACKTRACE 1

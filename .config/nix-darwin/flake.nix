@@ -110,6 +110,7 @@
 
             # bash
             nixpkgs-stable.legacyPackages.${pkgs.system}.bash-language-server
+            pkgs.shellcheck
             pkgs.shfmt
 
             # awk
@@ -175,6 +176,13 @@
             pkgs.maturin
             pkgs.bacon
             pkgs.rusty-man
+            pkgs.cargo-msrv
+            pkgs.cargo-sort
+            pkgs.cargo-audit
+            pkgs.cargo-info
+            pkgs.cargo-fuzz
+            pkgs.cargo-dist
+            pkgs.cargo-udeps
 
             # R
             # pkgs.R
@@ -219,8 +227,6 @@
             pkgs.gleam
             pkgs.beam28Packages.elixir
             pkgs.beam28Packages.elixir-ls
-            pkgs.next-ls
-            pkgs.livebook
 
             # authoring tools (e.g. typst, latex, quarto, markdown)
             pkgs.marksman
@@ -262,13 +268,10 @@
               # "zed"
               "visual-studio-code"
               "slack"
-              # "basecamp"
               "discord"
-              # "docker"
               "zoom"
               "raycast"
               "ghostty"
-              "hammerspoon"
               "font-symbols-only-nerd-font"
             ];
 

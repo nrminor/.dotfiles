@@ -75,10 +75,18 @@
 !/.config/yazi/yazi.toml
 !/.config/yazi/keymap.toml
 !/.config/yazi/theme.toml
+!/.config/yazi/flavors
+!/.config/yazi/flavors/catppuccin-macchiato.yazi
+!/.config/yazi/flavors/catppuccin-macchiato.yazi/flavor.toml
+!/.config/yazi/flavors/catppuccin-macchiato.yazi/tmtheme.xml
 
 # zellij configuration
 !/.config/zellij
 !/.config/zellij/config.kdl
+
+# atuin configuration
+!/.config/atuin
+!/.config/atuin/config.toml
 
 # skhd configuration
 !/.config/skhd
