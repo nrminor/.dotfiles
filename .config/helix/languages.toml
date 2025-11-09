@@ -184,6 +184,25 @@ auto-format = true
 '<' = '>'
 '`' = '`'
 
+[[language]]
+name = "svelte"
+formatter = { command = 'deno', args = [
+  "fmt",
+  "-",
+  "--ext",
+  "svelte",
+  "--unstable-component",
+] }
+auto-format = true
+
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'<' = '>'
+'`' = '`'
+
 [language-server.astro-ls]
 command = "astro-ls"
 args = ["--stdio"]
@@ -217,40 +236,6 @@ language-servers = [
 '<' = '>'
 '`' = '`'
 
-[language-server.vuels]
-command = "vue-language-server"
-args = ["--stdio"]
-# config = { vue = { hybridMode = false }, typescript = { tsdk = "~/.config/nvm/versions/node/v23.11.1/lib/node_modules/typescript/lib/" } }
-
-[[language]]
-name = "vue"
-auto-format = true
-formatter = { command = 'deno', args = [
-  "fmt",
-  "-",
-  "--ext",
-  "astro",
-  "--unstable-component",
-] }
-language-servers = [
-  "vuels",
-  # "typescript-language-server",
-  # "emmet-lsp",
-]
-
-[language.auto-pairs]
-'(' = ')'
-'{' = '}'
-'[' = ']'
-'"' = '"'
-'<' = '>'
-'`' = '`'
-
-[[language-server.typescript-language-server.config.plugins]]
-name = "@vue/typescript-plugin"
-location = "~/.config/nvm/versions/node/v23.11.1/lib/node_modules/@vue/typescript-plugin"
-languages = ["vue"]
-
 [language-server.deno-lsp]
 command = "deno"
 args = ["lsp"]
@@ -277,10 +262,6 @@ enumMemberValues.enabled = false
 [language-server.biome]
 command = "biome"
 args = ["lsp-proxy"]
-
-[language-server.emmet-lsp]
-command = "emmet-language-server"
-args = ["--stdio"]
 
 # SQL
 # **************************************************************************************
@@ -403,8 +384,10 @@ file-types = [
   "workbook",
   "mdx",
 ]
-roots = [".marksman.toml"]
-language-servers = ["marksman"]
+language-servers = [
+  # "marksman",
+  "markdown-oxide",
+]
 indent = { tab-width = 2, unit = "  " }
 formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md"] }
 auto-format = true
@@ -432,6 +415,11 @@ name = "nix"
 language-servers = ["nil"]
 formatter = { command = "nixfmt" }
 auto-format = true
+
+[[language]]
+name = "nu"
+auto-format = true
+formatter = { command = "topiary", args = ["format", "--language", "nu"] }
 
 [[language]]
 file-types = ["nf", "nf.test", { glob = "nextflow.config" }]

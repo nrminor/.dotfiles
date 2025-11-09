@@ -67,13 +67,15 @@
             pkgs.starship
             pkgs.atuin
             pkgs.hyperfine
-            pkgs.carapace
+            # pkgs.carapace
             pkgs.skhd
             pkgs.nushell
-            pkgs.du-dust
+            pkgs.topiary
+            pkgs.dust
             pkgs.zellij
             pkgs.bat
             pkgs.fzf
+            pkgs.fzf-make
             pkgs.yazi
             pkgs.ripgrep
             pkgs.ripgrep-all
@@ -97,6 +99,8 @@
             pkgs.difftastic
             pkgs.delta
             pkgs.pre-commit
+            pkgs.jujutsu
+            pkgs.lazyjj
             pkgs.xz
             pkgs.zstd
             pkgs.bzip2
@@ -108,14 +112,66 @@
             pkgs.gnuplot
             pkgs.wiki-tui
 
-            # bash
+            # bash/zsh
             nixpkgs-stable.legacyPackages.${pkgs.system}.bash-language-server
             pkgs.shellcheck
             pkgs.shfmt
+            pkgs.zsh-autosuggestions
+            pkgs.zsh-syntax-highlighting
 
             # awk
             pkgs.gawk
             pkgs.awk-language-server
+
+            # rust
+            pkgs.rustup
+            pkgs.mdbook
+            pkgs.rust-script
+            pkgs.evcxr
+            pkgs.maturin
+            pkgs.bacon
+            pkgs.rusty-man
+            pkgs.cargo-msrv
+            pkgs.cargo-sort
+            pkgs.cargo-audit
+            pkgs.cargo-info
+            pkgs.cargo-fuzz
+            pkgs.cargo-dist
+            pkgs.cargo-udeps
+            pkgs.dioxus-cli
+
+            # sql stuff
+            pkgs.duckdb
+            pkgs.fselect
+            pkgs.tabiew
+
+            # python
+            pkgs.python313
+            # pkgs.uv
+            pkgs.pixi
+            pkgs.ruff
+            # pkgs.ty
+            pkgs.basedpyright
+            pkgs.pylyzer
+            pkgs.marimo
+            # pkgs.python313Packages.radian
+            pkgs.python313Packages.ipython
+            pkgs.python313Packages.notebook
+            pkgs.python313Packages.marimo
+            pkgs.python313Packages.jupyter-core
+            pkgs.python313Packages.jupyterlab
+            pkgs.python313Packages.ipykernel
+            pkgs.python313Packages.polars
+            pkgs.python313Packages.biopython
+            pkgs.python313Packages.pysam
+
+            # R
+            # pkgs.R
+            pkgs.rstudio
+            pkgs.rPackages.languageserver
+            pkgs.air-formatter
+            # pkgs.rPackages.tidyverse
+            pkgs.rPackages.BiocManager
 
             # toml
             pkgs.taplo
@@ -143,55 +199,6 @@
             pkgs.lua-language-server
             pkgs.stylua
 
-            # sql stuff
-            pkgs.duckdb
-            pkgs.fselect
-            pkgs.tabiew
-
-            # python
-            pkgs.python313
-            # pkgs.uv
-            pkgs.pixi
-            pkgs.ruff
-            # pkgs.ty
-            pkgs.basedpyright
-            pkgs.pylyzer
-            pkgs.marimo
-            # pkgs.python313Packages.radian
-            pkgs.python313Packages.ipython
-            pkgs.python313Packages.notebook
-            pkgs.python313Packages.marimo
-            pkgs.python313Packages.jupyter-core
-            pkgs.python313Packages.jupyterlab
-            pkgs.python313Packages.ipykernel
-            pkgs.python313Packages.polars
-            pkgs.python313Packages.biopython
-            pkgs.python313Packages.pysam
-
-            # rust
-            pkgs.rustup
-            pkgs.mdbook
-            pkgs.rust-script
-            pkgs.evcxr
-            pkgs.maturin
-            pkgs.bacon
-            pkgs.rusty-man
-            pkgs.cargo-msrv
-            pkgs.cargo-sort
-            pkgs.cargo-audit
-            pkgs.cargo-info
-            pkgs.cargo-fuzz
-            pkgs.cargo-dist
-            pkgs.cargo-udeps
-
-            # R
-            # pkgs.R
-            pkgs.rstudio
-            pkgs.rPackages.languageserver
-            pkgs.air-formatter
-            pkgs.rPackages.tidyverse
-            pkgs.rPackages.BiocManager
-
             # java (and also nextflow)
             pkgs.openjdk
             pkgs.jdk
@@ -208,15 +215,18 @@
             # pkgs.typescript-language-server
             # pkgs.javascript-typescript-langserver
             # pkgs.biome
+            # pkgs.oxlint
             # pkgs.rescript-language-server
 
             # OCaml
             pkgs.ocaml
+            # pkgs.opam
 
             # Haskell
             # pkgs.haskellPackages.ghcup
             # pkgs.haskell-language-server
             pkgs.stylish-haskell
+            pkgs.haskellPackages.fourmolu
 
             # Lean 4
             pkgs.lean4
@@ -229,9 +239,10 @@
             pkgs.beam28Packages.elixir-ls
 
             # authoring tools (e.g. typst, latex, quarto, markdown)
-            pkgs.marksman
+            # pkgs.marksman
+            pkgs.markdown-oxide
             pkgs.typst
-            pkgs.typstfmt
+            pkgs.typstyle
             pkgs.tinymist
             pkgs.typstyle
             # pkgs.quarto
@@ -265,13 +276,14 @@
 
             casks = [
               "arc"
-              # "zed"
               "visual-studio-code"
+              "docker-desktop"
               "slack"
               "discord"
               "zoom"
               "raycast"
               "ghostty"
+              "figma"
               "font-symbols-only-nerd-font"
             ];
 
@@ -306,7 +318,7 @@
                 "/Applications/Bear.app"
                 "/Applications/Instapaper.app"
                 "/Applications/Ghostty.app"
-                # "/Applications/Zed.app"
+                "/Applications/Figma.app"
               ];
               wvous-tr-corner = 1;
               wvous-tl-corner = 1;
@@ -400,10 +412,28 @@
             extraOptions = ''
               experimental-features = nix-command flakes
             '';
+
+            # Automatic garbage collection
+            gc = {
+              automatic = true;
+              interval = {
+                Day = 7;
+              }; # Run weekly
+              options = "--delete-older-than 30d";
+            };
           };
 
           # Create /etc/zshrc that loads the nix-darwin environment.
-          programs.zsh.enable = true; # default shell on catalina
+          programs.zsh = {
+            enable = true;
+            enableCompletion = true;
+
+            interactiveShellInit = ''
+              source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+              source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+            '';
+
+          };
           # programs.fish.enable = true;
 
           # Set Git commit hash for darwin-version.
@@ -479,21 +509,6 @@
                 cd "/Users/nickminor/.dotfiles"
                 echo "Deploying dotfiles with dotter..."
                 sudo -u nickminor "${pkgs.dotter}/bin/dotter" deploy -f -y -v
-
-                # setup positron application directory
-                # echo "Making positron directory..."
-                # sudo -u nickminor mkdir -p "/Users/nickminor/Library/Application Support/Positron"
-                # chown -R nickminor:staff "/Users/nickminor/Library/Application Support/Positron"
-                # sudo -u nickminor chmod +rw "/Users/nickminor/Library/Application Support/Positron"
-                # sudo -u nickminor mkdir -p /Users/nickminor/.positron/extensions
-                # chown -R nickminor:staff /Users/nickminor/.positron/extensions
-                # sudo -u nickminor chmod +rw /Users/nickminor/.positron/extensions
-
-                # # install vscode/positron extensions
-                # echo "Installing positron extensions..."
-                # cat .config/positron/extensions.txt \
-                # | xargs -L 1 sudo -u nickminor /Applications/Positron.app/Contents/Resources/app/bin/code \
-                # --force --install-extension
               '';
 
           };

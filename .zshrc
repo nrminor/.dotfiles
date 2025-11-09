@@ -1,51 +1,65 @@
-# ENVIRONMENT VARIABLES
-# -------------------------------------------------------------------------------------
-export VISUAL=hx
-export EDITOR="$VISUAL"
-export GIT_EDITOR=hx
-export BREW_PREFIX=$(brew --prefix)
-export PATH=/usr/local/bin:$HOME/.cargo/bin:$HOME/.pixi/bin:$BREW_PREFIX/lib:$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$PATH:$HOME/.deno/bin:$HOME/.bun/bin:$HOME/go/bin #:$HOME/.juliaup/bin #:/opt/homebrew/opt/libiconv/bin:/opt/homebrew/opt/libiconv/lib
-export LIBRARY_PATH=$LIBRARY_PATH:$BREW_PREFIX/lib:/opt/homebrew/opt/libiconv/lib:$BREW_PREFIX/opt/libiconv/lib:$BREW_PREFIX/opt/zlib/lib
-export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib -L$BREW_PREFIX/opt/zlib/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include -I$BREW_PREFIX/opt/zlib/include"
-export PKG_CONFIG_PATH="$BREW_PREFIX/opt/zlib/lib/pkgconfig:$PKG_CONFIG_PATH"
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export XDG_CONFIG_HOME="$HOME/.config"
-export CARAPACE_BRIDGES='zsh,bash,clap,click'
-export HOMEBREW_NO_AUTO_UPDATE=1
-export GOPATH="$HOME/go"
-export GOBIN="$GOPATH/bin"
-export NVM_DIR="$HOME/.config/nvm"
-export BAT_THEME="OneHalfDark"
-# -------------------------------------------------------------------------------------
+# ============================================================================
+# Interactive shell configuration
+# For aliases, functions, completions, and prompt initialization
+# ============================================================================
 
-# SOURCES AND EVALS (the slow stuff)
+# INTERACTIVE SHELL INITIALIZATION
 # -------------------------------------------------------------------------------------
-eval "$(zoxide init zsh)"
-source <(fzf --zsh)
-eval "$(starship init zsh)"
-eval "$(atuin init zsh)"
-export ZSH_DISABLE_COMPFIX=true
+# These only run in interactive shells, not scripts
+
+# Initialize completion system
 autoload -Uz compinit
 compinit -u
-# zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-# source <(carapace _carapace)
-[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
-[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source "$HOME/.opam/opam-init/init.zsh" >/dev/null 2>/dev/null
+# -------------------------------------------------------------------------------------
+
+# EXTERNAL TOOL INITIALIZATION (the slow stuff)
+# -------------------------------------------------------------------------------------
+# Only initialize these for interactive shells
+
+# Fast directory jumping
+eval "$(zoxide init zsh)"
+
+# Fuzzy finder integration
+source <(fzf --zsh)
+
+# Prompt
+eval "$(starship init zsh)"
+
+# Shell history
+eval "$(atuin init zsh)"
+# -------------------------------------------------------------------------------------
+
+# CONDITIONAL TOOL INITIALIZATION
+# -------------------------------------------------------------------------------------
+# Load these only if they exist
+
+# Haskell
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
+
+# OCaml
+[[ -r $HOME/.opam/opam-init/init.zsh ]] && source "$HOME/.opam/opam-init/init.
+zsh" >/dev/null 2>/dev/null
+
+# Local overrides
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
-. "$HOME/.local/bin/env"
+
+# Local environment scripts
+[ -f "$HOME/.local/bin/env" ] && source "$HOME/.local/bin/env"
+
+# Bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# NVM (Node Version Manager) - loads on demand for interactive shells
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 # -------------------------------------------------------------------------------------
 
 # CUSTOM FUNCTIONS
 # -------------------------------------------------------------------------------------
-function mkcd() {
+mkcd() {
 	mkdir -p "$1" && cd "$1" || exit
 }
 
-function gitcc() {
+gitcc() {
 	if [[ -z "$1" ]]; then
 		echo "Usage: ghcc <Git repository URL>"
 		return 1
@@ -64,7 +78,7 @@ function gitcc() {
 	git clone "$url" && cd "$repo" || exit
 }
 
-function trash() {
+trash() {
 	if [[ "$(uname -s)" == "Darwin" ]]; then
 		# On macOS, move to user's Trash folder
 		mv "$@" "$HOME/.Trash/"
@@ -74,7 +88,7 @@ function trash() {
 	fi
 }
 
-function ycd() {
+ycd() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"
 	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
@@ -83,12 +97,12 @@ function ycd() {
 	rm -f -- "$tmp"
 }
 
-function fcd() {
+fcd() {
 	local dir
 	dir=$(find "${1:-.}" -type d 2>/dev/null | fzf --height 70% --preview='tree -C {} | head -200') && cd "$dir" || exit
 }
 
-function fopen() {
+fopen() {
 	local items
 	items=$(find "${1:-.}" 2>/dev/null | fzf -m --height 70% --reverse \
 		--preview='[ -d {} ] && tree -C {} || bat -pP {} --color=always')
@@ -99,23 +113,23 @@ function fopen() {
 	fi
 }
 
-function fh() {
+fh() {
 	history | fzf --height 70% --reverse --tiebreak=index | sed 's/ *[0-9]* *//'
 }
 
-function fkill() {
+fkill() {
 	ps -ef | sed 1d | fzf -m --height 70% --reverse --preview 'echo {}' | awk '{print $2}' | xargs -r kill -9
 }
 
-function fgb() {
+fgb() {
 	git branch --all | grep -v HEAD | sed 's/remotes\/origin\///' | sort -u | fzf --height 70% --reverse | xargs git checkout
 }
 
-function fco() {
+fco() {
 	git log --pretty=oneline --abbrev-commit | fzf --height 70% --reverse | cut -d ' ' -f 1 | xargs git checkout
 }
 
-function fzo() {
+fzo() {
 	local files
 	files=$(find "${1:-.}" 2>/dev/null | fzf --height 70% -m \
 		--preview='[ -d {} ] && tree -C {} || bat -pP {} --color=always') || return
@@ -126,7 +140,7 @@ function fzo() {
 	hx $files
 }
 
-function hxs() {
+hxs() {
 	RG_PREFIX="rg -i --files-with-matches"
 	local files
 	files="$(
@@ -140,7 +154,7 @@ function hxs() {
 	[[ "$files" ]] && hx --vsplit $(echo $files | tr \\0 " ")
 }
 
-function fseq() {
+fseq() {
 
 	local infile="$1"
 	local outfile="$2"
@@ -173,7 +187,7 @@ function fseq() {
 
 }
 
-function frm() {
+frm() {
 	# Use find to list files (and directories if you want) from the given path or current dir
 	# Adjust find arguments to suit your needs (e.g., just files, recursive, etc.)
 	local files
@@ -189,7 +203,7 @@ function frm() {
 	done <<<"$files"
 }
 
-function bam2fq() {
+bam2fq() {
 	find . -maxdepth 1 -type f -name '*.bam' -print0 |
 		parallel -0 -j 6 '
       echo "Converting {}..."
@@ -198,7 +212,7 @@ function bam2fq() {
     '
 }
 
-function seqstats() {
+seqstats() {
 	local dir="."
 	local output_file=""
 
@@ -246,30 +260,7 @@ function seqstats() {
 	fi
 }
 
-function exp() {
-	# Check if first argument is a number
-	if [[ ! "$1" =~ ^[0-9]+$ ]]; then
-		echo "Error: An experiment number must be provided."
-		return 1
-	fi
-
-	local number="$1"
-	local target_dir=""
-
-	# Check for -t or --tcf flag
-	if [[ "$2" == "-t" || "$2" == "--tcf" ]]; then
-		target_dir="/Volumes/Data-pathfs09EXP1/dholk/doit-tcf/experiments/$number/@files"
-	else
-		target_dir="/Volumes/Data-pathfs09EXP1/dholk/doit-drive-oconnorlab/labkey/files/experiments/$number/@files"
-	fi
-
-	# Change to the target directory
-	cd "$target_dir" || return 1
-	echo "Changed to directory: $target_dir"
-
-}
-
-function allow_ghostty() {
+allow_ghostty() {
 	local location="$1"
 	if [[ -z "$location" ]]; then
 		echo "Usage: allow_ghostty USERNAME@ADDRESS"
@@ -277,6 +268,49 @@ function allow_ghostty() {
 	fi
 
 	infocmp -x | ssh $location -- tic -x -
+}
+
+mo() {
+	local file="${1:-scratch.py}"
+	local user_provided=false
+
+	# Detect if user passed a path
+	if [[ -n "$1" ]]; then
+		user_provided=true
+	fi
+
+	# Run marimo in the foreground (blocking)
+	RUST_LOG=warn uvx \
+		--with polars \
+		--with biopython \
+		--with pysam \
+		--with polars-bio \
+		--with altair \
+		--with plotnine \
+		marimo edit "$file"
+
+	# Only prompt for cleanup if using default scratch file
+	if [[ "$user_provided" == false ]]; then
+		print -n "Keep $file? [y/N]: "
+		read -r keep
+
+		case "$keep" in
+		[yY][eE][sS] | [yY])
+			print -n "Rename $file? (leave empty to keep name): "
+			read -r newname
+			if [[ -n "$newname" ]]; then
+				mv -- "$file" "$newname"
+				echo "Saved as $newname"
+			else
+				echo "Keeping as $file"
+			fi
+			;;
+		*)
+			rm -f -- "$file"
+			echo "Deleted $file"
+			;;
+		esac
+	fi
 }
 # -------------------------------------------------------------------------------------
 
@@ -299,8 +333,7 @@ alias ll="eza -la --group-directories-first --icons --color=always"
 alias la="ll"
 alias less="less -R"
 alias cat="bat -pP"
-alias py="RUST_LOG=warn uvx --with polars --with biopython --with pysam --with polars-bio python"                               # run a uv-managed version of the python repl with some of my go to libs
-alias mo="RUST_LOG=warn uvx --with polars --with biopython --with pysam --with polars-bio --with altair marimo edit scratch.py" # run a scratch-space marimo notebook with some of my fave data science libs
+alias py="RUST_LOG=warn uvx --with polars --with biopython --with pysam --with polars-bio python" # run a uv-managed version of the python repl with some of my go to libs
 if [ -x "$(which radian)" ]; then
 	alias r="radian"
 	alias R="radian"
@@ -315,29 +348,18 @@ alias zjls="zellij ls"
 alias zja="zellij a"
 alias zjd="zellij d"
 alias f="fzf"
-alias fzo=fzo # fuzzy-find then open multiple files in helix
-alias fh=fh   # fuzzy-find through command history
 alias fhis=fh
 alias fhist=fh
-alias fopen=fopen # fuzzy find files and directories, select them, and open them with MacOS's `open`
 alias fop=fopen
 alias fzopen=fopen
 alias fzop=fopen
-alias fkill=fkill # fuzzy-find through processes to kill one
 alias fk=fkill
 alias fkl=fkill
-alias fgb=fgb # fuzzy-find through git branches
 alias fzgb=fgb
 alias fbranches=fgb
 alias fzbranches=fgb
-alias fco=fco     # fuzzy-find through git commits
-alias mkcd=mkcd   # make a directory and change into it
-alias gitcc=gitcc # git clone a repository and cd into it
 alias gitcd=gitcc
-alias hxs=hxs
-alias fseq=fseq # query a FASTA or FASTQ for specific IDs
 alias fzeq=fseq
-alias frm=frm # fuzzy find and move files into trash
 alias fzrm=frm
 alias z-="z -"
 alias uvv='uv sync --all-extras && source .venv/bin/activate'
@@ -372,6 +394,3 @@ alias cl="claude"
 alias oc="opencode"
 alias code="opencode"
 # -------------------------------------------------------------------------------------
-
-# bun completions
-[ -s "/Users/nickminor/.bun/_bun" ] && source "/Users/nickminor/.bun/_bun"

@@ -7,7 +7,7 @@
     //     "light": "Quiet Light",
     //     "dark": "Rosé Pine Moon"
     // },
-    "theme": "Catppuccin Frappé (Blue Blur+)",
+    "theme": "Github Plus Light",
     "ui_font_size": 13,
     "buffer_font_size": 11,
     "project_panel": { "dock": "right" },
@@ -145,10 +145,10 @@
             "language_servers": ["ruff", "basedpyright"],
             "formatter": [
                 {
-                    "code_actions": {
-                        "source.organizeImports.ruff": true,
-                        "source.fixAll.ruff": true
-                    }
+                    "code_action": "source.organizeImports.ruff"
+                },
+                {
+                    "code_action": "source.fixAll.ruff"
                 },
                 {
                     "language_server": {
