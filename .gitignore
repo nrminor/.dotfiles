@@ -22,9 +22,17 @@
 # zsh configuration files
 !.zshrc
 !.zprofile
+!.zshenv
+!.hushlogin
 
 # allow global direnv configuration
 !.direnvrc
+
+# we all give into javascript eventually
+!package.json
+
+# pre-commit framework configuration
+!.pre-commit-config.yaml
 
 # allowing the general .config directory
 !/.config
@@ -81,6 +89,7 @@
 !/.config/atuin/config.toml
 
 # fastfetch configuration
+!/.config/fastfetch
 !/.config/fastfetch/config.jsonc
 
 # allowing configuration files for the btop resource usage dashboard
@@ -96,3 +105,18 @@
 # configuration for the marimo python notebook system
 !.marimo.toml
 
+# nix flake for dotfiles devshell
+!flake.nix
+!flake.lock
+
+# direnv for automatic devshell activation
+!.envrc
+.direnv/
+
+# scripts for validation and maintenance
+!/scripts
+!/scripts/*.js
+!/scripts/*.ts
+!/scripts/*.sh
+!/scripts/*.ml
+!/scripts/*.hs

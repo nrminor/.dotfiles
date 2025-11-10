@@ -1,0 +1,15 @@
+{
+  "name": "dotfiles",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "bun run scripts/validate-dotfiles.ts",
+    "validate:verbose": "bun run scripts/validate-dotfiles.ts --verbose",
+    "validate:fix": "bun run scripts/validate-dotfiles.ts --fix"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.24",
+    "@types/bun": "^1.3.2"
+  }
+}

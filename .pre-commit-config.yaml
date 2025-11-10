@@ -1,0 +1,59 @@
+# Pre-commit hooks configuration
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+repos:
+  # Built-in pre-commit hooks for common issues
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: '(\.patch$|\.xml$)'
+      - id: end-of-file-fixer
+        exclude: '(\.patch$|\.xml$)'
+      - id: check-toml
+      - id: check-json
+        # Exclude JSONC files and Zed config (which allows comments)
+        exclude: '(\.jsonc$|\.config/zed/)'
+      - id: check-yaml
+      - id: check-symlinks
+      - id: destroyed-symlinks
+
+  # Shell script linting with shellcheck
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        args: ['--severity=warning']
+        # Exclude shell rc files and direnv files (they don't need shebangs)
+        exclude: '(\.zshrc|\.zprofile|\.zshenv|\.direnvrc|\.envrc)$'
+
+  # Local custom hooks specific to this dotfiles repository
+  - repo: local
+    hooks:
+      # TypeScript validator for dotfiles structure
+      - id: validate-dotfiles
+        name: Validate Dotfiles Repository
+        entry: bun run scripts/validate-dotfiles.ts
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+        verbose: true
+
+      # Ensure Nix files are formatted
+      - id: nixfmt-check
+        name: Check Nix Formatting
+        entry: nixfmt
+        args: ['--check']
+        language: system
+        files: '\.nix$'
+        pass_filenames: true
+
+      # Format TOML files
+      - id: taplo-format
+        name: Format TOML Files
+        entry: taplo format
+        language: system
+        files: '\.toml$'
+        pass_filenames: true
