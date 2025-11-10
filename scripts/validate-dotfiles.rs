@@ -16,10 +16,13 @@
 
 use anyhow::{Context, Result};
 use clap::Parser;
-use std::collections::HashSet;
-use std::fs;
-use std::path::{Path, PathBuf};
-use std::process::Command;
+
+use std::{
+    collections::HashSet,
+    env, fs,
+    path::{Path, PathBuf},
+    process::Command,
+};
 
 // ============================================================================
 // TYPES
@@ -523,9 +526,9 @@ struct Cli {
 fn main() -> Result<()> {
     let cli = Cli::parse();
 
-    let dotfiles_dir = std::env::var("DOTFILES_DIR")
+    let dotfiles_dir = env::var("DOTFILES_DIR")
         .map(PathBuf::from)
-        .unwrap_or_else(|_| std::env::current_dir().expect("Failed to get current directory"));
+        .unwrap_or_else(|_| env::current_dir().expect("Failed to get current directory"));
 
     let config = Config {
         dotfiles_dir,

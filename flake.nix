@@ -56,11 +56,19 @@
             haskellPackages.haskell-language-server # Haskell LSP
             haskellPackages.stylish-haskell # Haskell formatter
 
+            # Rust development
+            rustc # Rust compiler
+            cargo # Rust package manager
+            rust-analyzer # Rust LSP server
+            rustfmt # Rust formatter
+            clippy # Rust linter
+
             # Language servers for Helix
             just-lsp # Justfile LSP
 
             # Scripting and benchmarking
             bun # Fast JS/TS runtime
+            rust-script # Run Rust files as scripts
             hyperfine # Command-line benchmarking
 
             # Utilities
