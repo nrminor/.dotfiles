@@ -12,7 +12,6 @@
 !flake.lock
 !package.json
 !Cargo.toml
-!Cargo.lock
 !justfile
 !README.md
 !LICENSE
