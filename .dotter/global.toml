@@ -1,0 +1,44 @@
+[zsh.files]
+".zshrc" = "~/.zshrc"
+".zprofile" = "~/.zprofile"
+".zshenv" = "~/.zshenv"
+
+[git.files]
+".gitconfig" = "~/.gitconfig"
+
+[helix.files]
+".config/helix/config.toml" = "~/.config/helix/config.toml"
+".config/helix/languages.toml" = "~/.config/helix/languages.toml"
+".config/helix/runtime/themes/custom.toml" = "~/.config/helix/runtime/themes/custom.toml"
+".config/helix/runtime/themes/catppuccin_macchiato.toml" = "~/.config/helix/runtime/themes/catppuccin_macchiato.toml"
+".config/helix/runtime/themes/catppuccin_mocha.toml" = "~/.config/helix/runtime/themes/catppuccin_mocha.toml"
+
+[zed.files]
+".config/zed/settings.json" = "~/.config/zed/settings.json"
+".config/zed/keymap.json" = "~/.config/zed/keymap.json"
+
+[yazi.files]
+".config/yazi/yazi.toml" = "~/.config/yazi/yazi.toml"
+".config/yazi/theme.toml" = "~/.config/yazi/theme.toml"
+
+[zellij.files]
+".config/zellij/config.kdl" = "~/.config/zellij/config.kdl"
+
+[atuin.files]
+".config/atuin/config.toml" = "~/.config/atuin/config.toml"
+
+[btop.files]
+".config/btop/btop.conf" = "~/.config/btop/btop.conf"
+
+[julia.files]
+".config/julia/config/startup.jl" = "~/.julia/config/startup.jl"
+
+[marimo.files]
+".marimo.toml" = "~/.marimo.toml"
+
+[starship.files]
+".config/starship.toml" = "~/.config/starship.toml"
+
+[direnv.files]
+".direnvrc" = "~/.direnvrc"
+".config/nix-direnv/config.toml" = "~/.config/nix-direnv/config.toml"

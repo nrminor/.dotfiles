@@ -461,6 +461,9 @@
                   paths = config.environment.systemPackages;
                   pathsToLink = "/Applications";
                 };
+                # Get the primary user from system.primaryUser setting
+                primaryUser = config.system.primaryUser or "nickminor";
+                userHome = "/Users/${primaryUser}";
               in
               pkgs.lib.mkForce ''
                 # Set up applications.
@@ -478,37 +481,37 @@
                 sudo xcodebuild -license accept
 
                 echo "Setting up directories..." >&2
-                if [ ! -d "/Users/nickminor/Documents/bioinformatics" ]; then
+                if [ ! -d "${userHome}/Documents/bioinformatics" ]; then
                   echo "Creating bioinformatics directory..." >&2
-                  mkdir -p "/Users/nickminor/Documents/bioinformatics"
-                  chown -R nickminor:staff /Users/nickminor/Documents/bioinformatics
+                  mkdir -p "${userHome}/Documents/bioinformatics"
+                  chown -R nickminor:staff ${userHome}/Documents/bioinformatics
                 fi
 
-                if [ ! -d "/Users/nickminor/Documents/hacking" ]; then
+                if [ ! -d "${userHome}/Documents/hacking" ]; then
                   echo "Creating hacking directory..." >&2
-                  mkdir -p "/Users/nickminor/Documents/hacking"
-                  chown -R nickminor:staff /Users/nickminor/Documents/hacking
+                  mkdir -p "${userHome}/Documents/hacking"
+                  chown -R nickminor:staff ${userHome}/Documents/hacking
                 fi
 
-                if [ ! -d "/Users/nickminor/Documents/screenshots" ]; then
+                if [ ! -d "${userHome}/Documents/screenshots" ]; then
                   echo "Creating screenshots directory..." >&2
-                  mkdir -p "/Users/nickminor/Documents/screenshots"
-                  chown -R nickminor:staff /Users/nickminor/Documents/screenshots
+                  mkdir -p "${userHome}/Documents/screenshots"
+                  chown -R nickminor:staff ${userHome}/Documents/screenshots
                 fi
 
                 echo "Looking for dotfiles directory..."
                 # Clone my dotfiles repo if it's not already present
-                if [ ! -d "/Users/nickminor/.dotfiles" ]; then
+                if [ ! -d "${userHome}/.dotfiles" ]; then
                   echo "Cloning dotfiles repository..."
-                  git clone https://github.com/nrminor/.dotfiles.git "/Users/nickminor/.dotfiles"
+                  git clone https://github.com/nrminor/.dotfiles.git "${userHome}/.dotfiles"
                 else
                   echo "dotfiles directory found."
                 fi
 
                 # Deploy the dotfiles
-                cd "/Users/nickminor/.dotfiles"
+                cd "${userHome}/.dotfiles"
                 echo "Deploying dotfiles with dotter..."
-                sudo -u nickminor "${pkgs.dotter}/bin/dotter" deploy -f -y -v
+                sudo -u ${primaryUser} env HOME=/Users/${primaryUser} "${pkgs.dotter}/bin/dotter" deploy -f -y -v
               '';
 
           };
