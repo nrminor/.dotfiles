@@ -2,6 +2,7 @@
 ".zshrc" = "~/.zshrc"
 ".zprofile" = "~/.zprofile"
 ".zshenv" = "~/.zshenv"
+".hushlogin" = "~/.hushlogin"
 
 [git.files]
 ".gitconfig" = "~/.gitconfig"
@@ -42,3 +43,6 @@
 [direnv.files]
 ".direnvrc" = "~/.direnvrc"
 ".config/nix-direnv/config.toml" = "~/.config/nix-direnv/config.toml"
+
+[fastfetch.files]
+".config/fastfetch/config.jsonc" = "~/.config/fastfetch/config.jsonc"

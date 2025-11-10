@@ -26,14 +26,6 @@
 # allow global direnv configuration
 !.direnvrc
 
-# configurations for the warp terminal emulator
-!/.warp
-!/.warp/themes
-!/.warp/themes/*.yml
-!/.warp/keybindings.yaml
-!/.warp/launch_configurations
-!/.warp/launch_configurations/config.yaml
-
 # allowing the general .config directory
 !/.config
 
@@ -88,9 +80,8 @@
 !/.config/atuin
 !/.config/atuin/config.toml
 
-# skhd configuration
-!/.config/skhd
-!/.config/skhd/skhdrc
+# fastfetch configuration
+!/.config/fastfetch/config.jsonc
 
 # allowing configuration files for the btop resource usage dashboard
 !/.config/btop

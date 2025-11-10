@@ -4,4 +4,3 @@
 
 [ghostty.files]
 ".config/ghostty/config" = "~/Library/Application Support/com.mitchellh.ghostty/config"
-

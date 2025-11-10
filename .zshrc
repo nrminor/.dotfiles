@@ -7,14 +7,34 @@
 # -------------------------------------------------------------------------------------
 # These only run in interactive shells, not scripts
 
-# Initialize completion system
-autoload -Uz compinit
-compinit -u
+# Initialize completion system (currently commented out because nix already runs it through /etc/zshrc)
+# autoload -Uz compinit
+# zcompdump="${HOME}/.zcompdump"
+
+# if [[ -f "$zcompdump" ]]; then
+# 	# File exists, check age
+# 	cache_age_seconds=$(($(date +%s) - $(stat -f %m "$zcompdump" 2>/dev/null ||
+# 		echo 0)))
+# 	if ((cache_age_seconds > 86400)); then
+# 		# Cache is old (>24 hours), rebuild
+# 		compinit
+# 	else
+# 		# Cache is fresh, use it
+# 		compinit -C
+# 	fi
+# else
+# 	# No cache file, create it
+# 	compinit
+# fi
 # -------------------------------------------------------------------------------------
 
 # EXTERNAL TOOL INITIALIZATION (the slow stuff)
 # -------------------------------------------------------------------------------------
 # Only initialize these for interactive shells
+
+# nicer tab completions
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace zsh)
 
 # Fast directory jumping
 eval "$(zoxide init zsh)"
@@ -49,8 +69,27 @@ zsh" >/dev/null 2>/dev/null
 # Bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-# NVM (Node Version Manager) - loads on demand for interactive shells
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# NVM (Node Version Manager) - lazy-loads when first called for interactive shells
+nvm() {
+	unset -f nvm node npm npx
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+	nvm "$@"
+}
+node() {
+	unset -f nvm node npm npx
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+	node "$@"
+}
+npm() {
+	unset -f nvm node npm npx
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+	npm "$@"
+}
+npx() {
+	unset -f nvm node npm npx
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+	npx "$@"
+}
 # -------------------------------------------------------------------------------------
 
 # CUSTOM FUNCTIONS

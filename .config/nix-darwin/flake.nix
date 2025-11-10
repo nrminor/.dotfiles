@@ -67,7 +67,7 @@
             pkgs.starship
             pkgs.atuin
             pkgs.hyperfine
-            # pkgs.carapace
+            pkgs.carapace
             pkgs.skhd
             pkgs.nushell
             pkgs.topiary
@@ -427,6 +427,7 @@
           programs.zsh = {
             enable = true;
             enableCompletion = true;
+            promptInit = "";
 
             interactiveShellInit = ''
               source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
