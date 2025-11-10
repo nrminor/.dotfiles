@@ -448,7 +448,7 @@ let () =
       | _ -> ())
     (List.tl args);
 
-  if not show_help then begin
+  if !show_help then begin
     Printf.printf "Usage: validate-dotfiles.ml [options]\n\n";
     Printf.printf "Options:\n";
     Printf.printf "  -f, --fix       Show fix suggestions\n";
@@ -469,7 +469,7 @@ let () =
   in
 
   let config =
-    { dotfiles_dir; verbose = not verbose; fix_mode = not fix_mode }
+    { dotfiles_dir; verbose = !verbose; fix_mode = !fix_mode }
   in
 
   Printf.printf "\n%sValidating dotfiles repository...%s\n\n" Color.bold

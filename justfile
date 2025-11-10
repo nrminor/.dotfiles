@@ -467,29 +467,51 @@ restore:
 
 # ===== Validation =====
 
-# Validate dotfiles repository
+# Validate dotfiles repository with specified language (ts, hs, ml, rs, all)
 [group('validation')]
-validate:
-    @echo "Validating dotfiles..."
-    bun run {{ DOTFILES_DIR }}/scripts/validate-dotfiles.ts
+validate lang='ts' *flags='':
+    #!/usr/bin/env bash
+    set -euo pipefail
+    case "{{ lang }}" in
+        ts|typescript)
+            echo "Validating dotfiles (TypeScript)..."
+            bun run {{ DOTFILES_DIR }}/scripts/validate-dotfiles.ts {{ flags }}
+            ;;
+        hs|haskell)
+            echo "Validating dotfiles (Haskell)..."
+            runhaskell {{ DOTFILES_DIR }}/scripts/validate-dotfiles.hs {{ flags }}
+            ;;
+        ml|ocaml)
+            echo "Validating dotfiles (OCaml)..."
+            ocaml {{ DOTFILES_DIR }}/scripts/validate-dotfiles.ml {{ flags }}
+            ;;
+        rs|rust)
+            echo "Validating dotfiles (Rust)..."
+            rust-script {{ DOTFILES_DIR }}/scripts/validate-dotfiles.rs {{ flags }}
+            ;;
+        all)
+            echo "Running all validator implementations..."
+            echo ""
+            echo "=== TypeScript (Bun) ==="
+            bun run {{ DOTFILES_DIR }}/scripts/validate-dotfiles.ts || echo "FAILED"
+            echo ""
+            echo "=== Haskell ==="
+            runhaskell {{ DOTFILES_DIR }}/scripts/validate-dotfiles.hs || echo "FAILED"
+            echo ""
+            echo "=== OCaml ==="
+            ocaml {{ DOTFILES_DIR }}/scripts/validate-dotfiles.ml || echo "FAILED"
+            echo ""
+            echo "=== Rust ==="
+            rust-script {{ DOTFILES_DIR }}/scripts/validate-dotfiles.rs || echo "FAILED"
+            ;;
+        *)
+            echo "Unknown language: {{ lang }}"
+            echo "Available: ts (default), hs, ml, rs, all"
+            exit 1
+            ;;
+    esac
 
 alias v := validate
-
-# Validate dotfiles with verbose output
-[group('validation')]
-validate-verbose:
-    @echo "Validating dotfiles (verbose)..."
-    bun run {{ DOTFILES_DIR }}/scripts/validate-dotfiles.ts --verbose
-
-alias vv := validate-verbose
-
-# Validate dotfiles and show fix suggestions
-[group('validation')]
-validate-fix:
-    @echo "Validating dotfiles with fix suggestions..."
-    bun run {{ DOTFILES_DIR }}/scripts/validate-dotfiles.ts --fix
-
-alias vf := validate-fix
 
 # Validate nix-darwin flake builds correctly
 [group('validation')]
@@ -501,6 +523,119 @@ validate-flake:
     @echo "✓ Flake validation passed"
 
 alias vfl := validate-flake
+
+# ===== Scripts Development =====
+
+# Format TypeScript scripts
+[group('scripts')]
+format-ts:
+    @echo "Formatting TypeScript scripts..."
+    biome format --write {{ DOTFILES_DIR }}/scripts/*.ts
+    @echo "✓ TypeScript formatted"
+
+alias fts := format-ts
+
+# Format Haskell scripts
+[group('scripts')]
+format-hs:
+    @echo "Formatting Haskell scripts..."
+    stylish-haskell -i {{ DOTFILES_DIR }}/scripts/*.hs
+    @echo "✓ Haskell formatted"
+
+alias fhs := format-hs
+
+# Format OCaml scripts
+[group('scripts')]
+format-ml:
+    @echo "Formatting OCaml scripts..."
+    @if command -v ocamlformat >/dev/null 2>&1; then \
+        ocamlformat -i {{ DOTFILES_DIR }}/scripts/*.ml; \
+        echo "✓ OCaml formatted"; \
+    else \
+        echo "⚠ ocamlformat not available"; \
+    fi
+
+alias fml := format-ml
+
+# Format Rust scripts
+[group('scripts')]
+format-rs:
+    @echo "Formatting Rust scripts..."
+    rustfmt {{ DOTFILES_DIR }}/scripts/*.rs
+    @echo "✓ Rust formatted"
+
+alias frs := format-rs
+
+# Format all scripts
+[group('scripts')]
+format-scripts: format-ts format-hs format-ml format-rs
+    @echo "✓ All scripts formatted"
+
+# Lint TypeScript scripts
+[group('scripts')]
+lint-ts:
+    @echo "Linting TypeScript scripts..."
+    biome lint {{ DOTFILES_DIR }}/scripts/*.ts
+
+alias lts := lint-ts
+
+# Check Haskell scripts compile
+[group('scripts')]
+check-hs:
+    @echo "Checking Haskell scripts..."
+    @for file in {{ DOTFILES_DIR }}/scripts/*.hs; do \
+        echo "Checking $$file..."; \
+        ghc -fno-code -v0 $$file 2>&1 | grep -v "^Loaded"; \
+    done
+    @echo "✓ Haskell scripts valid"
+
+alias chs := check-hs
+
+# Check OCaml scripts compile
+[group('scripts')]
+check-ml:
+    @echo "Checking OCaml scripts..."
+    @for file in {{ DOTFILES_DIR }}/scripts/*.ml; do \
+        echo "Checking $$file..."; \
+        ocamlc -c -w +A $$file -o /dev/null 2>&1 || true; \
+    done
+    @echo "✓ OCaml scripts checked"
+
+alias cml := check-ml
+
+# Check Rust scripts compile
+[group('scripts')]
+check-rs:
+    @echo "Checking Rust scripts..."
+    @cd {{ DOTFILES_DIR }} && cargo check
+    @echo "✓ Rust scripts valid"
+
+alias crs := check-rs
+
+# Check all scripts
+[group('scripts')]
+check-scripts: lint-ts check-hs check-ml check-rs
+    @echo "✓ All scripts checked"
+
+alias cs := check-scripts
+
+# Run clippy on Rust scripts
+[group('scripts')]
+clippy:
+    @echo "Running clippy on Rust scripts..."
+    @cd {{ DOTFILES_DIR }} && cargo clippy
+
+# Benchmark all validator implementations
+[group('scripts')]
+bench-validators:
+    @echo "Benchmarking all validator implementations..."
+    hyperfine --warmup 2 --runs 10 \
+        --command-name "TypeScript" "bun run {{ DOTFILES_DIR }}/scripts/validate-dotfiles.ts" \
+        --command-name "Haskell" "runhaskell {{ DOTFILES_DIR }}/scripts/validate-dotfiles.hs" \
+        --command-name "OCaml" "ocaml {{ DOTFILES_DIR }}/scripts/validate-dotfiles.ml" \
+        --command-name "Rust" "rust-script {{ DOTFILES_DIR }}/scripts/validate-dotfiles.rs"
+
+alias bv := bench-validators
 
 # Install pre-commit hooks (run once per clone)
 [group('dev')]

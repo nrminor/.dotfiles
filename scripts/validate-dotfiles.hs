@@ -138,7 +138,7 @@ parseTomlLine line
       case trimmed of
         ('[':rest) -> case reverse rest of
                         (']':revName) -> Just . Left $ reverse revName
-                        _ -> Nothing
+                        _             -> Nothing
         _ -> Nothing
   | "=" `isInfixOf` trimmed =
       let (key, rest) = break (== '=') trimmed
@@ -150,7 +150,7 @@ parseTomlLine line
     cleanQuotes s = case s of
       ('"':rest) -> case reverse rest of
                       ('"':revBody) -> reverse revBody
-                      _ -> s
+                      _             -> s
       _ -> s
 
 parseToml :: FilePath -> IO [(String, String, String)]

@@ -12,6 +12,8 @@
 !flake.lock
 !package.json
 !bun.lock
+!Cargo.toml
+!Cargo.lock
 !justfile
 !README.md
 !LICENSE
@@ -33,6 +35,7 @@
 !/scripts/*.sh
 !/scripts/*.ml
 !/scripts/*.hs
+!/scripts/*.rs
 !/scripts/.ocamlinit
 
 # ============================================================================
