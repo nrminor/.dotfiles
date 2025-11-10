@@ -1,122 +1,47 @@
+# Ignore everything by default
 *
 
-# don't ignore changes to the gitignore!
+# ============================================================================
+# Project Files (Development Tooling)
+# ============================================================================
+
 !.gitignore
-
-# allow a justfile
+!.envrc
+!.pre-commit-config.yaml
+!flake.nix
+!flake.lock
+!package.json
+!bun.lock
 !justfile
-
-# allow a readme and a license
 !README.md
 !LICENSE
 
-# dotter dotfile management files
+# ============================================================================
+# Project Directories
+# ============================================================================
+
+# Dotter configuration
 !/.dotter
 !/.dotter/global.toml
 !/.dotter/macos.toml
 !/.dotter/local.toml
 
-# git configuration files
-!.gitconfig
-
-# zsh configuration files
-!.zshrc
-!.zprofile
-!.zshenv
-!.hushlogin
-
-# allow global direnv configuration
-!.direnvrc
-
-# we all give into javascript eventually
-!package.json
-
-# pre-commit framework configuration
-!.pre-commit-config.yaml
-
-# allowing the general .config directory
-!/.config
-
-# NixOS and nix-darwin configurations
-!/.config/nix
-!/.config/nix/shell.nix
-!/.config/nix/home.nix
-!/.config/nix-darwin
-!/.config/nix-darwin/flake.nix
-!/.config/nix-darwin/flake.lock
-
-# nix-direnv configurations
-!/.config/nix-direnv
-!/.config/nix-direnv/config.toml
-
-# ghostty configuration
-!/.config/ghostty
-!/.config/ghostty/config
-
-# starship configurations
-!/.config/starship.toml
-
-# allowing configuration files for the helix editor to be tracked
-!/.config/helix
-!/.config/helix/config.toml
-!/.config/helix/languages.toml
-!/.config/helix/runtime
-!/.config/helix/runtime/themes
-!/.config/helix/runtime/themes/*.toml
-
-# allowing configuration files for the Zed editor to be tracked
-!/.config/zed
-!/.config/zed/settings.json
-!/.config/zed/keymap.json
-!/.config/zed/themes
-
-# allow yazi configurations
-!/.config/yazi
-!/.config/yazi/yazi.toml
-!/.config/yazi/keymap.toml
-!/.config/yazi/theme.toml
-!/.config/yazi/flavors
-!/.config/yazi/flavors/catppuccin-macchiato.yazi
-!/.config/yazi/flavors/catppuccin-macchiato.yazi/flavor.toml
-!/.config/yazi/flavors/catppuccin-macchiato.yazi/tmtheme.xml
-
-# zellij configuration
-!/.config/zellij
-!/.config/zellij/config.kdl
-
-# atuin configuration
-!/.config/atuin
-!/.config/atuin/config.toml
-
-# fastfetch configuration
-!/.config/fastfetch
-!/.config/fastfetch/config.jsonc
-
-# allowing configuration files for the btop resource usage dashboard
-!/.config/btop
-!/.config/btop/themes
-!/.config/btop/btop.conf
-
-# julia stuff
-!/.config/julia
-!/.config/julia/config
-!/.config/julia/config/startup.jl
-
-# configuration for the marimo python notebook system
-!.marimo.toml
-
-# nix flake for dotfiles devshell
-!flake.nix
-!flake.lock
-
-# direnv for automatic devshell activation
-!.envrc
-.direnv/
-
-# scripts for validation and maintenance
+# Validation scripts
 !/scripts
 !/scripts/*.js
 !/scripts/*.ts
 !/scripts/*.sh
 !/scripts/*.ml
 !/scripts/*.hs
+!/scripts/.ocamlinit
+
+# ============================================================================
+# Dotfiles to be Deployed (Managed by Dotter)
+# ============================================================================
+
+# Allow entire dotfiles directory and all contents
+!/dotfiles
+!/dotfiles/**
+
+# But ignore build artifacts within dotfiles
+dotfiles/.direnv/

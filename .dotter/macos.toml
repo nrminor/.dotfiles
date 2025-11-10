@@ -1,6 +1,13 @@
-[nix-darwin.files]
-".config/nix-darwin/flake.nix" = "~/.config/nix-darwin/flake.nix"
-".config/nix-darwin/flake.lock" = "~/.config/nix-darwin/flake.lock"
+# ============================================================================
+# Dotter macOS-specific Configuration
+# These files are only deployed on macOS systems
+# ============================================================================
 
+# Nix-darwin system configuration
+[nix-darwin.files]
+"dotfiles/.config/nix-darwin/flake.nix" = "~/.config/nix-darwin/flake.nix"
+"dotfiles/.config/nix-darwin/flake.lock" = "~/.config/nix-darwin/flake.lock"
+
+# Ghostty terminal (macOS Application Support location)
 [ghostty.files]
-".config/ghostty/config" = "~/Library/Application Support/com.mitchellh.ghostty/config"
+"dotfiles/.config/ghostty/config" = "~/Library/Application Support/com.mitchellh.ghostty/config"

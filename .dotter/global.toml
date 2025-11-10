@@ -1,48 +1,66 @@
+# ============================================================================
+# Dotter Global Configuration
+# All source paths are relative to the repository root (~/.dotfiles)
+# ============================================================================
+
+# Shell configurations
 [zsh.files]
-".zshrc" = "~/.zshrc"
-".zprofile" = "~/.zprofile"
-".zshenv" = "~/.zshenv"
-".hushlogin" = "~/.hushlogin"
+"dotfiles/shell/.zshrc" = "~/.zshrc"
+"dotfiles/shell/.zprofile" = "~/.zprofile"
+"dotfiles/shell/.zshenv" = "~/.zshenv"
+"dotfiles/shell/.hushlogin" = "~/.hushlogin"
 
+# Git configuration
 [git.files]
-".gitconfig" = "~/.gitconfig"
+"dotfiles/git/.gitconfig" = "~/.gitconfig"
 
+# Helix editor
 [helix.files]
-".config/helix/config.toml" = "~/.config/helix/config.toml"
-".config/helix/languages.toml" = "~/.config/helix/languages.toml"
-".config/helix/runtime/themes/custom.toml" = "~/.config/helix/runtime/themes/custom.toml"
-".config/helix/runtime/themes/catppuccin_macchiato.toml" = "~/.config/helix/runtime/themes/catppuccin_macchiato.toml"
-".config/helix/runtime/themes/catppuccin_mocha.toml" = "~/.config/helix/runtime/themes/catppuccin_mocha.toml"
+"dotfiles/.config/helix/config.toml" = "~/.config/helix/config.toml"
+"dotfiles/.config/helix/languages.toml" = "~/.config/helix/languages.toml"
+"dotfiles/.config/helix/runtime/themes/custom.toml" = "~/.config/helix/runtime/themes/custom.toml"
+"dotfiles/.config/helix/runtime/themes/catppuccin_macchiato.toml" = "~/.config/helix/runtime/themes/catppuccin_macchiato.toml"
+"dotfiles/.config/helix/runtime/themes/catppuccin_mocha.toml" = "~/.config/helix/runtime/themes/catppuccin_mocha.toml"
 
+# Zed editor
 [zed.files]
-".config/zed/settings.json" = "~/.config/zed/settings.json"
-".config/zed/keymap.json" = "~/.config/zed/keymap.json"
+"dotfiles/.config/zed/settings.json" = "~/.config/zed/settings.json"
+"dotfiles/.config/zed/keymap.json" = "~/.config/zed/keymap.json"
 
+# Yazi file manager
 [yazi.files]
-".config/yazi/yazi.toml" = "~/.config/yazi/yazi.toml"
-".config/yazi/theme.toml" = "~/.config/yazi/theme.toml"
+"dotfiles/.config/yazi/yazi.toml" = "~/.config/yazi/yazi.toml"
+"dotfiles/.config/yazi/theme.toml" = "~/.config/yazi/theme.toml"
 
+# Zellij terminal multiplexer
 [zellij.files]
-".config/zellij/config.kdl" = "~/.config/zellij/config.kdl"
+"dotfiles/.config/zellij/config.kdl" = "~/.config/zellij/config.kdl"
 
+# Atuin shell history
 [atuin.files]
-".config/atuin/config.toml" = "~/.config/atuin/config.toml"
+"dotfiles/.config/atuin/config.toml" = "~/.config/atuin/config.toml"
 
+# btop system monitor
 [btop.files]
-".config/btop/btop.conf" = "~/.config/btop/btop.conf"
+"dotfiles/.config/btop/btop.conf" = "~/.config/btop/btop.conf"
 
+# Julia programming language
 [julia.files]
-".config/julia/config/startup.jl" = "~/.julia/config/startup.jl"
+"dotfiles/.config/julia/config/startup.jl" = "~/.julia/config/startup.jl"
 
+# Marimo Python notebooks
 [marimo.files]
-".marimo.toml" = "~/.marimo.toml"
+"dotfiles/.config/marimo/config.toml" = "~/.marimo.toml"
 
+# Starship prompt
 [starship.files]
-".config/starship.toml" = "~/.config/starship.toml"
+"dotfiles/.config/starship.toml" = "~/.config/starship.toml"
 
+# Direnv environment management
 [direnv.files]
-".direnvrc" = "~/.direnvrc"
-".config/nix-direnv/config.toml" = "~/.config/nix-direnv/config.toml"
+"dotfiles/shell/.direnvrc" = "~/.direnvrc"
+"dotfiles/.config/nix-direnv/config.toml" = "~/.config/nix-direnv/config.toml"
 
+# Fastfetch system information
 [fastfetch.files]
-".config/fastfetch/config.jsonc" = "~/.config/fastfetch/config.jsonc"
+"dotfiles/.config/fastfetch/config.jsonc" = "~/.config/fastfetch/config.jsonc"
