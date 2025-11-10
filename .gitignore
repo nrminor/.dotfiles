@@ -36,7 +36,6 @@
 !/scripts/*.ml
 !/scripts/*.hs
 !/scripts/*.rs
-!/scripts/.ocamlinit
 
 # ============================================================================
 # Dotfiles to be Deployed (Managed by Dotter)
