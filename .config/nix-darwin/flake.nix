@@ -72,6 +72,7 @@
             pkgs.nushell
             pkgs.topiary
             pkgs.dust
+            pkgs.dua
             pkgs.zellij
             pkgs.bat
             pkgs.fzf

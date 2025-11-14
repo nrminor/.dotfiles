@@ -5,62 +5,66 @@
 
 # Shell configurations
 [zsh.files]
-"dotfiles/shell/.zshrc" = "~/.zshrc"
-"dotfiles/shell/.zprofile" = "~/.zprofile"
-"dotfiles/shell/.zshenv" = "~/.zshenv"
-"dotfiles/shell/.hushlogin" = "~/.hushlogin"
+".config/shell/.zshrc" = "~/.zshrc"
+".config/shell/.zprofile" = "~/.zprofile"
+".config/shell/.zshenv" = "~/.zshenv"
+".config/shell/.hushlogin" = "~/.hushlogin"
 
 # Git configuration
 [git.files]
-"dotfiles/git/.gitconfig" = "~/.gitconfig"
+".config/git/.gitconfig" = "~/.gitconfig"
 
 # Helix editor
 [helix.files]
-"dotfiles/.config/helix/config.toml" = "~/.config/helix/config.toml"
-"dotfiles/.config/helix/languages.toml" = "~/.config/helix/languages.toml"
-"dotfiles/.config/helix/runtime/themes/custom.toml" = "~/.config/helix/runtime/themes/custom.toml"
-"dotfiles/.config/helix/runtime/themes/catppuccin_macchiato.toml" = "~/.config/helix/runtime/themes/catppuccin_macchiato.toml"
-"dotfiles/.config/helix/runtime/themes/catppuccin_mocha.toml" = "~/.config/helix/runtime/themes/catppuccin_mocha.toml"
+".config/helix/config.toml" = "~/.config/helix/config.toml"
+".config/helix/languages.toml" = "~/.config/helix/languages.toml"
+".config/helix/runtime/themes/custom.toml" = "~/.config/helix/runtime/themes/custom.toml"
+".config/helix/runtime/themes/catppuccin_macchiato.toml" = "~/.config/helix/runtime/themes/catppuccin_macchiato.toml"
+".config/helix/runtime/themes/catppuccin_mocha.toml" = "~/.config/helix/runtime/themes/catppuccin_mocha.toml"
 
 # Zed editor
 [zed.files]
-"dotfiles/.config/zed/settings.json" = "~/.config/zed/settings.json"
-"dotfiles/.config/zed/keymap.json" = "~/.config/zed/keymap.json"
+".config/zed/settings.json" = "~/.config/zed/settings.json"
+".config/zed/keymap.json" = "~/.config/zed/keymap.json"
 
 # Yazi file manager
 [yazi.files]
-"dotfiles/.config/yazi/yazi.toml" = "~/.config/yazi/yazi.toml"
-"dotfiles/.config/yazi/theme.toml" = "~/.config/yazi/theme.toml"
+".config/yazi/yazi.toml" = "~/.config/yazi/yazi.toml"
+".config/yazi/theme.toml" = "~/.config/yazi/theme.toml"
 
 # Zellij terminal multiplexer
 [zellij.files]
-"dotfiles/.config/zellij/config.kdl" = "~/.config/zellij/config.kdl"
+".config/zellij/config.kdl" = "~/.config/zellij/config.kdl"
 
 # Atuin shell history
 [atuin.files]
-"dotfiles/.config/atuin/config.toml" = "~/.config/atuin/config.toml"
+".config/atuin/config.toml" = "~/.config/atuin/config.toml"
 
 # btop system monitor
 [btop.files]
-"dotfiles/.config/btop/btop.conf" = "~/.config/btop/btop.conf"
+".config/btop/btop.conf" = "~/.config/btop/btop.conf"
 
 # Julia programming language
 [julia.files]
-"dotfiles/.config/julia/config/startup.jl" = "~/.julia/config/startup.jl"
+".config/julia/config/startup.jl" = "~/.julia/config/startup.jl"
 
 # Marimo Python notebooks
 [marimo.files]
-"dotfiles/.config/marimo/config.toml" = "~/.marimo.toml"
+".config/marimo/config.toml" = "~/.marimo.toml"
 
 # Starship prompt
 [starship.files]
-"dotfiles/.config/starship.toml" = "~/.config/starship.toml"
+".config/starship.toml" = "~/.config/starship.toml"
 
 # Direnv environment management
 [direnv.files]
-"dotfiles/shell/.direnvrc" = "~/.direnvrc"
-"dotfiles/.config/nix-direnv/config.toml" = "~/.config/nix-direnv/config.toml"
+".config/shell/.direnvrc" = "~/.direnvrc"
+".config/nix-direnv/config.toml" = "~/.config/nix-direnv/config.toml"
 
 # Fastfetch system information
 [fastfetch.files]
-"dotfiles/.config/fastfetch/config.jsonc" = "~/.config/fastfetch/config.jsonc"
+".config/fastfetch/config.jsonc" = "~/.config/fastfetch/config.jsonc"
+
+# Haskell files
+[haskell.files]
+".config/stylish-haskell/config.yaml" = "~/.config/stylish-haskell/config.yaml"

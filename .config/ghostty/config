@@ -4,9 +4,8 @@ font-size = 11.5
 
 # window configurations
 theme = Catppuccin Macchiato
-# One Half Light
-background-opacity = 0.97
-background-blur-radius = 10
+background-opacity = 0.95
+background-blur-radius = 30
 window-inherit-font-size = false
 window-width = 165
 window-height = 50

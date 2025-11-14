@@ -10,17 +10,17 @@
   and rules can be easily composed together.
 -}
 
-import           Control.Exception  (SomeException, catch)
-import           Control.Monad      (filterM, forM, forM_, unless, when)
-import           Data.Char          (isSpace)
-import           Data.List          (isInfixOf, isPrefixOf, isSuffixOf)
-import           Data.Maybe         (fromMaybe, mapMaybe)
-import           System.Directory   (doesFileExist, getModificationTime,
-                                     listDirectory)
-import           System.Environment (getArgs, lookupEnv)
-import           System.Exit        (ExitCode (..), exitWith)
-import           System.FilePath    (takeExtension, (</>))
-import           System.Process     (readProcess, readProcessWithExitCode)
+import           Control.Exception  ( SomeException, catch )
+import           Control.Monad      ( filterM, forM, forM_, unless, when )
+import           Data.Char          ( isSpace )
+import           Data.List          ( isInfixOf, isPrefixOf, isSuffixOf )
+import           Data.Maybe         ( fromMaybe, mapMaybe )
+import           System.Directory   ( doesFileExist, getModificationTime,
+                                      listDirectory )
+import           System.Environment ( getArgs, lookupEnv )
+import           System.Exit        ( ExitCode (..), exitWith )
+import           System.FilePath    ( takeExtension, (</>) )
+import           System.Process     ( readProcess, readProcessWithExitCode )
 
 -- ========================================================================
 -- TYPES

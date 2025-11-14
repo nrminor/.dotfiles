@@ -344,7 +344,6 @@ module Rules = struct
       passed = issues = [];
       issues;
     }
-
 end
 
 (* ========================================================================= *)
@@ -468,9 +467,7 @@ let () =
       Filename.concat home ".dotfiles"
   in
 
-  let config =
-    { dotfiles_dir; verbose = !verbose; fix_mode = !fix_mode }
-  in
+  let config = { dotfiles_dir; verbose = !verbose; fix_mode = !fix_mode } in
 
   Printf.printf "\n%sValidating dotfiles repository...%s\n\n" Color.bold
     Color.reset;

@@ -15,4 +15,5 @@ packages = [
   "julia",
   "starship",
   "fastfetch",
+  "haskell",
 ]

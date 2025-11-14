@@ -39,9 +39,9 @@
 # Dotfiles to be Deployed (Managed by Dotter)
 # ============================================================================
 
-# Allow entire dotfiles directory and all contents
-!/dotfiles
-!/dotfiles/**
+# Allow entire .config directory and all contents
+!/.config
+!/.config/**
 
-# But ignore build artifacts within dotfiles
-dotfiles/.direnv/
+# But ignore build artifacts within .config
+.config/.direnv/

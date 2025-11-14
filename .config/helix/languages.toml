@@ -298,7 +298,10 @@ auto-format = true
 
 # [[language]]
 # name = "haskell"
-# formatter = { command = "zsh", args = ["-c", "fourmolu --stdin-input-file $(pwd)" ] }
+# formatter = { command = "zsh", args = [
+#   "-c",
+#   "fourmolu --stdin-input-file $(pwd)",
+# ] }
 # auto-format = true
 
 # OCAML
