@@ -1,7 +1,7 @@
 # Dotfiles Management Commands
 # Declarative macOS environment with nix-darwin + dotter
 
-export FLAKE_DIR := env_var_or_default('XDG_CONFIG_HOME', env_var('HOME') + '/.config') + '/nix-darwin'
+export FLAKE_DIR := env_var('HOME') + '/.dotfiles/.config/nix-darwin'
 export DOTFILES_DIR := env_var('HOME') + '/.dotfiles'
 
 # Default recipe shows available commands
@@ -66,7 +66,7 @@ update:
     @echo "Updating nix-darwin flake..."
     cd {{ FLAKE_DIR }} && nix flake update
     @echo "Rebuilding system..."
-    darwin-rebuild switch --flake {{ FLAKE_DIR }}
+    darwin-rebuild switch --flake {{ FLAKE_DIR }}#starter
     @echo "✓ System updated and rebuilt"
 
 alias u := update
@@ -75,7 +75,7 @@ alias u := update
 [group('system')]
 rebuild:
     @echo "Rebuilding system..."
-    darwin-rebuild switch --flake {{ FLAKE_DIR }}
+    darwin-rebuild switch --flake {{ FLAKE_DIR }}#starter
     @echo "✓ System rebuilt"
 
 alias r := rebuild
@@ -92,7 +92,7 @@ alias uf := update-flake
 # Show what would change without rebuilding
 [group('system')]
 rebuild-dry:
-    darwin-rebuild build --flake {{ FLAKE_DIR }}
+    darwin-rebuild build --flake {{ FLAKE_DIR }}#starter
 
 alias rd := rebuild-dry
 
@@ -123,7 +123,7 @@ alias rb := rollback
 [group('system')]
 switch-generation gen:
     @echo "Switching to generation {{ gen }}..."
-    darwin-rebuild switch --flake {{ FLAKE_DIR }} --switch-generation {{ gen }}
+    darwin-rebuild switch --flake {{ FLAKE_DIR }}#starter --switch-generation {{ gen }}
 
 alias sg := switch-generation
 
@@ -519,7 +519,7 @@ validate-flake:
     @echo "Validating nix-darwin configuration..."
     @cd {{ FLAKE_DIR }} && nix flake check
     @echo "Building configuration..."
-    @darwin-rebuild build --flake {{ FLAKE_DIR }}
+    @darwin-rebuild build --flake {{ FLAKE_DIR }}#starter
     @echo "✓ Flake validation passed"
 
 alias vfl := validate-flake
@@ -738,7 +738,7 @@ alias bd := bench-deploy
 [group('perf')]
 bench-rebuild:
     @echo "Benchmarking darwin-rebuild (this will take a while)..."
-    @hyperfine --warmup 1 --runs 3 'darwin-rebuild build --flake {{ FLAKE_DIR }}'
+    @hyperfine --warmup 1 --runs 3 'darwin-rebuild build --flake {{ FLAKE_DIR }}#starter'
 
 alias br := bench-rebuild
 

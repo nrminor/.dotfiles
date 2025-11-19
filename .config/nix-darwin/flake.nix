@@ -84,6 +84,7 @@
             pkgs.poppler
             pkgs.ffmpeg
             pkgs.imagemagick
+            pkgs.graphviz
             pkgs.xclip
             pkgs.p7zip
             pkgs.ncspot
@@ -154,11 +155,11 @@
             # pkgs.ty
             pkgs.basedpyright
             pkgs.pylyzer
-            pkgs.marimo
+            nixpkgs-stable.legacyPackages.${pkgs.system}.marimo
             # pkgs.python313Packages.radian
             pkgs.python313Packages.ipython
             pkgs.python313Packages.notebook
-            pkgs.python313Packages.marimo
+            # pkgs.python313Packages.marimo
             pkgs.python313Packages.jupyter-core
             pkgs.python313Packages.jupyterlab
             pkgs.python313Packages.ipykernel
@@ -168,7 +169,7 @@
 
             # R
             # pkgs.R
-            pkgs.rstudio
+            # pkgs.rstudio
             pkgs.rPackages.languageserver
             pkgs.air-formatter
             # pkgs.rPackages.tidyverse
@@ -461,7 +462,7 @@
                 env = pkgs.buildEnv {
                   name = "system-applications";
                   paths = config.environment.systemPackages;
-                  pathsToLink = "/Applications";
+                  pathsToLink = [ "/Applications" ];
                 };
                 # Get the primary user from system.primaryUser setting
                 primaryUser = config.system.primaryUser or "nickminor";

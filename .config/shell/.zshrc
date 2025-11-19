@@ -359,6 +359,7 @@ alias b="btop"
 alias cd="z"
 alias cat="bat -pP"
 alias lg="lazygit"
+alias lj="lazyjj"
 alias gst="git status"
 alias curll='curl -L' # curl but follow redirects
 alias h="hx"
