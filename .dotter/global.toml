@@ -44,10 +44,6 @@
 [btop.files]
 ".config/btop/btop.conf" = "~/.config/btop/btop.conf"
 
-# Julia programming language
-[julia.files]
-".config/julia/config/startup.jl" = "~/.julia/config/startup.jl"
-
 # Marimo Python notebooks
 [marimo.files]
 ".config/marimo/config.toml" = "~/.marimo.toml"
@@ -55,6 +51,10 @@
 # Starship prompt
 [starship.files]
 ".config/starship.toml" = "~/.config/starship.toml"
+
+# bat configuration
+[bat.files]
+".config/bat/config" = "~/.config/bat/config"
 
 # Direnv environment management
 [direnv.files]
@@ -64,7 +64,3 @@
 # Fastfetch system information
 [fastfetch.files]
 ".config/fastfetch/config.jsonc" = "~/.config/fastfetch/config.jsonc"
-
-# Haskell files
-[haskell.files]
-".config/stylish-haskell/config.yaml" = "~/.config/stylish-haskell/config.yaml"

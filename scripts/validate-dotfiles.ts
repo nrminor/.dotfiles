@@ -193,11 +193,15 @@ function parseToml(filepath: string): TomlData {
 			const [, key, value] = kvMatch;
 			if (currentSubsection) {
 				// Ensure nested structure exists
-				const subsectionData = sections[currentSection][currentSubsection] as Record<string, string> | undefined;
+				const subsectionData = sections[currentSection][currentSubsection] as
+					| Record<string, string>
+					| undefined;
 				if (!subsectionData || typeof subsectionData !== "object") {
 					sections[currentSection][currentSubsection] = {};
 				}
-				(sections[currentSection][currentSubsection] as Record<string, string>)[key] = value;
+				(sections[currentSection][currentSubsection] as Record<string, string>)[
+					key
+				] = value;
 			} else {
 				sections[currentSection][key] = value;
 			}
@@ -428,8 +432,6 @@ const Rules = {
 			issues,
 		};
 	},
-
-
 };
 
 // ========================================================================

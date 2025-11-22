@@ -11,3 +11,7 @@
 # Ghostty terminal (macOS Application Support location)
 [ghostty.files]
 ".config/ghostty/config" = "~/Library/Application Support/com.mitchellh.ghostty/config"
+
+# TLDR manual page printer
+[tlrc.files]
+".config/tlrc/config.toml" = "~/Library/Application Support/tlrc/config.toml"

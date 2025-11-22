@@ -70,6 +70,12 @@
             pkgs.carapace
             pkgs.skhd
             pkgs.nushell
+            pkgs.nushellPlugins.polars
+            # pkgs.nushellPlugins.units
+            pkgs.nushellPlugins.query
+            pkgs.nushellPlugins.highlight
+            pkgs.nushellPlugins.gstat
+            pkgs.nushellPlugins.formats
             pkgs.topiary
             pkgs.dust
             pkgs.dua
@@ -113,6 +119,7 @@
             pkgs.lychee
             pkgs.gnuplot
             pkgs.wiki-tui
+            pkgs.tlrc
 
             # bash/zsh
             nixpkgs-stable.legacyPackages.${pkgs.system}.bash-language-server
@@ -227,11 +234,11 @@
             # Haskell
             # pkgs.haskellPackages.ghcup
             # pkgs.haskell-language-server
-            pkgs.stylish-haskell
-            pkgs.haskellPackages.fourmolu
+            # pkgs.stylish-haskell
+            # pkgs.haskellPackages.fourmolu
 
             # Lean 4
-            pkgs.lean4
+            # pkgs.lean4
 
             # BEAM VM ecosystem
             pkgs.erlang

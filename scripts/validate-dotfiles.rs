@@ -12,6 +12,7 @@
 //! toml = "0.8"
 //! serde = { version = "1.0", features = ["derive"] }
 //! serde_json = "1.0"
+//! regex = "1.0"
 //! ```
 
 use anyhow::{Context, Result};
@@ -345,18 +346,42 @@ fn json_files_valid(config: &Config) -> Result<ValidationResult> {
     let mut issues = Vec::new();
 
     for file in &json_files {
-        // Skip JSONC files and Zed config files (which allow comments)
-        if file.ends_with(".jsonc") || file.contains("/.config/zed/") {
-            continue;
-        }
-
         let path = config.dotfiles_dir.join(file);
-        if let Ok(content) = fs::read_to_string(&path) {
+        if let Ok(mut content) = fs::read_to_string(&path) {
+            // Check if file has comments
+            let has_comments = content.contains("//") || content.contains("/*");
+
+            // Strip comments from JSONC files or JSON files with comments
+            if file.ends_with(".jsonc") || has_comments {
+                // Remove line comments (lines starting with //)
+                let lines: Vec<&str> = content
+                    .lines()
+                    .filter(|line| !line.trim().starts_with("//"))
+                    .collect();
+                content = lines.join("\n");
+
+                // Remove inline line comments (multiline mode)
+                let re_line_comment = regex::Regex::new(r"(?m)\s*//[^\n]*$").unwrap();
+                content = re_line_comment.replace_all(&content, "").to_string();
+
+                // Remove block comments
+                let re_block_comment = regex::Regex::new(r"(?s)/\*.*?\*/").unwrap();
+                content = re_block_comment.replace_all(&content, "").to_string();
+
+                // Remove trailing commas before } or ]
+                let re_trailing_comma = regex::Regex::new(r",(\s*[}\]])").unwrap();
+                content = re_trailing_comma.replace_all(&content, "$1").to_string();
+            }
+
+            // Try to parse the JSON
             if serde_json::from_str::<serde_json::Value>(&content).is_err() {
-                issues.push(
-                    Issue::new(Severity::Error, format!("Invalid JSON syntax: {}", file))
-                        .with_file((*file).clone()),
-                );
+                // Only report errors for .json files, not .jsonc files
+                if !file.ends_with(".jsonc") {
+                    issues.push(
+                        Issue::new(Severity::Error, format!("Invalid JSON syntax: {}", file))
+                            .with_file((*file).clone()),
+                    );
+                }
             }
         }
     }

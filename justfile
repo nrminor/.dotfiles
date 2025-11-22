@@ -467,7 +467,7 @@ restore:
 
 # ===== Validation =====
 
-# Validate dotfiles repository with specified language (ts, hs, ml, rs, all)
+# Validate dotfiles repository with specified language (ts, rs, nu, all)
 [group('validation')]
 validate lang='ts' *flags='':
     #!/usr/bin/env bash
@@ -477,17 +477,13 @@ validate lang='ts' *flags='':
             echo "Validating dotfiles (TypeScript)..."
             bun run {{ DOTFILES_DIR }}/scripts/validate-dotfiles.ts {{ flags }}
             ;;
-        hs|haskell)
-            echo "Validating dotfiles (Haskell)..."
-            runhaskell {{ DOTFILES_DIR }}/scripts/validate-dotfiles.hs {{ flags }}
-            ;;
-        ml|ocaml)
-            echo "Validating dotfiles (OCaml)..."
-            ocaml {{ DOTFILES_DIR }}/scripts/validate-dotfiles.ml {{ flags }}
-            ;;
         rs|rust)
             echo "Validating dotfiles (Rust)..."
             rust-script {{ DOTFILES_DIR }}/scripts/validate-dotfiles.rs {{ flags }}
+            ;;
+        nu|nushell)
+            echo "Validating dotfiles (Nushell)..."
+            nu {{ DOTFILES_DIR }}/scripts/validate-dotfiles.nu {{ flags }}
             ;;
         all)
             echo "Running all validator implementations..."
@@ -495,18 +491,15 @@ validate lang='ts' *flags='':
             echo "=== TypeScript (Bun) ==="
             bun run {{ DOTFILES_DIR }}/scripts/validate-dotfiles.ts || echo "FAILED"
             echo ""
-            echo "=== Haskell ==="
-            runhaskell {{ DOTFILES_DIR }}/scripts/validate-dotfiles.hs || echo "FAILED"
-            echo ""
-            echo "=== OCaml ==="
-            ocaml {{ DOTFILES_DIR }}/scripts/validate-dotfiles.ml || echo "FAILED"
-            echo ""
             echo "=== Rust ==="
             rust-script {{ DOTFILES_DIR }}/scripts/validate-dotfiles.rs || echo "FAILED"
+            echo ""
+            echo "=== Nushell ==="
+            nu {{ DOTFILES_DIR }}/scripts/validate-dotfiles.nu || echo "FAILED"
             ;;
         *)
             echo "Unknown language: {{ lang }}"
-            echo "Available: ts (default), hs, ml, rs, all"
+            echo "Available: ts (default), rs, nu, all"
             exit 1
             ;;
     esac
@@ -535,28 +528,6 @@ format-ts:
 
 alias fts := format-ts
 
-# Format Haskell scripts
-[group('scripts')]
-format-hs:
-    @echo "Formatting Haskell scripts..."
-    stylish-haskell -i {{ DOTFILES_DIR }}/scripts/*.hs
-    @echo "✓ Haskell formatted"
-
-alias fhs := format-hs
-
-# Format OCaml scripts
-[group('scripts')]
-format-ml:
-    @echo "Formatting OCaml scripts..."
-    @if command -v ocamlformat >/dev/null 2>&1; then \
-        ocamlformat -i {{ DOTFILES_DIR }}/scripts/*.ml; \
-        echo "✓ OCaml formatted"; \
-    else \
-        echo "⚠ ocamlformat not available"; \
-    fi
-
-alias fml := format-ml
-
 # Format Rust scripts
 [group('scripts')]
 format-rs:
@@ -566,9 +537,27 @@ format-rs:
 
 alias frs := format-rs
 
+# Format Nushell scripts
+[group('scripts')]
+format-nu:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "Checking Nushell scripts..."
+    echo "Note: Nushell auto-formats on save in most editors"
+    find {{ DOTFILES_DIR }}/scripts -name "*.nu" -type f | while read -r file; do
+        echo "Checking $file..."
+        if nu -c "nu-check $file" > /dev/null 2>&1; then
+            echo "  ✓ Valid"
+        else
+            echo "  ✗ Syntax error"
+        fi
+    done
+
+alias fnu := format-nu
+
 # Format all scripts
 [group('scripts')]
-format-scripts: format-ts format-hs format-ml format-rs
+format-scripts: format-ts format-rs format-nu
     @echo "✓ All scripts formatted"
 
 # Lint TypeScript scripts
@@ -579,30 +568,6 @@ lint-ts:
 
 alias lts := lint-ts
 
-# Check Haskell scripts compile
-[group('scripts')]
-check-hs:
-    @echo "Checking Haskell scripts..."
-    @for file in {{ DOTFILES_DIR }}/scripts/*.hs; do \
-        echo "Checking $$file..."; \
-        ghc -fno-code -v0 $$file 2>&1 | grep -v "^Loaded"; \
-    done
-    @echo "✓ Haskell scripts valid"
-
-alias chs := check-hs
-
-# Check OCaml scripts compile
-[group('scripts')]
-check-ml:
-    @echo "Checking OCaml scripts..."
-    @for file in {{ DOTFILES_DIR }}/scripts/*.ml; do \
-        echo "Checking $$file..."; \
-        ocamlc -c -w +A $$file -o /dev/null 2>&1 || true; \
-    done
-    @echo "✓ OCaml scripts checked"
-
-alias cml := check-ml
-
 # Check Rust scripts compile
 [group('scripts')]
 check-rs:
@@ -612,9 +577,27 @@ check-rs:
 
 alias crs := check-rs
 
+# Check Nushell scripts for syntax errors
+[group('scripts')]
+check-nu:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "Checking Nushell scripts..."
+    find {{ DOTFILES_DIR }}/scripts -name "*.nu" -type f | while read -r file; do
+        echo "Checking $file..."
+        if nu -c "nu-check $file" > /dev/null 2>&1; then
+            echo "  ✓ Valid"
+        else
+            echo "  ✗ Syntax error"
+        fi
+    done
+    echo "✓ Nushell scripts checked"
+
+alias cnu := check-nu
+
 # Check all scripts
 [group('scripts')]
-check-scripts: lint-ts check-hs check-ml check-rs
+check-scripts: lint-ts check-rs check-nu
     @echo "✓ All scripts checked"
 
 alias cs := check-scripts
@@ -631,9 +614,8 @@ bench-validators:
     @echo "Benchmarking all validator implementations..."
     hyperfine --warmup 2 --runs 10 \
         --command-name "TypeScript" "bun run {{ DOTFILES_DIR }}/scripts/validate-dotfiles.ts" \
-        --command-name "Haskell" "runhaskell {{ DOTFILES_DIR }}/scripts/validate-dotfiles.hs" \
-        --command-name "OCaml" "ocaml {{ DOTFILES_DIR }}/scripts/validate-dotfiles.ml" \
-        --command-name "Rust" "rust-script {{ DOTFILES_DIR }}/scripts/validate-dotfiles.rs"
+        --command-name "Rust" "rust-script {{ DOTFILES_DIR }}/scripts/validate-dotfiles.rs" \
+        --command-name "Nushell" "nu {{ DOTFILES_DIR }}/scripts/validate-dotfiles.nu"
 
 alias bv := bench-validators
 

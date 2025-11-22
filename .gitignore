@@ -31,6 +31,7 @@
 !/scripts/*.js
 !/scripts/*.ts
 !/scripts/*.sh
+!/scripts/*.nu
 !/scripts/*.ml
 !/scripts/*.hs
 !/scripts/*.rs
@@ -39,9 +40,130 @@
 # Dotfiles to be Deployed (Managed by Dotter)
 # ============================================================================
 
-# Allow entire .config directory and all contents
+# Allow .config directory structure
 !/.config
-!/.config/**
 
-# But ignore build artifacts within .config
-.config/.direnv/
+# Atuin
+!/.config/atuin
+!/.config/atuin/config.toml
+
+# btop
+!/.config/btop
+!/.config/btop/btop.conf
+
+# Fastfetch
+!/.config/fastfetch
+!/.config/fastfetch/config.jsonc
+
+# Ghostty
+!/.config/ghostty
+!/.config/ghostty/config
+
+# Git
+!/.config/git
+!/.config/git/.gitconfig
+
+# Helix
+!/.config/helix
+!/.config/helix/config.toml
+!/.config/helix/languages.toml
+!/.config/helix/runtime
+!/.config/helix/runtime/themes
+!/.config/helix/runtime/themes/*.toml
+
+# Julia
+!/.config/julia
+!/.config/julia/config
+!/.config/julia/config/startup.jl
+
+# Marimo
+!/.config/marimo
+!/.config/marimo/config.toml
+
+# Nix
+!/.config/nix
+!/.config/nix/shell.nix
+
+# Nix Darwin
+!/.config/nix-darwin
+!/.config/nix-darwin/flake.nix
+!/.config/nix-darwin/flake.lock
+
+# Nix Direnv
+!/.config/nix-direnv
+!/.config/nix-direnv/config.toml
+
+# Shell
+!/.config/shell
+!/.config/shell/.direnvrc
+!/.config/shell/.hushlogin
+!/.config/shell/.zprofile
+!/.config/shell/.zshenv
+!/.config/shell/.zshrc
+
+# Stylish Haskell
+!/.config/stylish-haskell
+!/.config/stylish-haskell/config.yaml
+
+# Yazi
+!/.config/yazi
+!/.config/yazi/yazi.toml
+!/.config/yazi/theme.toml
+!/.config/yazi/flavors
+!/.config/yazi/flavors/catppuccin-frappe.yazi
+!/.config/yazi/flavors/catppuccin-frappe.yazi/*.toml
+!/.config/yazi/flavors/catppuccin-frappe.yazi/*.xml
+!/.config/yazi/flavors/catppuccin-frappe.yazi/*.png
+!/.config/yazi/flavors/catppuccin-frappe.yazi/LICENSE*
+!/.config/yazi/flavors/catppuccin-frappe.yazi/README.md
+!/.config/yazi/flavors/catppuccin-latte.yazi
+!/.config/yazi/flavors/catppuccin-latte.yazi/*.toml
+!/.config/yazi/flavors/catppuccin-latte.yazi/*.xml
+!/.config/yazi/flavors/catppuccin-latte.yazi/*.png
+!/.config/yazi/flavors/catppuccin-latte.yazi/LICENSE*
+!/.config/yazi/flavors/catppuccin-latte.yazi/README.md
+!/.config/yazi/flavors/catppuccin-macchiato.yazi
+!/.config/yazi/flavors/catppuccin-macchiato.yazi/*.toml
+!/.config/yazi/flavors/catppuccin-macchiato.yazi/*.xml
+!/.config/yazi/flavors/catppuccin-macchiato.yazi/*.png
+!/.config/yazi/flavors/catppuccin-macchiato.yazi/LICENSE*
+!/.config/yazi/flavors/catppuccin-macchiato.yazi/README.md
+!/.config/yazi/flavors/catppuccin-mocha.yazi
+!/.config/yazi/flavors/catppuccin-mocha.yazi/*.toml
+!/.config/yazi/flavors/catppuccin-mocha.yazi/*.xml
+!/.config/yazi/flavors/catppuccin-mocha.yazi/*.png
+!/.config/yazi/flavors/catppuccin-mocha.yazi/LICENSE*
+!/.config/yazi/flavors/catppuccin-mocha.yazi/README.md
+!/.config/yazi/flavors/dracula.yazi
+!/.config/yazi/flavors/dracula.yazi/*.toml
+!/.config/yazi/flavors/dracula.yazi/*.xml
+!/.config/yazi/flavors/dracula.yazi/*.png
+!/.config/yazi/flavors/dracula.yazi/LICENSE*
+!/.config/yazi/flavors/dracula.yazi/README.md
+
+# Zed
+!/.config/zed
+!/.config/zed/keymap.json
+!/.config/zed/settings.json
+
+# Zellij
+!/.config/zellij
+!/.config/zellij/config.kdl
+
+# bat config
+!/.config/bat
+!/.config/bat/config
+!/.config/config
+
+# starship config
+!/.config/starship.toml
+
+# tldr config
+!/.config/tlrc
+!/.config/tlrc/config.toml
+
+# Ignore common unwanted files
+/.config/**/.DS_Store
+
+# Ignore build artifacts within .config
+/.config/.direnv/

@@ -10,10 +10,10 @@ packages = [
   "yazi",
   "zellij",
   "atuin",
+  "bat",
   "marimo",
   "btop",
-  "julia",
+  "tlrc",
   "starship",
   "fastfetch",
-  "haskell",
 ]

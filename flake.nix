@@ -22,8 +22,9 @@
           buildInputs = with pkgs; [
             # Core dotfiles tools
             just
+            nushell
             dotter
-            pre-commit # Framework for managing git hooks
+            pre-commit
 
             # Nix tooling
             nixd
@@ -44,17 +45,6 @@
             nodejs # Required to run typescript-language-server
             nodePackages.typescript-language-server # LSP for IDE features
             biome # Formatting & linting (standalone binary)
-
-            # OCaml development
-            ocaml # OCaml compiler
-            ocamlPackages.ocaml-lsp # OCaml LSP server (provides 'ocamllsp')
-            ocamlPackages.ocamlformat # OCaml formatter
-            dune_3 # OCaml build system
-
-            # Haskell development
-            ghc # Haskell compiler (GHC)
-            haskellPackages.haskell-language-server # Haskell LSP
-            haskellPackages.stylish-haskell # Haskell formatter
 
             # Rust development
             rustc # Rust compiler

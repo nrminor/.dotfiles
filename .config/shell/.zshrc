@@ -53,9 +53,6 @@ eval "$(atuin init zsh)"
 # -------------------------------------------------------------------------------------
 # Load these only if they exist
 
-# Haskell
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
-
 # OCaml
 [[ -r $HOME/.opam/opam-init/init.zsh ]] && source "$HOME/.opam/opam-init/init.
 zsh" >/dev/null 2>/dev/null
@@ -144,7 +141,7 @@ fcd() {
 fopen() {
 	local items
 	items=$(find "${1:-.}" 2>/dev/null | fzf -m --height 70% --reverse \
-		--preview='[ -d {} ] && tree -C {} || bat -pP {} --color=always')
+		--preview='[ -d {} ] && tree -C {} || bat -p --paging=never {} --color=always')
 	if [[ -n "$items" ]]; then
 		while IFS= read -r line; do
 			open "$line"
@@ -171,7 +168,7 @@ fco() {
 fzo() {
 	local files
 	files=$(find "${1:-.}" 2>/dev/null | fzf --height 70% -m \
-		--preview='[ -d {} ] && tree -C {} || bat -pP {} --color=always') || return
+		--preview='[ -d {} ] && tree -C {} || bat -p --paging=never {} --color=always') || return
 
 	# If no selection was made, return with exit code 0
 	[[ -z "$files" ]] && return 0
@@ -231,7 +228,7 @@ frm() {
 	# Adjust find arguments to suit your needs (e.g., just files, recursive, etc.)
 	local files
 	files=$(find "${1:-.}" -mindepth 1 -maxdepth 1 2>/dev/null | fzf --multi --height 75% \
-		--preview='[ -d {} ] && tree -C {} || bat -pP {} --color=always') || return
+		--preview='[ -d {} ] && tree -C {} || bat -p --paging=never {} --color=always') || return
 
 	# If no selection was made, exit
 	[[ -z "$files" ]] && return 0
@@ -357,7 +354,7 @@ mo() {
 # -------------------------------------------------------------------------------------
 alias b="btop"
 alias cd="z"
-alias cat="bat -pP"
+alias cat="bat -p --paging=never"
 alias lg="lazygit"
 alias lj="lazyjj"
 alias gst="git status"
@@ -372,7 +369,6 @@ alias ls="eza -1a --group-directories-first --color=always"
 alias ll="eza -la --group-directories-first --icons --color=always"
 alias la="ll"
 alias less="less -R"
-alias cat="bat -pP"
 alias py="RUST_LOG=warn uvx --with polars --with biopython --with pysam --with polars-bio python" # run a uv-managed version of the python repl with some of my go to libs
 if [ -x "$(which radian)" ]; then
 	alias r="radian"
@@ -380,6 +376,8 @@ if [ -x "$(which radian)" ]; then
 fi
 alias u="utop"
 alias db="duckdb"
+alias tw="tw --theme catppuccin"
+alias tab="tw"
 alias ff="fastfetch"
 alias y="yazi"
 alias zj="zellij"
@@ -398,6 +396,7 @@ alias fkl=fkill
 alias fzgb=fgb
 alias fbranches=fgb
 alias fzbranches=fgb
+alias fzmake="fzf-make"
 alias gitcd=gitcc
 alias fzeq=fseq
 alias fzrm=frm
@@ -413,9 +412,9 @@ alias st='samtools'
 alias bcf='bcftools'
 alias nf='nextflow'
 alias k="clear"
-alias zr="source $HOME/.zshrc"
-alias zrl="source $HOME/.zshrc"
-alias zshrc="source $HOME/.zshrc"
+alias zr="source $HOME/.zshenv && source $HOME/.zshrc"
+alias zrl="source $HOME/.zshenv && source $HOME/.zshrc"
+alias zshrc="source $HOME/.zshenv && source $HOME/.zshrc"
 if [[ "$(uname -s)" == "Darwin" ]]; then
 	alias bfx="z $HOME/Documents/bioinformatics"
 	alias books="z $HOME/Documents/books"
@@ -434,3 +433,6 @@ alias cl="claude"
 alias oc="opencode"
 alias code="opencode"
 # -------------------------------------------------------------------------------------
+
+# bun completions
+[ -s "/Users/nickminor/.bun/_bun" ] && source "/Users/nickminor/.bun/_bun"

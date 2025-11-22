@@ -1,3 +1,6 @@
+# shell to launch
+# command = "/run/current-system/sw/bin/nu"
+
 # font configurations
 font-family = "Berkeley Mono"
 font-size = 11.5
@@ -37,7 +40,7 @@ macos-titlebar-style = tabs
 macos-titlebar-proxy-icon = visible
 
 # miscellaneous
-shell-integration = zsh
+shell-integration = detect
 shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo
 quit-after-last-window-closed = true
 shell-integration-features = sudo

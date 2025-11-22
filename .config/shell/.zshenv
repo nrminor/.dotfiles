@@ -5,8 +5,8 @@
 
 # Enable automatic PATH deduplication (zsh built-in magic!)
 typeset -U PATH path
-typeset -U LIBRARY_PATH library_path
-typeset -U PKG_CONFIG_PATH pkg_config_path
+typeset -TU LIBRARY_PATH library_path
+typeset -TU PKG_CONFIG_PATH pkg_config_path
 
 # CORE EDITOR CONFIGURATION
 # ---------------------------------------------------------------------------
@@ -40,7 +40,6 @@ path=(
 	# Homebrew
 	$BREW_PREFIX/bin
 	$BREW_PREFIX/sbin
-	$BREW_PREFIX/lib
 
 	# Runtime environments
 	$HOME/.deno/bin  # Deno
@@ -66,6 +65,7 @@ library_path=(
 	$BREW_PREFIX/opt/zlib/lib
 	$library_path
 )
+export LIBRARY_PATH
 
 export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib -L$BREW_PREFIX/opt/zlib/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include
@@ -75,6 +75,7 @@ pkg_config_path=(
 	$BREW_PREFIX/opt/zlib/lib/pkgconfig
 	$pkg_config_path
 )
+export PKG_CONFIG_PATH
 
 # LANGUAGE-SPECIFIC ENVIRONMENTS
 # ---------------------------------------------------------------------------
