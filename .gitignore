@@ -99,10 +99,6 @@
 !/.config/shell/.zshenv
 !/.config/shell/.zshrc
 
-# Stylish Haskell
-!/.config/stylish-haskell
-!/.config/stylish-haskell/config.yaml
-
 # Yazi
 !/.config/yazi
 !/.config/yazi/yazi.toml
