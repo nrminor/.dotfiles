@@ -10,6 +10,12 @@
 ".config/shell/.zshenv" = "~/.zshenv"
 ".config/shell/.hushlogin" = "~/.hushlogin"
 
+# nushell configurations
+[nushell.files]
+".config/nushell/config.nu" = "~/.config/nushell/config.nu"
+".config/nushell/env.nu" = "~/.config/nushell/env.nu"
+".config/atuin/init.nu" = "~/.config/atuin/init.nu"
+
 # Git configuration
 [git.files]
 ".config/git/.gitconfig" = "~/.gitconfig"

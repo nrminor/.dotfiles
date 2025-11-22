@@ -44,6 +44,7 @@
 # Atuin
 !/.config/atuin
 !/.config/atuin/config.toml
+!/.config/atuin/init.nu
 
 # btop
 !/.config/btop
@@ -68,6 +69,9 @@
 !/.config/helix/runtime
 !/.config/helix/runtime/themes
 !/.config/helix/runtime/themes/*.toml
+
+# Zoxide
+!/.config/zoxide/.zoxide.nu
 
 # Julia
 !/.config/julia
@@ -98,6 +102,10 @@
 !/.config/shell/.zprofile
 !/.config/shell/.zshenv
 !/.config/shell/.zshrc
+
+# Nushell
+!/.config/nushell
+!/.config/nushell/*.nu
 
 # Yazi
 !/.config/yazi

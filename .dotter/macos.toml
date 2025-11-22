@@ -15,3 +15,8 @@
 # TLDR manual page printer
 [tlrc.files]
 ".config/tlrc/config.toml" = "~/Library/Application Support/tlrc/config.toml"
+
+# MacOS-specific Nushell-file placements
+[nushell.files]
+".config/nushell/starship.nu" = "/Users/nickminor/Library/Application Support/nushell/vendor/autoload/starship.nu"
+".config/nushell/carapace.nu" = "/Users/nickminor/Library/Caches/nushell/carapace.nu"

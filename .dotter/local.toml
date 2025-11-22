@@ -1,6 +1,7 @@
 includes = [".dotter/macos.toml"]
 packages = [
   "zsh",
+  "nushell",
   "git",
   "nix-darwin",
   "direnv",
