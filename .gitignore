@@ -32,8 +32,6 @@
 !/scripts/*.ts
 !/scripts/*.sh
 !/scripts/*.nu
-!/scripts/*.ml
-!/scripts/*.hs
 !/scripts/*.rs
 
 # ============================================================================
