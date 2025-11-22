@@ -38,6 +38,8 @@
 [yazi.files]
 ".config/yazi/yazi.toml" = "~/.config/yazi/yazi.toml"
 ".config/yazi/theme.toml" = "~/.config/yazi/theme.toml"
+".config/yazi/keymap.toml" = "~/.config/yazi/keymap.toml"
+".config/yazi/init.lua" = "~/.config/yazi/init.lua"
 
 # Zellij terminal multiplexer
 [zellij.files]

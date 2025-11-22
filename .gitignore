@@ -106,6 +106,8 @@
 !/.config/yazi
 !/.config/yazi/yazi.toml
 !/.config/yazi/theme.toml
+!/.config/yazi/keymap.toml
+!/.config/yazi/init.lua
 !/.config/yazi/flavors
 !/.config/yazi/flavors/catppuccin-frappe.yazi
 !/.config/yazi/flavors/catppuccin-frappe.yazi/*.toml

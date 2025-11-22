@@ -84,6 +84,18 @@
             pkgs.fzf
             pkgs.fzf-make
             pkgs.yazi
+            pkgs.yaziPlugins.sudo
+            pkgs.yaziPlugins.starship
+            pkgs.yaziPlugins.rsync
+            pkgs.yaziPlugins.ouch
+            pkgs.yaziPlugins.smart-filter
+            pkgs.yaziPlugins.smart-enter
+            pkgs.yaziPlugins.mount
+            pkgs.yaziPlugins.mediainfo
+            pkgs.yaziPlugins.chmod
+            pkgs.yaziPlugins.git
+            pkgs.yaziPlugins.lazygit
+            pkgs.yaziPlugins.duckdb
             pkgs.ripgrep
             pkgs.ripgrep-all
             pkgs.tokei
@@ -522,6 +534,56 @@
                 cd "${userHome}/.dotfiles"
                 echo "Deploying dotfiles with dotter..."
                 sudo -u ${primaryUser} env HOME=/Users/${primaryUser} "${pkgs.dotter}/bin/dotter" deploy -f -y -v
+              '';
+
+            yaziPlugins.text =
+              let
+                primaryUser = config.system.primaryUser or "nickminor";
+                userHome = "/Users/${primaryUser}";
+                pluginsDir = "${userHome}/.config/yazi/plugins";
+
+                # List all yazi plugins that should be symlinked
+                yaziPluginsList = [
+                  pkgs.yaziPlugins.sudo
+                  pkgs.yaziPlugins.starship
+                  pkgs.yaziPlugins.rsync
+                  pkgs.yaziPlugins.ouch
+                  pkgs.yaziPlugins.smart-filter
+                  pkgs.yaziPlugins.smart-enter
+                  pkgs.yaziPlugins.mount
+                  pkgs.yaziPlugins.mediainfo
+                  pkgs.yaziPlugins.chmod
+                  pkgs.yaziPlugins.git
+                  pkgs.yaziPlugins.lazygit
+                  pkgs.yaziPlugins.duckdb
+                ];
+              in
+              ''
+                echo "Setting up Yazi plugins..." >&2
+
+                # Create plugins directory if it doesn't exist
+                mkdir -p "${pluginsDir}"
+
+                # Remove old nix-managed plugin symlinks (but preserve ya pkg managed ones)
+                # We identify nix symlinks by checking if they point to /nix/store
+                for plugin in "${pluginsDir}"/*.yazi; do
+                  if [ -L "$plugin" ] && readlink "$plugin" | grep -q "^/nix/store"; then
+                    echo "Removing old Nix plugin symlink: $plugin" >&2
+                    rm "$plugin"
+                  fi
+                done
+
+                # Create symlinks for each plugin
+                ${pkgs.lib.concatMapStringsSep "\n" (plugin: ''
+                  # Extract plugin name: hash-name.yazi-version -> name.yazi
+                  full_name=$(basename "${plugin}")
+                  plugin_name=$(echo "$full_name" | sed 's/^[^-]*-\(.*\)\.yazi-.*/\1.yazi/')
+                  echo "Linking $plugin_name..." >&2
+                  ln -sf "${plugin}" "${pluginsDir}/$plugin_name"
+                  chown -h ${primaryUser}:staff "${pluginsDir}/$plugin_name"
+                '') yaziPluginsList}
+
+                echo "Yazi plugins setup complete!" >&2
               '';
 
           };
