@@ -586,6 +586,51 @@
                 echo "Yazi plugins setup complete!" >&2
               '';
 
+            nushellPlugins.text =
+              let
+                primaryUser = config.system.primaryUser or "nickminor";
+                userHome = "/Users/${primaryUser}";
+                pluginsDir = "${userHome}/.local/share/nushell-plugins";
+
+                # List of nushell plugins to symlink
+                nushellPluginsList = [
+                  pkgs.nushellPlugins.polars
+                  pkgs.nushellPlugins.query
+                  pkgs.nushellPlugins.highlight
+                  pkgs.nushellPlugins.gstat
+                  pkgs.nushellPlugins.formats
+                ];
+              in
+              ''
+                echo "Setting up Nushell plugins..." >&2
+
+                # Create plugins directory
+                mkdir -p "${pluginsDir}"
+
+                # Remove old nix-managed plugin symlinks
+                for plugin in "${pluginsDir}"/nu_plugin_*; do
+                  if [ -L "$plugin" ] && readlink "$plugin" | grep -q "^/nix/store"; then
+                    echo "Removing old Nix plugin symlink: $plugin" >&2
+                    rm "$plugin"
+                  fi
+                done
+
+                # Create symlinks for each plugin binary
+                ${pkgs.lib.concatMapStringsSep "\n" (plugin: ''
+                  # Plugin binaries are in ${plugin}/bin/nu_plugin_<name>
+                  for binary in "${plugin}"/bin/nu_plugin_*; do
+                    if [ -f "$binary" ]; then
+                      plugin_name=$(basename "$binary")
+                      echo "Linking $plugin_name..." >&2
+                      ln -sf "$binary" "${pluginsDir}/$plugin_name"
+                      chown -h ${primaryUser}:staff "${pluginsDir}/$plugin_name"
+                    fi
+                  done
+                '') nushellPluginsList}
+
+                echo "Nushell plugins setup complete!" >&2
+              '';
+
           };
 
         };

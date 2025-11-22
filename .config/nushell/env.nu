@@ -25,6 +25,15 @@ $env.LANG = "en_US.UTF-8"
 $env.XDG_CONFIG_HOME = ($env.HOME | path join ".config")
 
 # ============================================================================
+# NUSHELL PLUGIN DIRECTORIES
+# ============================================================================
+# Add Nix-managed plugin directory to search path
+$env.NU_PLUGIN_DIRS = (
+  $env.NU_PLUGIN_DIRS
+  | prepend ($env.HOME | path join ".local" "share" "nushell-plugins")
+)
+
+# ============================================================================
 # HOMEBREW CONFIGURATION
 # ============================================================================
 $env.BREW_PREFIX = "/opt/homebrew"
