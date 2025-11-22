@@ -92,7 +92,7 @@ export TOPIARY_LANGUAGE_DIR=$XDG_CONFIG_HOME/topiary/languages
 
 # TOOL CONFIGURATION
 # ---------------------------------------------------------------------------
-export BAT_THEME="OneHalfDark"
+export BAT_THEME="Catppuccin Macchiato"
 export CARAPACE_BRIDGES='zsh,bash,clap,click'
 
 # Disable compfix warnings

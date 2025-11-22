@@ -73,11 +73,6 @@
 # Zoxide
 !/.config/zoxide/.zoxide.nu
 
-# Julia
-!/.config/julia
-!/.config/julia/config
-!/.config/julia/config/startup.jl
-
 # Marimo
 !/.config/marimo
 !/.config/marimo/config.toml
@@ -155,7 +150,6 @@
 # bat config
 !/.config/bat
 !/.config/bat/config
-!/.config/config
 
 # starship config
 !/.config/starship.toml

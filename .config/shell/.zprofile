@@ -4,11 +4,11 @@
 # ============================================================================
 
 # Display system info on login
-if command -v fastfetch >/dev/null 2>&1; then
-	echo ""
-	fastfetch
-	echo ""
-fi
+# if command -v fastfetch >/dev/null 2>&1; then
+# 	echo ""
+# 	fastfetch
+# 	echo ""
+# fi
 
 # Check if nix-darwin flake needs updating (once per login)
 if command -v nix >/dev/null 2>&1; then

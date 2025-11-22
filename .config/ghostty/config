@@ -1,5 +1,5 @@
 # shell to launch
-# command = "/run/current-system/sw/bin/nu"
+command = "/bin/zsh -l -c 'exec nu --login'"
 
 # font configurations
 font-family = "Berkeley Mono"

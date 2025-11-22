@@ -1,53 +1,141 @@
-# config.nu
-#
-# Installed by:
-# version = "0.103.0"
-#
-# This file is used to override default Nushell settings, define
-# (or import) custom commands, or run any other startup tasks.
-# See https://www.nushell.sh/book/configuration.html
-#
-# This file is loaded after env.nu and before login.nu
-#
-# You can open this file in your default editor using:
-# config nu
-#
-# See `help config nu` for more options
-#
-# You can remove these comments if you want or leave
-# them for future reference.
+# ============================================================================
+# Interactive shell configuration
+# For config settings, custom commands, aliases, and tool initialization
+# ============================================================================
 
-# cut startup printout
-echo ""
+# CUSTOM COMMANDS MODULE
+# -------------------------------------------------------------------------------------
+# Import custom commands from commands.nu
+use commands.nu *
+
+# INTERACTIVE SHELL INITIALIZATION
+# -------------------------------------------------------------------------------------
+# Display system info on startup
+print ""
 fastfetch
-echo ""
+print ""
 
-# evironment variables!
-$env.config.buffer_editor = "hx"
-$env.config.show_banner = false
-$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense,clap'
-$env.TOPIARY_CONFIG_FILE = ($env.XDG_CONFIG_HOME | path join topiary languages.ncl)
-$env.TOPIARY_LANGUAGE_DIR = ($env.XDG_CONFIG_HOME | path join topiary languages)
+# Nix-Darwin Flake Update Reminder
+if (which nix | is-not-empty) {
+  let flake_dir = ($env.XDG_CONFIG_HOME | path join "nix-darwin")
+  let flake_lock = ($flake_dir | path join "flake.lock")
 
-# atuin setup
+  if ($flake_lock | path exists) {
+    # Get the modification time of flake.lock
+    let lock_info = (ls -l $flake_lock | first)
+    let lock_age = ($lock_info.modified | into int) / 1_000_000_000 # Convert to seconds
+    let now = (date now | into int) / 1_000_000_000
+    let age_days = (($now - $lock_age) / 86400 | math floor)
+
+    if $age_days > 7 {
+      # Resolve the real path by following the flake.nix symlink
+      let flake_nix = ($flake_dir | path join "flake.nix")
+      let real_flake_dir = if ($flake_nix | path type) == "symlink" {
+        let flake_target = (ls -l $flake_nix | first | get target)
+        ($flake_target | path dirname)
+      } else {
+        $flake_dir
+      }
+
+      print $"💡 Tip: Your nix-darwin flake hasn't been updated in ($age_days) days."
+      print $"   Run: cd ($real_flake_dir) && nix flake update && darwin-rebuild switch --flake ."
+    }
+  }
+}
+
+# Nushell config settings
+$env.config = {
+  buffer_editor: "hx"
+  show_banner: false
+
+  hooks: {
+    pre_prompt: [
+      {||
+        # Direnv integration
+        if (which direnv | is-empty) {
+          return
+        }
+
+        direnv export json | from json | default {} | load-env
+        if 'ENV_CONVERSIONS' in $env and 'PATH' in $env.ENV_CONVERSIONS {
+          $env.PATH = do $env.ENV_CONVERSIONS.PATH.from_string $env.PATH
+        }
+      }
+    ]
+  }
+}
+# -------------------------------------------------------------------------------------
+
+# EXTERNAL TOOL INITIALIZATION
+# -------------------------------------------------------------------------------------
+# Only initialize these for interactive shells
+
+# Shell history
 source ~/.config/atuin/init.nu
 
-# zoxide setup
+# Fast directory jumping
 source ~/.zoxide.nu
 
-# one time starship setup
-# mkdir ($nu.data-dir | path join "vendor/autoload")
-# starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
-
-# (partially) one time carapace setup
+# Completions (nicer tab completions)
+# One-time setup (if needed):
 # mkdir $"($nu.cache-dir)"
 # carapace _carapace nushell | save --force $"($nu.cache-dir)/carapace.nu"
 source $"($nu.cache-dir)/carapace.nu"
 
-# aliases
+# Prompt (Starship)
+# One-time setup (if needed):
+# mkdir ($nu.data-dir | path join "vendor/autoload")
+# starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+# Starship is auto-loaded from vendor/autoload directory
+# -------------------------------------------------------------------------------------
+
+# CONDITIONAL TOOL INITIALIZATION
+# -------------------------------------------------------------------------------------
+# Load these only if they exist
+
+# OCaml/OPAM initialization
+# if ("/Users/nickminor/.opam/opam-init/init.nu" | path exists) {
+#   source ~/.opam/opam-init/init.nu
+# }
+
+# Local overrides
+# if ("~/.config.nu.local" | path exists) {
+#   source ~/.config.nu.local
+# }
+
+# Bun completions
+# if ("~/.bun/_bun.nu" | path exists) {
+#   source ~/.bun/_bun.nu
+# }
+# -------------------------------------------------------------------------------------
+
+# PYTHON VENV HELPERS
+# -------------------------------------------------------------------------------------
+# Python virtual environment activation requires overlay commands
+# These aliases provide shorter syntax
+alias a = overlay use .venv/bin/activate.nu
+# alias d = deactivate
+
+# NVM Lazy Loading
+# -------------------------------------------------------------------------------------
+# Note: NVM lazy loading in nushell works differently than in zsh.
+# These are placeholder implementations. For full NVM support in nushell,
+# consider using nushell's built-in virtual environment or a different Node version manager.
+
+# TODO: Implement NVM lazy loading for nushell
+# The zsh approach of function overriding doesn't translate directly to nushell.
+# Consider alternatives like:
+# - Using a nushell plugin for NVM
+# - Direct sourcing of NVM in env.nu
+# - Using a different version manager (e.g., fnm which has better nushell support)
+
+# -------------------------------------------------------------------------------------
+
+# ALIASES
+# -------------------------------------------------------------------------------------
 alias b = btop
 alias cd = z
-alias cat = bat -pP
+alias cat = bat -p --pager never
 alias lg = lazygit
 alias lj = lazyjj
 alias gst = git status
@@ -58,10 +146,9 @@ alias x = hx
 alias z. = zed .
 alias o. = open . # open the current directory in Finder on MacOS
 alias dots = dotter deploy -f -v -y
-def ll [path = "."] { ls --all --long $path | sort-by type }
 alias la = ls --all
 alias less = less -R
-alias cat = bat -pP
+alias cat = bat -p --pager never
 alias py = RUST_LOG=warn uvx --with polars --with biopython --with pysam --with polars-bio python # run a uv-managed version of the python repl with some of my go to libs
 alias u = utop
 alias db = duckdb
