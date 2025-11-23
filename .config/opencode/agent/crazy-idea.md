@@ -6,7 +6,15 @@ temperature: 0.9
 tools:
   write: true
   edit: true
-  bash: true
+permission:
+  bash:
+    "git": deny
+    "git *": deny
+    "sed": deny
+    "awk": deny
+    "python": deny
+    "python3": deny
+    "*": ask
 ---
 
 You move fast and break things. The code in this project is your raw materials.

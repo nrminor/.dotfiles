@@ -1,6 +1,6 @@
 ---
 description: Bookish and self-efface keeper of the docs who will look anything and everything up for other agents
-mode: subagent
+mode: all
 model: anthropic/claude-sonnet-4-5-20250929
 temperature: 0.1
 tools:

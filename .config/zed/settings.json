@@ -1,4 +1,5 @@
 {
+    "ui_font_weight": 450.0,
     "outline_panel": {
         "dock": "left"
     },
@@ -7,9 +8,9 @@
     //     "light": "Quiet Light",
     //     "dark": "Rosé Pine Moon"
     // },
-    "theme": "Github Plus Light",
-    "ui_font_size": 13,
-    "buffer_font_size": 11,
+    "theme": "Catppuccin Macchiato (Blue Blur+)",
+    "ui_font_size": 14.0,
+    "buffer_font_size": 12.0,
     "project_panel": { "dock": "right" },
     "ui_font_family": "Berkeley Mono",
     "buffer_font_family": "Berkeley Mono",
@@ -17,7 +18,7 @@
     "base_keymap": "VSCode",
     "helix_mode": true,
     "vim_mode": false,
-    "relative_line_numbers": true,
+    "relative_line_numbers": "enabled",
     "cursor_blink": false,
 
     "preview_tabs": {
