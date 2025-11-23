@@ -168,3 +168,6 @@ symbol = " "
 
 [gradle]
 symbol = " "
+
+[jobs]
+disabled = true
