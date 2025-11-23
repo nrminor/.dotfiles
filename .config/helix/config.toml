@@ -86,6 +86,8 @@ C-g = [
 ]
 C-s = ":w"
 Cmd-s = ":write"
+"C-p" = ":sh echo -n %{buffer_name} | pbcopy"
+"C-c" = ":sh echo -n %{buffer_name} | pbcopy"
 "ret" = "goto_word"
 tab = "move_parent_node_end"
 S-tab = "move_parent_node_start"
