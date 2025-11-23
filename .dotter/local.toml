@@ -17,4 +17,5 @@ packages = [
   "tlrc",
   "starship",
   "fastfetch",
+  "opencode",
 ]
