@@ -73,3 +73,6 @@
 # Fastfetch system information
 [fastfetch.files]
 ".config/fastfetch/config.jsonc" = "~/.config/fastfetch/config.jsonc"
+
+# opencode agent files and configuration
+".config/opencode/agent/careful.md" = "~/.config/opencode/agent/careful.md"

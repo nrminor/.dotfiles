@@ -160,6 +160,12 @@
 !/.config/tlrc
 !/.config/tlrc/config.toml
 
+# opencode config
+!/.config/opencode
+!/.config/opencode/opencode.json
+!/.config/opencode/agent
+!/.config/opencode/agent/*.md
+
 # Ignore common unwanted files
 /.config/**/.DS_Store
 
