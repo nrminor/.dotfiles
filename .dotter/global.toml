@@ -80,3 +80,7 @@
 ".config/opencode/agent/crazy-idea.md" = "~/.config/opencode/agent/crazy-idea.md"
 ".config/opencode/agent/documentation-nerd.md" = "~/.config/opencode/agent/documentation-nerd.md"
 ".config/opencode/agent/architecture-advice.md" = "~/.config/opencode/agent/architecture-advice.md"
+
+# Lazygit terminal UI for git
+[lazygit.files]
+".config/lazygit/config.yml" = "~/.config/lazygit/config.yml"

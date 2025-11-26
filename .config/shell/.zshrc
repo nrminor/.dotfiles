@@ -87,6 +87,7 @@ npx() {
 	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 	npx "$@"
 }
+eval "$(fnm env --use-on-cd --shell zsh)"
 # -------------------------------------------------------------------------------------
 
 # CUSTOM FUNCTIONS

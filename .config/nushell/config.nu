@@ -115,20 +115,21 @@ source $"($nu.cache-dir)/carapace.nu"
 # These aliases provide shorter syntax
 alias a = overlay use .venv/bin/activate.nu
 # alias d = deactivate
-
-# NVM Lazy Loading
 # -------------------------------------------------------------------------------------
-# Note: NVM lazy loading in nushell works differently than in zsh.
-# These are placeholder implementations. For full NVM support in nushell,
-# consider using nushell's built-in virtual environment or a different Node version manager.
 
-# TODO: Implement NVM lazy loading for nushell
-# The zsh approach of function overriding doesn't translate directly to nushell.
-# Consider alternatives like:
-# - Using a nushell plugin for NVM
-# - Direct sourcing of NVM in env.nu
-# - Using a different version manager (e.g., fnm which has better nushell support)
+# Managing Node/NVM with fnm
+# -------------------------------------------------------------------------------------
+if not (which fnm | is-empty) {
+  ^fnm env --log-level=error --json | from json | load-env
 
+  $env.PATH = $env.PATH | prepend ($env.FNM_MULTISHELL_PATH | path join (if $nu.os-info.name == 'windows' { '' } else { 'bin' }))
+  $env.config.hooks.env_change.PWD = (
+    $env.config.hooks.env_change.PWD? | append {
+      condition: {|| ['.nvmrc' '.node-version' 'package.json'] | any {|el| $el | path exists } }
+      code: {|| ^fnm use --install-if-missing --silent-if-unchanged --log-level=error }
+    }
+  )
+}
 # -------------------------------------------------------------------------------------
 
 # ALIASES
@@ -172,7 +173,7 @@ alias fkl = fkill
 alias fzgb = fgb
 alias fbranches = fgb
 alias fzbranches = fgb
-alias gitcd = gitcc
+alias gitcc = gitcd
 alias fzeq = fseq
 alias fzrm = frm
 # alias z- = z -

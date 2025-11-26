@@ -260,8 +260,8 @@ functionLikeReturnTypes.enabled = false
 enumMemberValues.enabled = false
 
 [language-server.biome]
-command = "biome"
-args = ["lsp-proxy"]
+command = "bunx"
+args = ["biome", "lsp-proxy"]
 
 # SQL
 # **************************************************************************************

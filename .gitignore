@@ -153,6 +153,10 @@
 !/.config/bat
 !/.config/bat/config
 
+# lazygit
+!/.config/lazygit
+!/.config/lazygit/config.yml
+
 # starship config
 !/.config/starship.toml
 

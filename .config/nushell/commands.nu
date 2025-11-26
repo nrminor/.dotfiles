@@ -261,9 +261,65 @@ export def hxs [
   }
 }
 
+# Open modified git files in Helix
+#
+# Opens git-modified files as buffers in Helix.
+# By default shows unstaged changes only.
+#
+# Examples:
+#   > hg                     # Open unstaged modified files
+#   > hg --staged            # Open all changes (staged + unstaged)
+#   > hg --untracked         # Open all changes including untracked files
+export def hg [
+  --staged (-s)     # Include staged files (shows all changes vs HEAD)
+  --untracked (-u)  # Include untracked files
+] {
+  let files = if $untracked {
+    # Get all changes including untracked
+    git status --short | lines | parse "{status} {file}" | get file
+  } else if $staged {
+    # Get staged and unstaged changes (all changes vs HEAD)
+    git diff --name-only HEAD | lines
+  } else {
+    # Just unstaged changes
+    git diff --name-only | lines
+  }
+
+  if ($files | is-not-empty) {
+    hx ...$files
+  } else {
+    print "No modified files"
+  }
+}
+
 # ============================================================================
 # GIT WORKFLOW
 # ============================================================================
+
+# Clone a git repository and cd into it
+#
+# Clones a git repository and automatically changes into the cloned directory.
+# Extracts the repository name from the URL and removes .git suffix if present.
+#
+# Examples:
+#   > gitcd https://github.com/user/repo.git
+#   > gitcd git@github.com:user/repo.git
+#   > gitcc https://github.com/user/repo      # Using alias
+export def --env gitcd [
+  url: string # Git repository URL to clone
+] {
+  # Extract the last path component (e.g., "myrepo.git" or "myrepo")
+  let base = ($url | path basename)
+
+  # Remove trailing ".git" if present
+  let repo = ($base | str replace --regex '\.git$' '')
+
+  # Clone and change into the repo directory if successful
+  git clone $url
+  if $env.LAST_EXIT_CODE == 0 {
+    cd $repo
+  }
+}
 
 # Fuzzy find and checkout a git branch
 #

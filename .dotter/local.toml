@@ -15,6 +15,7 @@ packages = [
   "marimo",
   "btop",
   "tlrc",
+  "lazygit",
   "starship",
   "fastfetch",
   "opencode",

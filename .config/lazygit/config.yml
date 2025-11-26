@@ -1,0 +1,10 @@
+# ============================================================================
+# Lazygit Configuration
+# ============================================================================
+
+git:
+  pagers:
+    # Default lazygit diff view
+    - pager: ''
+    # Difftastic - AST-aware structural diffs
+    - externalDiffCommand: difft --color=always

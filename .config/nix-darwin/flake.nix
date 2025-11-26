@@ -117,7 +117,6 @@
             pkgs.git
             pkgs.lazygit
             pkgs.difftastic
-            pkgs.delta
             pkgs.pre-commit
             pkgs.jujutsu
             pkgs.lazyjj
@@ -158,7 +157,8 @@
             pkgs.cargo-info
             pkgs.cargo-fuzz
             pkgs.cargo-dist
-            pkgs.cargo-udeps
+            pkgs.cargo-shear
+            pkgs.cargo-wizard
             pkgs.dioxus-cli
 
             # sql stuff
@@ -229,6 +229,7 @@
             # HTML, JS/TS, and other web stuff
             # pkgs.vscode-langservers-extracted
             pkgs.superhtml
+            pkgs.fnm
             # pkgs.nodejs_23
             # pkgs.deno
             # pkgs.bun
