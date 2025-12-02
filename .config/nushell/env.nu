@@ -74,6 +74,20 @@ $env.PATH = (
 )
 
 # ============================================================================
+# ENVIRONMENT VARIABLE CONVERSIONS
+# ============================================================================
+# Define how environment variables should be converted between string and structured types
+# This is essential for PATH and other colon-separated variables to work correctly
+# with overlays, direnv, and external tools
+
+$env.ENV_CONVERSIONS = {
+  PATH: {
+    from_string: {|s| $s | split row (char esep) }
+    to_string: {|v| $v | str join (char esep) }
+  }
+}
+
+# ============================================================================
 # LIBRARY AND COMPILER PATHS
 # ============================================================================
 # These are used by compilers and linkers (must be colon-separated strings)

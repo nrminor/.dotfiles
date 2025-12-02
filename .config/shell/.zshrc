@@ -256,19 +256,19 @@ seqstats() {
 	# Parse arguments
 	while [[ $# -gt 0 ]]; do
 		case "$1" in
-		-o)
-			output_file="$2"
-			shift 2
-			;;
-		*)
-			if [[ "$1" != -* ]]; then
-				dir="$1"
-				shift
-			else
-				echo "Unknown option: $1" >&2
-				return 1
-			fi
-			;;
+			-o)
+				output_file="$2"
+				shift 2
+				;;
+			*)
+				if [[ "$1" != -* ]]; then
+					dir="$1"
+					shift
+				else
+					echo "Unknown option: $1" >&2
+					return 1
+				fi
+				;;
 		esac
 	done
 
@@ -332,20 +332,20 @@ mo() {
 		read -r keep
 
 		case "$keep" in
-		[yY][eE][sS] | [yY])
-			print -n "Rename $file? (leave empty to keep name): "
-			read -r newname
-			if [[ -n "$newname" ]]; then
-				mv -- "$file" "$newname"
-				echo "Saved as $newname"
-			else
-				echo "Keeping as $file"
-			fi
-			;;
-		*)
-			rm -f -- "$file"
-			echo "Deleted $file"
-			;;
+			[yY][eE][sS] | [yY])
+				print -n "Rename $file? (leave empty to keep name): "
+				read -r newname
+				if [[ -n "$newname" ]]; then
+					mv -- "$file" "$newname"
+					echo "Saved as $newname"
+				else
+					echo "Keeping as $file"
+				fi
+				;;
+			*)
+				rm -f -- "$file"
+				echo "Deleted $file"
+				;;
 		esac
 	fi
 }

@@ -1,7 +1,7 @@
 ---
 description: Throws caution to the wind and innovates
-mode: primary
-model: anthropic/claude-sonnet-4-5-20250929
+mode: all
+model: anthropic/claude-opus-4-5
 temperature: 0.9
 tools:
   write: true

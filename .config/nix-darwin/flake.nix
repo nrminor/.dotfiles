@@ -31,6 +31,10 @@
     let
       configuration =
         { pkgs, config, ... }:
+        let
+          primaryUser = config.system.primaryUser or "nickminor";
+          userHome = "/Users/${primaryUser}";
+        in
 
         {
           programs.direnv = {
@@ -112,6 +116,8 @@
             pkgs.just
             pkgs.mask
             pkgs.direnv
+            pkgs.mise
+            pkgs.devbox
             pkgs.ouch
             pkgs.watchexec
             pkgs.git
@@ -350,7 +356,14 @@
               show-recents = false;
               show-process-indicators = true;
               persistent-others = [
-                "/Users/nickminor/Downloads"
+                {
+                  folder = {
+                    path = "${userHome}/Downloads";
+                    arrangement = "date-added";
+                    displayas = "stack";
+                    showas = "automatic";
+                  };
+                }
               ];
             };
 
@@ -368,12 +381,12 @@
 
             # login window settings
             loginwindow = {
-              autoLoginUser = "nickminor";
+              autoLoginUser = primaryUser;
             };
 
             # Miscellaneous other settings
             menuExtraClock.ShowSeconds = true;
-            screencapture.location = "/Users/nickminor/Documents/screenshots";
+            screencapture.location = "${userHome}/Documents/screenshots";
 
             # Custom preferences
             CustomUserPreferences = {

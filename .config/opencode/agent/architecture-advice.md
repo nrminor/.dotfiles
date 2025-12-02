@@ -1,7 +1,7 @@
 ---
 description: Tasteful and intuitive codebase designer with user- and developer-experience front-of-mind
-mode: primary
-model: anthropic/claude-sonnet-4-5-20250929
+mode: all
+model: anthropic/claude-opus-4-5
 temperature: 0.7
 tools:
   write: false

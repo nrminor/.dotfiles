@@ -56,9 +56,15 @@ $env.config = {
           return
         }
 
-        direnv export json | from json | default {} | load-env
-        if 'ENV_CONVERSIONS' in $env and 'PATH' in $env.ENV_CONVERSIONS {
-          $env.PATH = do $env.ENV_CONVERSIONS.PATH.from_string $env.PATH
+        let direnv_data = (direnv export json | from json | default {})
+
+        # Handle PATH separately to keep it as a list
+        if 'PATH' in $direnv_data {
+          $env.PATH = ($direnv_data.PATH | split row (char esep))
+          let other_vars = ($direnv_data | reject PATH)
+          load-env $other_vars
+        } else {
+          load-env $direnv_data
         }
       }
     ]
@@ -91,22 +97,10 @@ source $"($nu.cache-dir)/carapace.nu"
 
 # CONDITIONAL TOOL INITIALIZATION
 # -------------------------------------------------------------------------------------
-# Load these only if they exist
-
-# OCaml/OPAM initialization
-# if ("/Users/nickminor/.opam/opam-init/init.nu" | path exists) {
-#   source ~/.opam/opam-init/init.nu
-# }
-
 # Local overrides
-# if ("~/.config.nu.local" | path exists) {
-#   source ~/.config.nu.local
-# }
-
-# Bun completions
-# if ("~/.bun/_bun.nu" | path exists) {
-#   source ~/.bun/_bun.nu
-# }
+if ("~/.config/nushell/local.nu" | path exists) {
+  overlay use "~/.config/nushell/local.nu"
+}
 # -------------------------------------------------------------------------------------
 
 # PYTHON VENV HELPERS
@@ -114,7 +108,7 @@ source $"($nu.cache-dir)/carapace.nu"
 # Python virtual environment activation requires overlay commands
 # These aliases provide shorter syntax
 alias a = overlay use .venv/bin/activate.nu
-# alias d = deactivate
+alias d = overlay hide activate
 # -------------------------------------------------------------------------------------
 
 # Managing Node/NVM with fnm
@@ -180,7 +174,6 @@ alias fzrm = frm
 alias uvs = uv sync --all-extras
 # alias uvv = uv sync --all-extras and source .venv/bin/activate
 # alias a = source .venv/bin/activate
-alias d = deactivate
 alias sq = seqkit
 alias mm = minimap2
 alias bt = bedtools
@@ -207,3 +200,4 @@ alias cld = claude
 alias cl = claude
 alias oc = opencode
 alias code = opencode
+alias chtc = ssh nrminor@oconnor-ap.chtc.wisc.edu

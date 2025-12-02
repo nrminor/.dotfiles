@@ -23,10 +23,6 @@ export def --env mkcd [
   cd $dir
 }
 
-# ============================================================================
-# PYTHON VIRTUAL ENVIRONMENTS
-# ============================================================================
-
 # Note: Python venv activation in nushell requires running the overlay command directly:
 #   overlay use .venv/bin/activate.nu    # to activate (aliased to 'a')
 #   overlay hide activate                 # to deactivate (aliased to 'd')
@@ -58,6 +54,23 @@ export def --env ycd [
     cd $cwd
   }
   rm -f $tmp
+}
+
+# Change to the local directory storing DHOLK experiment directories. See
+# https://dholk.primate.wisc.edu/project/dho/experiments/begin.view for the online
+# equivalents of the files in these directories.
+export def --env dholk [] {
+  let dholk_dir = if $nu.os-info.name == "macos" {
+    $env.HOME | path join "Documents" "dholk_experiments"
+  } else {
+    $env.HOME | path join "dholk_experiments"
+  }
+
+  if not ($dholk_dir | path exists) {
+    mkdir $dholk_dir
+  }
+
+  cd $dholk_dir
 }
 
 # Fuzzy find and cd into a directory
@@ -271,8 +284,8 @@ export def hxs [
 #   > hg --staged            # Open all changes (staged + unstaged)
 #   > hg --untracked         # Open all changes including untracked files
 export def hg [
-  --staged (-s)     # Include staged files (shows all changes vs HEAD)
-  --untracked (-u)  # Include untracked files
+  --staged (-s) # Include staged files (shows all changes vs HEAD)
+  --untracked (-u) # Include untracked files
 ] {
   let files = if $untracked {
     # Get all changes including untracked
@@ -413,7 +426,7 @@ export def fkill [] {
 #   > cat sequences.fasta | from fasta | where ($it.sequence | str length) > 100
 export def "from fasta" [] {
   $in
-  | ^seqkit fx2tab --name --only-id
+  | ^seqkit fx2tab
   | from tsv --noheaders
   | rename id sequence
 }
@@ -429,7 +442,7 @@ export def "from fasta" [] {
 export def "from fasta-gz" [] {
   $in
   | ^gunzip -c
-  | ^seqkit fx2tab --name --only-id
+  | ^seqkit fx2tab
   | from tsv --noheaders
   | rename id sequence
 }
@@ -444,7 +457,7 @@ export def "from fasta-gz" [] {
 #   > cat sequences.fastq | from fastq | where ($it.sequence | str length) > 50
 export def "from fastq" [] {
   $in
-  | ^seqkit fx2tab --name --only-id --qual
+  | ^seqkit fx2tab
   | from tsv --noheaders
   | rename id sequence quality
 }
@@ -460,7 +473,7 @@ export def "from fastq" [] {
 export def "from fastq-gz" [] {
   $in
   | ^gunzip -c
-  | ^seqkit fx2tab --name --only-id --qual
+  | ^seqkit fx2tab
   | from tsv --noheaders
   | rename id sequence quality
 }

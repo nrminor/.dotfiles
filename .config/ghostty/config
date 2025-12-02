@@ -16,7 +16,7 @@ window-height = 50
 window-decoration = true
 window-padding-balance = true
 window-save-state = always
-adjust-cell-height = 10%
+adjust-cell-height = 18%
 
 # mouse and cursor configurations
 mouse-hide-while-typing = true

@@ -1,7 +1,7 @@
 ---
 description: Edits code with increased sensitivity to entropy
 mode: primary
-model: anthropic/claude-sonnet-4-5-20250929
+model: anthropic/claude-opus-4-5
 temperature: 0.5
 tools:
   write: true
