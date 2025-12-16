@@ -4,8 +4,9 @@ mode: all
 model: anthropic/claude-opus-4-5
 temperature: 0.9
 tools:
-  write: true
-  edit: true
+  write: false
+  edit: false
+  bash: true
 permission:
   bash:
     "git": deny

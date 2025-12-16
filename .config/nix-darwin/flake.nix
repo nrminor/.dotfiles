@@ -113,6 +113,7 @@
             pkgs.fd
             pkgs.jq
             pkgs.btop
+            pkgs.bottom
             pkgs.just
             pkgs.mask
             pkgs.direnv
@@ -175,7 +176,7 @@
             # python
             pkgs.python313
             # pkgs.uv
-            pkgs.pixi
+            # pkgs.pixi
             pkgs.ruff
             # pkgs.ty
             pkgs.basedpyright
@@ -338,7 +339,7 @@
             dock = {
               autohide = false;
               mineffect = "scale";
-              orientation = "left";
+              orientation = "right";
               persistent-apps = [
                 "/Applications/Arc.app"
                 "/Applications/ChatGPT.app"

@@ -277,25 +277,30 @@ export def hxs [
 # Open modified git files in Helix
 #
 # Opens git-modified files as buffers in Helix.
-# By default shows unstaged changes only.
+# By default shows all changes including untracked files, excluding deleted files.
 #
 # Examples:
-#   > hg                     # Open unstaged modified files
-#   > hg --staged            # Open all changes (staged + unstaged)
-#   > hg --untracked         # Open all changes including untracked files
+#   > hg                     # Open all modified files including untracked
+#   > hg --tracked           # Open only tracked modified files (staged + unstaged)
+#   > hg --unstaged          # Open only unstaged modified files
 export def hg [
-  --staged (-s) # Include staged files (shows all changes vs HEAD)
-  --untracked (-u) # Include untracked files
+  --tracked (-t) # Only show tracked files (staged + unstaged vs HEAD)
+  --unstaged (-w) # Only show unstaged changes (working tree vs index)
 ] {
-  let files = if $untracked {
-    # Get all changes including untracked
-    git status --short | lines | parse "{status} {file}" | get file
-  } else if $staged {
-    # Get staged and unstaged changes (all changes vs HEAD)
-    git diff --name-only HEAD | lines
+  let files = if $unstaged {
+    # Just unstaged changes, excluding deleted files
+    git diff --name-only --diff-filter=d | lines
+  } else if $tracked {
+    # Get staged and unstaged changes (all changes vs HEAD), excluding deleted files
+    git diff --name-only --diff-filter=d HEAD | lines
   } else {
-    # Just unstaged changes
-    git diff --name-only | lines
+    # Get all changes including untracked, excluding deleted files
+    # Porcelain format: XY filename (2-char status, space, filename)
+    # Note: 0..<2 is exclusive range; 0..2 would include index 2
+    git status --porcelain -uall
+    | lines
+    | where ($it | str substring 0..<2) != "D " and ($it | str substring 0..<2) != " D"
+    | each { $in | str substring 3.. }
   }
 
   if ($files | is-not-empty) {

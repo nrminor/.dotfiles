@@ -44,9 +44,11 @@ if (which nix | is-not-empty) {
 }
 
 # Nushell config settings
+
 $env.config = {
   buffer_editor: "hx"
   show_banner: false
+  # edit_mode: "vi"
 
   hooks: {
     pre_prompt: [
@@ -137,6 +139,7 @@ alias gst = git status
 alias curll = curl -L
 alias h = hx
 alias h. = hx .
+alias g. = hx .
 alias x = hx
 alias z. = zed .
 alias o. = open . # open the current directory in Finder on MacOS

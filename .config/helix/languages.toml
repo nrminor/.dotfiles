@@ -57,10 +57,16 @@ rulers = [100]
 command = "clippy"
 
 [language-server.rust-analyzer.config] # see here for more: https://rust-analyzer.github.io/book/configuration.html
-closureReturnTypeHints.enable = "always"
 inlayHints.enable = true
-inlayHints.lifetimeElisionHints.enable = true
+inlayHints.lifetimeElisionHints.enable = "skip_trivial"
 inlayHints.lifetimeElisionHints.useParameterNames = true
+inlayHints.parameterHints.enable = true
+inlayHints.chainingHints.enable = false
+inlayHints.closureCaptureHints.enable = false
+inlayHints.closureStyle = "impl_fn"
+closureReturnTypeHints.enable = "always"
+inlayHints.expressionAdjustmentHints.enable = "never"
+inlayHints.implicitDrops.enable = false
 
 # LUA
 # **************************************************************************************
