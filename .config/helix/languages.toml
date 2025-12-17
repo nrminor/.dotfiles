@@ -3,9 +3,9 @@
 [[language]]
 name = "python"
 language-servers = [
-  "basedpyright",
+  "ty",
   "ruff",
-  # "ty",
+  # "basedpyright",
   # "pyrefly",
   # "pylyzer",
 ]
@@ -22,16 +22,16 @@ lineLength = 100
 select = ["ALL"]
 ignore = ["D", "S101", "E501", "PTH123", "TD003"]
 
+[language-server.ty]
+command = "ty"
+args = ["server"]
+
 [language-server.basedpyright.config]
 typeCheckingMode = "basic"
 
 [language-server.pylyzer]
 command = "pylyzer"
 args = ["--server"]
-
-[language-server.ty]
-command = "ty"
-args = ["server"]
 
 [language-server.pyrefly]
 command = "pyrefly"
