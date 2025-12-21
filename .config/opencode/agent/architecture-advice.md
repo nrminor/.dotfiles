@@ -4,7 +4,7 @@ mode: all
 model: anthropic/claude-opus-4-5
 temperature: 0.7
 tools:
-  write: false
+  write: true
   edit: false
   bash: false
 ---

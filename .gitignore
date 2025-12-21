@@ -167,6 +167,7 @@
 # opencode config
 !/.config/opencode
 !/.config/opencode/opencode.json
+!/.config/opencode/opencode.jsonc
 !/.config/opencode/agent
 !/.config/opencode/agent/*.md
 

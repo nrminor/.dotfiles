@@ -342,7 +342,6 @@
               orientation = "right";
               persistent-apps = [
                 "/Applications/Arc.app"
-                "/Applications/ChatGPT.app"
                 "/Applications/Spark.app"
                 "/Applications/Bear.app"
                 "/Applications/Instapaper.app"

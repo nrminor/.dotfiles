@@ -76,6 +76,7 @@
 
 # opencode agent files and configuration
 [opencode.files]
+".config/opencode/opencode.jsonc" = "~/.config/opencode/opencode.jsonc"
 ".config/opencode/agent/careful.md" = "~/.config/opencode/agent/careful.md"
 ".config/opencode/agent/crazy-idea.md" = "~/.config/opencode/agent/crazy-idea.md"
 ".config/opencode/agent/documentation-nerd.md" = "~/.config/opencode/agent/documentation-nerd.md"
