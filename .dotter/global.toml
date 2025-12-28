@@ -81,7 +81,14 @@
 ".config/opencode/agent/crazy-idea.md" = "~/.config/opencode/agent/crazy-idea.md"
 ".config/opencode/agent/documentation-nerd.md" = "~/.config/opencode/agent/documentation-nerd.md"
 ".config/opencode/agent/architecture-advice.md" = "~/.config/opencode/agent/architecture-advice.md"
+".config/opencode/agent/testing-guru.md" = "~/.config/opencode/agent/testing-guru.md"
+".config/opencode/agent/semver-nag.md" = "~/.config/opencode/agent/semver-nag.md"
 
 # Lazygit terminal UI for git
 [lazygit.files]
 ".config/lazygit/config.yml" = "~/.config/lazygit/config.yml"
+
+# Gitui terminal UI configs
+[gitui.files]
+".config/gitui/key_bindings.ron" = "~/.config/gitui/key_bindings.ron"
+".config/gitui/theme.ron" = "~/.config/gitui/theme.ron"

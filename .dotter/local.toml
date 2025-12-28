@@ -16,7 +16,9 @@ packages = [
   "btop",
   "tlrc",
   "lazygit",
+  "gitui",
   "starship",
   "fastfetch",
   "opencode",
+  "harlequin",
 ]

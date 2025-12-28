@@ -16,6 +16,8 @@ completion-timeout = 5 # time for auto-completion to appear. 5 is instant, 250 i
 # completion-replace = true
 undercurl = true
 indent-heuristic = "tree-sitter"
+jump-label-alphabet = "jfkdls;aurieowpqnvmcxz"
+# shell = ["nu", "--stdin", "-c"]
 
 [editor.inline-diagnostics]
 cursor-line = "hint"
@@ -76,14 +78,6 @@ right = [
 
 [keys.normal]
 esc = ["collapse_selection", "keep_primary_selection"]
-C-g = [
-  ":write-all",
-  ":new",
-  ":insert-output lazygit",
-  ":buffer-close!",
-  ":redraw",
-  ":reload-all",
-]
 Cmd-r = ":reload-all"
 C-s = ":w"
 Cmd-s = ":write"

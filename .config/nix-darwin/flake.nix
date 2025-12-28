@@ -99,6 +99,7 @@
             pkgs.yaziPlugins.chmod
             pkgs.yaziPlugins.git
             pkgs.yaziPlugins.lazygit
+            pkgs.yaziPlugins.gitui
             pkgs.yaziPlugins.duckdb
             pkgs.ripgrep
             pkgs.ripgrep-all
@@ -123,10 +124,13 @@
             pkgs.watchexec
             pkgs.git
             pkgs.lazygit
+            pkgs.gitui
             pkgs.difftastic
             pkgs.pre-commit
+            pkgs.wrkflw
             pkgs.jujutsu
             pkgs.lazyjj
+            pkgs.mergiraf
             pkgs.xz
             pkgs.zstd
             pkgs.bzip2
@@ -166,12 +170,17 @@
             pkgs.cargo-dist
             pkgs.cargo-shear
             pkgs.cargo-wizard
+            pkgs.cargo-show-asm
+            pkgs.cargo-generate
+            pkgs.cargo-readme
+            pkgs.reindeer
+            pkgs.crate2nix
             pkgs.dioxus-cli
 
             # sql stuff
             pkgs.duckdb
-            pkgs.fselect
             pkgs.tabiew
+            pkgs.visidata
 
             # python
             pkgs.python313
@@ -342,9 +351,9 @@
               orientation = "right";
               persistent-apps = [
                 "/Applications/Arc.app"
-                "/Applications/Spark.app"
+                "/Applications/Superhuman.app"
                 "/Applications/Bear.app"
-                "/Applications/Instapaper.app"
+                # "/Applications/Instapaper.app"
                 "/Applications/Ghostty.app"
                 "/Applications/Figma.app"
               ];

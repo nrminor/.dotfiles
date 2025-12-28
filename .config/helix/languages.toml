@@ -274,18 +274,21 @@ args = ["biome", "lsp-proxy"]
 [[language]]
 name = "sql"
 auto-format = true
-formatter = { command = 'deno', args = [
-  "fmt",
+formatter = { command = "uvx", args = [
+  "--from",
+  "sqlparse",
+  "sqlformat",
+  "--reindent",
+  "--keywords",
+  "lower",
+  "-s",
   "-",
-  "--ext",
-  "sql",
-  "--unstable-sql",
 ] }
-language-servers = ["sql-language-server"]
+# language-servers = ["sql-language-server"]
 
 [language-server.sql-language-server]
-command = "sql-language-server"
-args = ["up", "--method", "stdio"]
+command = "bunx"
+args = ["sql-language-server", "up", "--method", "stdio"]
 
 # GO
 # **************************************************************************************

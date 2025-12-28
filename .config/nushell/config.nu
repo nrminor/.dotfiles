@@ -21,24 +21,16 @@ if (which nix | is-not-empty) {
   let flake_lock = ($flake_dir | path join "flake.lock")
 
   if ($flake_lock | path exists) {
-    # Get the modification time of flake.lock
-    let lock_info = (ls -l $flake_lock | first)
+    # Follow symlink to get the real file's modification time
+    let real_lock = ($flake_lock | path expand)
+    let lock_info = (ls -l $real_lock | first)
     let lock_age = ($lock_info.modified | into int) / 1_000_000_000 # Convert to seconds
     let now = (date now | into int) / 1_000_000_000
     let age_days = (($now - $lock_age) / 86400 | math floor)
 
     if $age_days > 7 {
-      # Resolve the real path by following the flake.nix symlink
-      let flake_nix = ($flake_dir | path join "flake.nix")
-      let real_flake_dir = if ($flake_nix | path type) == "symlink" {
-        let flake_target = (ls -l $flake_nix | first | get target)
-        ($flake_target | path dirname)
-      } else {
-        $flake_dir
-      }
-
       print $"💡 Tip: Your nix-darwin flake hasn't been updated in ($age_days) days."
-      print $"   Run: cd ($real_flake_dir) && nix flake update && darwin-rebuild switch --flake ."
+      print $"   Run: sysupdate"
     }
   }
 }
@@ -84,10 +76,10 @@ source ~/.config/atuin/init.nu
 # Fast directory jumping
 source ~/.zoxide.nu
 
-# Completions (nicer tab completions)
-# One-time setup (if needed):
-# mkdir $"($nu.cache-dir)"
-# carapace _carapace nushell | save --force $"($nu.cache-dir)/carapace.nu"
+# Completions (carapace for external commands)
+# This file is managed by dotter and symlinked to the cache directory.
+# See .config/nushell/carapace.nu in the dotfiles repo for the customized version
+# that properly defers to Nushell's internal completer for built-in commands.
 source $"($nu.cache-dir)/carapace.nu"
 
 # Prompt (Starship)
@@ -134,6 +126,7 @@ alias b = btop
 alias cd = z
 alias cat = bat -p --pager never
 alias lg = lazygit
+alias gu = gitui
 alias lj = lazyjj
 alias gst = git status
 alias curll = curl -L
@@ -150,6 +143,7 @@ alias cat = bat -p --pager never
 alias py = RUST_LOG=warn uvx --with polars --with biopython --with pysam --with polars-bio python # run a uv-managed version of the python repl with some of my go to libs
 alias u = utop
 alias db = duckdb
+alias hq = harlequin
 alias tw = tw --theme catppuccin
 alias tab = tw
 alias ff = fastfetch

@@ -4,6 +4,8 @@
 # Organized by category: directory navigation, file operations, editor integration,
 # git workflow, process management, bioinformatics tools, and development tools
 
+use std/assert
+
 # ============================================================================
 # DIRECTORY NAVIGATION
 # ============================================================================
@@ -207,6 +209,39 @@ export def frm [
       trash $item
     } | ignore
   }
+}
+
+# Convert tabular data files between formats using DuckDB
+#
+# Converts between CSV, TSV, Parquet, and JSON formats.
+# DuckDB auto-detects the source format based on file extension.
+# Requires duckdb to be installed and available in PATH.
+#
+# Examples:
+#   > convert_file data.csv data.parquet        # CSV to Parquet
+#   > convert_file results.parquet results.csv  # Parquet to CSV
+#   > convert_file input.json output.tsv        # JSON to TSV
+export def convert_file [
+  src: string # Source file path (csv, tsv, parquet, json, ndjson)
+  dest: string # Destination file path (csv, tsv, parquet, json, ndjson)
+] {
+  assert ($src | path exists) $"The source file provided, ($src), does not exist."
+
+  let src_ext = $src | path parse | get extension | str downcase
+  let dest_ext = $dest | path parse | get extension | str downcase
+
+  let supported = ["csv" "tsv" "parquet" "json" "ndjson"]
+
+  assert ($src_ext in $supported) $"The source file's extension, ($src_ext), is not supported. Supported formats: ($supported | str join ', ')."
+  assert ($dest_ext in $supported) $"The destination file's extension, ($dest_ext), is not supported. Supported formats: ($supported | str join ', ')."
+
+  try {
+    ^duckdb -c $"copy \(select * from '($src)') to '($dest)'"
+  } catch {|err|
+    error make {msg: $"Conversion failed: ($err.msg)"}
+  }
+
+  print $"Conversion complete: ($dest)"
 }
 
 # ============================================================================
@@ -673,4 +708,220 @@ export def mo [
       print $"Deleted ($file)"
     }
   }
+}
+
+# ============================================================================
+# SYSTEM MANAGEMENT
+# ============================================================================
+
+# Update nix-darwin flake and rebuild system
+#
+# Updates flake.lock inputs and rebuilds the system configuration.
+# Use --dry-run to build without activating (no sudo required).
+# Equivalent to: just update (but works from any directory)
+#
+# Examples:
+#   > sysupdate              # Update flake and rebuild system
+#   > sysupdate --dry-run    # Update flake and build without activating
+export def sysupdate [
+  --dry-run (-n) # Build without activating (no sudo required)
+] {
+  let flake_dir = $env.HOME | path join ".dotfiles" ".config" "nix-darwin"
+
+  print "Updating nix-darwin flake..."
+  ^nix flake update --flake $flake_dir
+
+  if $dry_run {
+    print "Building system (dry run)..."
+    ^darwin-rebuild build --flake $"($flake_dir)#starter"
+    print "[ok] Build succeeded (no changes applied)"
+  } else {
+    print "Rebuilding system..."
+    ^sudo darwin-rebuild switch --flake $"($flake_dir)#starter"
+    print "[ok] System updated and rebuilt"
+  }
+}
+
+# Display nix-darwin system health and storage information
+#
+# Shows system status including flake info and generations.
+# Use --store to show nix store size (slow).
+# Use --gc to scan for reclaimable space (very slow).
+# Use --check to validate the flake.
+#
+# Examples:
+#   > syscheck                  # Show system status (fast)
+#   > syscheck --store          # Include store size (slow)
+#   > syscheck --gc             # Include garbage collection analysis (very slow)
+#   > syscheck --check          # Also run nix flake check
+#   > syscheck --store --gc -c  # Full analysis
+export def syscheck [
+  --check (-c) # Also run nix flake check to validate flake
+  --store (-s) # Show nix store size (slow)
+  --gc (-g)    # Scan for reclaimable space (very slow)
+] {
+  let flake_dir = $env.HOME | path join ".dotfiles" ".config" "nix-darwin"
+  let flake_lock = $flake_dir | path join "flake.lock"
+
+  # Header
+  print "==================================================================="
+  print "                    nix-darwin system status"
+  print "==================================================================="
+  print ""
+
+  # Flake info
+  print "[flake]"
+  print $"  location: ($flake_dir)"
+  if ($flake_lock | path exists) {
+    let lock_info = (ls -l $flake_lock | first)
+    let lock_age = ($lock_info.modified | into int) / 1_000_000_000
+    let now = (date now | into int) / 1_000_000_000
+    let age_days = (($now - $lock_age) / 86400 | math floor)
+    print $"  lock age: ($age_days) days"
+  }
+  print ""
+
+  # Current generation
+  print "[current system]"
+  let system_link = "/nix/var/nix/profiles/system"
+  if ($system_link | path exists) {
+    let current = (ls -l $system_link | first | get target | path basename)
+    let gen_num = ($current | parse "system-{num}-link" | get 0?.num? | default "unknown")
+    let current_target = (^readlink "/run/current-system" | str trim)
+    print $"  generation: ($gen_num)"
+    print $"  store path: ($current_target | path basename)"
+  }
+  print ""
+
+  # Count all generations
+  print "[generations]"
+  let gen_links = (ls /nix/var/nix/profiles/system-*-link | length)
+  print $"  total: ($gen_links)"
+  # Show last 3
+  let recent = (ls -l /nix/var/nix/profiles/system-*-link | sort-by modified | last 3 | reverse)
+  print "  recent:"
+  $recent | each {|g|
+    let name = ($g.name | path basename)
+    let num = ($name | parse "system-{num}-link" | get 0?.num? | default "?")
+    let age = ($g.modified | date humanize)
+    print $"    gen ($num): ($age)"
+  }
+  # Store size (opt-in due to slowness)
+  if $store {
+    print ""
+    print "[nix store]"
+    let store_size = (^du -sh /nix/store | split row "\t" | first | str trim)
+    print $"  total size: ($store_size)"
+  }
+
+  # Garbage collection info (opt-in due to slowness)
+  if $gc {
+    print ""
+    print "[garbage collection]"
+    print "  scanning for reclaimable paths..."
+    let dead_paths = (^nix-store --gc --print-dead err> /dev/null | lines)
+    let dead_count = ($dead_paths | length)
+    print $"  reclaimable paths: ($dead_count)"
+    if $dead_count > 0 {
+      # Estimate size of dead paths (sample first 100 for speed)
+      let sample = ($dead_paths | first ([$dead_count, 100] | math min))
+      let sample_sizes = ($sample | each {|p|
+        let info = (^nix path-info -S $p err> /dev/null | str trim | split row "\t")
+        if ($info | length) >= 2 {
+          $info | get 1 | into int
+        } else {
+          0
+        }
+      })
+      let sample_total = ($sample_sizes | math sum)
+      let estimated_total = if $dead_count > 100 {
+        ($sample_total * $dead_count / 100)
+      } else {
+        $sample_total
+      }
+      let human_size = if $estimated_total > 1073741824 {
+        $"~(($estimated_total / 1073741824 | math round --precision 1))GB"
+      } else if $estimated_total > 1048576 {
+        $"~(($estimated_total / 1048576 | math round --precision 0))MB"
+      } else {
+        $"~(($estimated_total / 1024 | math round --precision 0))KB"
+      }
+      print $"  estimated reclaimable: ($human_size)"
+      print "  hint: run 'nix-collect-garbage -d' to reclaim space"
+    } else {
+      print "  store is clean"
+    }
+  }
+
+  # Optional flake check
+  if $check {
+    print ""
+    print "[flake validation]"
+    print "  running nix flake check..."
+    let check_result = (do { ^nix flake check $flake_dir } | complete)
+    if $check_result.exit_code == 0 {
+      print "  [ok] flake check passed"
+    } else {
+      print "  [error] flake check failed"
+      print $check_result.stderr
+    }
+  }
+
+  print ""
+  print "==================================================================="
+}
+
+# ============================================================================
+# SHELL DIAGNOSTICS
+# ============================================================================
+
+# Display shell startup time and diagnostic information
+#
+# Shows timing and configuration details useful for optimizing shell startup.
+# Includes nushell startup time, loaded commands/plugins, PATH analysis,
+# active integrations, and starship module timings.
+#
+# Examples:
+#   > startup                # Show all startup diagnostics
+export def startup [] {
+  # Core timing and version info
+  print $"Nushell startup: ($nu.startup-time)"
+  print $"Version: (version | get version)"
+  print $"Config: ($nu.config-path)"
+
+  # Load metrics
+  let cmd_count = (help commands | length)
+  let plugin_count = (plugin list | length)
+  let overlay_count = (overlay list | length)
+  print $"Commands loaded: ($cmd_count)"
+  print $"Plugins: ($plugin_count)"
+  print $"Overlays: ($overlay_count)"
+
+  # Environment analysis
+  let path_count = ($env.PATH | length)
+  print $"PATH entries: ($path_count)"
+
+  # History info
+  let history_count = (history | length)
+  print $"History entries: ($history_count)"
+
+  # Detect active integrations
+  let integrations = (
+    [
+      (if (which atuin | is-not-empty) { "atuin" })
+      (if (which zoxide | is-not-empty) { "zoxide" })
+      (if (which carapace | is-not-empty) { "carapace" })
+      (if (which fnm | is-not-empty) { "fnm" })
+      (if (which direnv | is-not-empty) { "direnv" })
+      (if (which starship | is-not-empty) { "starship" })
+    ]
+    | compact
+    | str join ", "
+  )
+  print $"Active integrations: ($integrations)"
+
+  # Starship timings
+  print ""
+  print "Starship module timings:"
+  ^starship timings
 }

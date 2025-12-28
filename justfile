@@ -66,7 +66,7 @@ update:
     @echo "Updating nix-darwin flake..."
     cd {{ FLAKE_DIR }} && nix flake update
     @echo "Rebuilding system..."
-    darwin-rebuild switch --flake {{ FLAKE_DIR }}#starter
+    sudo darwin-rebuild switch --flake {{ FLAKE_DIR }}#starter
     @echo "✓ System updated and rebuilt"
 
 alias u := update
@@ -75,7 +75,7 @@ alias u := update
 [group('system')]
 rebuild:
     @echo "Rebuilding system..."
-    darwin-rebuild switch --flake {{ FLAKE_DIR }}#starter
+    sudo darwin-rebuild switch --flake {{ FLAKE_DIR }}#starter
     @echo "✓ System rebuilt"
 
 alias r := rebuild
@@ -114,7 +114,7 @@ alias g := generations
 [group('system')]
 rollback:
     @echo "Rolling back to previous generation..."
-    darwin-rebuild --rollback
+    sudo darwin-rebuild --rollback
     @echo "✓ Rolled back"
 
 alias rb := rollback
@@ -123,7 +123,7 @@ alias rb := rollback
 [group('system')]
 switch-generation gen:
     @echo "Switching to generation {{ gen }}..."
-    darwin-rebuild switch --flake {{ FLAKE_DIR }}#starter --switch-generation {{ gen }}
+    sudo darwin-rebuild switch --flake {{ FLAKE_DIR }}#starter --switch-generation {{ gen }}
 
 alias sg := switch-generation
 

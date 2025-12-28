@@ -1,0 +1,7 @@
+default_profile = "global"
+
+[profiles.global]
+adapter = "duckdb"
+theme = "catppuccin-mocha"
+limit = 100000
+keymap_name = ["vscode"]

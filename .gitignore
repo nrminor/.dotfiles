@@ -157,6 +157,11 @@
 !/.config/lazygit
 !/.config/lazygit/config.yml
 
+# gitui
+!/.config/gitui
+!/.config/gitui/key_bindings.ron
+!/.config/gitui/theme.ron
+
 # starship config
 !/.config/starship.toml
 
@@ -170,6 +175,9 @@
 !/.config/opencode/opencode.jsonc
 !/.config/opencode/agent
 !/.config/opencode/agent/*.md
+
+# harlequin
+!/.config/.harlequin.toml
 
 # Ignore common unwanted files
 /.config/**/.DS_Store

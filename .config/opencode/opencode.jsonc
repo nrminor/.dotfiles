@@ -6,5 +6,10 @@
     "scroll_acceleration": {
       "enabled": true
     }
-  }
+  },
+  "keybinds": {
+    "input_submit": "return",
+    "input_newline": "shift+return,ctrl+return,alt+return,ctrl+j"
+  },
+  "default_agent": "careful"
 }
