@@ -15,6 +15,10 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    homebrew-steipete = {
+      url = "github:steipete/homebrew-tap";
+      flake = false;
+    };
   };
 
   outputs =
@@ -26,6 +30,7 @@
       nix-homebrew,
       homebrew-core,
       homebrew-cask,
+      homebrew-steipete,
       ...
     }:
     let
@@ -130,6 +135,7 @@
             pkgs.wrkflw
             pkgs.jujutsu
             pkgs.lazyjj
+            pkgs.jjui
             pkgs.mergiraf
             pkgs.xz
             pkgs.zstd
@@ -220,8 +226,8 @@
             pkgs.goreleaser
 
             # zig
-            pkgs.zig
-            pkgs.zls
+            # pkgs.zig
+            # pkgs.zls
 
             # docker
             pkgs.docker-ls
@@ -277,8 +283,9 @@
             pkgs.beam28Packages.elixir-ls
 
             # authoring tools (e.g. typst, latex, quarto, markdown)
-            # pkgs.marksman
+            pkgs.marksman
             pkgs.markdown-oxide
+            pkgs.rumdl
             pkgs.typst
             pkgs.typstyle
             pkgs.tinymist
@@ -323,6 +330,7 @@
               "ghostty"
               "figma"
               "font-symbols-only-nerd-font"
+              "steipete/tap/repobar"
             ];
 
             masApps = {
@@ -670,6 +678,9 @@
               enableRosetta = false;
               user = "nickminor";
               autoMigrate = true;
+              taps = {
+                "steipete/tap" = homebrew-steipete;
+              };
             };
           }
           (

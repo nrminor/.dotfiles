@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rvben/rumdl/main/rumdl.schema.json
+
+[global]
+respect-gitignore = false
+disable = ["MD013", "MD033", "MD041"]
+
+# [MD013]
+# line-length = 100
+# code-blocks = false
+# tables = false
+# reflow = true

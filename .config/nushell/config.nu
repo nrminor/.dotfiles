@@ -3,11 +3,6 @@
 # For config settings, custom commands, aliases, and tool initialization
 # ============================================================================
 
-# CUSTOM COMMANDS MODULE
-# -------------------------------------------------------------------------------------
-# Import custom commands from commands.nu
-use commands.nu *
-
 # INTERACTIVE SHELL INITIALIZATION
 # -------------------------------------------------------------------------------------
 # Display system info on startup
@@ -97,14 +92,6 @@ if ("~/.config/nushell/local.nu" | path exists) {
 }
 # -------------------------------------------------------------------------------------
 
-# PYTHON VENV HELPERS
-# -------------------------------------------------------------------------------------
-# Python virtual environment activation requires overlay commands
-# These aliases provide shorter syntax
-alias a = overlay use .venv/bin/activate.nu
-alias d = overlay hide activate
-# -------------------------------------------------------------------------------------
-
 # Managing Node/NVM with fnm
 # -------------------------------------------------------------------------------------
 if not (which fnm | is-empty) {
@@ -120,81 +107,10 @@ if not (which fnm | is-empty) {
 }
 # -------------------------------------------------------------------------------------
 
-# ALIASES
+# LOAD CUSTOM MODULES
 # -------------------------------------------------------------------------------------
-alias b = btop
-alias cd = z
-alias cat = bat -p --pager never
-alias lg = lazygit
-alias gu = gitui
-alias lj = lazyjj
-alias gst = git status
-alias curll = curl -L
-alias h = hx
-alias h. = hx .
-alias g. = hx .
-alias x = hx
-alias z. = zed .
-alias o. = ^open . # open the current directory in Finder on MacOS
-alias dots = dotter deploy -f -v -y
-alias la = ls --all
-alias less = less -R
-alias cat = bat -p --pager never
-alias py = RUST_LOG=warn uvx --with polars --with biopython --with pysam --with polars-bio python # run a uv-managed version of the python repl with some of my go to libs
-alias u = utop
-alias db = duckdb
-alias hq = harlequin
-alias tw = tw --theme catppuccin
-alias tab = tw
-alias ff = fastfetch
-alias y = yazi
-alias zj = zellij
-alias zjs = zellij ls
-alias zjls = zellij ls
-alias zja = zellij a
-alias zjd = zellij d
-alias f = fzf
-alias fhis = fh
-alias fhist = fh
-alias fop = fopen
-alias fzopen = fopen
-alias fzop = fopen
-alias fk = fkill
-alias fkl = fkill
-alias fzgb = fgb
-alias fbranches = fgb
-alias fzbranches = fgb
-alias gitcc = gitcd
-alias fzeq = fseq
-alias fzrm = frm
-# alias z- = z -
-alias uvs = uv sync --all-extras
-# alias uvv = uv sync --all-extras and source .venv/bin/activate
-# alias a = source .venv/bin/activate
-alias sq = seqkit
-alias mm = minimap2
-alias bt = bedtools
-alias st = samtools
-alias bcf = bcftools
-alias nf = nextflow
-alias k = clear
-# alias zr = source $HOME/.zshenv && source $HOME/.zshrc
-# alias zrl = source $HOME/.zshenv && source $HOME/.zshrc
-# alias zshrc = source $HOME/.zshenv && source $HOME/.zshrc
-if $nu.os-info.name == "macos" {
-  alias bfx = z ~/Documents/bioinformatics/
-  alias books = z ~/Documents/books/
-  alias dholk = z ~/Documents/dholk_experiments/
-} else {
-  alias bfx = z ~/bioinformatics/
-  alias books = z ~/books/
-  alias dholk = z ~/dholk_experiments/
-}
-alias l = ls
-alias s = ls
-alias ks = ls
-alias cld = claude
-alias cl = claude
-alias oc = opencode
-alias code = opencode
-alias chtc = ssh nrminor@oconnor-ap.chtc.wisc.edu
+# Import custom commands and aliases. We do this at the end of the config because some
+# commands and aliases depend on all the above having happened first.
+use commands.nu *
+use aliases.nu *
+# -------------------------------------------------------------------------------------

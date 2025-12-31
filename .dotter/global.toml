@@ -15,6 +15,7 @@
 ".config/nushell/config.nu" = "~/.config/nushell/config.nu"
 ".config/nushell/env.nu" = "~/.config/nushell/env.nu"
 ".config/nushell/commands.nu" = "~/.config/nushell/commands.nu"
+".config/nushell/aliases.nu" = "~/.config/nushell/aliases.nu"
 ".config/atuin/init.nu" = "~/.config/atuin/init.nu"
 
 # Git configuration
@@ -83,6 +84,7 @@
 ".config/opencode/agent/architecture-advice.md" = "~/.config/opencode/agent/architecture-advice.md"
 ".config/opencode/agent/testing-guru.md" = "~/.config/opencode/agent/testing-guru.md"
 ".config/opencode/agent/semver-nag.md" = "~/.config/opencode/agent/semver-nag.md"
+".config/opencode/agent/nick-isms.md" = "~/.config/opencode/agent/nick-isms.md"
 
 # Lazygit terminal UI for git
 [lazygit.files]
@@ -92,3 +94,16 @@
 [gitui.files]
 ".config/gitui/key_bindings.ron" = "~/.config/gitui/key_bindings.ron"
 ".config/gitui/theme.ron" = "~/.config/gitui/theme.ron"
+
+# rumdl markdown language server and formatter
+[rumdl.files]
+".config/rumdl/.rumdl.toml" = "~/.config/rumdl/.rumdl.toml"
+
+# prettier rc file
+[prettier.files]
+".config/.prettierrc" = "~/.prettierrc"
+
+# oxc file
+[oxc.files]
+".config/.oxfmtrc.json" = "~/.oxfmtrc.json"
+# ".config/.oxfmtrc.jsonc" = "~/.oxfmtrc.jsonc"

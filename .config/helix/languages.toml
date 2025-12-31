@@ -269,6 +269,14 @@ enumMemberValues.enabled = false
 command = "bunx"
 args = ["biome", "lsp-proxy"]
 
+[language-server.oxlint]
+command = "bunx"
+args = ["oxlint", "--lsp"]
+
+[language-server.oxfmt]
+command = "bunx"
+args = ["oxfmt", "--lsp"]
+
 # SQL
 # **************************************************************************************
 [[language]]
@@ -402,13 +410,16 @@ file-types = [
   "workbook",
   "mdx",
 ]
-language-servers = [
-  # "marksman",
-  "markdown-oxide",
-]
+language-servers = ["rumdl", "marksman", "markdown-oxide"]
 indent = { tab-width = 2, unit = "  " }
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md"] }
+# formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md"] }
+# formatter = { command = 'rumdl', args = ["fmt", "-", "--quiet"] }
+formatter = { command = "bunx", args = ["prettier", "--parser", "markdown"] }
 auto-format = true
+
+[language-server.rumdl]
+command = "rumdl"
+args = ["server", "--stdio"]
 
 [[language]]
 name = "typst"

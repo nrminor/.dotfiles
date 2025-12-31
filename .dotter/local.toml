@@ -21,4 +21,7 @@ packages = [
   "fastfetch",
   "opencode",
   "harlequin",
+  "rumdl",
+  "prettier",
+  "oxc",
 ]

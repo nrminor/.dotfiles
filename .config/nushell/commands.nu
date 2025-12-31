@@ -314,6 +314,9 @@ export def hxs [
 # Opens git-modified files as buffers in Helix.
 # By default shows all changes including untracked files, excluding deleted files.
 #
+# Note: This command name conflicts with Mercurial's CLI. If Mercurial is installed,
+# this command will error with instructions on how to disable it.
+#
 # Examples:
 #   > hg                     # Open all modified files including untracked
 #   > hg --tracked           # Open only tracked modified files (staged + unstaged)
@@ -322,6 +325,20 @@ export def hg [
   --tracked (-t) # Only show tracked files (staged + unstaged vs HEAD)
   --unstaged (-w) # Only show unstaged changes (working tree vs index)
 ] {
+  # Check if mercurial (external hg) is installed - if so, we shouldn't shadow it
+  let mercurial = (which -a hg | where type == "external" | first?)
+  if ($mercurial | is-not-empty) {
+    error make {
+      msg: "Command collision: 'hg' conflicts with Mercurial"
+      help: $"Mercurial is installed at ($mercurial.path). This custom 'hg' command cannot coexist with it.
+
+To disable this custom command and use Mercurial instead, add to your config.nu:
+    hide commands hg
+
+Or remove/rename the 'hg' command in commands.nu"
+    }
+  }
+
   let files = if $unstaged {
     # Just unstaged changes, excluding deleted files
     git diff --name-only --diff-filter=d | lines
@@ -371,6 +388,43 @@ export def --env gitcd [
   git clone $url
   if $env.LAST_EXIT_CODE == 0 {
     cd $repo
+  }
+}
+
+# Describe the current jj change with an optional message
+#
+# Opens the editor for interactive description if no message provided.
+# Requires jj (Jujutsu) to be installed and available in PATH.
+#
+# Examples:
+#   > jjd                           # Open editor to write description
+#   > jjd "Fix typo in README"      # Set description directly
+export def jjd [
+  msg?: string # Optional commit message
+] {
+  if ($msg | is-not-empty) {
+    ^jj describe -m $msg
+  } else {
+    ^jj describe
+  }
+}
+
+# Create a new jj change with an optional description
+#
+# Creates a new change after the current one. If a message is provided,
+# sets the description immediately; otherwise leaves it empty.
+# Requires jj (Jujutsu) to be installed and available in PATH.
+#
+# Examples:
+#   > jjn                           # Create new empty change
+#   > jjn "Add user authentication" # Create new change with description
+export def jjn [
+  msg?: string # Optional description for the new change
+] {
+  if ($msg | is-not-empty) {
+    ^jj new -m $msg
+  } else {
+    ^jj new
   }
 }
 
@@ -758,7 +812,7 @@ export def sysupdate [
 export def syscheck [
   --check (-c) # Also run nix flake check to validate flake
   --store (-s) # Show nix store size (slow)
-  --gc (-g)    # Scan for reclaimable space (very slow)
+  --gc (-g) # Scan for reclaimable space (very slow)
 ] {
   let flake_dir = $env.HOME | path join ".dotfiles" ".config" "nix-darwin"
   let flake_lock = $flake_dir | path join "flake.lock"
@@ -824,15 +878,17 @@ export def syscheck [
     print $"  reclaimable paths: ($dead_count)"
     if $dead_count > 0 {
       # Estimate size of dead paths (sample first 100 for speed)
-      let sample = ($dead_paths | first ([$dead_count, 100] | math min))
-      let sample_sizes = ($sample | each {|p|
-        let info = (^nix path-info -S $p err> /dev/null | str trim | split row "\t")
-        if ($info | length) >= 2 {
-          $info | get 1 | into int
-        } else {
-          0
+      let sample = ($dead_paths | first ([$dead_count 100] | math min))
+      let sample_sizes = (
+        $sample | each {|p|
+          let info = (^nix path-info -S $p err> /dev/null | str trim | split row "\t")
+          if ($info | length) >= 2 {
+            $info | get 1 | into int
+          } else {
+            0
+          }
         }
-      })
+      )
       let sample_total = ($sample_sizes | math sum)
       let estimated_total = if $dead_count > 100 {
         ($sample_total * $dead_count / 100)

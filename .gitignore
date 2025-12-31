@@ -179,6 +179,17 @@
 # harlequin
 !/.config/.harlequin.toml
 
+# rumdl
+!/.config/rumdl
+!/.config/rumdl/.rumdl.toml
+
+# prettier
+!/.config/.prettierrc
+
+# oxc (oxfmt, oxlint, etc.)
+!/.config/.oxfmtrc.json
+!/.config/.oxfmtrc.jsonc
+
 # Ignore common unwanted files
 /.config/**/.DS_Store
 
