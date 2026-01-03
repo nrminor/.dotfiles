@@ -2,9 +2,10 @@
 command = "/bin/zsh -l -c 'exec nu --login'"
 
 # font configurations
-font-family = "Berkeley Mono"
+font-family = Berkeley Mono
 font-size = 11.5
 font-thicken = true
+# font-thicken-strength = 255
 
 # window configurations
 theme = Catppuccin Macchiato
@@ -17,6 +18,7 @@ window-decoration = true
 window-padding-balance = true
 window-save-state = always
 adjust-cell-height = 18%
+# adjust-cell-width = 0%
 
 # mouse and cursor configurations
 mouse-hide-while-typing = true
@@ -34,8 +36,6 @@ quick-terminal-screen = main
 macos-option-as-alt = left
 macos-icon-frame = chrome
 macos-icon = custom-style
-keybind = alt+left=unbind
-keybind = alt+right=unbind
 window-decoration = auto
 macos-titlebar-style = tabs
 macos-titlebar-proxy-icon = visible
