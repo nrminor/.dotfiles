@@ -428,6 +428,34 @@ export def jjn [
   }
 }
 
+# Zoxide path completer
+#
+# Provides completions from zoxide's frecency database for the z command.
+# Used internally by the z command below.
+def "nu-complete zoxide path" [context: string] {
+  let parts = $context | split row " " | skip 1
+  {
+    options: {
+      sort: false,
+      completion_algorithm: substring,
+      case_sensitive: false,
+    },
+    completions: (^zoxide query --list --exclude $env.PWD -- ...$parts | lines),
+  }
+}
+
+# Jump to a directory using zoxide with completions
+#
+# Overrides the z alias from .zoxide.nu to provide tab completions
+# from zoxide's frecency database. Wraps __zoxide_z for the actual navigation.
+#
+# Examples:
+#   > z dot<TAB>             # Complete to ~/.dotfiles (if visited frequently)
+#   > z bio des<TAB>         # Complete with multiple keywords
+export def --env --wrapped z [...rest: string@"nu-complete zoxide path"] {
+  __zoxide_z ...$rest
+}
+
 # Fuzzy find and checkout a git branch
 #
 # Lists all branches (local and remote), removes duplicates, and allows fuzzy selection.

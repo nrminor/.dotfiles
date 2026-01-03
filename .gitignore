@@ -71,6 +71,7 @@
 !/.config/helix/runtime/themes/*.toml
 
 # Zoxide
+!/.config/zoxide
 !/.config/zoxide/.zoxide.nu
 
 # Marimo

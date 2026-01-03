@@ -11,6 +11,7 @@ packages = [
   "yazi",
   "zellij",
   "atuin",
+  "zoxide",
   "bat",
   "marimo",
   "btop",

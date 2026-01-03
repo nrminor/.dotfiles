@@ -50,6 +50,9 @@
 [atuin.files]
 ".config/atuin/config.toml" = "~/.config/atuin/config.toml"
 
+[zoxide.files]
+".config/zoxide/.zoxide.nu" = "~/.zoxide.nu"
+
 # btop system monitor
 [btop.files]
 ".config/btop/btop.conf" = "~/.config/btop/btop.conf"
