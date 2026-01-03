@@ -37,3 +37,20 @@ $current.completions.external = (
 )
 
 $env.config = $current
+
+$env.config.menus ++= [
+  {
+    name: completion_menu
+    only_buffer_difference: false
+    marker: "| "
+    type: {
+      layout: ide
+      columns: 1
+      col_width: 25
+      selection_rows: 20
+      description_rows: 20
+    }
+    style: {
+    }
+  }
+]
