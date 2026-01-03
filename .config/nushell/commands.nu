@@ -117,7 +117,7 @@ export def --env fcd [
 export def ll [
   path: string = "." # Directory path to list
 ] {
-  ls --all --long $path | sort-by type
+  ls --threads --all --long $path | sort-by type
 }
 
 # ============================================================================
@@ -326,8 +326,8 @@ export def hg [
   --unstaged (-w) # Only show unstaged changes (working tree vs index)
 ] {
   # Check if mercurial (external hg) is installed - if so, we shouldn't shadow it
-  let mercurial = (which -a hg | where type == "external" | first?)
-  if ($mercurial | is-not-empty) {
+  let mercurial = (which -a hg | where type == "external" | length)
+  if ($mercurial != 0) {
     error make {
       msg: "Command collision: 'hg' conflicts with Mercurial"
       help: $"Mercurial is installed at ($mercurial.path). This custom 'hg' command cannot coexist with it.
@@ -363,7 +363,7 @@ Or remove/rename the 'hg' command in commands.nu"
 }
 
 # ============================================================================
-# GIT WORKFLOW
+# VERSION CONTROL WORKFLOW
 # ============================================================================
 
 # Clone a git repository and cd into it
@@ -425,6 +425,31 @@ export def jjn [
     ^jj new -m $msg
   } else {
     ^jj new
+  }
+}
+
+# Initialize a colocated jj repo from an existing git repo
+#
+# Runs `jj git init --git-repo .` and then tracks all remote-tracking branches
+# from origin as jj bookmarks. This is useful when migrating a git repo to jj
+# while keeping it colocated (sharing the .git directory).
+#
+# Examples:
+#   > jj from git            # Initialize jj and track all origin branches
+export def "jj from git" [] {
+  # start with an init
+  ^jj git init --git-repo .
+
+  # determine which bookmarks to create based on branches on the remote origin
+  let origin_branches = git branch -r
+  | lines
+  | where $it !~ "HEAD" # Filter out HEAD -> main pointer
+  | str trim
+  | each {|b| $b | str replace "origin/" "" | $"($in)@origin" }
+
+  # track any detected git origin branches
+  if ($origin_branches | is-not-empty) {
+    ^jj bookmark track ...$origin_branches
   }
 }
 

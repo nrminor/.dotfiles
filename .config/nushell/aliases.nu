@@ -73,6 +73,7 @@ export alias gitcc = gitcd
 export alias jja = jj abandon
 export alias jjs = jj status
 export alias jju = jj undo
+export alias jje = jj edit
 
 # ============================================================================
 # ZELLIJ (Terminal Multiplexer)
