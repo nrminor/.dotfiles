@@ -113,7 +113,9 @@ args = ["language-server"]
 name = "javascript"
 language-servers = [
   { name = "typescript-language-server", except-features = ["format"] },
-  "biome",
+  "oxfmt",
+  "oxlint",
+  # "biome",
   # "deno-lsp",
   "vscode-eslint-language-server",
 ]
@@ -139,7 +141,9 @@ auto-format = true
 name = "typescript"
 language-servers = [
   { name = "typescript-language-server", except-features = ["format"] },
-  "biome",
+  "oxfmt",
+  "oxlint",
+  # "biome",
   # "vscode-eslint-language-server",
   "tailwindcss-ls",
 ]
@@ -158,7 +162,9 @@ auto-format = true
 name = "jsx"
 language-servers = [
   { name = "typescript-language-server", except-features = ["format"] },
-  "biome",
+  "oxfmt",
+  "oxlint",
+  # "biome",
   # "vscode-eslint-language-server",
   "tailwindcss-ls",
 ]
@@ -176,7 +182,9 @@ auto-format = true
 name = "tsx"
 language-servers = [
   { name = "typescript-language-server", except-features = ["format"] },
-  "biome",
+  "oxfmt",
+  "oxlint",
+  # "biome",
   # "vscode-eslint-language-server",
   "tailwindcss-ls",
 ]
