@@ -140,6 +140,7 @@
             pkgs.jjui
             jj-starship.packages.${pkgs.system}.jj-starship
             pkgs.mergiraf
+            pkgs.gh
             pkgs.xz
             pkgs.zstd
             pkgs.bzip2
@@ -176,6 +177,7 @@
             pkgs.cargo-audit
             pkgs.cargo-info
             pkgs.cargo-fuzz
+            pkgs.cargo-insta
             pkgs.cargo-dist
             pkgs.cargo-shear
             pkgs.cargo-wizard

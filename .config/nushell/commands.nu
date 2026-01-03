@@ -117,7 +117,7 @@ export def --env fcd [
 export def ll [
   path: string = "." # Directory path to list
 ] {
-  ls --threads --all --long $path | sort-by type
+  ls --all --long $path | sort-by type
 }
 
 # ============================================================================
@@ -461,11 +461,11 @@ def "nu-complete zoxide path" [context: string] {
   let parts = $context | split row " " | skip 1
   {
     options: {
-      sort: false,
-      completion_algorithm: substring,
-      case_sensitive: false,
-    },
-    completions: (^zoxide query --list --exclude $env.PWD -- ...$parts | lines),
+      sort: false
+      completion_algorithm: substring
+      case_sensitive: false
+    }
+    completions: (^zoxide query --list --exclude $env.PWD -- ...$parts | lines)
   }
 }
 
@@ -848,6 +848,43 @@ export def sysupdate [
     print "[ok] System updated and rebuilt"
   }
 }
+
+# Option and modify the nix-darwin flake in the editor configured with $VISUAL.
+#
+# This command is useful shorthand for changing to the dotfiles directory and opening
+# the nix flake for modification, e.g., adding a nixpkgs system dependency.
+export def --env sysmod [
+  --update (-u) # run system update on exit
+  --stay (-s) # stay in dotfiles repo on exit
+] {
+  # record the directory we're starting in (this can be anywhere in the system)
+  let current_dir = $env.PWD
+
+  # move to the dotfiles directory and find the flake
+  let dotfiles_dir = $env.HOME | path join ".dotfiles"
+  let darwin_flake = $dotfiles_dir | path join ".config" "nix-darwin" "flake.nix"
+
+  # make sure the flake exists
+  if not ($darwin_flake | path exists) {
+    error make {msg: $"The system nix flake expected at the path ($darwin_flake) is missing. Aborting."}
+  }
+
+  # move into the dotfiles repo and open it in the user's editor
+  cd $dotfiles_dir
+  ^$env.VISUAL $darwin_flake
+
+  # move back to the directory we started in unless the user requested otherwise
+  if not $stay {
+    cd $current_dir
+  }
+
+  # eagerly run a nixOS system update with any changes if requested by the user. This
+  # command defaults to lazy updating unless given `--update`.
+  if $update {
+    sysupdate
+  }
+}
+export alias sysedit = sysmod
 
 # Display nix-darwin system health and storage information
 #
