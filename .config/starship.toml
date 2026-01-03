@@ -7,8 +7,7 @@ $username\
 [](bg:peach fg:red)\
 $directory\
 [](bg:yellow fg:peach)\
-$git_branch\
-$git_status\
+${custom.jj}\
 [](fg:yellow bg:green)\
 $c\
 $rust\
@@ -25,8 +24,10 @@ $conda\
 $time\
 [ ](fg:lavender)\
 $cmd_duration\
-$line_break\
-$character"""
+$line_break
+
+$character
+"""
 
 palette = 'catppuccin_mocha'
 
@@ -79,10 +80,12 @@ truncation_symbol = "…/"
 symbol = ""
 style = "bg:yellow"
 format = '[[ $symbol $branch ](fg:crust bg:yellow)]($style)'
+disabled = true
 
 [git_status]
 style = "bg:yellow"
 format = '[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)'
+disabled = true
 
 [nodejs]
 symbol = ""
@@ -277,3 +280,11 @@ surface0 = "#363a4f"
 base = "#24273a"
 mantle = "#1e2030"
 crust = "#181926"
+
+[custom.jj]
+command = "jj-starship --no-color"
+style = "bg:yellow"
+format = '[[ $symbol $output ](fg:crust bg:yellow)]($style)'
+when = "jj-starship detect"
+shell = ["sh"]
+# format = "$output "

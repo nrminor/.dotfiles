@@ -19,6 +19,7 @@
       url = "github:steipete/homebrew-tap";
       flake = false;
     };
+    jj-starship.url = "github:dmmulroy/jj-starship";
   };
 
   outputs =
@@ -31,6 +32,7 @@
       homebrew-core,
       homebrew-cask,
       homebrew-steipete,
+      jj-starship,
       ...
     }:
     let
@@ -136,6 +138,7 @@
             pkgs.jujutsu
             pkgs.lazyjj
             pkgs.jjui
+            jj-starship.packages.${pkgs.system}.jj-starship
             pkgs.mergiraf
             pkgs.xz
             pkgs.zstd
@@ -320,15 +323,16 @@
             ];
 
             casks = [
+              "ghostty"
               "arc"
-              "visual-studio-code"
-              "docker-desktop"
+              "raycast"
+              "figma"
               "slack"
               "discord"
+              "signal"
+              "visual-studio-code"
+              "docker-desktop"
               "zoom"
-              "raycast"
-              "ghostty"
-              "figma"
               "font-symbols-only-nerd-font"
               "steipete/tap/repobar"
             ];
@@ -361,7 +365,7 @@
                 "/Applications/Arc.app"
                 "/Applications/Superhuman.app"
                 "/Applications/Bear.app"
-                # "/Applications/Instapaper.app"
+                "/Applications/Instapaper.app"
                 "/Applications/Ghostty.app"
                 "/Applications/Figma.app"
               ];
