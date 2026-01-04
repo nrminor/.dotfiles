@@ -391,6 +391,90 @@ export def --env gitcd [
   }
 }
 
+# Clone a repository into a dedicated code reviews directory.
+#
+# By default, clones into ~/Documents/code-reviews, creating the directory if it
+# doesn't exist. Uses Jujutsu (jj) for cloning, falling back to git if jj fails.
+#
+# Examples:
+#   # Clone a repo into the default code reviews directory
+#   review https://github.com/nushell/nushell.git
+#
+#   # Clone into a custom directory
+#   review https://github.com/nushell/nushell.git ~/reviews
+#
+#   # Fail if the code reviews directory doesn't exist
+#   review --no-create https://github.com/nushell/nushell.git
+#
+#   # Immediately open the cloned directory into the editor set up with $VISUAL,
+#   # falling back to $EDITOR
+#   review --edit https://github.com/nushell/nushell.git
+export def --env review [
+  repo: string # URL for repository to clone
+  directory?: string # override default behavior and place the repo in this destination
+  --no-create (-n) # fail instead of creating a code-reviews parent directory
+  --edit (-e) # open editor once the clone is complete
+] {
+  # link up the components of a directory for code reviews (note that this path will
+  # not be idiomatic on windows)
+  let reviews_dir = match $directory {
+    null | "" => ($env.HOME | path join "Documents" "code-reviews")
+    _ => $directory
+  }
+
+  # run existence check on the reviews directory
+  let dir_exists = $reviews_dir | path exists
+
+  # create the directory if it doesn't exist
+  match [$dir_exists $no_create] {
+    [false true] => {
+      error make {
+        msg: $"The expected code reviews directory, ($reviews_dir), does not exist, and `--no-create` was specified."
+      }
+    }
+    [false false] => { mkdir -v $reviews_dir }
+    _ => { }
+  }
+
+  # change to the reviews dir that we now know exists
+  cd $reviews_dir
+
+  # make sure the user's repo exists
+  try { git ls-remote $repo | ignore } catch {
+    error make {
+      msg: $"The provided repo '($repo)' does not exist, is private to you, or there is no network connection."
+    }
+  }
+
+  # try to clone with `jj`, falling back to git if needed
+  try { jj git clone $repo } catch {
+    print "WARNING: failed to clone with Jujutsu; falling back to git."
+    git clone $repo
+  }
+
+  # pull out the name of the repo and change into it
+  let repo_name = $repo
+  | path basename
+  | str replace -r '\.git$' ''
+  cd $repo_name
+
+  # if the user doesn't want to immediately open their editor, we're done here
+  if not $edit { return }
+
+  # if the editor is requested, open the directory in this repo
+  try { ^$env.VISUAL . } catch {
+    try {
+      ^$env.EDITOR .
+    } catch {|err|
+      error make {
+        msg: $"Could not automatically open the repo for review using the editor in $VISUAL or $EDITOR: '($err.msg)'"
+      }
+    }
+  }
+}
+export alias code-review = review
+# export alias "code review" = code-review
+
 # Describe the current jj change with an optional message
 #
 # Opens the editor for interactive description if no message provided.
