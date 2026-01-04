@@ -430,7 +430,7 @@ export def jjn [
 
 # Initialize a colocated jj repo from an existing git repo
 #
-# Runs `jj git init --git-repo .` and then tracks all remote-tracking branches
+# Runs `jj git init --colocate` and then tracks all remote-tracking branches
 # from origin as jj bookmarks. This is useful when migrating a git repo to jj
 # while keeping it colocated (sharing the .git directory).
 #
@@ -438,7 +438,7 @@ export def jjn [
 #   > jj from git            # Initialize jj and track all origin branches
 export def "jj from git" [] {
   # start with an init
-  ^jj git init --git-repo .
+  ^jj git init --colocate
 
   # determine which bookmarks to create based on branches on the remote origin
   let origin_branches = git branch -r
