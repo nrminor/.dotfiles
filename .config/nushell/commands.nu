@@ -325,6 +325,10 @@ export def hg [
   --tracked (-t) # Only show tracked files (staged + unstaged vs HEAD)
   --unstaged (-w) # Only show unstaged changes (working tree vs index)
 ] {
+  if (which jj | is-not-empty) {
+    print $"(ansi yellow)WARNING:(ansi reset) It is recommended you use `hj` instead of `hg` given that you have Jujutsu installed."
+  }
+
   # Check if mercurial (external hg) is installed - if so, we shouldn't shadow it
   let mercurial = (which -a hg | where type == "external" | length)
   if ($mercurial != 0) {
@@ -361,6 +365,41 @@ Or remove/rename the 'hg' command in commands.nu"
     print "No modified files"
   }
 }
+
+# Open modified jj files in Helix
+#
+# Opens files modified in a jj revision as buffers in Helix.
+# Defaults to the working copy (@).
+#
+# Examples:
+#   > jj hx                  # Open files modified in working copy
+#   > jj hx -r @-            # Open files modified in parent revision
+#   > jj hx -r abc123        # Open files modified in specific revision
+export def "jj hx" [
+  --revision (-r): string = "@" # Revision to show changes for
+] {
+  # find modified files, filtering out deleted ones
+  let files = ^jj diff --summary -r $revision
+  | lines
+  | where not ($it | str starts-with "D ")
+  | each { $in | str substring 2.. }
+
+  # exit if there are no files in this revision
+  if ($files | is-empty) {
+    print $"No modified files in revision ($revision)"
+    return
+  }
+
+  if ($files | is-not-empty) {
+    hx ...$files
+  } else {
+    print $"No modified files in revision ($revision)"
+  }
+}
+export alias hj = jj hx
+export alias hjj = jj hx
+export alias hxjj = jj hx
+export alias jjhx = jj hx
 
 # ============================================================================
 # VERSION CONTROL WORKFLOW
