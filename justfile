@@ -281,6 +281,15 @@ update-input input:
 
 alias ui := update-input
 
+# Update dev flake.lock (repo root)
+[group('dev')]
+update-dev-flake:
+    @echo "Updating dev flake.lock..."
+    cd {{ DOTFILES_DIR }} && nix flake update
+    @echo "✓ Dev flake updated"
+
+alias udf := update-dev-flake
+
 # ===== Formatting & Linting =====
 
 # Format all Nix files in dotfiles
