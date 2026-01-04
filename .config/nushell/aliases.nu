@@ -148,3 +148,8 @@ export alias cld = claude
 export alias cl = claude
 export alias oc = opencode
 export alias code = opencode
+
+# ============================================================================
+# "CUTE STUFF"
+# ============================================================================
+export alias noise = ^relax-player
