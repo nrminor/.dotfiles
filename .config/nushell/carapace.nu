@@ -36,7 +36,7 @@ $current.completions.external = (
   | upsert completer { if $in == null { $carapace_completer } else { $in } }
 )
 
-$env.config = $current
+$env.config.completions = $current.completions
 
 $env.config.menus ++= [
   {

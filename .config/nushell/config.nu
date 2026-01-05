@@ -111,6 +111,10 @@ if not (which fnm | is-empty) {
 # -------------------------------------------------------------------------------------
 # Import custom commands and aliases. We do this at the end of the config because some
 # commands and aliases depend on all the above having happened first.
-use commands.nu *
-use aliases.nu *
+#
+# NOTE: We use `overlay use ... as` instead of `use` to work around a nushell bug (#15859)
+# where loading modules from symlinks (which dotter creates) corrupts PWD tracking
+# for built-in completions.
+overlay use commands.nu as commands
+overlay use aliases.nu as aliases
 # -------------------------------------------------------------------------------------

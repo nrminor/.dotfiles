@@ -576,19 +576,38 @@ export def "jj from git" [] {
   }
 }
 
-# Zoxide path completer
+# Hybrid zoxide + local directory completer
 #
-# Provides completions from zoxide's frecency database for the z command.
+# Provides completions from both local directories and zoxide's frecency database.
+# Local directories are shown first (as relative paths), followed by zoxide
+# frecency results (as absolute paths). Duplicates are filtered out.
 # Used internally by the z command below.
 def "nu-complete zoxide path" [context: string] {
   let parts = $context | split row " " | skip 1
+  let query = ($parts | str join " ")
+
+  # Get local directories, filtered by query if present
+  let local_dirs = (
+    ls | where type == dir | get name
+    | if ($query | is-empty) { $in } else { where { $in =~ $query } }
+  )
+
+  # Get zoxide frecency results
+  let zoxide_dirs = (
+    do { ^zoxide query --list --exclude $env.PWD -- ...$parts } | complete
+    | if ($in.exit_code == 0) { $in.stdout | lines } else { [] }
+  )
+
+  # Combine: local first, then zoxide (excluding duplicates by basename)
+  let zoxide_filtered = ($zoxide_dirs | where { ($in | path basename) not-in $local_dirs })
+
   {
     options: {
       sort: false
       completion_algorithm: substring
       case_sensitive: false
     }
-    completions: (^zoxide query --list --exclude $env.PWD -- ...$parts | lines)
+    completions: ($local_dirs | append $zoxide_filtered)
   }
 }
 
