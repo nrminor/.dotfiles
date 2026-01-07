@@ -908,6 +908,122 @@ export def seqstats [
 # DEVELOPMENT TOOLS
 # ============================================================================
 
+# Build and optionally push Docker images with sticky configuration
+#
+# On first run, provide options to create a .dockerup config file in nuon format.
+# Subsequent runs in the same directory will use the saved config.
+# Command-line args override and update the config file.
+#
+# The .dockerup file stores all settings, so after initial setup you can just
+# run `dockerup` with no arguments to repeat the same build/push workflow.
+#
+# Examples:
+#   > dockerup -i nrminor/nvd -t v2.4.0 -p -l     # First run: creates .dockerup
+#   > dockerup                                     # Uses saved config
+#   > dockerup -t v2.5.0                           # Bump tag, updates .dockerup
+#   > dockerup --no-push                           # Build only, disables push in config
+export def dockerup [
+  --image (-i): string     # Image name (e.g., "nrminor/nvd")
+  --tag (-t): string       # Version tag (e.g., "v2.4.0")
+  --push (-p)              # Push to Docker Hub after building
+  --no-push                # Disable pushing (overrides config)
+  --latest (-l)            # Also build/push :latest tag
+  --no-latest              # Disable :latest tagging (overrides config)
+  --file (-f): string      # Containerfile path (default: "Containerfile")
+  --platform: string       # Target platform (default: "linux/amd64")
+] {
+  let config_file = ".dockerup"
+
+  # Load existing config or start empty
+  let config = if ($config_file | path exists) {
+    open $config_file
+  } else {
+    {}
+  }
+
+  # Resolve all settings: CLI args override config, then defaults
+  let resolved_image = $image | default $config.image?
+  let resolved_tag = $tag | default $config.tag?
+  let resolved_file = $file | default ($config.file? | default "Containerfile")
+  let resolved_platform = $platform | default ($config.platform? | default "linux/amd64")
+
+  # Boolean flags: --no-* takes precedence, then --*, then config, then false
+  let resolved_push = if $no_push {
+    false
+  } else if $push {
+    true
+  } else {
+    $config.push? | default false
+  }
+
+  let resolved_latest = if $no_latest {
+    false
+  } else if $latest {
+    true
+  } else {
+    $config.latest? | default false
+  }
+
+  # Validate required values
+  if $resolved_image == null {
+    error make {msg: "No image specified. Provide --image or create a .dockerup file."}
+  }
+  if $resolved_tag == null {
+    error make {msg: "No tag specified. Provide --tag or create a .dockerup file."}
+  }
+
+  # Build new config from resolved values
+  let new_config = {
+    image: $resolved_image
+    tag: $resolved_tag
+    push: $resolved_push
+    latest: $resolved_latest
+    file: $resolved_file
+    platform: $resolved_platform
+  }
+
+  # Save config if any CLI arg was provided or config didn't exist
+  let config_changed = (
+    $image != null or $tag != null or $push or $no_push or $latest or $no_latest
+    or $file != null or $platform != null or not ($config_file | path exists)
+  )
+
+  if $config_changed {
+    $new_config | to nuon | save -f $config_file
+    print $"Updated ($config_file)"
+  }
+
+  # Validate containerfile exists
+  if not ($resolved_file | path exists) {
+    error make {msg: $"Containerfile not found: ($resolved_file)"}
+  }
+
+  let versioned_tag = $"($resolved_image):($resolved_tag)"
+  let latest_tag = $"($resolved_image):latest"
+
+  # Build versioned image
+  print $"Building ($versioned_tag)..."
+  ^docker buildx build --platform $resolved_platform --file $resolved_file --tag $versioned_tag --load .
+
+  if $resolved_push {
+    print $"Pushing ($versioned_tag)..."
+    ^docker push $versioned_tag
+  }
+
+  # Handle latest tag
+  if $resolved_latest {
+    print $"Tagging ($latest_tag)..."
+    ^docker tag $versioned_tag $latest_tag
+
+    if $resolved_push {
+      print $"Pushing ($latest_tag)..."
+      ^docker push $latest_tag
+    }
+  }
+
+  print "Done!"
+}
+
 # Set up Ghostty terminal info on remote server
 #
 # Compiles local terminal info and sends it to a remote server via SSH.

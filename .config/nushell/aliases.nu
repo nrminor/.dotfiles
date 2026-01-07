@@ -14,10 +14,10 @@ export alias d = overlay hide activate
 # ============================================================================
 export alias cd = z
 export alias k = clear
-export alias l = ls
 export alias s = ls
 export alias ks = ls
 export alias la = ls --all
+export alias l = la
 
 # Change to bioinformatics directory (OS-aware)
 export def --env bfx [] {
@@ -74,6 +74,9 @@ export alias jja = jj abandon
 export alias jjs = jj status
 export alias jju = jj undo
 export alias jje = jj edit
+export alias j = jj
+export alias kk = jj
+export alias hh = jj
 
 # ============================================================================
 # ZELLIJ (Terminal Multiplexer)
@@ -146,8 +149,10 @@ export alias dots = dotter deploy -f -v -y
 # ============================================================================
 export alias cld = claude
 export alias cl = claude
-export alias oc = opencode
+export alias vscode = ^code
 export alias code = opencode
+export alias oc = opencode
+export alias agent = opencode
 
 # ============================================================================
 # "CUTE STUFF"
