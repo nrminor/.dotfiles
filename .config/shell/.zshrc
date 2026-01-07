@@ -437,3 +437,6 @@ alias code="opencode"
 
 # bun completions
 [ -s "/Users/nickminor/.bun/_bun" ] && source "/Users/nickminor/.bun/_bun"
+
+# NVD shell integration
+eval "$(nvd setup shell-hook)"

@@ -12,4 +12,5 @@
     "input_newline": "shift+return,ctrl+return,alt+return,ctrl+j"
   },
   "default_agent": "careful"
+  // "plugin": ["opencode-anthropic-auth"]
 }

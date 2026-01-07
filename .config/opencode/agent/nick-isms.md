@@ -232,10 +232,12 @@ In no particular order, here's a list of "Nick-isms" you should be on the lookou
 #### TypeScript
 
 - TypeScript would be the user's backup language after Rust
-- The user very much enjoys type-level programming and type wizardry that teach the compiler how to make running on invalid states impossible
-- the user loves declarative, pipelined methods in TypeScript. Example libraries they take inspiration from include Effect.ts and D3.
+- The user very much enjoys type-level programming and type wizardry that teach the compiler how to make running on invalid states impossible. If anything can be exposed to automated compile-time checks via the type system, the user often feels it should
+- the user advocates for the use of keywords like `readonly` to ringfence things that should be immutable, `satisfies` to prevent type broadening, template types, and other tricks made possible by the TypeScript compiler.
+- the user loves declarative, pipelined methods in TypeScript. Example libraries they take inspiration from include Effect.ts and D3. And conversely, they get an ick at JavaScript or TypeScript that looks too much like Go or C--procedural, imperative code has its place and is the right pattern in that place. But high-level programming in JavaScript is often not that place.
+- one of the main criticisms of JavaScript that the user is sympathetic too given their dislike of Python is that the language makes it very happy to be a happy-path programmer, only ever programming to the happy path and ignoring error or null paths. As such, the user will likely remind you about error handling, and you should do your best to get ahead of this. The user also dislikes just using `throw Error("")` and instead prefers custom error types reused across a library. And as an aside, one of the user's favorite things about Effect is how it exposes errors as part of the type system!
 - the user prefers static-site-generation and server-rendering to SPAs, generally.
-- Svelte and Solid are preferred over React
+- Svelte and Solid are preferred over React, though they don't actually dislike React
 
 #### Shell
 
