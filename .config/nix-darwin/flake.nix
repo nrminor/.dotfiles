@@ -88,6 +88,7 @@
             pkgs.nushellPlugins.gstat
             pkgs.nushellPlugins.formats
             pkgs.topiary
+            pkgs.nufmt
             pkgs.dust
             pkgs.dua
             pkgs.zellij
@@ -121,17 +122,17 @@
             pkgs.fd
             pkgs.jq
             pkgs.btop
-            pkgs.bottom
+            # pkgs.bottom
             pkgs.just
-            pkgs.mask
+            # pkgs.mask
             pkgs.direnv
-            pkgs.mise
+            # pkgs.mise
             pkgs.devbox
             pkgs.ouch
             pkgs.watchexec
             pkgs.git
             pkgs.lazygit
-            pkgs.gitui
+            # pkgs.gitui
             pkgs.difftastic
             pkgs.pre-commit
             pkgs.wrkflw
@@ -305,6 +306,9 @@
             pkgs.bedtools
             pkgs.samtools
             pkgs.bcftools
+
+            # AI stuff
+            # pkgs.opencode
           ];
 
           homebrew = {
