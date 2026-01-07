@@ -70,6 +70,10 @@
 !/.config/helix/runtime/themes
 !/.config/helix/runtime/themes/*.toml
 
+# Jujutsu
+!/.config/jj
+!/.config/jj/config.toml
+
 # Zoxide
 !/.config/zoxide
 !/.config/zoxide/.zoxide.nu

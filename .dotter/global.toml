@@ -18,6 +18,10 @@
 ".config/nushell/aliases.nu" = "~/.config/nushell/aliases.nu"
 ".config/atuin/init.nu" = "~/.config/atuin/init.nu"
 
+# Jujutsu configuration
+[jj.files]
+".config/jj/config.toml" = "~/.config/jj/config.toml"
+
 # Git configuration
 [git.files]
 ".config/git/.gitconfig" = "~/.gitconfig"
