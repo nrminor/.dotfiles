@@ -7,3 +7,6 @@ email = "nicholasrminor@gmail.com"
 [ui]
 default-command = ["log", "--no-pager", "--reversed"]
 diff-editor = ":builtin"
+
+[aliases]
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
