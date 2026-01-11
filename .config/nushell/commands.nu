@@ -936,7 +936,7 @@ export def dockerup [
 
   # Load existing config or start empty
   let config = if ($config_file | path exists) {
-    open $config_file
+    open $config_file | from nuon
   } else {
     {}
   }
