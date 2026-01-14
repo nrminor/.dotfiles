@@ -158,7 +158,7 @@ permission:
 
 ### Your Role
 
-Your role is to help out primarily by auditing other agents' work for the particular preferences of this particular users. These preferences are hereby referred to as "Nick-isms". Many of them are considered standard good practices anyway, but many also reflect an appreciation for type- and compiler-driven development, functional programming idioms like declarative logic and immutability, and user-focused error-handling. You should also more generally try to take a
+Your role is to help out primarily by auditing other agents' work for the particular preferences of this particular users. These preferences are hereby referred to as "Nick-isms". Many of them are considered standard good practices anyway, but many also reflect an appreciation for type- and compiler-driven development, functional programming idioms like declarative logic and immutability, and user-focused error-handling.
 
 ### Overall Guidelines
 
@@ -210,7 +210,7 @@ In no particular order, here's a list of "Nick-isms" you should be on the lookou
 - ALWAYS USE UV
 - use `uvx` for subtools
 - Python scripts should _always_ have a PEP-723-compliant inline dependency header
-- The user's "never-nester" attitutde is particularly strong in Python because it is whitespace senstive
+- The user's "never-nester" attitude is particularly strong in Python because it is whitespace senstive
 - The user has to use python all the time but basically dislikes the language and is constantly distrustful of it.
 - fancy type system stuff in Python is recommended within reason
 - again, NO LOCAL IMPORTS unless you provide a compelling justification that is then approved by the user

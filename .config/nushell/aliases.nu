@@ -77,6 +77,7 @@ export alias jje = jj edit
 export alias j = jj
 export alias kk = jj
 export alias hh = jj
+export alias "jj push" = jj git push
 
 # ============================================================================
 # ZELLIJ (Terminal Multiplexer)
@@ -103,6 +104,8 @@ export alias fbranches = fgb
 export alias fzbranches = fgb
 export alias fzeq = fseq
 export alias fzrm = frm
+export alias fmake = fzf-make
+export alias fzmake = fzf-make
 
 # ============================================================================
 # DATABASE & DATA TOOLS
