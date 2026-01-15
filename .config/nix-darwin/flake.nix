@@ -63,7 +63,7 @@
             pkgs.llvm
             pkgs.gettext
             pkgs.nixd
-            pkgs.nixfmt-rfc-style
+            pkgs.nixfmt
             pkgs.nil
             pkgs.mkalias
             pkgs.neovim
@@ -122,6 +122,7 @@
             pkgs.fd
             pkgs.jq
             pkgs.btop
+            pkgs.htop
             # pkgs.bottom
             pkgs.just
             # pkgs.mask
@@ -371,9 +372,9 @@
                 "/Applications/Arc.app"
                 "/Applications/Superhuman.app"
                 "/Applications/Bear.app"
-                "/Applications/Instapaper.app"
+                # "/Applications/Instapaper.app"
                 "/Applications/Ghostty.app"
-                "/Applications/Figma.app"
+                # "/Applications/Figma.app"
               ];
               wvous-tr-corner = 1;
               wvous-tl-corner = 1;
