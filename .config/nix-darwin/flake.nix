@@ -577,13 +577,24 @@
                 sudo -u ${primaryUser} env HOME=/Users/${primaryUser} "${pkgs.dotter}/bin/dotter" deploy -f -y -v
               '';
 
-            yaziPlugins.text =
+            # NOTE: Custom activation script names (like `yaziPlugins` or `nushellPlugins`)
+            # are silently ignored by nix-darwin. Only a hardcoded list of script names
+            # gets assembled into the final /run/current-system/activate script.
+            #
+            # To run custom activation code, you MUST use one of these extension points:
+            #   - preActivation.text   (runs first, before system setup)
+            #   - extraActivation.text (runs early, after createRun)
+            #   - postActivation.text  (runs last, after all system setup)
+            #
+            # We use postActivation here since plugin symlinks depend on the system
+            # being fully set up first.
+            postActivation.text =
               let
                 primaryUser = config.system.primaryUser or "nickminor";
                 userHome = "/Users/${primaryUser}";
-                pluginsDir = "${userHome}/.config/yazi/plugins";
 
-                # List all yazi plugins that should be symlinked
+                # Yazi plugins
+                yaziPluginsDir = "${userHome}/.config/yazi/plugins";
                 yaziPluginsList = [
                   pkgs.yaziPlugins.sudo
                   pkgs.yaziPlugins.starship
@@ -598,42 +609,9 @@
                   pkgs.yaziPlugins.lazygit
                   pkgs.yaziPlugins.duckdb
                 ];
-              in
-              ''
-                echo "Setting up Yazi plugins..." >&2
 
-                # Create plugins directory if it doesn't exist
-                mkdir -p "${pluginsDir}"
-
-                # Remove old nix-managed plugin symlinks (but preserve ya pkg managed ones)
-                # We identify nix symlinks by checking if they point to /nix/store
-                for plugin in "${pluginsDir}"/*.yazi; do
-                  if [ -L "$plugin" ] && readlink "$plugin" | grep -q "^/nix/store"; then
-                    echo "Removing old Nix plugin symlink: $plugin" >&2
-                    rm "$plugin"
-                  fi
-                done
-
-                # Create symlinks for each plugin
-                ${pkgs.lib.concatMapStringsSep "\n" (plugin: ''
-                  # Extract plugin name: hash-name.yazi-version -> name.yazi
-                  full_name=$(basename "${plugin}")
-                  plugin_name=$(echo "$full_name" | sed 's/^[^-]*-\(.*\)\.yazi-.*/\1.yazi/')
-                  echo "Linking $plugin_name..." >&2
-                  ln -sf "${plugin}" "${pluginsDir}/$plugin_name"
-                  chown -h ${primaryUser}:staff "${pluginsDir}/$plugin_name"
-                '') yaziPluginsList}
-
-                echo "Yazi plugins setup complete!" >&2
-              '';
-
-            nushellPlugins.text =
-              let
-                primaryUser = config.system.primaryUser or "nickminor";
-                userHome = "/Users/${primaryUser}";
-                pluginsDir = "${userHome}/.local/share/nushell-plugins";
-
-                # List of nushell plugins to symlink
+                # Nushell plugins
+                nushellPluginsDir = "${userHome}/.local/share/nushell-plugins";
                 nushellPluginsList = [
                   pkgs.nushellPlugins.polars
                   pkgs.nushellPlugins.query
@@ -643,13 +621,40 @@
                 ];
               in
               ''
+                # ===== Yazi Plugins =====
+                echo "Setting up Yazi plugins..." >&2
+
+                mkdir -p "${yaziPluginsDir}"
+
+                # Remove old nix-managed plugin symlinks (preserve ya pkg managed ones)
+                for plugin in "${yaziPluginsDir}"/*.yazi; do
+                  if [ -L "$plugin" ] && readlink "$plugin" | grep -q "^/nix/store"; then
+                    echo "Removing old Nix plugin symlink: $plugin" >&2
+                    rm "$plugin"
+                  fi
+                done
+
+                # Create symlinks for each plugin
+                ${pkgs.lib.concatMapStringsSep "\n" (plugin: ''
+                  full_name=$(basename "${plugin}")
+                  # Extract plugin name: hash-name.yazi-version -> name.yazi
+                  # e.g. "1x07v17gy30ixljh746lfrsi352pras3-sudo.yazi-0-unstable-2025-11-05" -> "sudo.yazi"
+                  temp="''${full_name#*-}"      # remove hash prefix: "sudo.yazi-0-unstable-2025-11-05"
+                  plugin_name="''${temp%%.yazi-*}.yazi"  # remove version suffix, add .yazi back
+                  echo "Linking $plugin_name..." >&2
+                  ln -sf "${plugin}" "${yaziPluginsDir}/$plugin_name"
+                  chown -h ${primaryUser}:staff "${yaziPluginsDir}/$plugin_name"
+                '') yaziPluginsList}
+
+                echo "Yazi plugins setup complete!" >&2
+
+                # ===== Nushell Plugins =====
                 echo "Setting up Nushell plugins..." >&2
 
-                # Create plugins directory
-                mkdir -p "${pluginsDir}"
+                mkdir -p "${nushellPluginsDir}"
 
                 # Remove old nix-managed plugin symlinks
-                for plugin in "${pluginsDir}"/nu_plugin_*; do
+                for plugin in "${nushellPluginsDir}"/nu_plugin_*; do
                   if [ -L "$plugin" ] && readlink "$plugin" | grep -q "^/nix/store"; then
                     echo "Removing old Nix plugin symlink: $plugin" >&2
                     rm "$plugin"
@@ -658,18 +663,19 @@
 
                 # Create symlinks for each plugin binary
                 ${pkgs.lib.concatMapStringsSep "\n" (plugin: ''
-                  # Plugin binaries are in ${plugin}/bin/nu_plugin_<name>
                   for binary in "${plugin}"/bin/nu_plugin_*; do
                     if [ -f "$binary" ]; then
                       plugin_name=$(basename "$binary")
                       echo "Linking $plugin_name..." >&2
-                      ln -sf "$binary" "${pluginsDir}/$plugin_name"
-                      chown -h ${primaryUser}:staff "${pluginsDir}/$plugin_name"
+                      ln -sf "$binary" "${nushellPluginsDir}/$plugin_name"
+                      chown -h ${primaryUser}:staff "${nushellPluginsDir}/$plugin_name"
                     fi
                   done
                 '') nushellPluginsList}
 
                 echo "Nushell plugins setup complete!" >&2
+
+                # ===== Future activation scripts can be added here =====
               '';
 
           };
