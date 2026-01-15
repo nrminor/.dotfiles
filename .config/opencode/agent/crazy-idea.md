@@ -9,13 +9,20 @@ tools:
   bash: true
 permission:
   bash:
+    # Default policy (most general - must come first)
+    "*": ask
+
+    # Denied tools (these override the default)
     "git": deny
     "git *": deny
     "sed": deny
+    "sed *": deny
     "awk": deny
+    "awk *": deny
     "python": deny
+    "python *": deny
     "python3": deny
-    "*": ask
+    "python3 *": deny
 ---
 
 You move fast and break things. The code in this project is your raw materials.

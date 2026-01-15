@@ -8,7 +8,16 @@ tools:
   edit: false
 permission:
   bash:
-    # Git - Allow read-only operations, deny writes
+    # =======================================================================
+    # ORDERING: most general → most specific (last matching rule wins)
+    # =======================================================================
+
+    # Default policy (most general - must come first)
+    "*": ask
+
+    # --- Git: deny by default, then allow specific read-only commands ---
+    "git": deny
+    "git *": deny
     "git status": allow
     "git status *": allow
     "git log": allow
@@ -21,10 +30,10 @@ permission:
     "git branch *": allow
     "git ls-files": allow
     "git ls-files *": allow
-    "git": deny
-    "git *": deny
 
-    # Jujutsu - Same pattern (read-only allowed)
+    # --- Jujutsu: deny by default, then allow specific read-only commands ---
+    "jj": deny
+    "jj *": deny
     "jj log": allow
     "jj log *": allow
     "jj diff": allow
@@ -33,14 +42,14 @@ permission:
     "jj show *": allow
     "jj status": allow
     "jj status *": allow
-    "jj": deny
-    "jj *": deny
 
-    # Build tools - Safe to run
-    "cargo install": deny
+    # --- Cargo: allow by default, then restrict specific commands ---
+    "cargo *": allow
     "cargo add": ask
     "cargo remove": ask
-    "cargo *": allow
+    "cargo install": deny
+
+    # --- Other build tools (safe to run) ---
     "rustc": allow
     "rustc *": allow
     "just": allow
@@ -48,13 +57,13 @@ permission:
     "make": allow
     "make *": allow
 
-    # Testing - Safe to run
+    # --- Testing (safe to run) ---
     "pytest": allow
     "pytest *": allow
     "npm test": allow
     "npm run test": allow
 
-    # Read-only file operations
+    # --- Read-only file operations ---
     "cat": allow
     "cat *": allow
     "head": allow
@@ -69,10 +78,15 @@ permission:
     "grep *": allow
     "rg": allow
     "rg *": allow
-    "find": allow
-    "find *": allow # find itself is safe, we block -delete/-exec
 
-    # Directory navigation/listing
+    # --- Find: allow by default, deny dangerous flags ---
+    "find": allow
+    "find *": allow
+    "find * -delete": deny
+    "find * -exec": deny
+    "find * -execdir": deny
+
+    # --- Directory navigation/listing ---
     "ls": allow
     "ls *": allow
     "pwd": allow
@@ -85,7 +99,7 @@ permission:
     "wc": allow
     "wc *": allow
 
-    # Safe utilities
+    # --- Safe utilities ---
     "echo": allow
     "echo *": allow
     "printf": allow
@@ -101,13 +115,13 @@ permission:
     "uname": allow
     "uname *": allow
 
-    # Diff/comparison tools
+    # --- Diff/comparison tools ---
     "diff": allow
     "diff *": allow
     "cmp": allow
     "cmp *": allow
 
-    # Compression (read operations)
+    # --- Compression (read operations only) ---
     "tar -t": allow
     "tar -t *": allow
     "unzip -l": allow
@@ -115,7 +129,7 @@ permission:
     "gzip -l": allow
     "gzip -l *": allow
 
-    # Editing tools - Complete deny
+    # --- Editing tools (complete deny) ---
     "sed": deny
     "sed *": deny
     "awk": deny
@@ -127,33 +141,27 @@ permission:
     "python3": deny
     "python3 *": deny
 
-    # node dependency hell avoidance
+    # --- Node dependency hell avoidance ---
     "npm install": deny
     "npm i": deny
     "bun install": deny
     "bun i": deny
 
-    # Destructive file operations
+    # --- Destructive file operations ---
     "rm -rf": deny
     "rm -rf *": deny
-    "find * -delete": deny
-    "find * -exec": deny
-    "find * -execdir": deny
     "dd": deny
     "dd *": deny
     "truncate": deny
     "truncate *": deny
 
-    # Dangerous remote execution
+    # --- Dangerous remote execution ---
     "curl * | sh": deny
     "curl * | bash": deny
     "wget * | sh": deny
     "wget * | bash": deny
     "eval": deny
     "eval *": deny
-
-    # Default policy
-    "*": ask
 ---
 
 ### Your Role

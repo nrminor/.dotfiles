@@ -8,7 +8,16 @@ tools:
   edit: true
 permission:
   bash:
-    # Git - Allow read-only operations, deny writes
+    # =======================================================================
+    # ORDERING: most general → most specific (last matching rule wins)
+    # =======================================================================
+
+    # Default policy (most general - must come first)
+    "*": ask
+
+    # --- Git: deny by default, then allow specific read-only commands ---
+    "git": deny
+    "git *": deny
     "git status": allow
     "git status *": allow
     "git log": allow
@@ -21,10 +30,10 @@ permission:
     "git branch *": allow
     "git ls-files": allow
     "git ls-files *": allow
-    "git": deny
-    "git *": deny
 
-    # Jujutsu - Same pattern (read-only allowed)
+    # --- Jujutsu: deny by default, then allow specific read-only commands ---
+    "jj": deny
+    "jj *": deny
     "jj log": allow
     "jj log *": allow
     "jj diff": allow
@@ -33,82 +42,62 @@ permission:
     "jj show *": allow
     "jj status": allow
     "jj status *": allow
-    "jj": deny
-    "jj *": deny
 
-    # Rust testing ecosystem
-    "cargo install": deny
+    # --- Cargo: allow by default, then restrict specific commands ---
+    "cargo *": allow
     "cargo add": ask
     "cargo remove": ask
-    "cargo test": allow
-    "cargo test *": allow
-    "cargo nextest": allow
-    "cargo nextest *": allow
-    "cargo bench": allow
-    "cargo bench *": allow
-    "cargo check": allow
-    "cargo check *": allow
-    "cargo clippy": allow
-    "cargo clippy *": allow
-    "cargo build": allow
-    "cargo build *": allow
-    "cargo run": allow
-    "cargo run *": allow
-    "cargo *": allow
+    "cargo install": deny
     "rustc": allow
     "rustc *": allow
 
-    # Python testing via uv
+    # --- Python testing via uv: ask by default, allow specific test commands ---
+    "uv *": ask
+    "uv sync": allow
+    "uv sync *": allow
     "uv run pytest": allow
     "uv run pytest *": allow
     "uv run python": allow
     "uv run python *": allow
     "uv run coverage": allow
     "uv run coverage *": allow
-    "uv sync": allow
-    "uv sync *": allow
-    "uv add": ask
-    "uv remove": ask
-    "uv *": ask
 
-    # Python testing via pixi
+    # --- Python testing via pixi: ask by default, allow specific test commands ---
+    "pixi *": ask
+    "pixi install": allow
+    "pixi install *": allow
     "pixi run pytest": allow
     "pixi run pytest *": allow
     "pixi run python": allow
     "pixi run python *": allow
     "pixi run coverage": allow
     "pixi run coverage *": allow
-    "pixi install": allow
-    "pixi install *": allow
-    "pixi add": ask
-    "pixi remove": ask
-    "pixi *": ask
 
-    # Node testing via bun
+    # --- Node testing via bun: ask by default, allow test commands, deny install ---
+    "bun *": ask
+    "bun run": allow
+    "bun run *": allow
     "bun test": allow
     "bun test *": allow
     "bun run test": allow
     "bun run test *": allow
-    "bun run": allow
-    "bun run *": allow
-    "bun install": deny
-    "bun i": deny
     "bun add": ask
     "bun remove": ask
-    "bun *": ask
+    "bun install": deny
+    "bun i": deny
 
-    # npm test commands (read-only style)
+    # --- npm test commands ---
     "npm test": allow
     "npm run test": allow
     "npm run test *": allow
 
-    # Build tools - Safe to run
+    # --- Build tools (safe to run) ---
     "just": allow
     "just *": allow
     "make": allow
     "make *": allow
 
-    # Read-only file operations
+    # --- Read-only file operations ---
     "cat": allow
     "cat *": allow
     "head": allow
@@ -123,10 +112,15 @@ permission:
     "grep *": allow
     "rg": allow
     "rg *": allow
+
+    # --- Find: allow by default, deny dangerous flags ---
     "find": allow
     "find *": allow
+    "find * -delete": deny
+    "find * -exec": deny
+    "find * -execdir": deny
 
-    # Directory navigation/listing
+    # --- Directory navigation/listing ---
     "ls": allow
     "ls *": allow
     "pwd": allow
@@ -139,7 +133,7 @@ permission:
     "wc": allow
     "wc *": allow
 
-    # Safe utilities
+    # --- Safe utilities ---
     "echo": allow
     "echo *": allow
     "printf": allow
@@ -155,13 +149,13 @@ permission:
     "uname": allow
     "uname *": allow
 
-    # Diff/comparison tools
+    # --- Diff/comparison tools ---
     "diff": allow
     "diff *": allow
     "cmp": allow
     "cmp *": allow
 
-    # Compression (read operations)
+    # --- Compression (read operations only) ---
     "tar -t": allow
     "tar -t *": allow
     "unzip -l": allow
@@ -169,7 +163,7 @@ permission:
     "gzip -l": allow
     "gzip -l *": allow
 
-    # Editing tools - Complete deny
+    # --- Editing tools (complete deny) ---
     "sed": deny
     "sed *": deny
     "awk": deny
@@ -181,27 +175,21 @@ permission:
     "python3": deny
     "python3 *": deny
 
-    # Destructive file operations
+    # --- Destructive file operations ---
     "rm -rf": deny
     "rm -rf *": deny
-    "find * -delete": deny
-    "find * -exec": deny
-    "find * -execdir": deny
     "dd": deny
     "dd *": deny
     "truncate": deny
     "truncate *": deny
 
-    # Dangerous remote execution
+    # --- Dangerous remote execution ---
     "curl * | sh": deny
     "curl * | bash": deny
     "wget * | sh": deny
     "wget * | bash": deny
     "eval": deny
     "eval *": deny
-
-    # Default policy
-    "*": ask
 ---
 
 You are a testing specialist with an almost paranoid attention to correctness.
