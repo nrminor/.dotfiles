@@ -4,11 +4,11 @@ That's right. It's yet another guy's dotfiles. Though I use lots of tools as a
 bioinformatician and data scientist, most of my configurations are for a core
 set of developer tools:
 
-1. [Ghostty](https://ghostty.org/), my terminal of choice
-2. The [Helix](https://helix-editor.com/) text editor and dev environment
-3. [Yazi](https://yazi-rs.github.io/), a terminal file manager
-4. [Zellij](https://zellij.dev/), a terminal workspace manager
-5. [Lazygit](https://github.com/jesseduffield/lazygit), a git terminal UI
+1. [nushell](https://www.nushell.sh/), my shell and command-line environment
+2. [Helix](https://helix-editor.com/) my text editor and development environment
+3. [Ghostty](https://ghostty.org/), my terminal of choice
+4. [Jujutsu](https://github.com/jj-vcs/jj), the git-compatible version control system
+5. [OpenCode](https://opencode.ai/), an AI coding agent harness
 
 (Yes, I do almost everything in the command line)
 
@@ -23,12 +23,12 @@ Jupyter, RStudio, etc. Other goodies include
 See all installed packages starting
 [here](https://github.com/nrminor/.dotfiles/blob/2be595fadbd191db1105c6b63ee6c23c25d0df79/.config/nix-darwin/flake.nix#L43)
 and my growing list of handy aliases
-[here](https://github.com/nrminor/.dotfiles/blob/2be595fadbd191db1105c6b63ee6c23c25d0df79/.zshrc#L283)
+[here](https://github.com/nrminor/.dotfiles/blob/main/.config/nushell/aliases.nu)
 
 If you do bioinformatics and data science and use these tools on Apple computers
 like me, read on!
 
-### Setup on a new Apple machine
+### Setup on a new Apple machine <!-- rumdl-disable-line MD001 -->
 
 The point of this repository is to make setting up my development environment on
 different machines easy. To do so, I use [NixOS](https://nixos.org/), and
