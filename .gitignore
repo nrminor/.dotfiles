@@ -94,11 +94,6 @@
 !/.config/nix/modules/home
 !/.config/nix/modules/home/*.nix
 
-# Nix Darwin
-!/.config/nix-darwin
-!/.config/nix-darwin/flake.nix
-!/.config/nix-darwin/flake.lock
-
 # Nix Direnv
 !/.config/nix-direnv
 !/.config/nix-direnv/config.toml
