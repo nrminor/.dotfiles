@@ -50,6 +50,7 @@ export alias less = less -R
 # ============================================================================
 export alias h = hx
 export alias h. = hx .
+export alias h, = hx .
 export alias g. = hx .
 export alias x = hx
 export alias z. = zed .

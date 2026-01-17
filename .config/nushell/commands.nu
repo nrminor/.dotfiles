@@ -576,6 +576,21 @@ export def "jj from git" [] {
   }
 }
 
+# Set the most recent ancestor bookmark to the latest commit and then push it to a
+# git remote branch.
+#
+# This command replaces running `jj bookmark move --from heads(::@- & bookmarks()) --to @-`
+# followed by `jj git push`. And it is also funny. It is a portmanteau of tug and push.
+#
+# NOTE: This command requires the following section in the jujutsu config TOML:
+#
+# ```toml
+# [aliases]
+# tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+#
+# ```
+export def "jj tush" [] { jj tug; jj git push }
+
 # Hybrid zoxide + local directory completer
 #
 # Provides completions from both local directories and zoxide's frecency database.
@@ -923,14 +938,14 @@ export def seqstats [
 #   > dockerup -t v2.5.0                           # Bump tag, updates .dockerup
 #   > dockerup --no-push                           # Build only, disables push in config
 export def dockerup [
-  --image (-i): string     # Image name (e.g., "nrminor/nvd")
-  --tag (-t): string       # Version tag (e.g., "v2.4.0")
-  --push (-p)              # Push to Docker Hub after building
-  --no-push                # Disable pushing (overrides config)
-  --latest (-l)            # Also build/push :latest tag
-  --no-latest              # Disable :latest tagging (overrides config)
-  --file (-f): string      # Containerfile path (default: "Containerfile")
-  --platform: string       # Target platform (default: "linux/amd64")
+  --image (-i): string # Image name (e.g., "nrminor/nvd")
+  --tag (-t): string # Version tag (e.g., "v2.4.0")
+  --push (-p) # Push to Docker Hub after building
+  --no-push # Disable pushing (overrides config)
+  --latest (-l) # Also build/push :latest tag
+  --no-latest # Disable :latest tagging (overrides config)
+  --file (-f): string # Containerfile path (default: "Containerfile")
+  --platform: string # Target platform (default: "linux/amd64")
 ] {
   let config_file = ".dockerup"
 
