@@ -91,6 +91,8 @@
 !/.config/nix/modules/common/*.nix
 !/.config/nix/modules/darwin
 !/.config/nix/modules/darwin/*.nix
+!/.config/nix/modules/home
+!/.config/nix/modules/home/*.nix
 
 # Nix Darwin
 !/.config/nix-darwin

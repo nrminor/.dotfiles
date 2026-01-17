@@ -67,6 +67,7 @@ $env.PATH = (
 
     # Nix (if present)
     ($env.HOME | path join ".nix-profile" "bin")
+    "/etc/profiles/per-user/nickminor/bin" # home-manager packages
     "/run/current-system/sw/bin"
     "/nix/var/nix/profiles/default/bin"
   ]

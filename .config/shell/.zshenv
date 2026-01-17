@@ -49,6 +49,7 @@ path=(
 
 	# Nix (if present)
 	$HOME/.nix-profile/bin
+	/etc/profiles/per-user/$USER/bin # home-manager packages
 	/run/current-system/sw/bin
 	/nix/var/nix/profiles/default/bin
 

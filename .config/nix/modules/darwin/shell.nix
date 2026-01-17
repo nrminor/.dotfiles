@@ -1,8 +1,8 @@
 # Shell configuration
 #
-# Zsh setup with plugins. The actual dotfiles (.zshrc, etc.)
-# are managed by dotter; this module ensures zsh and its
-# plugins are installed and integrated.
+# Zsh setup with plugins for SSH sessions and fallback use.
+# The actual dotfiles (.zshrc, etc.) are managed by dotter.
+# Direnv is configured in home-manager (modules/home/programs.nix).
 { pkgs, ... }:
 
 {
@@ -15,10 +15,5 @@
       source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
       source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     '';
-  };
-
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
   };
 }

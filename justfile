@@ -1,8 +1,8 @@
 # Dotfiles Management Commands
 # Declarative macOS environment with nix + dotter
 
-export FLAKE_DIR := env_var('HOME') + '/.dotfiles/.config/nix'
-export DOTFILES_DIR := env_var('HOME') + '/.dotfiles'
+export FLAKE_DIR := env('HOME') + '/.dotfiles/.config/nix'
+export DOTFILES_DIR := env('HOME') + '/.dotfiles'
 
 # Default recipe shows available commands
 [group('help')]

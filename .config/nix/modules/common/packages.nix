@@ -6,15 +6,14 @@
 { pkgs, inputs }:
 
 let
-  pkgs-stable = inputs.nixpkgs-stable.legacyPackages.${pkgs.system};
+  pkgs-stable = inputs.nixpkgs-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in
 [
   # ===== Build Tools & System Libraries =====
   pkgs.cmake
   pkgs.clang
   pkgs.libiconv
-  pkgs.pkg-config
-  pkgs.pkgconf
+  pkgs.pkgconf # Modern pkg-config replacement
   pkgs.zlib
   pkgs.llvm
   pkgs.gettext
@@ -83,19 +82,8 @@ in
 
   # ===== File Management =====
   pkgs.yazi
-  pkgs.yaziPlugins.sudo
-  pkgs.yaziPlugins.starship
-  pkgs.yaziPlugins.rsync
-  pkgs.yaziPlugins.ouch
-  pkgs.yaziPlugins.smart-filter
-  pkgs.yaziPlugins.smart-enter
-  pkgs.yaziPlugins.mount
-  pkgs.yaziPlugins.mediainfo
-  pkgs.yaziPlugins.chmod
-  pkgs.yaziPlugins.git
-  pkgs.yaziPlugins.lazygit
-  pkgs.yaziPlugins.gitui
-  pkgs.yaziPlugins.duckdb
+  # Note: yazi plugins are in common/plugins.nix and symlinked via activation scripts
+  # They're not installed as packages because they conflict in buildEnv
 
   # ===== Git & Version Control =====
   pkgs.git
@@ -107,7 +95,7 @@ in
   pkgs.jujutsu
   pkgs.lazyjj
   pkgs.jjui
-  inputs.jj-starship.packages.${pkgs.system}.jj-starship
+  inputs.jj-starship.packages.${pkgs.stdenv.hostPlatform.system}.jj-starship
   pkgs.mergiraf
   pkgs.gh
 
@@ -187,10 +175,11 @@ in
   # ===== R Ecosystem =====
   # pkgs.R
   # pkgs.rstudio
-  pkgs.rPackages.languageserver
+  # Note: R packages may conflict in home.packages buildEnv - testing
+  # pkgs.rPackages.languageserver
   pkgs.air-formatter
   # pkgs.rPackages.tidyverse
-  pkgs.rPackages.BiocManager
+  # pkgs.rPackages.BiocManager
 
   # ===== TOML =====
   pkgs.taplo
@@ -212,8 +201,10 @@ in
   pkgs.yaml-language-server
 
   # ===== Lua Ecosystem =====
-  pkgs.lua
-  pkgs.luau
+  # Note: lua, luau, and luajit conflict (all provide /bin/lua)
+  # Using luajit as it's the most common; comment out others
+  # pkgs.lua
+  # pkgs.luau
   pkgs.luajit
   pkgs.lua-language-server
   pkgs.stylua

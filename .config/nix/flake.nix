@@ -23,6 +23,9 @@
     };
 
     jj-starship.url = "github:dmmulroy/jj-starship";
+
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -31,6 +34,7 @@
       nix-darwin,
       nixpkgs,
       nix-homebrew,
+      home-manager,
       ...
     }:
     let
@@ -53,7 +57,16 @@
             # Third-party module for Homebrew management
             nix-homebrew.darwinModules.nix-homebrew
 
-            # Our darwin configuration (imports common data internally)
+            # Home-manager integration (user-level packages and config)
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${username} = import ./modules/home;
+              home-manager.extraSpecialArgs = { inherit inputs username; };
+            }
+
+            # Our darwin configuration
             ./modules/darwin
           ];
         };
