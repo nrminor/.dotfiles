@@ -1079,7 +1079,7 @@ export def mo [
 # SYSTEM MANAGEMENT
 # ============================================================================
 
-# Update nix-darwin flake and rebuild system
+# Update nix flake and rebuild system
 #
 # Updates flake.lock inputs and rebuilds the system configuration.
 # Use --dry-run to build without activating (no sudo required).
@@ -1091,9 +1091,9 @@ export def mo [
 export def sysupdate [
   --dry-run (-n) # Build without activating (no sudo required)
 ] {
-  let flake_dir = $env.HOME | path join ".dotfiles" ".config" "nix-darwin"
+  let flake_dir = $env.HOME | path join ".dotfiles" ".config" "nix"
 
-  print "Updating nix-darwin flake..."
+  print "Updating nix flake..."
   ^nix flake update --flake $flake_dir
 
   if $dry_run {
@@ -1107,7 +1107,7 @@ export def sysupdate [
   }
 }
 
-# Option and modify the nix-darwin flake in the editor configured with $VISUAL.
+# Open and modify the nix flake in the editor configured with $VISUAL.
 #
 # This command is useful shorthand for changing to the dotfiles directory and opening
 # the nix flake for modification, e.g., adding a nixpkgs system dependency.
@@ -1120,7 +1120,7 @@ export def --env sysmod [
 
   # move to the dotfiles directory and find the flake
   let dotfiles_dir = $env.HOME | path join ".dotfiles"
-  let darwin_flake = $dotfiles_dir | path join ".config" "nix-darwin" "flake.nix"
+  let darwin_flake = $dotfiles_dir | path join ".config" "nix" "flake.nix"
 
   # make sure the flake exists
   if not ($darwin_flake | path exists) {
@@ -1144,7 +1144,7 @@ export def --env sysmod [
 }
 export alias sysedit = sysmod
 
-# Display nix-darwin system health and storage information
+# Display nix system health and storage information
 #
 # Shows system status including flake info and generations.
 # Use --store to show nix store size (slow).
@@ -1162,12 +1162,12 @@ export def syscheck [
   --store (-s) # Show nix store size (slow)
   --gc (-g) # Scan for reclaimable space (very slow)
 ] {
-  let flake_dir = $env.HOME | path join ".dotfiles" ".config" "nix-darwin"
+  let flake_dir = $env.HOME | path join ".dotfiles" ".config" "nix"
   let flake_lock = $flake_dir | path join "flake.lock"
 
   # Header
   print "==================================================================="
-  print "                    nix-darwin system status"
+  print "                       nix system status"
   print "==================================================================="
   print ""
 

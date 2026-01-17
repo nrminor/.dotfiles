@@ -20,7 +20,7 @@ Jupyter, RStudio, etc. Other goodies include
 [fzf](https://junegunn.github.io/fzf/),
 [btop](https://github.com/aristocratos/btop),
 [imagemagick](https://github.com/ImageMagick/ImageMagick), and much, much more.
-See all installed packages [here](https://github.com/nrminor/.dotfiles/blob/main/.config/nix-darwin/flake.nix)
+See all installed packages [here](https://github.com/nrminor/.dotfiles/blob/main/.config/nix/modules/common/packages.nix)
 and my growing list of handy aliases
 [here](https://github.com/nrminor/.dotfiles/blob/main/.config/nushell/aliases.nu)
 
@@ -52,7 +52,7 @@ Next, install Nix (the package manager, not NixOS the Linux distribution):
 sh <(curl -L https://nixos.org/nix/install)
 ```
 
-Before running the nix-darwin installer, you'll need to enable flakes. Create
+Before running the nix-darwin installer (which sets up macOS system management), you'll need to enable flakes. Create
 or edit `~/.config/nix/nix.conf` and add:
 
 ```
@@ -63,7 +63,7 @@ Then restart your terminal (or run `source /nix/var/nix/profiles/default/etc/pro
 and run the installer:
 
 ```bash
-nix run nix-darwin -- switch --flake ~/.dotfiles/.config/nix-darwin#starter
+nix run nix-darwin -- switch --flake ~/.dotfiles/.config/nix#starter
 ```
 
 This will take a while on the first run—it's installing everything from the
@@ -106,7 +106,7 @@ goes wrong, `just rollback` will switch back to the previous generation.
 For editing, there are shortcuts that open the relevant files in Helix:
 
 ```bash
-just ef         # edit the nix-darwin flake
+just ef         # edit the nix flake
 just ed         # edit dotter configuration
 just ez         # edit zshrc
 just eh         # edit helix config

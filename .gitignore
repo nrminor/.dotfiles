@@ -82,9 +82,15 @@
 !/.config/marimo
 !/.config/marimo/config.toml
 
-# Nix
+# Nix (modular cross-platform config)
 !/.config/nix
-!/.config/nix/shell.nix
+!/.config/nix/flake.nix
+!/.config/nix/flake.lock
+!/.config/nix/modules
+!/.config/nix/modules/common
+!/.config/nix/modules/common/*.nix
+!/.config/nix/modules/darwin
+!/.config/nix/modules/darwin/*.nix
 
 # Nix Darwin
 !/.config/nix-darwin

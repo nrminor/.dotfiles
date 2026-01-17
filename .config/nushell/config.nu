@@ -10,9 +10,9 @@ print ""
 fastfetch
 print ""
 
-# Nix-Darwin Flake Update Reminder
+# Nix Flake Update Reminder
 if (which nix | is-not-empty) {
-  let flake_dir = ($env.XDG_CONFIG_HOME | path join "nix-darwin")
+  let flake_dir = ($env.XDG_CONFIG_HOME | path join "nix")
   let flake_lock = ($flake_dir | path join "flake.lock")
 
   if ($flake_lock | path exists) {
@@ -24,7 +24,7 @@ if (which nix | is-not-empty) {
     let age_days = (($now - $lock_age) / 86400 | math floor)
 
     if $age_days > 7 {
-      print $"💡 Tip: Your nix-darwin flake hasn't been updated in ($age_days) days."
+      print $"💡 Tip: Your nix flake hasn't been updated in ($age_days) days."
       print $"   Run: sysupdate"
     }
   }

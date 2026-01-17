@@ -1,7 +1,7 @@
 # Dotfiles Management Commands
-# Declarative macOS environment with nix-darwin + dotter
+# Declarative macOS environment with nix + dotter
 
-export FLAKE_DIR := env_var('HOME') + '/.dotfiles/.config/nix-darwin'
+export FLAKE_DIR := env_var('HOME') + '/.dotfiles/.config/nix'
 export DOTFILES_DIR := env_var('HOME') + '/.dotfiles'
 
 # Default recipe shows available commands
@@ -60,10 +60,10 @@ alias dr := deploy-reload
 
 # ===== System Operations =====
 
-# Update nix-darwin flake and rebuild system
+# Update nix flake and rebuild system
 [group('system')]
 update:
-    @echo "Updating nix-darwin flake..."
+    @echo "Updating nix flake..."
     cd {{ FLAKE_DIR }} && nix flake update
     @echo "Rebuilding system..."
     sudo darwin-rebuild switch --flake {{ FLAKE_DIR }}#starter
@@ -103,7 +103,7 @@ full-update: update deploy
 
 alias fu := full-update
 
-# List nix-darwin generations
+# List darwin generations
 [group('system')]
 generations:
     darwin-rebuild --list-generations
@@ -214,7 +214,7 @@ alias ss := store-size
 
 # ===== Development Operations =====
 
-# Edit nix-darwin flake in Helix
+# Edit nix flake in Helix
 [group('dev')]
 edit-flake:
     hx {{ FLAKE_DIR }}/flake.nix
@@ -437,7 +437,7 @@ search query:
     @echo "Searching for: {{ query }}"
     @nix search nixpkgs {{ query }}
 
-# Show what's in the current nix-darwin generation
+# Show what's in the current darwin generation
 [group('info')]
 show-generation:
     @darwin-rebuild --list-generations | tail -1
@@ -515,10 +515,10 @@ validate lang='ts' *flags='':
 
 alias v := validate
 
-# Validate nix-darwin flake builds correctly
+# Validate nix flake builds correctly
 [group('validation')]
 validate-flake:
-    @echo "Validating nix-darwin configuration..."
+    @echo "Validating nix configuration..."
     @cd {{ FLAKE_DIR }} && nix flake check
     @echo "Building configuration..."
     @darwin-rebuild build --flake {{ FLAKE_DIR }}#starter
@@ -725,7 +725,7 @@ bench-deploy:
 
 alias bd := bench-deploy
 
-# Benchmark nix-darwin rebuild
+# Benchmark darwin-rebuild
 [group('perf')]
 bench-rebuild:
     @echo "Benchmarking darwin-rebuild (this will take a while)..."

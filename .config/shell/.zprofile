@@ -10,9 +10,9 @@
 # 	echo ""
 # fi
 
-# Check if nix-darwin flake needs updating (once per login)
+# Check if nix flake needs updating (once per login)
 if command -v nix >/dev/null 2>&1; then
-	FLAKE_DIR="$XDG_CONFIG_HOME/nix-darwin"
+	FLAKE_DIR="$XDG_CONFIG_HOME/nix"
 	if [ -f "$FLAKE_DIR/flake.lock" ]; then
 		# Check if flake.lock is older than 7 days (follow symlinks with -L)
 		if [ -n "$(find -L "$FLAKE_DIR/flake.lock" -mtime +7 2>/dev/null)" ]; then
@@ -23,7 +23,7 @@ if command -v nix >/dev/null 2>&1; then
 			else
 				REAL_FLAKE_DIR="$FLAKE_DIR"
 			fi
-			echo "💡 Tip: Your nix-darwin flake hasn't been updated in over a week."
+			echo "💡 Tip: Your nix flake hasn't been updated in over a week."
 			echo "   Run: cd $REAL_FLAKE_DIR && nix flake update && darwin-rebuild switch --flake ."
 		fi
 	fi

@@ -3,10 +3,19 @@
 # These files are only deployed on macOS systems
 # ============================================================================
 
-# Nix-darwin system configuration
-[nix-darwin.files]
-".config/nix-darwin/flake.nix" = "~/.config/nix-darwin/flake.nix"
-".config/nix-darwin/flake.lock" = "~/.config/nix-darwin/flake.lock"
+# Nix system configuration (modular)
+[nix.files]
+".config/nix/flake.nix" = "~/.config/nix/flake.nix"
+".config/nix/flake.lock" = "~/.config/nix/flake.lock"
+".config/nix/modules/common/packages.nix" = "~/.config/nix/modules/common/packages.nix"
+".config/nix/modules/common/plugins.nix" = "~/.config/nix/modules/common/plugins.nix"
+".config/nix/modules/darwin/default.nix" = "~/.config/nix/modules/darwin/default.nix"
+".config/nix/modules/darwin/packages.nix" = "~/.config/nix/modules/darwin/packages.nix"
+".config/nix/modules/darwin/homebrew.nix" = "~/.config/nix/modules/darwin/homebrew.nix"
+".config/nix/modules/darwin/system.nix" = "~/.config/nix/modules/darwin/system.nix"
+".config/nix/modules/darwin/shell.nix" = "~/.config/nix/modules/darwin/shell.nix"
+".config/nix/modules/darwin/environment.nix" = "~/.config/nix/modules/darwin/environment.nix"
+".config/nix/modules/darwin/activation.nix" = "~/.config/nix/modules/darwin/activation.nix"
 
 # Ghostty terminal (macOS Application Support location)
 [ghostty.files]
