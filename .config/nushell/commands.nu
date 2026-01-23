@@ -475,8 +475,37 @@ export def --env review [
     _ => { }
   }
 
+  # pull out the name of the repo so we can check if it already exists
+  let repo_name = $repo
+  | path basename
+  | str replace -r '\.git$' ''
+
   # change to the reviews dir that we now know exists
   cd $reviews_dir
+
+  # if the repo directory already exists, just cd into it, fetch updates, and optionally open editor
+  if ($repo_name | path exists) {
+    print $"Repository '($repo_name)' already exists, switching to it."
+    cd $repo_name
+
+    # try to fetch updates with jj, falling back to git
+    try { jj git fetch } catch {
+      try { git fetch } catch {
+        print "WARNING: failed to fetch updates (you may be offline)."
+      }
+    }
+
+    if $edit {
+      try { ^$env.VISUAL . } catch {
+        try { ^$env.EDITOR . } catch {|err|
+          error make {
+            msg: $"Could not open editor: '($err.msg)'"
+          }
+        }
+      }
+    }
+    return
+  }
 
   # make sure the user's repo exists
   try { git ls-remote $repo | ignore } catch {
@@ -491,10 +520,6 @@ export def --env review [
     git clone $repo
   }
 
-  # pull out the name of the repo and change into it
-  let repo_name = $repo
-  | path basename
-  | str replace -r '\.git$' ''
   cd $repo_name
 
   # if the user doesn't want to immediately open their editor, we're done here
