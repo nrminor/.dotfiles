@@ -114,3 +114,9 @@
 [oxc.files]
 ".config/.oxfmtrc.json" = "~/.oxfmtrc.json"
 # ".config/.oxfmtrc.jsonc" = "~/.oxfmtrc.jsonc"
+
+# Claude Code compatible skills (works with OpenCode too)
+# Dotter recursively expands directories, creating symlinks for each file
+# type = "symbolic" prevents Dotter from treating {{ }} in files as Handlebars templates
+[skills.files]
+".config/.claude/skills" = { target = "~/.claude/skills", type = "symbolic" }
