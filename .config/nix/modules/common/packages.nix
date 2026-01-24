@@ -30,7 +30,6 @@ in
 
   # ===== Core CLI Tools =====
   pkgs.less
-  pkgs.tailspin
   pkgs.tree
   pkgs.parallel
   pkgs.curl
@@ -39,6 +38,7 @@ in
   pkgs.ripgrep
   pkgs.ripgrep-all
   pkgs.fd
+  pkgs.skim
   pkgs.fzf
   pkgs.fzf-make
   pkgs.bat
@@ -51,6 +51,7 @@ in
   pkgs.bzip2
   pkgs.p7zip
   pkgs.xclip
+  pkgs.tailspin
 
   # ===== Shell & Prompt =====
   pkgs.zoxide
@@ -79,6 +80,7 @@ in
 
   # ===== Terminal Multiplexer =====
   pkgs.zellij
+  pkgs.tmux
 
   # ===== File Management =====
   pkgs.yazi
@@ -87,21 +89,23 @@ in
 
   # ===== Git & Version Control =====
   pkgs.git
+  pkgs.gh
+  pkgs.jujutsu
   pkgs.lazygit
   # pkgs.gitui
   pkgs.difftastic
-  pkgs.pre-commit
+  pkgs.prek
+  # pkgs.pre-commit
   pkgs.wrkflw
-  pkgs.jujutsu
-  pkgs.lazyjj
-  pkgs.jjui
+  # pkgs.lazyjj
+  # pkgs.jjui
   inputs.jj-starship.packages.${pkgs.stdenv.hostPlatform.system}.jj-starship
   pkgs.mergiraf
-  pkgs.gh
+  pkgs.gitlogue
 
   # ===== Development Tools =====
   pkgs.just
-  # pkgs.mask
+  pkgs.mask
   pkgs.direnv
   pkgs.mise
   pkgs.devbox
@@ -111,6 +115,7 @@ in
   pkgs.gnuplot
   pkgs.wiki-tui
   pkgs.tlrc
+  pkgs.binsider
 
   # ===== Bash/Zsh =====
   pkgs-stable.bash-language-server
@@ -150,6 +155,7 @@ in
   # ===== SQL & Data =====
   pkgs.duckdb
   pkgs.tabiew
+  pkgs.harlequin
   # pkgs.visidata
 
   # ===== Python Ecosystem =====
@@ -160,7 +166,7 @@ in
   # pkgs.ty
   pkgs.basedpyright
   # pkgs.pylyzer
-  pkgs-stable.marimo
+  pkgs.marimo
   pkgs.python313Packages.ipython
   pkgs.python313Packages.notebook
   # pkgs.python313Packages.marimo

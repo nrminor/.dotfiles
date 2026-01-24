@@ -205,110 +205,16 @@
 /.config/.direnv/
 
 # ============================================================================
-# Claude Code Skills (deployed to ~/.claude/skills/)
+# Custom Claude/OpenCode Skills (Anthropic skills managed by Nix/home-manager)
 # ============================================================================
 
 !/.config/.claude
 !/.config/.claude/skills
 
-# --- Skill directories (alphabetical) ---
-!/.config/.claude/skills/biopython
-!/.config/.claude/skills/biopython/SKILL.md
-!/.config/.claude/skills/biorxiv-database
-!/.config/.claude/skills/biorxiv-database/SKILL.md
-!/.config/.claude/skills/dask
-!/.config/.claude/skills/dask/SKILL.md
-!/.config/.claude/skills/doc-coauthoring
-!/.config/.claude/skills/doc-coauthoring/SKILL.md
+# duckdb skill
 !/.config/.claude/skills/duckdb
 !/.config/.claude/skills/duckdb/SKILL.md
-!/.config/.claude/skills/ena-database
-!/.config/.claude/skills/ena-database/SKILL.md
-!/.config/.claude/skills/ensembl-database
-!/.config/.claude/skills/ensembl-database/SKILL.md
-!/.config/.claude/skills/exploratory-data-analysis
-!/.config/.claude/skills/exploratory-data-analysis/SKILL.md
-!/.config/.claude/skills/frontend-design
-!/.config/.claude/skills/frontend-design/SKILL.md
-!/.config/.claude/skills/gene-database
-!/.config/.claude/skills/gene-database/SKILL.md
-!/.config/.claude/skills/gget
-!/.config/.claude/skills/gget/SKILL.md
-!/.config/.claude/skills/literature-review
-!/.config/.claude/skills/literature-review/SKILL.md
-!/.config/.claude/skills/matplotlib
-!/.config/.claude/skills/matplotlib/SKILL.md
-!/.config/.claude/skills/mcp-builder
-!/.config/.claude/skills/mcp-builder/SKILL.md
-!/.config/.claude/skills/opentrons-integration
-!/.config/.claude/skills/opentrons-integration/SKILL.md
-!/.config/.claude/skills/pdf
-!/.config/.claude/skills/pdf/SKILL.md
-!/.config/.claude/skills/peer-review
-!/.config/.claude/skills/peer-review/SKILL.md
-!/.config/.claude/skills/perplexity-search
-!/.config/.claude/skills/perplexity-search/SKILL.md
-!/.config/.claude/skills/plotly
-!/.config/.claude/skills/plotly/SKILL.md
-!/.config/.claude/skills/polars
-!/.config/.claude/skills/polars/SKILL.md
-!/.config/.claude/skills/pysam
-!/.config/.claude/skills/pysam/SKILL.md
-!/.config/.claude/skills/research-lookup
-!/.config/.claude/skills/research-lookup/SKILL.md
-!/.config/.claude/skills/scanpy
-!/.config/.claude/skills/scanpy/SKILL.md
-!/.config/.claude/skills/scientific-brainstorming
-!/.config/.claude/skills/scientific-brainstorming/SKILL.md
-!/.config/.claude/skills/scientific-critical-thinking
-!/.config/.claude/skills/scientific-critical-thinking/SKILL.md
-!/.config/.claude/skills/scientific-schematics
-!/.config/.claude/skills/scientific-schematics/SKILL.md
-!/.config/.claude/skills/scientific-slides
-!/.config/.claude/skills/scientific-slides/SKILL.md
-!/.config/.claude/skills/scientific-visualization
-!/.config/.claude/skills/scientific-visualization/SKILL.md
-!/.config/.claude/skills/scientific-writing
-!/.config/.claude/skills/scientific-writing/SKILL.md
-!/.config/.claude/skills/scikit-bio
-!/.config/.claude/skills/scikit-bio/SKILL.md
-!/.config/.claude/skills/scikit-learn
-!/.config/.claude/skills/scikit-learn/SKILL.md
-!/.config/.claude/skills/seaborn
-!/.config/.claude/skills/seaborn/SKILL.md
-!/.config/.claude/skills/simpy
-!/.config/.claude/skills/simpy/SKILL.md
-!/.config/.claude/skills/skill-creator
-!/.config/.claude/skills/skill-creator/SKILL.md
-!/.config/.claude/skills/statistical-analysis
-!/.config/.claude/skills/statistical-analysis/SKILL.md
-!/.config/.claude/skills/statsmodels
-!/.config/.claude/skills/statsmodels/SKILL.md
+
+# typst skill
 !/.config/.claude/skills/typst
 !/.config/.claude/skills/typst/SKILL.md
-!/.config/.claude/skills/zarr-python
-!/.config/.claude/skills/zarr-python/SKILL.md
-
-# --- Skill subdirectories ---
-!/.config/.claude/skills/*/references
-!/.config/.claude/skills/*/reference
-!/.config/.claude/skills/*/scripts
-!/.config/.claude/skills/*/assets
-
-# --- File type globs ---
-!/.config/.claude/skills/*/*.md
-!/.config/.claude/skills/*/references/*.md
-!/.config/.claude/skills/*/reference/*.md
-!/.config/.claude/skills/*/scripts/*.py
-!/.config/.claude/skills/*/scripts/*.js
-!/.config/.claude/skills/*/scripts/*.sh
-!/.config/.claude/skills/*/scripts/*.txt
-!/.config/.claude/skills/*/assets/*.md
-!/.config/.claude/skills/*/assets/*.py
-!/.config/.claude/skills/*/assets/*.tex
-!/.config/.claude/skills/*/assets/*.sty
-!/.config/.claude/skills/*/assets/*.mplstyle
-!/.config/.claude/skills/*/assets/*.env.example
-
-# --- Additional script file types ---
-!/.config/.claude/skills/*/scripts/*.xml

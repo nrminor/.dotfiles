@@ -23,6 +23,7 @@ in
   imports = [
     ./packages.nix
     ./programs.nix
+    ./skills.nix
   ];
 
   # Required: username and home directory

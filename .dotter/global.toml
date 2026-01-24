@@ -115,8 +115,8 @@
 ".config/.oxfmtrc.json" = "~/.oxfmtrc.json"
 # ".config/.oxfmtrc.jsonc" = "~/.oxfmtrc.jsonc"
 
-# Claude Code compatible skills (works with OpenCode too)
-# Dotter recursively expands directories, creating symlinks for each file
+# Custom Claude/OpenCode skills (Anthropic skills are managed by Nix/home-manager)
 # type = "symbolic" prevents Dotter from treating {{ }} in files as Handlebars templates
 [skills.files]
-".config/.claude/skills" = { target = "~/.claude/skills", type = "symbolic" }
+".config/.claude/skills/duckdb" = { target = "~/.claude/skills/duckdb", type = "symbolic" }
+".config/.claude/skills/typst" = { target = "~/.claude/skills/typst", type = "symbolic" }

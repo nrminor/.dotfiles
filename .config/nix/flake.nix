@@ -24,6 +24,12 @@
 
     jj-starship.url = "github:dmmulroy/jj-starship";
 
+    # Claude/OpenCode skills from Anthropic (not a flake, just fetch the repo)
+    anthropic-skills = {
+      url = "github:anthropics/skills";
+      flake = false;
+    };
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
