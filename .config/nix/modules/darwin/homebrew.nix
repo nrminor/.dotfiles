@@ -49,6 +49,7 @@
       "discord"
       "signal"
       "visual-studio-code"
+      "rstudio"
       "docker-desktop"
       "zoom"
       "font-symbols-only-nerd-font"

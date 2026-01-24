@@ -103,7 +103,7 @@ in
   pkgs.just
   # pkgs.mask
   pkgs.direnv
-  # pkgs.mise
+  pkgs.mise
   pkgs.devbox
   pkgs.watchexec
   pkgs.dotter
@@ -150,7 +150,7 @@ in
   # ===== SQL & Data =====
   pkgs.duckdb
   pkgs.tabiew
-  pkgs.visidata
+  # pkgs.visidata
 
   # ===== Python Ecosystem =====
   pkgs.python313
@@ -159,9 +159,8 @@ in
   pkgs.ruff
   # pkgs.ty
   pkgs.basedpyright
-  pkgs.pylyzer
+  # pkgs.pylyzer
   pkgs-stable.marimo
-  # pkgs.python313Packages.radian
   pkgs.python313Packages.ipython
   pkgs.python313Packages.notebook
   # pkgs.python313Packages.marimo
@@ -173,8 +172,9 @@ in
   pkgs.python313Packages.pysam
 
   # ===== R Ecosystem =====
-  # pkgs.R
+  pkgs.R
   # pkgs.rstudio
+  pkgs.radian
   # Note: R packages may conflict in home.packages buildEnv - testing
   # pkgs.rPackages.languageserver
   pkgs.air-formatter
@@ -227,7 +227,6 @@ in
   # pkgs.javascript-typescript-langserver
   # pkgs.biome
   # pkgs.oxlint
-  # pkgs.rescript-language-server
 
   # ===== OCaml =====
   pkgs.ocaml
@@ -238,9 +237,6 @@ in
   # pkgs.haskell-language-server
   # pkgs.stylish-haskell
   # pkgs.haskellPackages.fourmolu
-
-  # ===== Lean 4 =====
-  # pkgs.lean4
 
   # ===== BEAM VM (Erlang/Elixir/Gleam) =====
   pkgs.erlang
@@ -258,7 +254,7 @@ in
   pkgs.tinymist
   # pkgs.quarto
   pkgs.presenterm
-  pkgs.d2
+  # pkgs.d2
 
   # ===== Media Processing =====
   pkgs.poppler
