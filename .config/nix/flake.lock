@@ -138,6 +138,22 @@
         "type": "github"
       }
     },
+    "kdense-scientific-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769004994,
+        "narHash": "sha256-u6ggT9Wrousu6BlY5dXWu6xQSj2hcKqcIlRA+Ckm1zE=",
+        "owner": "K-Dense-AI",
+        "repo": "claude-scientific-skills",
+        "rev": "cd537c1af6731965817eed2ae32b8dd8ea9d0b5e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "K-Dense-AI",
+        "repo": "claude-scientific-skills",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -232,6 +248,7 @@
         "homebrew-core": "homebrew-core",
         "homebrew-steipete": "homebrew-steipete",
         "jj-starship": "jj-starship",
+        "kdense-scientific-skills": "kdense-scientific-skills",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_2",

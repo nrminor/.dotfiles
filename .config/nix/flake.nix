@@ -24,9 +24,13 @@
 
     jj-starship.url = "github:dmmulroy/jj-starship";
 
-    # Claude/OpenCode skills from Anthropic (not a flake, just fetch the repo)
+    # Claude/OpenCode skills (not flakes, just fetch the repos)
     anthropic-skills = {
       url = "github:anthropics/skills";
+      flake = false;
+    };
+    kdense-scientific-skills = {
+      url = "github:K-Dense-AI/claude-scientific-skills";
       flake = false;
     };
 

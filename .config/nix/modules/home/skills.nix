@@ -1,33 +1,46 @@
-# Claude/OpenCode skills from Anthropic
+# Claude/OpenCode skills from multiple upstreams
 #
-# Dynamically discovers and links all skills from the anthropic-skills
-# flake input to ~/.claude/skills/. Custom skills (duckdb, typst, etc.)
-# are managed separately by Dotter.
+# Dynamically discovers and links all skills from upstream repositories
+# to ~/.claude/skills/. Custom skills (duckdb, typst, etc.) are managed
+# separately by Dotter.
 #
 # Skills are linked individually so that Dotter can add custom skills
 # to the same directory without conflicts.
+#
+# Upstreams:
+#   - anthropics/skills (official Anthropic skills)
+#   - K-Dense-AI/claude-scientific-skills (scientific/bioinformatics skills)
 { inputs, lib, ... }:
 
 let
-  # Path to the skills directory in the anthropic-skills repo
-  skillsSource = "${inputs.anthropic-skills}/skills";
+  # Helper function to get skill directories from a source path
+  getSkillDirs =
+    source:
+    let
+      contents = builtins.readDir source;
+    in
+    builtins.filter (name: contents.${name} == "directory") (builtins.attrNames contents);
 
-  # Read the directory contents and filter to only directories
-  skillsDir = builtins.readDir skillsSource;
-  skillNames = builtins.filter (name: skillsDir.${name} == "directory") (
-    builtins.attrNames skillsDir
-  );
+  # Helper function to generate home.file entries from a skills source
+  mkSkillFiles =
+    source:
+    builtins.listToAttrs (
+      map (name: {
+        name = ".claude/skills/${name}";
+        value = {
+          source = "${source}/${name}";
+        };
+      }) (getSkillDirs source)
+    );
 
-  # Generate home.file entries for each skill
-  skillFiles = builtins.listToAttrs (
-    map (name: {
-      name = ".claude/skills/${name}";
-      value = {
-        source = "${skillsSource}/${name}";
-      };
-    }) skillNames
-  );
+  # Anthropic official skills (in 'skills/' subdirectory)
+  anthropicSkills = mkSkillFiles "${inputs.anthropic-skills}/skills";
+
+  # K-Dense scientific skills (in 'scientific-skills/' subdirectory)
+  kdenseSkills = mkSkillFiles "${inputs.kdense-scientific-skills}/scientific-skills";
+
 in
 {
-  home.file = skillFiles;
+  # Merge all skill sources (later entries override earlier on conflict)
+  home.file = anthropicSkills // kdenseSkills;
 }
