@@ -220,15 +220,6 @@
 !/.config/.claude/skills/dask/SKILL.md
 !/.config/.claude/skills/doc-coauthoring
 !/.config/.claude/skills/doc-coauthoring/SKILL.md
-!/.config/.claude/skills/document-skills
-!/.config/.claude/skills/document-skills/docx
-!/.config/.claude/skills/document-skills/docx/SKILL.md
-!/.config/.claude/skills/document-skills/pdf
-!/.config/.claude/skills/document-skills/pdf/SKILL.md
-!/.config/.claude/skills/document-skills/pptx
-!/.config/.claude/skills/document-skills/pptx/SKILL.md
-!/.config/.claude/skills/document-skills/xlsx
-!/.config/.claude/skills/document-skills/xlsx/SKILL.md
 !/.config/.claude/skills/duckdb
 !/.config/.claude/skills/duckdb/SKILL.md
 !/.config/.claude/skills/ena-database
@@ -243,8 +234,6 @@
 !/.config/.claude/skills/gene-database/SKILL.md
 !/.config/.claude/skills/gget
 !/.config/.claude/skills/gget/SKILL.md
-!/.config/.claude/skills/latex-posters
-!/.config/.claude/skills/latex-posters/SKILL.md
 !/.config/.claude/skills/literature-review
 !/.config/.claude/skills/literature-review/SKILL.md
 !/.config/.claude/skills/matplotlib
@@ -306,19 +295,6 @@
 !/.config/.claude/skills/*/scripts
 !/.config/.claude/skills/*/assets
 
-# --- document-skills nested structure (OOXML schemas) ---
-!/.config/.claude/skills/document-skills/*/ooxml
-!/.config/.claude/skills/document-skills/*/ooxml/schemas
-!/.config/.claude/skills/document-skills/*/ooxml/schemas/ISO-IEC29500-4_2016
-!/.config/.claude/skills/document-skills/*/ooxml/schemas/ecma
-!/.config/.claude/skills/document-skills/*/ooxml/schemas/ecma/fouth-edition
-!/.config/.claude/skills/document-skills/*/ooxml/schemas/mce
-!/.config/.claude/skills/document-skills/*/ooxml/schemas/microsoft
-!/.config/.claude/skills/document-skills/*/ooxml/scripts
-!/.config/.claude/skills/document-skills/*/ooxml/scripts/validation
-!/.config/.claude/skills/document-skills/*/scripts
-!/.config/.claude/skills/document-skills/*/scripts/templates
-
 # --- File type globs ---
 !/.config/.claude/skills/*/*.md
 !/.config/.claude/skills/*/references/*.md
@@ -333,18 +309,6 @@
 !/.config/.claude/skills/*/assets/*.sty
 !/.config/.claude/skills/*/assets/*.mplstyle
 !/.config/.claude/skills/*/assets/*.env.example
-
-# --- document-skills file type globs ---
-!/.config/.claude/skills/document-skills/*/*.md
-!/.config/.claude/skills/document-skills/*/*.py
-!/.config/.claude/skills/document-skills/*/*.txt
-!/.config/.claude/skills/document-skills/*/scripts/*.py
-!/.config/.claude/skills/document-skills/*/scripts/*.js
-!/.config/.claude/skills/document-skills/*/scripts/templates/*.xml
-!/.config/.claude/skills/document-skills/*/ooxml/schemas/*/*.xsd
-!/.config/.claude/skills/document-skills/*/ooxml/schemas/*/*/*.xsd
-!/.config/.claude/skills/document-skills/*/ooxml/scripts/*.py
-!/.config/.claude/skills/document-skills/*/ooxml/scripts/validation/*.py
 
 # --- Additional script file types ---
 !/.config/.claude/skills/*/scripts/*.xml
