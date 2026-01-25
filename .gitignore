@@ -224,3 +224,7 @@
 !/.config/.claude/skills/allocations/SKILL.md
 !/.config/.claude/skills/allocations/references
 !/.config/.claude/skills/allocations/references/*.md
+
+# self-doubt skill
+!/.config/.claude/skills/self-doubt
+!/.config/.claude/skills/self-doubt/SKILL.md
