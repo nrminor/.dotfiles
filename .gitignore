@@ -218,3 +218,9 @@
 # typst skill
 !/.config/.claude/skills/typst
 !/.config/.claude/skills/typst/SKILL.md
+
+# allocations skill
+!/.config/.claude/skills/allocations
+!/.config/.claude/skills/allocations/SKILL.md
+!/.config/.claude/skills/allocations/references
+!/.config/.claude/skills/allocations/references/*.md

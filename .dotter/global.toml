@@ -92,6 +92,7 @@
 ".config/opencode/agent/testing-guru.md" = "~/.config/opencode/agent/testing-guru.md"
 ".config/opencode/agent/semver-nag.md" = "~/.config/opencode/agent/semver-nag.md"
 ".config/opencode/agent/nick-isms.md" = "~/.config/opencode/agent/nick-isms.md"
+".config/opencode/agent/allocation-nag.md" = "~/.config/opencode/agent/allocation-nag.md"
 
 # Lazygit terminal UI for git
 [lazygit.files]
@@ -120,3 +121,4 @@
 [skills.files]
 ".config/.claude/skills/duckdb" = { target = "~/.claude/skills/duckdb", type = "symbolic" }
 ".config/.claude/skills/typst" = { target = "~/.claude/skills/typst", type = "symbolic" }
+".config/.claude/skills/allocations" = { target = "~/.claude/skills/allocations", type = "symbolic" }
