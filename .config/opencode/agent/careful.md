@@ -60,6 +60,7 @@ permission:
     # --- Testing (safe to run) ---
     "pytest": allow
     "pytest *": allow
+    "uv run pytest *": allow
     "npm test": allow
     "npm run test": allow
 
@@ -140,6 +141,7 @@ permission:
     "python *": deny
     "python3": deny
     "python3 *": deny
+    "uv run *": ask
 
     # --- Node dependency hell avoidance ---
     "npm install": deny
