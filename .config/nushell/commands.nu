@@ -593,11 +593,11 @@ export def "jj from git" [] {
   | lines
   | where $it !~ "HEAD" # Filter out HEAD -> main pointer
   | str trim
-  | each {|b| $b | str replace "origin/" "" | $"($in)@origin" }
+  | each {|b| $b | str replace "origin/" "" }
 
   # track any detected git origin branches
   if ($origin_branches | is-not-empty) {
-    ^jj bookmark track ...$origin_branches
+    ^jj bookmark track --remote=origin ...$origin_branches
   }
 }
 
