@@ -31,9 +31,9 @@ permission:
     "git ls-files": allow
     "git ls-files *": allow
 
-    # --- Jujutsu: deny by default, then allow specific read-only commands ---
-    "jj": deny
-    "jj *": deny
+    # --- Jujutsu: ask by default, then allow specific read-only commands ---
+    "jj": ask
+    "jj *": ask
     "jj log": allow
     "jj log *": allow
     "jj diff": allow
