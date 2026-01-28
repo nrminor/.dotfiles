@@ -97,7 +97,7 @@ in
   pkgs.prek
   # pkgs.pre-commit
   pkgs.wrkflw
-  # pkgs.lazyjj
+  pkgs.lazyjj
   # pkgs.jjui
   inputs.jj-starship.packages.${pkgs.stdenv.hostPlatform.system}.jj-starship
   pkgs.mergiraf
@@ -252,7 +252,7 @@ in
   pkgs.beam28Packages.elixir-ls
 
   # ===== Authoring & Documentation =====
-  pkgs.marksman
+  # pkgs.marksman # commented out because of the .NET and Swift transitive dependencies, which both get compiled from source
   pkgs.markdown-oxide
   pkgs.rumdl
   pkgs.typst
