@@ -1,4 +1,5 @@
 theme "catppuccin-macchiato"
+default_shell "nu"
 pane_frames false
 // default_layout "default"
 default_layout "compact"
