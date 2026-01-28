@@ -183,6 +183,11 @@
 !/.config/opencode/opencode.jsonc
 !/.config/opencode/agent
 !/.config/opencode/agent/*.md
+!/.config/opencode/command
+!/.config/opencode/command/*.md
+!/.config/opencode/plugin
+!/.config/opencode/plugin/*.ts
+!/.config/opencode/plugin/*.js
 
 # harlequin
 !/.config/.harlequin.toml
@@ -228,3 +233,7 @@
 # self-doubt skill
 !/.config/.claude/skills/self-doubt
 !/.config/.claude/skills/self-doubt/SKILL.md
+
+# vcs detection skills
+!.config/.claude/skills/vcs-detect
+!.config/.claude/skills/vcs-detect/SKILL.md

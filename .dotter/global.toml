@@ -86,6 +86,7 @@
 [opencode.files]
 ".config/opencode/opencode.jsonc" = "~/.config/opencode/opencode.jsonc"
 ".config/opencode/agent/careful.md" = "~/.config/opencode/agent/careful.md"
+".config/opencode/agent/oracle.md" = "~/.config/opencode/agent/oracle.md"
 ".config/opencode/agent/crazy-idea.md" = "~/.config/opencode/agent/crazy-idea.md"
 ".config/opencode/agent/documentation-nerd.md" = "~/.config/opencode/agent/documentation-nerd.md"
 ".config/opencode/agent/architecture-advice.md" = "~/.config/opencode/agent/architecture-advice.md"
@@ -93,6 +94,9 @@
 ".config/opencode/agent/semver-nag.md" = "~/.config/opencode/agent/semver-nag.md"
 ".config/opencode/agent/nick-isms.md" = "~/.config/opencode/agent/nick-isms.md"
 ".config/opencode/agent/allocation-nag.md" = "~/.config/opencode/agent/allocation-nag.md"
+".config/opencode/agent/opencode-expert.md" = "~/.config/opencode/agent/opencode-expert.md"
+".config/opencode/command" = "~/.config/opencode/command"
+".config/opencode/plugin" = "~/.config/opencode/plugin"
 
 # Lazygit terminal UI for git
 [lazygit.files]
@@ -123,3 +127,4 @@
 ".config/.claude/skills/typst" = { target = "~/.claude/skills/typst", type = "symbolic" }
 ".config/.claude/skills/allocations" = { target = "~/.claude/skills/allocations", type = "symbolic" }
 ".config/.claude/skills/self-doubt" = { target = "~/.claude/skills/self-doubt", type = "symbolic" }
+".config/.claude/skills/vcs-detect" = { target = "~/.claude/skills/vcs-detect", type = "symbolic" }
