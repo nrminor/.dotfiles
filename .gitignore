@@ -237,3 +237,9 @@
 # vcs detection skills
 !.config/.claude/skills/vcs-detect
 !.config/.claude/skills/vcs-detect/SKILL.md
+
+# PRD and ralph loop skills
+!.config/.claude/skills/prd
+!.config/.claude/skills/prd/SKILL.md
+!.config/.claude/skills/ralph
+!.config/.claude/skills/ralph/SKILL.md
