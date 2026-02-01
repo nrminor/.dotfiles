@@ -92,13 +92,9 @@ in
   pkgs.gh
   pkgs.jujutsu
   pkgs.lazygit
-  # pkgs.gitui
   pkgs.difftastic
   pkgs.prek
-  # pkgs.pre-commit
   pkgs.wrkflw
-  pkgs.lazyjj
-  # pkgs.jjui
   inputs.jj-starship.packages.${pkgs.stdenv.hostPlatform.system}.jj-starship
   pkgs.mergiraf
   pkgs.gitlogue
