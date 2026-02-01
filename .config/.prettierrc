@@ -1,17 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/prettierrc.json",
   "trailingComma": "es5",
-  "printWidth": 80,
-  "proseWrap": "preserve",
-  "overrides":
-    [
-      {
-        "files": "*.md",
-        "options": { "proseWrap": "preserve", "printWidth": 88, "tabWidth": 2 },
-      },
-      {
-        "files": "*.mdx",
-        "options": { "proseWrap": "preserve", "printWidth": 88, "tabWidth": 2 },
-      },
-    ],
+  "printWidth": 88,
+  "proseWrap": "preserve"
 }

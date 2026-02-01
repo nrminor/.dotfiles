@@ -136,6 +136,7 @@ in
   pkgs.maturin
   pkgs.bacon
   pkgs.rusty-man
+  pkgs.cargo-nextest
   pkgs.cargo-msrv
   pkgs.cargo-sort
   pkgs.cargo-audit
