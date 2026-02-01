@@ -1116,6 +1116,237 @@ export def mo [
 }
 
 # ============================================================================
+# RALPH WIGGUM AGENT LOOP
+# ============================================================================
+
+# Check if a file exists, printing a colored error with optional hint if not.
+# Returns true if file exists, false otherwise.
+def ralph_check_file [path: string hint?: string]: nothing -> bool {
+  if ($path | path exists) {
+    true
+  } else {
+    print $"(ansi red)Error: '($path)' not found(ansi reset)"
+    if ($hint | is-not-empty) {
+      print $"(ansi cyan)Hint: ($hint)(ansi reset)"
+    }
+    false
+  }
+}
+
+# Validate that prd.json exists, is valid JSON, and has at least one incomplete story.
+# Returns a record with { valid: bool, error?: string, incomplete_count?: int }.
+def ralph_validate_prd []: nothing -> record<valid: bool, error: string, incomplete_count: int> {
+  let prd_file = ".agents/prd.json"
+
+  if not ($prd_file | path exists) {
+    return {
+      valid: false
+      error: "PRD file not found. Start a planning session to create your prd.json:\n  - Write or paste your PRD, then ask the agent to convert it\n  - Or use: /ralph to invoke the PRD converter skill"
+      incomplete_count: 0
+    }
+  }
+
+  # Try to parse JSON
+  let prd = try {
+    open $prd_file
+  } catch {
+    return {
+      valid: false
+      error: $"Failed to parse ($prd_file) as JSON"
+      incomplete_count: 0
+    }
+  }
+
+  # Check for userStories field
+  if "userStories" not-in ($prd | columns) {
+    return {
+      valid: false
+      error: $"($prd_file) is missing 'userStories' field"
+      incomplete_count: 0
+    }
+  }
+
+  # Count incomplete stories
+  let incomplete = $prd.userStories | where {|s| $s.passes == false }
+  let incomplete_count = $incomplete | length
+
+  if $incomplete_count == 0 {
+    return {
+      valid: false
+      error: "All stories in prd.json are already complete (passes: true)"
+      incomplete_count: 0
+    }
+  }
+
+  {
+    valid: true
+    error: ""
+    incomplete_count: $incomplete_count
+  }
+}
+
+# Initialize a project for Ralph Wiggum agent loops
+#
+# Scaffolds the .agents/ directory with a PROMPT.md template and progress.txt.
+# Never overwrites existing files. After running, start a planning session to
+# create your prd.json with user stories for the agent to work through.
+#
+# Examples:
+#   > ralph init                    # Scaffold .agents/ directory
+#   > ralph init; claude            # Then start planning session
+export def "ralph init" [] {
+  let agents_dir = ".agents"
+  let prompt_file = $"($agents_dir)/PROMPT.md"
+  let progress_file = $"($agents_dir)/progress.txt"
+
+  # Check for existing files first - never overwrite
+  if ($agents_dir | path exists) {
+    print $"(ansi red)Error: ($agents_dir)/ already exists. Remove it first if you want to reinitialize.(ansi reset)"
+    return
+  }
+
+  mkdir $agents_dir
+
+  # Create PROMPT.md template
+  let prompt_template = "0. Confirm that you've loaded @AGENTS.md, have reviewed updates appended recently to `.agents/progress.txt`, and that we're in a new clean commit. If not, we will need to finish the previous commit and then make a new one before proceeding.
+1. Find the first story in `.agents/prd.json` where `passes: false`, declare your intent for this commit with `jj describe` in the style discussed in @AGENTS.md, and then proceed to working only on that story. Stories are ordered by dependency, so always work on the first incomplete one. Implementation should follow all guidelines from @AGENTS.md.
+2. Check that the code passes all checks, including formatting, clippy, tests, doc building, etc., with `just check`. No code may be committed that does not pass all checks.
+3. Solicit feedback from @nick-isms, @testing-guru, and @semver-nag to ensure the code is high-quality. REMINDER: all code, before and after addressing code-review feedback, _must pass `just check`_.
+4. Update the PRD: set `passes: true` for the completed story and add implementation notes to the `notes` field in `.agents/prd.json`.
+5. Append your progress to `.agents/progress.txt`. Use this to leave a note for the next agent working on the codebase.
+6. Make sure you haven't forgotten to allow any new paths (remember: no globs) in @.gitignore. Then, once everything is in your feature commit, make a new, clean commit with `jj new` for the next session.
+
+ONLY WORK ON A SINGLE FEATURE.
+
+If, while implementing a feature, you notice the whole PRD is complete, output <promise>COMPLETE</promise>.
+"
+  $prompt_template | save $prompt_file
+
+  # Create progress.txt with header
+  let progress_header = "# Agent Progress Log
+# Each agent session appends notes here for continuity across context windows.
+# ============================================================================
+
+"
+  $progress_header | save $progress_file
+
+  print $"(ansi green)Initialized ($agents_dir)/ with:(ansi reset)"
+  print $"  - ($prompt_file)"
+  print $"  - ($progress_file)"
+  print ""
+  print $"(ansi cyan)Next steps:(ansi reset)"
+  print "  1. Ensure your project has a `just check` recipe that runs all validation"
+  print "     (formatting, linting, tests, doc building, etc.)"
+  print "  2. Create an AGENTS.md with project-specific guidelines for the agent"
+  print "  3. Start a planning session to create .agents/prd.json:"
+  print "     - Write or paste your PRD, then ask the agent to convert it"
+  print "     - Or use: /ralph to invoke the PRD converter skill"
+  print "  4. Run `ralph loop` to start autonomous iteration"
+}
+
+# Run an autonomous AI agent loop (Ralph Wiggum pattern)
+#
+# Iteratively runs an AI agent against a prompt file until it emits a
+# completion marker or max iterations is reached. Each iteration spawns
+# a fresh context, with the agent seeing its previous work via git history
+# and workspace state. Activity is logged for real-time monitoring.
+#
+# The loop exits early on infrastructure failures (API errors, auth issues)
+# but continues iterating on task failures (the agent sees and learns from
+# its mistakes). Success is signaled by <promise>COMPLETE</promise> in output.
+#
+# Examples:
+#   > ralph loop                           # Run with defaults (.agents/PROMPT.md, 10 iterations)
+#   > ralph loop -n 20                     # Allow up to 20 iterations
+#   > ralph loop -p ./PROMPT.md            # Use a different prompt file
+#   > ralph loop -a http://localhost:4096  # Attach to running dev server
+#   > tail -f .agents/thinking.log         # Monitor agent activity in another terminal
+export def "ralph loop" [
+  --max-iterations (-n): int = 10 # Maximum number of iterations
+  --prompt-file (-p): string = ".agents/PROMPT.md" # Prompt file to use
+  --attach (-a): string = "" # Optional: attach to running server (e.g., http://localhost:4096)
+  --log-file (-l): string = ".agents/thinking.log" # Log file for real-time agent activity
+] {
+  # Check for required files before starting
+  let init_hint = "Run `ralph init` to scaffold the .agents/ directory"
+  let progress_file = ".agents/progress.txt"
+
+  if not (ralph_check_file $prompt_file $init_hint) {
+    return
+  }
+
+  if not (ralph_check_file $progress_file $init_hint) {
+    return
+  }
+
+  # Validate PRD structure and check for incomplete stories
+  let prd_status = ralph_validate_prd
+  if not $prd_status.valid {
+    print $"(ansi red)Error: ($prd_status.error)(ansi reset)"
+    return
+  }
+
+  print $"Starting Ralph loop with max ($max_iterations) iterations"
+  print $"Incomplete stories: ($prd_status.incomplete_count)"
+  print $"Prompt file: ($prompt_file)"
+  print $"Activity log: ($log_file) -- use 'tail -f' to watch"
+
+  for i in 1..$max_iterations {
+    print ""
+    print $"(ansi cyan)═══════════════════════════════════════════════════════════════(ansi reset)"
+    print $"(ansi cyan)  Iteration ($i) of ($max_iterations)(ansi reset)"
+    print $"(ansi cyan)═══════════════════════════════════════════════════════════════(ansi reset)"
+    print ""
+
+    # Log iteration start
+    let timestamp = (date now | format date "%Y-%m-%d %H:%M:%S")
+    $"\n\n═══════════════════════════════════════════════════════════════\n  Iteration ($i) started at ($timestamp)\n═══════════════════════════════════════════════════════════════\n\n" | save --append $log_file
+
+    let prompt = (open $prompt_file)
+
+    # Run opencode and tee output to log file while capturing it
+    let result = if ($attach | is-empty) {
+      opencode run $prompt | tee { save --append $log_file } | complete
+    } else {
+      opencode run --attach $attach $prompt | tee { save --append $log_file } | complete
+    }
+
+    if $result.exit_code != 0 {
+      print $"(ansi red)Error: opencode failed with exit code ($result.exit_code)(ansi reset)"
+      if not ($result.stderr | is-empty) {
+        print $result.stderr
+      }
+      return
+    }
+
+    # Print output to console
+    print $result.stdout
+
+    # Check for completion marker
+    if ($result.stdout | str contains "<promise>COMPLETE</promise>") {
+      print ""
+      print $"(ansi green)═══════════════════════════════════════════════════════════════(ansi reset)"
+      print $"(ansi green)  THE FULL PRD IS COMPLETE after ($i) iteration\(s\)(ansi reset)"
+      print $"(ansi green)═══════════════════════════════════════════════════════════════(ansi reset)"
+      return
+    }
+
+    if $i < $max_iterations {
+      print ""
+      print $"(ansi green)═══════════════════════════════════════════════════════════════(ansi reset)"
+      print $"(ansi green) Iteration ($i) completed. Now proceeding to next loop iteration... (ansi reset)"
+      print $"(ansi green)═══════════════════════════════════════════════════════════════(ansi reset)"
+    }
+  }
+
+  print ""
+  print $"(ansi red)═══════════════════════════════════════════════════════════════(ansi reset)"
+  print $"(ansi red)  Max iterations \(($max_iterations)\) reached without completion(ansi reset)"
+  print $"(ansi red)═══════════════════════════════════════════════════════════════(ansi reset)"
+}
+export alias ralph = ralph loop
+
+# ============================================================================
 # SYSTEM MANAGEMENT
 # ============================================================================
 
