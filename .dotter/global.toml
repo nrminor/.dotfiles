@@ -96,7 +96,7 @@
 ".config/opencode/agent/allocation-nag.md" = "~/.config/opencode/agent/allocation-nag.md"
 ".config/opencode/agent/opencode-expert.md" = "~/.config/opencode/agent/opencode-expert.md"
 ".config/opencode/command" = "~/.config/opencode/command"
-".config/opencode/plugin" = "~/.config/opencode/plugin"
+# ".config/opencode/plugin" = "~/.config/opencode/plugin"
 
 # Lazygit terminal UI for git
 [lazygit.files]
