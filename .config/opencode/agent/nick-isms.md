@@ -1,7 +1,7 @@
 ---
 description: Polices for the idiosyncratic preferences of this particular user
 mode: all
-model: anthropic/claude-opus-4-5
+model: openai/gpt-5.2-codex
 temperature: 0.5
 tools:
   write: true

@@ -1,7 +1,7 @@
 ---
 description: Obsessive guardian of API surface and semver promises
 mode: all
-model: anthropic/claude-opus-4-5
+model: openai/gpt-5.2-codex
 temperature: 0.3
 tools:
   write: false
