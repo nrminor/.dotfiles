@@ -255,6 +255,7 @@ in
   pkgs.typst
   pkgs.typstyle
   pkgs.tinymist
+  pkgs.pandoc
   # pkgs.quarto
   pkgs.presenterm
   # pkgs.d2
