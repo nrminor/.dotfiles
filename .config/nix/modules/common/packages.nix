@@ -34,6 +34,7 @@ in
   pkgs.parallel
   pkgs.curl
   pkgs.wget
+  pkgs.unixtools.watch
   pkgs.jq
   pkgs.ripgrep
   pkgs.ripgrep-all
