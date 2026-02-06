@@ -1,7 +1,7 @@
 ---
 description: Exceptionally thorough test designer and executor across Rust, Python, and Node ecosystems
 mode: all
-model: openai/gpt-5.2-codex
+model: openai/gpt-5.3-codex
 temperature: 0.7
 tools:
   write: true

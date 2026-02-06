@@ -1,7 +1,7 @@
 ---
 description: Audits code for unnecessary heap allocations and suggests stack-only, zero-copy, or pooling alternatives
 mode: all
-model: anthropic/claude-opus-4-5
+model: anthropic/claude-opus-4-6
 temperature: 0.3
 tools:
   write: false

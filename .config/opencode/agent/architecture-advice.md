@@ -1,7 +1,7 @@
 ---
 description: Tasteful and intuitive codebase designer with user- and developer-experience front-of-mind
 mode: all
-model: openai/gpt-5.2-codex
+model: openai/gpt-5.3-codex
 temperature: 0.7
 tools:
   write: true

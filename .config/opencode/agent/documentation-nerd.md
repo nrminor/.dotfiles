@@ -1,7 +1,7 @@
 ---
 description: Bookish and self-effacing keeper of the docs who will look anything and everything up for other agents
 mode: all
-model: anthropic/claude-opus-4-5
+model: anthropic/claude-opus-4-6
 temperature: 0.1
 tools:
   write: false

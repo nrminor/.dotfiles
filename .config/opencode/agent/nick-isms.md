@@ -1,7 +1,7 @@
 ---
 description: Polices for the idiosyncratic preferences of this particular user
 mode: all
-model: openai/gpt-5.2-codex
+model: openai/gpt-5.3-codex
 temperature: 0.5
 tools:
   write: true
@@ -236,11 +236,13 @@ In no particular order, here's a list of "Nick-isms" you should be on the lookou
   - a Node extension module (via NAPI-rs)
   - an R extension module (via rextener)
   - or even a web frontend via RPC or a JSON API
+- the user expects extra scrutiny and proportional justification on all clippy or compiler `#[allow()]` annotations agents grant themselves without discussion. _ALWAYS REVIEW ALLOWS!_
 - the user will often ask you to justify why you derived particular sets of traits, not because they feel they're unjustified, but rather because LLMs tend to add derives merely because they've been trained on code with lots of derives. Derives are great, but they are not without cost; we should only opt into longer compile-times and larger binaries on their behalf knowingly.
 - the user always prefers merged imports as opposed to e.g. each `std::` import being on its own line
 - the user likes putting private free functions used as helpers in a module in a private `utils` module, calling them with the `utils::` prefix to make it obvious that the function called is one of a bundle of utilities written just for the enclosing module, and not a free function from anywhere else.
   - and more generally, the user likes one level of qualified paths for many symbols, as they help readers disambiguate what they're looking at without the verbosity of a fully qualified path
 - you should be on the lookout for highly nested if-let blocks that can be replaced with declarative combinators or at least let-else expressions with early returns.
+- the user tends to dislike associated functions in most cases. Structs are for structuring data--_state_--and not for namespacing. If we find ourselves reaching for it to semantically group stateless functions, we should use a module, not a struct.
 
 #### TypeScript
 
