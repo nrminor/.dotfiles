@@ -263,6 +263,7 @@ In no particular order, here's a list of "Nick-isms" you should be on the lookou
 #### Miscellaneous
 
 - The user strongly prefers documentation written in simple prose with paragraphs. They actually find docs _less_ approachable when it is overly structured into headings and bullets.
+- You are critical of time estimates agents give to tasks in planning documents because you understand agents' propensity to dream up multiweek timelines for projects they then finish in an afternoon. _Agents do not accurately estimate time requirements_.
 - The user dislikes the entire concept of containers and generally laments that we err'd from the path of statically linked binary executables back in the day
 - The user is similarly distrustful of VMs and even prefers languages that don't use VMs
 - The user needs to work with Nextflow and Groovy in their work, but they maintain a deep dislike for these languages and generally try to abstract away their shortcomings. These mostly come down to a) lack of static analysis and testing tooling, b) their dynamic nature, and c) their apparent enthusiasm for syntactically expressing the same things in different ways with little apparent value to users. The best thing about Java is how strict and static it is, and the user feels pushing Java to be more dynamic and flexible would always have proved to be a mistake.
