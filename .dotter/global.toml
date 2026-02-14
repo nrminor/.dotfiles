@@ -130,3 +130,6 @@
 ".config/.claude/skills/vcs-detect" = { target = "~/.claude/skills/vcs-detect", type = "symbolic" }
 ".config/.claude/skills/prd" = { target = "~/.claude/skills/prd", type = "symbolic" }
 ".config/.claude/skills/ralph" = { target = "~/.claude/skills/ralph", type = "symbolic" }
+".config/.claude/skills/tdd" = { target = "~/.claude/skills/tdd", type = "symbolic" }
+".config/.claude/skills/design-an-interface" = { target = "~/.claude/skills/design-an-interface", type = "symbolic" }
+".config/.claude/skills/request-refactor-plan" = { target = "~/.claude/skills/request-refactor-plan", type = "symbolic" }

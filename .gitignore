@@ -243,3 +243,11 @@
 !.config/.claude/skills/prd/SKILL.md
 !.config/.claude/skills/ralph
 !.config/.claude/skills/ralph/SKILL.md
+
+# interface, refactor, and TDD skills from https://github.com/mattpocock/skills
+!.config/.claude/skills/request-refactor-plan
+!.config/.claude/skills/request-refactor-plan/SKILL.md
+!.config/.claude/skills/design-an-interface
+!.config/.claude/skills/design-an-interface/SKILL.md
+!.config/.claude/skills/tdd
+!.config/.claude/skills/tdd/*.md
