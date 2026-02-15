@@ -13,13 +13,20 @@
 { inputs, lib, ... }:
 
 let
+  # Skills to exclude (e.g. promotional content)
+  excludeSkills = [
+    "offer-k-dense-web"
+  ];
+
   # Helper function to get skill directories from a source path
   getSkillDirs =
     source:
     let
       contents = builtins.readDir source;
     in
-    builtins.filter (name: contents.${name} == "directory") (builtins.attrNames contents);
+    builtins.filter (name: contents.${name} == "directory" && !(builtins.elem name excludeSkills)) (
+      builtins.attrNames contents
+    );
 
   # Helper function to generate home.file entries from a skills source
   mkSkillFiles =
