@@ -22,8 +22,8 @@ in
       ];
       wvous-tr-corner = 1;
       wvous-tl-corner = 1;
-      wvous-br-corner = 1;
-      wvous-bl-corner = 1;
+      wvous-br-corner = 5; # start screen saver
+      wvous-bl-corner = 5; # start screen saver
       tilesize = 28;
       show-recents = false;
       show-process-indicators = true;

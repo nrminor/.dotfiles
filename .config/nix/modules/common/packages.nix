@@ -265,6 +265,7 @@ in
   pkgs.poppler
   pkgs.ffmpeg
   pkgs.imagemagick
+  pkgs.ghostscript
   pkgs.graphviz
 
   # ===== Bioinformatics =====
