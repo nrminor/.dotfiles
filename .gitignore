@@ -251,3 +251,23 @@
 !.config/.claude/skills/design-an-interface/SKILL.md
 !.config/.claude/skills/tdd
 !.config/.claude/skills/tdd/*.md
+
+# codebase-searcher skill
+!/.config/.claude/skills/codebase-searcher
+!/.config/.claude/skills/codebase-searcher/SKILL.md
+
+# back-of-envelope skill
+!/.config/.claude/skills/back-of-envelope
+!/.config/.claude/skills/back-of-envelope/SKILL.md
+
+# logging skill
+!/.config/.claude/skills/logging
+!/.config/.claude/skills/logging/SKILL.md
+
+# local-ci skill
+!/.config/.claude/skills/local-ci
+!/.config/.claude/skills/local-ci/SKILL.md
+
+# jj skill
+!/.config/.claude/skills/jj
+!/.config/.claude/skills/jj/SKILL.md

@@ -95,6 +95,8 @@
 ".config/opencode/agent/nick-isms.md" = "~/.config/opencode/agent/nick-isms.md"
 ".config/opencode/agent/allocation-nag.md" = "~/.config/opencode/agent/allocation-nag.md"
 ".config/opencode/agent/opencode-expert.md" = "~/.config/opencode/agent/opencode-expert.md"
+".config/opencode/agent/codebase-searcher.md" = "~/.config/opencode/agent/codebase-searcher.md"
+".config/opencode/agent/measurement-guru.md" = "~/.config/opencode/agent/measurement-guru.md"
 ".config/opencode/command" = "~/.config/opencode/command"
 # ".config/opencode/plugin" = "~/.config/opencode/plugin"
 
@@ -133,3 +135,8 @@
 ".config/.claude/skills/tdd" = { target = "~/.claude/skills/tdd", type = "symbolic" }
 ".config/.claude/skills/design-an-interface" = { target = "~/.claude/skills/design-an-interface", type = "symbolic" }
 ".config/.claude/skills/request-refactor-plan" = { target = "~/.claude/skills/request-refactor-plan", type = "symbolic" }
+".config/.claude/skills/codebase-searcher" = { target = "~/.claude/skills/codebase-searcher", type = "symbolic" }
+".config/.claude/skills/back-of-envelope" = { target = "~/.claude/skills/back-of-envelope", type = "symbolic" }
+".config/.claude/skills/logging" = { target = "~/.claude/skills/logging", type = "symbolic" }
+".config/.claude/skills/local-ci" = { target = "~/.claude/skills/local-ci", type = "symbolic" }
+".config/.claude/skills/jj" = { target = "~/.claude/skills/jj", type = "symbolic" }
