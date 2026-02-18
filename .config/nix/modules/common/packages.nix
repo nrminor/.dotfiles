@@ -38,6 +38,7 @@ in
   pkgs.jq
   pkgs.ripgrep
   pkgs.ripgrep-all
+  pkgs.ast-grep
   pkgs.fd
   pkgs.skim
   pkgs.fzf
