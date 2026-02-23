@@ -3,8 +3,8 @@ description: Dispatch parallel subagent code reviews, resolve conflicts between 
 ---
 
 Please dispatch @testing-guru, @nick-isms, @semver-nag, and @allocation-nag
-subagents to perform parallel code reviews of any files from the last three
-commits that contain changes. This will be the first pass of reviews.
+subagents to perform parallel code reviews of any files from the last commits that
+contain changes. This will be the first pass of reviews.
 
 Once you get their reviews, identify any points of conflict between the
 subagents' reviews. Once identified, please again prompt the relevant subagent
