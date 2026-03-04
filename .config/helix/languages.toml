@@ -145,7 +145,7 @@ language-servers = [
   "oxlint",
   # "biome",
   # "vscode-eslint-language-server",
-  "tailwindcss-ls",
+  # "tailwindcss-ls",
 ]
 roots = ["biome.json", "biome.jsonc", "deno.json", "deno.jsonc", "package.json"]
 auto-format = true
@@ -166,7 +166,7 @@ language-servers = [
   "oxlint",
   # "biome",
   # "vscode-eslint-language-server",
-  "tailwindcss-ls",
+  # "tailwindcss-ls",
 ]
 auto-format = true
 
@@ -186,7 +186,7 @@ language-servers = [
   "oxlint",
   # "biome",
   # "vscode-eslint-language-server",
-  "tailwindcss-ls",
+  # "tailwindcss-ls",
 ]
 auto-format = true
 
@@ -249,6 +249,16 @@ language-servers = [
 '"' = '"'
 '<' = '>'
 '`' = '`'
+
+[language-server.typescript-language-server.config.typescript.inlayHints]
+includeInlayParameterNameHints = "none"
+includeInlayParameterNameHintsWhenArgumentMatchesName = false
+includeInlayFunctionParameterTypeHints = false
+includeInlayVariableTypeHints = false
+includeInlayVariableTypeHintsWhenTypeMatchesName = false
+includeInlayPropertyDeclarationTypeHints = false
+includeInlayFunctionLikeReturnTypeHints = false
+includeInlayEnumMemberValueHints = false
 
 [language-server.deno-lsp]
 command = "deno"
@@ -389,7 +399,7 @@ language-servers = [
     "format",
   ] },
   "vscode-html-language-server",
-  { name = "tailwindcss-ls" },
+  # { name = "tailwindcss-ls" },
 ]
 auto-format = true
 
