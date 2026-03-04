@@ -18,6 +18,7 @@ permission:
     # --- Git: deny by default, then allow specific read-only commands ---
     "git": deny
     "git *": deny
+    "git push": deny
     "git status": allow
     "git status *": allow
     "git log": allow
@@ -34,6 +35,7 @@ permission:
     # --- Jujutsu: ask by default, then allow specific read-only commands ---
     "jj": ask
     "jj *": ask
+    "jj git push": deny
     "jj log": allow
     "jj log *": allow
     "jj diff": allow
@@ -61,8 +63,10 @@ permission:
     "pytest": allow
     "pytest *": allow
     "uv run pytest *": allow
-    "npm test": allow
-    "npm run test": allow
+    "bun test": allow
+    "bun test *": allow
+    "bun run test": allow
+    "bun run test *": allow
 
     # --- Read-only file operations ---
     "cat": allow
@@ -146,8 +150,10 @@ permission:
     # --- Node dependency hell avoidance ---
     "npm install": deny
     "npm i": deny
-    "bun install": deny
-    "bun i": deny
+    "npm": deny
+    "npm *": deny
+    "npx": deny
+    "npx *": deny
 
     # --- Destructive file operations ---
     "rm -rf": deny

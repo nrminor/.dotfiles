@@ -9,7 +9,7 @@ font-thicken = true
 
 # window configurations
 theme = Catppuccin Macchiato
-background-opacity = 0.75
+background-opacity = 0.85
 background-blur-radius = 25
 window-inherit-font-size = false
 window-width = 165

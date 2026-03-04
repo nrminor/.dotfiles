@@ -19,6 +19,7 @@ in
         "/Applications/Superhuman.app"
         "/Applications/Bear.app"
         "/Applications/Ghostty.app"
+        "/Applications/Paper.app"
       ];
       wvous-tr-corner = 1;
       wvous-tl-corner = 1;
