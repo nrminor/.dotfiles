@@ -10,6 +10,25 @@ use std/assert
 # DIRECTORY NAVIGATION
 # ============================================================================
 
+# Copy the current working directory to the system clipboard
+#
+# Copies the absolute path of the current directory to the macOS clipboard
+# using pbcopy and prints a confirmation message.
+#
+# Examples:
+#   > pwd copy                      # Copy current directory path
+#   > path copy                     # Same thing (via alias)
+#   > pwd clip                      # Same thing (via alias)
+export def "pwd copy" [] {
+  $env.PWD | ^pbcopy
+  print $"Copied: ($env.PWD)"
+}
+export def "pwd clip" [] { pwd copy }
+export def "pwd yank" [] { pwd copy }
+export def "path copy" [] { pwd copy }
+export def "path clip" [] { pwd copy }
+export def "path yank" [] { pwd copy }
+
 # Create a directory and change into it
 #
 # Creates parent directories as needed, then changes to the new directory.
