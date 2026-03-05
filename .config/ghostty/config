@@ -51,3 +51,6 @@ keybind = global:ctrl+grave_accent=toggle_quick_terminal
 keybind = alt+left=unbind
 keybind = alt+right=unbind
 keybind = shift+enter=text:\n
+
+# get those sweet tip updates
+auto-update-channel = tip
