@@ -1,7 +1,7 @@
 ---
 description: Senior engineering advisor for code reviews, architecture decisions, complex debugging, and planning. Invoke when you need deeper analysis before acting — reviews, trade-offs, debugging race conditions, planning refactors. Prompt with precise problem + files. Ask for concrete outcomes.
 mode: subagent
-model: openai/gpt-5.3-codex
+model: openai/gpt-5.4
 # Extended thinking - maxed out for deepest reasoning
 options:
   thinking:

@@ -11,10 +11,13 @@ only materialize the rows (lines) you actually need. Every file you read in full
 is a table scan. Don't do table scans.
 
 More importantly, this skill teaches you to **choose the right level of search
-abstraction**. Text-based grep is the lowest level — it's fast but unfocused,
-matching indiscriminately in code, comments, strings, and documentation. Most
-searches benefit from starting at a higher level of abstraction and only falling
-back to text search when necessary.
+abstraction**. Your primary search tools are bash commands — `codemogger` first
+for maximally efficient semantic search, then `sg`/`ast-grep` for structural search,
+and then `rg` (ripgrep) for textual search as the least efficient last resort. Do
+not default to using Glob + Read as a search strategy. Globbing for files and then
+reading them one by one to find information is the most token-expensive and least
+focused approach possible. Use your bash search tools to find what you're looking for,
+then use Read only to pull the specific line ranges you need from the results.
 
 ## The Pushdown Principle
 
@@ -160,13 +163,13 @@ match:
 
 **Key flags:**
 
-| Flag | Purpose |
-|------|---------|
-| `-p <pattern>` | The AST pattern to match (required) |
-| `-l <lang>` | Language: `rs`, `py`, `ts`, `tsx`, `js`, `go`, `java`, `c`, `cpp` |
-| `--json` | JSON output (pipe to `jq` for extraction) |
-| `-C <n>` | Context lines |
-| `--debug-query=ast` | Print pattern's AST — essential for debugging |
+| Flag                | Purpose                                                           |
+| ------------------- | ----------------------------------------------------------------- |
+| `-p <pattern>`      | The AST pattern to match (required)                               |
+| `-l <lang>`         | Language: `rs`, `py`, `ts`, `tsx`, `js`, `go`, `java`, `c`, `cpp` |
+| `--json`            | JSON output (pipe to `jq` for extraction)                         |
+| `-C <n>`            | Context lines                                                     |
+| `--debug-query=ast` | Print pattern's AST — essential for debugging                     |
 
 Always specify `-l`. Without it, `sg` infers from file extensions, which can be
 surprising.
@@ -226,21 +229,21 @@ documentation indiscriminately.
 
 **Key flags for efficient searching:**
 
-| Flag | Purpose | When to use |
-|------|---------|-------------|
-| `-l` | Filenames only | First pass — scope before reading |
-| `-c` | Match count per file | Gauging usage breadth |
-| `--count-matches` | Total matches (not lines) | Precise usage counts |
-| `-t <lang>` | Language filter (`-trust`, `-tpy`, `-tts`) | Always, in polyglot repos |
-| `-g '<glob>'` | Path glob filter (`-g '!*test*'`) | Excluding tests, fixtures |
-| `-n` | Line numbers | Always when piping (on by default in terminal) |
-| `-w` | Word boundary | Preventing `foo` matching `foobar` |
-| `-F` | Fixed string (no regex) | Patterns with `.`, `[`, `(`, etc. |
-| `-C <n>` | Context lines | Use `-C 3`, not `-C 20` |
-| `-A`/`-B <n>` | Asymmetric context | When you need lines after but not before |
-| `-U` | Multiline mode | Cross-line patterns |
-| `-o` | Only matching portion | Extracting specific substrings |
-| `--no-ignore` | Include gitignored files | Searching build output or vendored code |
+| Flag              | Purpose                                    | When to use                                    |
+| ----------------- | ------------------------------------------ | ---------------------------------------------- |
+| `-l`              | Filenames only                             | First pass — scope before reading              |
+| `-c`              | Match count per file                       | Gauging usage breadth                          |
+| `--count-matches` | Total matches (not lines)                  | Precise usage counts                           |
+| `-t <lang>`       | Language filter (`-trust`, `-tpy`, `-tts`) | Always, in polyglot repos                      |
+| `-g '<glob>'`     | Path glob filter (`-g '!*test*'`)          | Excluding tests, fixtures                      |
+| `-n`              | Line numbers                               | Always when piping (on by default in terminal) |
+| `-w`              | Word boundary                              | Preventing `foo` matching `foobar`             |
+| `-F`              | Fixed string (no regex)                    | Patterns with `.`, `[`, `(`, etc.              |
+| `-C <n>`          | Context lines                              | Use `-C 3`, not `-C 20`                        |
+| `-A`/`-B <n>`     | Asymmetric context                         | When you need lines after but not before       |
+| `-U`              | Multiline mode                             | Cross-line patterns                            |
+| `-o`              | Only matching portion                      | Extracting specific substrings                 |
+| `--no-ignore`     | Include gitignored files                   | Searching build output or vendored code        |
 
 **Examples:**
 
