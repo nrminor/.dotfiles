@@ -115,6 +115,7 @@ export alias db = duckdb
 export alias hq = harlequin
 export alias tw = tw --theme catppuccin
 export alias tab = tw
+export alias pl = polars # https://www.nushell.sh/blog/2026-02-28-nushell_v0_111_0.html#type-polars-less-now
 
 # ============================================================================
 # NETWORK & REMOTE
