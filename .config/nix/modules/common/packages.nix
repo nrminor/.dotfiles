@@ -99,6 +99,7 @@ in
   pkgs.wrkflw
   inputs.jj-starship.packages.${pkgs.stdenv.hostPlatform.system}.jj-starship
   pkgs.mergiraf
+  pkgs.git-cliff
   pkgs.gitlogue
 
   # ===== Development Tools =====
@@ -154,7 +155,7 @@ in
   # ===== SQL & Data =====
   pkgs.duckdb
   pkgs.tabiew
-  pkgs.harlequin
+  # pkgs.harlequin
   # pkgs.visidata
 
   # ===== Python Ecosystem =====
@@ -172,9 +173,9 @@ in
   pkgs.python313Packages.jupyter-core
   pkgs.python313Packages.jupyterlab
   pkgs.python313Packages.ipykernel
-  pkgs.python313Packages.polars
-  pkgs.python313Packages.biopython
-  pkgs.python313Packages.pysam
+  # pkgs.python313Packages.polars
+  # pkgs.python313Packages.biopython
+  # pkgs.python313Packages.pysam
 
   # ===== R Ecosystem =====
   pkgs.R
