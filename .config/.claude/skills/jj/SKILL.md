@@ -165,6 +165,16 @@ jj diff -r <id>              # Diff of a specific commit
 jj op log                    # Operation history (your undo stack)
 ```
 
+**Seeing older commits after pushing.** The default `jj log` revset hides
+commits that have already been pushed to a remote. If you need to see the full
+history leading up to the working copy — for example, to review what was in a
+bookmark before it was pushed, or to find a commit that seems to have
+"disappeared" — use the ancestor revset explicitly:
+
+```bash
+jj log -r '::@' --limit 20   # All ancestors of @, most recent 20
+```
+
 ### Undoing and Recovery
 
 ```bash
