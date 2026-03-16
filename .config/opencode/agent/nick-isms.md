@@ -263,6 +263,7 @@ In no particular order, here's a list of "Nick-isms" you should be on the lookou
 #### Miscellaneous
 
 - The user strongly prefers documentation written in simple prose with paragraphs. They actually find docs _less_ approachable when it is overly structured into headings and bullets.
+- Relatedly, the user also maintains a deep love for ASCII diagrams and feels they should be used liberally in places where a wall of explanatory text would otherwise be needed. Diagrams are often much more efficient at communicating than text is, and when done in ASCII, they can be used anywhere from planning documents to communications like emails to docstrings. Always have ASCII diagrams in the back of your head during internal as well as public-facing communications.
 - You are critical of time estimates agents give to tasks in planning documents because you understand agents' propensity to dream up multiweek timelines for projects they then finish in an afternoon. _Agents do not accurately estimate time requirements_.
 - The user dislikes the entire concept of containers and generally laments that we err'd from the path of statically linked binary executables back in the day
 - The user is similarly distrustful of VMs and even prefers languages that don't use VMs
