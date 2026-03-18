@@ -278,3 +278,7 @@
 !/.config/.claude/skills/effect-ts/SKILL.md
 !/.config/.claude/skills/effect-ts/references
 !/.config/.claude/skills/effect-ts/references/*.md
+
+# design-engineering skill
+!/.config/.claude/skills/design-engineering
+!/.config/.claude/skills/design-engineering/SKILL.md
