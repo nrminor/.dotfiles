@@ -141,3 +141,5 @@
 ".config/.claude/skills/logging" = { target = "~/.claude/skills/logging", type = "symbolic" }
 ".config/.claude/skills/local-ci" = { target = "~/.claude/skills/local-ci", type = "symbolic" }
 ".config/.claude/skills/jj" = { target = "~/.claude/skills/jj", type = "symbolic" }
+".config/.claude/skills/tigerstyle" = { target = "~/.claude/skills/tigerstyle", type = "symbolic" }
+".config/.claude/skills/effect-ts" = { target = "~/.claude/skills/effect-ts", type = "symbolic" }

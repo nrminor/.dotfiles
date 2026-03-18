@@ -272,3 +272,9 @@
 # jj skill
 !/.config/.claude/skills/jj
 !/.config/.claude/skills/jj/SKILL.md
+
+# effect-ts skill
+!/.config/.claude/skills/effect-ts
+!/.config/.claude/skills/effect-ts/SKILL.md
+!/.config/.claude/skills/effect-ts/references
+!/.config/.claude/skills/effect-ts/references/*.md
