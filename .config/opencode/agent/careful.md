@@ -1,7 +1,7 @@
 ---
 description: Edits code with increased sensitivity to entropy
 mode: primary
-model: openai/gpt-5.4
+model: anthropic/claude-opus-4-6
 temperature: 0.5
 tools:
   write: true
