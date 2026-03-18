@@ -17,10 +17,6 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
-    homebrew-steipete = {
-      url = "github:steipete/homebrew-tap";
-      flake = false;
-    };
 
     jj-starship.url = "github:dmmulroy/jj-starship";
 

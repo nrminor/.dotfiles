@@ -24,7 +24,7 @@
             just
             nushell
             dotter
-            pre-commit
+            prek
 
             # Nix tooling
             nixd

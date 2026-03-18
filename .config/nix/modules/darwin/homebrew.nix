@@ -15,9 +15,6 @@
     enableRosetta = false;
     user = username;
     autoMigrate = true;
-    taps = {
-      "steipete/tap" = inputs.homebrew-steipete;
-    };
   };
 
   # homebrew: what to install via Homebrew
@@ -53,7 +50,6 @@
       "docker-desktop"
       "zoom"
       "font-symbols-only-nerd-font"
-      "steipete/tap/repobar"
     ];
 
     # Mac App Store apps (IDs from 'mas search <name>')

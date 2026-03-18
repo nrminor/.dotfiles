@@ -58,11 +58,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772845525,
-        "narHash": "sha256-Dp5Ir2u4jJDGCgeMRviHvEQDe+U37hMxp6RSNOoMMPc=",
+        "lastModified": 1774007980,
+        "narHash": "sha256-FOnZjElEI8pqqCvB6K/1JRHTE8o4rer8driivTpq2uo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "27b93804fbef1544cb07718d3f0a451f4c4cd6c0",
+        "rev": "9670de2921812bc4e0452f6e3efd8c859696c183",
         "type": "github"
       },
       "original": {
@@ -74,11 +74,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1772915405,
-        "narHash": "sha256-FNHei3VTb2u/uV9ptK1jr6RtdGHSiODcFdZsLzPCQPc=",
+        "lastModified": 1774100742,
+        "narHash": "sha256-iJXVu2AHV1gSiwmPhw+5lwngB4MDXNtiVj8Wvmz6yqM=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "791a6492496359b5c3fef6cfa8b758d8423ce600",
+        "rev": "370037e0047568d451224772e7f75dad7fe5c7ea",
         "type": "github"
       },
       "original": {
@@ -90,32 +90,16 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1772915703,
-        "narHash": "sha256-jqslI39wVeYHv9JLfDI0zeIq2ENCUbfNWuquv0XxNZM=",
+        "lastModified": 1774107489,
+        "narHash": "sha256-NhVybEZMyVjOFHohFUeSnAWZN0rgF9cLVf3wPfa9IRY=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "1116231ce59ab1493dccf2f54114ae373af5ef50",
+        "rev": "cac3148e9698ce08ede65c1053d095d2f106395f",
         "type": "github"
       },
       "original": {
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "type": "github"
-      }
-    },
-    "homebrew-steipete": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1771223140,
-        "narHash": "sha256-F+hJm88+HAQ5kMKnve3Atf3mfwlRTZgE7e4b9mo66iI=",
-        "owner": "steipete",
-        "repo": "homebrew-tap",
-        "rev": "b3d483692d3343deeaf74b222e6c50586af349ca",
-        "type": "github"
-      },
-      "original": {
-        "owner": "steipete",
-        "repo": "homebrew-tap",
         "type": "github"
       }
     },
@@ -141,11 +125,11 @@
     "kdense-scientific-skills": {
       "flake": false,
       "locked": {
-        "lastModified": 1772836753,
-        "narHash": "sha256-TKg89hjpR9FYUU6toaDs2uWogPmmVWhm5NG1nMRJROU=",
+        "lastModified": 1774025992,
+        "narHash": "sha256-Alokqt2q6eJpf8hKEsy8ViG3eUZaZG/EvdtSDI9F3mk=",
         "owner": "K-Dense-AI",
         "repo": "claude-scientific-skills",
-        "rev": "c84622c08adb7a4619bb0bbfcf43224541ef22dd",
+        "rev": "903caa6a26a6613c41ee90511b65c28cc3426d5e",
         "type": "github"
       },
       "original": {
@@ -161,11 +145,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772379624,
-        "narHash": "sha256-NG9LLTWlz4YiaTAiRGChbrzbVxBfX+Auq4Ab/SWmk4A=",
+        "lastModified": 1773000227,
+        "narHash": "sha256-zm3ftUQw0MPumYi91HovoGhgyZBlM4o3Zy0LhPNwzXE=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "52d061516108769656a8bd9c6e811c677ec5b462",
+        "rev": "da529ac9e46f25ed5616fd634079a5f3c579135f",
         "type": "github"
       },
       "original": {
@@ -226,11 +210,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1772736753,
-        "narHash": "sha256-au/m3+EuBLoSzWUCb64a/MZq6QUtOV8oC0D9tY2scPQ=",
+        "lastModified": 1773840656,
+        "narHash": "sha256-9tpvMGFteZnd3gRQZFlRCohVpqooygFuy9yjuyRL2C0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "917fec990948658ef1ccd07cef2a1ef060786846",
+        "rev": "9cf7092bdd603554bd8b63c216e8943cf9b12512",
         "type": "github"
       },
       "original": {
@@ -246,7 +230,6 @@
         "home-manager": "home-manager",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
-        "homebrew-steipete": "homebrew-steipete",
         "jj-starship": "jj-starship",
         "kdense-scientific-skills": "kdense-scientific-skills",
         "nix-darwin": "nix-darwin",

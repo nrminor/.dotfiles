@@ -152,6 +152,9 @@ in
   pkgs.crate2nix
   pkgs.dioxus-cli
 
+  # ===== WebAssembly =====
+  pkgs.wasm-pack
+
   # ===== SQL & Data =====
   pkgs.duckdb
   pkgs.tabiew
@@ -178,9 +181,9 @@ in
   # pkgs.python313Packages.pysam
 
   # ===== R Ecosystem =====
-  pkgs.R
+  pkgs-stable.R
   # pkgs.rstudio
-  pkgs.radian
+  # pkgs.radian # pulls in unstable R + texlive; install via pip if needed
   # Note: R packages may conflict in home.packages buildEnv - testing
   # pkgs.rPackages.languageserver
   pkgs.air-formatter
