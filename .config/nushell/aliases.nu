@@ -79,8 +79,9 @@ export alias j = jj
 export alias kk = jj
 export alias hh = jj
 export alias "jj push" = jj git push
-export alias "jj@" = jj -r '::@'
 export alias "jj ::@" = jj -r '::@'
+export alias "jj@" = jj -r '::@'
+export alias "j@" = jj -r '::@'
 
 # ============================================================================
 # ZELLIJ (Terminal Multiplexer)

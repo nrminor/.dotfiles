@@ -9,6 +9,11 @@ export DOTFILES_DIR := env('HOME') + '/.dotfiles'
 default:
     @just --list --unsorted
 
+# Recipe for interactively choosing a recipe
+[group('help')]
+choose:
+  @just --choose
+
 # Show all available recipes with descriptions
 [group('help')]
 help:
