@@ -147,7 +147,14 @@ language-servers = [
   # "vscode-eslint-language-server",
   # "tailwindcss-ls",
 ]
-roots = ["biome.json", "biome.jsonc", "deno.json", "deno.jsonc", "package.json"]
+roots = [
+  "tsconfig.json",
+  "biome.json",
+  "biome.jsonc",
+  "deno.json",
+  "deno.jsonc",
+  "package.json",
+]
 auto-format = true
 
 [language.auto-pairs]
@@ -395,9 +402,7 @@ auto-format = true
 [[language]]
 name = "html"
 language-servers = [
-  { name = "superhtml", except-features = [
-    "format",
-  ] },
+  { name = "superhtml", except-features = ["format"] },
   "vscode-html-language-server",
   # { name = "tailwindcss-ls" },
 ]

@@ -37,8 +37,9 @@ normal = "block"
 select = "underline"
 
 [editor.indent-guides]
-character = "╎"
 render = true
+character = "┊"
+skip-levels = 1
 
 [editor.file-picker]
 hidden = false
@@ -52,7 +53,7 @@ enable = true
 [editor.lsp]
 auto-signature-help = false
 display-messages = true
-display-inlay-hints = true
+display-inlay-hints = false
 
 [editor.statusline]
 left = [
