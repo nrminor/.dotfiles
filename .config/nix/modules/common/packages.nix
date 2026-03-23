@@ -24,7 +24,7 @@ in
   pkgs.nil
 
   # ===== Editors =====
-  pkgs.neovim
+  # pkgs.neovim  # Managed by nixvim via home-manager (see modules/home/neovim.nix)
   pkgs.helix
   # pkgs.ghostty
 
@@ -109,12 +109,14 @@ in
   pkgs.mise
   pkgs.devbox
   pkgs.watchexec
+  pkgs.watchman
   pkgs.dotter
   pkgs.lychee
   pkgs.gnuplot
   pkgs.wiki-tui
   pkgs.tlrc
   pkgs.binsider
+  pkgs.tree-sitter
 
   # ===== Bash/Zsh =====
   pkgs-stable.bash-language-server
@@ -200,8 +202,8 @@ in
   pkgs.goreleaser
 
   # ===== Zig Ecosystem =====
-  # pkgs.zig
-  # pkgs.zls
+  pkgs.zig
+  pkgs.zls
 
   # ===== Docker =====
   pkgs.docker-ls

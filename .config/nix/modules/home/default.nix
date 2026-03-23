@@ -24,6 +24,7 @@ in
     ./packages.nix
     ./programs.nix
     ./skills.nix
+    ./neovim.nix
   ];
 
   # Required: username and home directory

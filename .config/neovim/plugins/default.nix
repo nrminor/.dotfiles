@@ -1,0 +1,27 @@
+{
+  imports = [
+    ./languages
+    ./autopairs.nix
+    ./blink.nix
+    ./bufferline-nvim.nix
+    ./comment.nix
+    ./conform.nix
+    ./fff.nix
+    ./flash.nix
+    ./fugitive.nix
+    ./git-worktree.nix
+    ./gitsigns.nix
+    ./lint.nix
+    ./lsp.nix
+    ./lualine.nix
+    ./luasnip.nix
+    ./mini.nix
+    ./oil.nix
+    ./snacks
+    ./tmux-navigator.nix
+    ./treesitter.nix
+    ./visual-multi.nix
+    ./web-devicons.nix
+    ./which-key.nix
+  ];
+}

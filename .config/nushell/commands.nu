@@ -421,6 +421,42 @@ export alias hjj = jj hx
 export alias hxjj = jj hx
 export alias jjhx = jj hx
 
+# Open modified jj files in Neovim
+#
+# Opens files modified in a jj revision as buffers in Neovim.
+# Defaults to the working copy (@).
+#
+# Examples:
+#   > jj vim                  # Open files modified in working copy
+#   > jj vim -r @-            # Open files modified in parent revision
+#   > jj vim -r abc123        # Open files modified in specific revision
+export def "jj vim" [
+  --revision (-r): string = "@" # Revision to show changes for
+] {
+  # find modified files, filtering out deleted ones
+  let files = ^jj diff --summary -r $revision
+  | lines
+  | where not ($it | str starts-with "D ")
+  | each { $in | str substring 2.. }
+
+  # exit if there are no files in this revision
+  if ($files | is-empty) {
+    print $"No modified files in revision ($revision)"
+    return
+  }
+
+  if ($files | is-not-empty) {
+    nvim ...$files
+  } else {
+    print $"No modified files in revision ($revision)"
+  }
+}
+export alias vj = jj vim
+export alias vjj = jj vim
+export alias vimjj = jj vim
+export alias jjvim = jj vim
+export alias "jj nvim" = jj vim
+
 # ============================================================================
 # VERSION CONTROL WORKFLOW
 # ============================================================================

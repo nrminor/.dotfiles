@@ -1,0 +1,30 @@
+{
+  imports = [
+    ./astro.nix
+    ./awk.nix
+    ./bash.nix
+    ./css.nix
+    ./gleam.nix
+    ./golang.nix
+    ./haskell.nix
+    ./html.nix
+    ./json.nix
+    ./just.nix
+    ./lua.nix
+    ./markdown.nix
+    ./mdx.nix
+    ./nextflow.nix
+    ./nix.nix
+    ./nushell.nix
+    ./ocaml.nix
+    ./python.nix
+    ./r.nix
+    ./rust.nix
+    ./sql.nix
+    ./toml.nix
+    ./typst.nix
+    ./typescript.nix
+    ./yaml.nix
+    ./zig.nix
+  ];
+}

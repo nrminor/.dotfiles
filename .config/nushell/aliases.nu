@@ -54,6 +54,8 @@ export alias h, = hx .
 export alias g. = hx .
 export alias x = hx
 export alias z. = zed .
+export alias v = nvim
+export alias v. = nvim .
 
 # ============================================================================
 # SYSTEM TOOLS

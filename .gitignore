@@ -93,6 +93,21 @@
 !/.config/nix/modules/darwin/*.nix
 !/.config/nix/modules/home
 !/.config/nix/modules/home/*.nix
+# Neovim (nixvim config)
+!/.config/neovim
+!/.config/neovim/*.nix
+!/.config/neovim/plugins
+!/.config/neovim/plugins/*.nix
+!/.config/neovim/plugins/languages
+!/.config/neovim/plugins/languages/*.nix
+!/.config/neovim/plugins/languages/queries
+!/.config/neovim/plugins/languages/queries/markdown
+!/.config/neovim/plugins/languages/queries/markdown/*.scm
+!/.config/neovim/plugins/snacks
+!/.config/neovim/plugins/snacks/*.nix
+!/.config/neovim/plugins/snippets
+!/.config/neovim/plugins/snippets/typescript
+!/.config/neovim/plugins/snippets/typescript/*.lua
 
 # Nix Direnv
 !/.config/nix-direnv
