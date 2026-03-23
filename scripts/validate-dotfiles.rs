@@ -17,6 +17,7 @@
 
 use anyhow::{Context, Result};
 use clap::Parser;
+use regex::Regex;
 
 use std::{
     collections::HashSet,
@@ -187,10 +188,10 @@ fn get_tracked_files(config: &Config) -> Result<Vec<String>> {
 }
 
 fn is_broken_symlink(path: &Path) -> bool {
-    if let Ok(metadata) = std::fs::symlink_metadata(path) {
-        if metadata.file_type().is_symlink() {
-            return std::fs::metadata(path).is_err();
-        }
+    if let Ok(metadata) = std::fs::symlink_metadata(path)
+        && metadata.file_type().is_symlink()
+    {
+        return std::fs::metadata(path).is_err();
     }
     false
 }
@@ -237,11 +238,11 @@ fn dotter_files_tracked(config: &Config) -> Result<ValidationResult> {
 
         if let Some(table) = doc.as_table() {
             for (_, value) in table {
-                if let Some(files) = value.get("files") {
-                    if let Some(files_table) = files.as_table() {
-                        for (source, _) in files_table {
-                            all_files.insert(source.clone());
-                        }
+                if let Some(files) = value.get("files")
+                    && let Some(files_table) = files.as_table()
+                {
+                    for (source, _) in files_table {
+                        all_files.insert(source.clone());
                     }
                 }
             }
@@ -320,13 +321,13 @@ fn toml_files_valid(config: &Config) -> Result<ValidationResult> {
 
     for file in &toml_files {
         let path = config.dotfiles_dir.join(file);
-        if let Ok(content) = fs::read_to_string(&path) {
-            if toml::from_str::<toml::Value>(&content).is_err() {
-                issues.push(
-                    Issue::new(Severity::Error, format!("Invalid TOML syntax: {}", file))
-                        .with_file((*file).clone()),
-                );
-            }
+        if let Ok(content) = fs::read_to_string(&path)
+            && toml::from_str::<toml::Value>(&content).is_err()
+        {
+            issues.push(
+                Issue::new(Severity::Error, format!("Invalid TOML syntax: {}", file))
+                    .with_file((*file).clone()),
+            );
         }
     }
 
@@ -345,6 +346,11 @@ fn json_files_valid(config: &Config) -> Result<ValidationResult> {
         .collect();
     let mut issues = Vec::new();
 
+    // compile regexes
+    let re_line_comment = Regex::new(r"(?m)\s*//[^\n]*$").unwrap();
+    let re_block_comment = Regex::new(r"(?s)/\*.*?\*/").unwrap();
+    let re_trailing_comma = Regex::new(r",(\s*[}\]])").unwrap();
+
     for file in &json_files {
         let path = config.dotfiles_dir.join(file);
         if let Ok(mut content) = fs::read_to_string(&path) {
@@ -361,15 +367,12 @@ fn json_files_valid(config: &Config) -> Result<ValidationResult> {
                 content = lines.join("\n");
 
                 // Remove inline line comments (multiline mode)
-                let re_line_comment = regex::Regex::new(r"(?m)\s*//[^\n]*$").unwrap();
                 content = re_line_comment.replace_all(&content, "").to_string();
 
                 // Remove block comments
-                let re_block_comment = regex::Regex::new(r"(?s)/\*.*?\*/").unwrap();
                 content = re_block_comment.replace_all(&content, "").to_string();
 
                 // Remove trailing commas before } or ]
-                let re_trailing_comma = regex::Regex::new(r",(\s*[}\]])").unwrap();
                 content = re_trailing_comma.replace_all(&content, "$1").to_string();
             }
 
