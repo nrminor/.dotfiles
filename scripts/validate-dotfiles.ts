@@ -20,24 +20,24 @@ import { parseArgs } from "node:util";
 type Severity = "error" | "warning" | "info";
 
 interface Issue {
-	severity: Severity;
-	message: string;
-	file?: string;
-	fixSuggestion?: string;
+  severity: Severity;
+  message: string;
+  file?: string;
+  fixSuggestion?: string;
 }
 
 interface ValidationResult {
-	ruleName: string;
-	passed: boolean;
-	issues: Issue[];
+  ruleName: string;
+  passed: boolean;
+  issues: Issue[];
 }
 
 type Rule = () => ValidationResult;
 
 interface Config {
-	dotfilesDir: string;
-	verbose: boolean;
-	fixMode: boolean;
+  dotfilesDir: string;
+  verbose: boolean;
+  fixMode: boolean;
 }
 
 // ========================================================================
@@ -45,20 +45,20 @@ interface Config {
 // ========================================================================
 
 const Color = {
-	reset: "\x1b[0m",
-	bold: "\x1b[1m",
-	red: "\x1b[31m",
-	green: "\x1b[32m",
-	yellow: "\x1b[33m",
-	blue: "\x1b[34m",
-	cyan: "\x1b[36m",
+  reset: "\x1b[0m",
+  bold: "\x1b[1m",
+  red: "\x1b[31m",
+  green: "\x1b[32m",
+  yellow: "\x1b[33m",
+  blue: "\x1b[34m",
+  cyan: "\x1b[36m",
 } as const;
 
 const Symbols = {
-	success: "✓",
-	failure: "✗",
-	warning: "⚠",
-	info: "ℹ",
+  success: "✓",
+  failure: "✗",
+  warning: "⚠",
+  info: "ℹ",
 } as const;
 
 // ========================================================================
@@ -66,29 +66,29 @@ const Symbols = {
 // ========================================================================
 
 function log(message: string, color: string = Color.reset): void {
-	console.log(`${color}${message}${Color.reset}`);
+  console.log(`${color}${message}${Color.reset}`);
 }
 
 function success(message: string): void {
-	log(`${Symbols.success} ${message}`, Color.green);
+  log(`${Symbols.success} ${message}`, Color.green);
 }
 
 function failure(message: string): void {
-	log(`${Symbols.failure} ${message}`, Color.red);
+  log(`${Symbols.failure} ${message}`, Color.red);
 }
 
 function warning(message: string): void {
-	log(`${Symbols.warning} ${message}`, Color.yellow);
+  log(`${Symbols.warning} ${message}`, Color.yellow);
 }
 
 function info(message: string): void {
-	log(`${Symbols.info} ${message}`, Color.cyan);
+  log(`${Symbols.info} ${message}`, Color.cyan);
 }
 
 function verbose(config: Config, message: string): void {
-	if (config.verbose) {
-		log(`  ${message}`, Color.blue);
-	}
+  if (config.verbose) {
+    log(`  ${message}`, Color.blue);
+  }
 }
 
 // ========================================================================
@@ -96,52 +96,52 @@ function verbose(config: Config, message: string): void {
 // ========================================================================
 
 function isTrackedByGit(config: Config, filepath: string): boolean {
-	try {
-		execSync(`git ls-files --error-unmatch "${filepath}"`, {
-			cwd: config.dotfilesDir,
-			stdio: "pipe",
-		});
-		return true;
-	} catch {
-		return false;
-	}
+  try {
+    execSync(`git ls-files --error-unmatch "${filepath}"`, {
+      cwd: config.dotfilesDir,
+      stdio: "pipe",
+    });
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function isIgnoredByGit(config: Config, filepath: string): boolean {
-	try {
-		const output = execSync(`git check-ignore "${filepath}"`, {
-			cwd: config.dotfilesDir,
-			stdio: "pipe",
-		});
-		return output.toString().trim().length > 0;
-	} catch {
-		return false;
-	}
+  try {
+    const output = execSync(`git check-ignore "${filepath}"`, {
+      cwd: config.dotfilesDir,
+      stdio: "pipe",
+    });
+    return output.toString().trim().length > 0;
+  } catch {
+    return false;
+  }
 }
 
 function getTrackedFiles(config: Config): string[] {
-	try {
-		const output = execSync("git ls-files", {
-			cwd: config.dotfilesDir,
-			stdio: "pipe",
-		});
-		return output.toString().trim().split("\n").filter(Boolean);
-	} catch {
-		return [];
-	}
+  try {
+    const output = execSync("git ls-files", {
+      cwd: config.dotfilesDir,
+      stdio: "pipe",
+    });
+    return output.toString().trim().split("\n").filter(Boolean);
+  } catch {
+    return [];
+  }
 }
 
 function isBrokenSymlink(filepath: string): boolean {
-	try {
-		const stats = lstatSync(filepath);
-		if (stats.isSymbolicLink()) {
-			statSync(filepath);
-			return false;
-		}
-		return false;
-	} catch {
-		return true;
-	}
+  try {
+    const stats = lstatSync(filepath);
+    if (stats.isSymbolicLink()) {
+      statSync(filepath);
+      return false;
+    }
+    return false;
+  } catch {
+    return true;
+  }
 }
 
 // ========================================================================
@@ -151,91 +151,91 @@ function isBrokenSymlink(filepath: string): boolean {
 // Type for parsed TOML data
 // Structure: { section: { subsection: { key: value } } } or { section: { key: value } }
 interface TomlData {
-	[section: string]: Record<string, string | Record<string, string>>;
+  [section: string]: Record<string, string | Record<string, string>>;
 }
 
 interface DotterFile {
-	source: string;
-	target: string;
-	group: string;
+  source: string;
+  target: string;
+  group: string;
 }
 
 function parseToml(filepath: string): TomlData {
-	const content = readFileSync(filepath, "utf-8");
-	const lines = content.split("\n");
-	// Use Record with explicit any for dynamic TOML structure
-	const sections: Record<string, Record<string, unknown>> = {};
-	let currentSection: string | null = null;
-	let currentSubsection: string | null = null;
+  const content = readFileSync(filepath, "utf-8");
+  const lines = content.split("\n");
+  // Use Record with explicit any for dynamic TOML structure
+  const sections: Record<string, Record<string, unknown>> = {};
+  let currentSection: string | null = null;
+  let currentSubsection: string | null = null;
 
-	for (const line of lines) {
-		const trimmed = line.trim();
+  for (const line of lines) {
+    const trimmed = line.trim();
 
-		if (!trimmed || trimmed.startsWith("#")) continue;
+    if (!trimmed || trimmed.startsWith("#")) continue;
 
-		const sectionMatch = trimmed.match(/^\[([^\]]+)\]$/);
-		if (sectionMatch) {
-			const parts = sectionMatch[1].split(".");
-			currentSection = parts[0];
-			currentSubsection = parts.length > 1 ? parts[1] : null;
+    const sectionMatch = trimmed.match(/^\[([^\]]+)\]$/);
+    if (sectionMatch) {
+      const parts = sectionMatch[1].split(".");
+      currentSection = parts[0];
+      currentSubsection = parts.length > 1 ? parts[1] : null;
 
-			if (!sections[currentSection]) {
-				sections[currentSection] = {};
-			}
-			if (currentSubsection && !sections[currentSection][currentSubsection]) {
-				sections[currentSection][currentSubsection] = {};
-			}
-			continue;
-		}
+      if (!sections[currentSection]) {
+        sections[currentSection] = {};
+      }
+      if (currentSubsection && !sections[currentSection][currentSubsection]) {
+        sections[currentSection][currentSubsection] = {};
+      }
+      continue;
+    }
 
-		const kvMatch = trimmed.match(/^"?([^"=]+)"?\s*=\s*"([^"]+)"$/);
-		if (kvMatch && currentSection) {
-			const [, key, value] = kvMatch;
-			if (currentSubsection) {
-				// Ensure nested structure exists
-				const subsectionData = sections[currentSection][currentSubsection] as
-					| Record<string, string>
-					| undefined;
-				if (!subsectionData || typeof subsectionData !== "object") {
-					sections[currentSection][currentSubsection] = {};
-				}
-				(sections[currentSection][currentSubsection] as Record<string, string>)[
-					key
-				] = value;
-			} else {
-				sections[currentSection][key] = value;
-			}
-		}
-	}
+    const kvMatch = trimmed.match(/^"?([^"=]+)"?\s*=\s*"([^"]+)"$/);
+    if (kvMatch && currentSection) {
+      const [, key, value] = kvMatch;
+      if (currentSubsection) {
+        // Ensure nested structure exists
+        const subsectionData = sections[currentSection][currentSubsection] as
+          | Record<string, string>
+          | undefined;
+        if (!subsectionData || typeof subsectionData !== "object") {
+          sections[currentSection][currentSubsection] = {};
+        }
+        (sections[currentSection][currentSubsection] as Record<string, string>)[
+          key
+        ] = value;
+      } else {
+        sections[currentSection][key] = value;
+      }
+    }
+  }
 
-	// Single type assertion at the end
-	return sections as TomlData;
+  // Single type assertion at the end
+  return sections as TomlData;
 }
 
 function extractDotterFiles(tomlData: TomlData): DotterFile[] {
-	const files: DotterFile[] = [];
+  const files: DotterFile[] = [];
 
-	for (const [group, subsections] of Object.entries(tomlData)) {
-		// Comprehensive type guard
-		if (
-			typeof subsections === "object" &&
-			subsections !== null &&
-			"files" in subsections &&
-			typeof subsections.files === "object" &&
-			subsections.files !== null
-		) {
-			const filesSection = subsections.files as Record<string, string>;
-			for (const [sourceFile, targetPath] of Object.entries(filesSection)) {
-				files.push({
-					source: sourceFile,
-					target: targetPath,
-					group,
-				});
-			}
-		}
-	}
+  for (const [group, subsections] of Object.entries(tomlData)) {
+    // Comprehensive type guard
+    if (
+      typeof subsections === "object" &&
+      subsections !== null &&
+      "files" in subsections &&
+      typeof subsections.files === "object" &&
+      subsections.files !== null
+    ) {
+      const filesSection = subsections.files as Record<string, string>;
+      for (const [sourceFile, targetPath] of Object.entries(filesSection)) {
+        files.push({
+          source: sourceFile,
+          target: targetPath,
+          group,
+        });
+      }
+    }
+  }
 
-	return files;
+  return files;
 }
 
 // ========================================================================
@@ -243,195 +243,195 @@ function extractDotterFiles(tomlData: TomlData): DotterFile[] {
 // ========================================================================
 
 const Rules = {
-	/**
-	 * Rule: Dotter configuration files exist
-	 */
-	dotterConfigsExist: (config: Config): ValidationResult => {
-		const globalToml = join(config.dotfilesDir, ".dotter", "global.toml");
+  /**
+   * Rule: Dotter configuration files exist
+   */
+  dotterConfigsExist: (config: Config): ValidationResult => {
+    const globalToml = join(config.dotfilesDir, ".dotter", "global.toml");
 
-		const issues: Issue[] = [];
+    const issues: Issue[] = [];
 
-		if (!existsSync(globalToml)) {
-			issues.push({
-				severity: "error",
-				message: "Dotter global.toml not found",
-				file: globalToml,
-			});
-		}
+    if (!existsSync(globalToml)) {
+      issues.push({
+        severity: "error",
+        message: "Dotter global.toml not found",
+        file: globalToml,
+      });
+    }
 
-		return {
-			ruleName: "Dotter configuration files exist",
-			passed: issues.length === 0,
-			issues,
-		};
-	},
+    return {
+      ruleName: "Dotter configuration files exist",
+      passed: issues.length === 0,
+      issues,
+    };
+  },
 
-	/**
-	 * Rule: All files referenced in dotter config exist and are tracked
-	 */
-	dotterFilesTracked: (config: Config): ValidationResult => {
-		const globalToml = join(config.dotfilesDir, ".dotter", "global.toml");
-		const macosToml = join(config.dotfilesDir, ".dotter", "macos.toml");
+  /**
+   * Rule: All files referenced in dotter config exist and are tracked
+   */
+  dotterFilesTracked: (config: Config): ValidationResult => {
+    const globalToml = join(config.dotfilesDir, ".dotter", "global.toml");
+    const macosToml = join(config.dotfilesDir, ".dotter", "macos.toml");
 
-		const parseConfig = (path: string): DotterFile[] => {
-			if (!existsSync(path)) return [];
-			try {
-				const tomlData = parseToml(path);
-				return extractDotterFiles(tomlData);
-			} catch {
-				return [];
-			}
-		};
+    const parseConfig = (path: string): DotterFile[] => {
+      if (!existsSync(path)) return [];
+      try {
+        const tomlData = parseToml(path);
+        return extractDotterFiles(tomlData);
+      } catch {
+        return [];
+      }
+    };
 
-		const globalFiles = parseConfig(globalToml);
-		const macosFiles = parseConfig(macosToml);
-		const allFiles = [...globalFiles, ...macosFiles];
+    const globalFiles = parseConfig(globalToml);
+    const macosFiles = parseConfig(macosToml);
+    const allFiles = [...globalFiles, ...macosFiles];
 
-		if (config.verbose) {
-			info(`Found ${allFiles.length} files referenced in dotter configs`);
-		}
+    if (config.verbose) {
+      info(`Found ${allFiles.length} files referenced in dotter configs`);
+    }
 
-		const issues: Issue[] = [];
+    const issues: Issue[] = [];
 
-		for (const { source, group } of allFiles) {
-			const filepath = join(config.dotfilesDir, source);
+    for (const { source, group } of allFiles) {
+      const filepath = join(config.dotfilesDir, source);
 
-			if (!existsSync(filepath)) {
-				issues.push({
-					severity: "error",
-					message: `File missing: ${source} (from ${group})`,
-					file: source,
-				});
-				continue;
-			}
+      if (!existsSync(filepath)) {
+        issues.push({
+          severity: "error",
+          message: `File missing: ${source} (from ${group})`,
+          file: source,
+        });
+        continue;
+      }
 
-			if (!isTrackedByGit(config, source)) {
-				if (isIgnoredByGit(config, source)) {
-					issues.push({
-						severity: "error",
-						message: `File ignored by git: ${source} (from ${group})`,
-						file: source,
-						fixSuggestion: `Add to .gitignore: !${source}`,
-					});
-				} else {
-					issues.push({
-						severity: "warning",
-						message: `File not tracked: ${source} (from ${group})`,
-						file: source,
-						fixSuggestion: `Run: git add ${source}`,
-					});
-				}
-			}
-		}
+      if (!isTrackedByGit(config, source)) {
+        if (isIgnoredByGit(config, source)) {
+          issues.push({
+            severity: "error",
+            message: `File ignored by git: ${source} (from ${group})`,
+            file: source,
+            fixSuggestion: `Add to .gitignore: !${source}`,
+          });
+        } else {
+          issues.push({
+            severity: "warning",
+            message: `File not tracked: ${source} (from ${group})`,
+            file: source,
+            fixSuggestion: `Run: git add ${source}`,
+          });
+        }
+      }
+    }
 
-		return {
-			ruleName: "Dotter files exist and are tracked",
-			passed: issues.every((i) => i.severity === "warning"),
-			issues,
-		};
-	},
+    return {
+      ruleName: "Dotter files exist and are tracked",
+      passed: issues.every((i) => i.severity === "warning"),
+      issues,
+    };
+  },
 
-	/**
-	 * Rule: No broken symlinks
-	 */
-	noBrokenSymlinks: (config: Config): ValidationResult => {
-		const tracked = getTrackedFiles(config);
-		const issues: Issue[] = [];
+  /**
+   * Rule: No broken symlinks
+   */
+  noBrokenSymlinks: (config: Config): ValidationResult => {
+    const tracked = getTrackedFiles(config);
+    const issues: Issue[] = [];
 
-		for (const file of tracked) {
-			const path = join(config.dotfilesDir, file);
-			if (isBrokenSymlink(path)) {
-				issues.push({
-					severity: "error",
-					message: `Broken symlink: ${file}`,
-					file,
-				});
-			}
-		}
+    for (const file of tracked) {
+      const path = join(config.dotfilesDir, file);
+      if (isBrokenSymlink(path)) {
+        issues.push({
+          severity: "error",
+          message: `Broken symlink: ${file}`,
+          file,
+        });
+      }
+    }
 
-		return {
-			ruleName: "No broken symlinks",
-			passed: issues.length === 0,
-			issues,
-		};
-	},
+    return {
+      ruleName: "No broken symlinks",
+      passed: issues.length === 0,
+      issues,
+    };
+  },
 
-	/**
-	 * Rule: TOML files are valid
-	 */
-	tomlFilesValid: (config: Config): ValidationResult => {
-		const tracked = getTrackedFiles(config);
-		const tomlFiles = tracked.filter((f) => f.endsWith(".toml"));
-		const issues: Issue[] = [];
+  /**
+   * Rule: TOML files are valid
+   */
+  tomlFilesValid: (config: Config): ValidationResult => {
+    const tracked = getTrackedFiles(config);
+    const tomlFiles = tracked.filter((f) => f.endsWith(".toml"));
+    const issues: Issue[] = [];
 
-		for (const file of tomlFiles) {
-			const path = join(config.dotfilesDir, file);
-			try {
-				parseToml(path);
-			} catch {
-				issues.push({
-					severity: "error",
-					message: `Invalid TOML syntax: ${file}`,
-					file,
-				});
-			}
-		}
+    for (const file of tomlFiles) {
+      const path = join(config.dotfilesDir, file);
+      try {
+        parseToml(path);
+      } catch {
+        issues.push({
+          severity: "error",
+          message: `Invalid TOML syntax: ${file}`,
+          file,
+        });
+      }
+    }
 
-		return {
-			ruleName: `All ${tomlFiles.length} TOML files are valid`,
-			passed: issues.length === 0,
-			issues,
-		};
-	},
+    return {
+      ruleName: `All ${tomlFiles.length} TOML files are valid`,
+      passed: issues.length === 0,
+      issues,
+    };
+  },
 
-	/**
-	 * Rule: JSON files are valid (supports JSONC)
-	 */
-	jsonFilesValid: (config: Config): ValidationResult => {
-		const tracked = getTrackedFiles(config);
-		const jsonFiles = tracked.filter(
-			(f) => f.endsWith(".json") || f.endsWith(".jsonc"),
-		);
-		const issues: Issue[] = [];
+  /**
+   * Rule: JSON files are valid (supports JSONC)
+   */
+  jsonFilesValid: (config: Config): ValidationResult => {
+    const tracked = getTrackedFiles(config);
+    const jsonFiles = tracked.filter(
+      (f) => f.endsWith(".json") || f.endsWith(".jsonc")
+    );
+    const issues: Issue[] = [];
 
-		for (const file of jsonFiles) {
-			const path = join(config.dotfilesDir, file);
-			try {
-				let content = readFileSync(path, "utf-8");
+    for (const file of jsonFiles) {
+      const path = join(config.dotfilesDir, file);
+      try {
+        let content = readFileSync(path, "utf-8");
 
-				const hasComments = /\/\/|\/\*/.test(content);
+        const hasComments = /\/\/|\/\*/.test(content);
 
-				if (file.endsWith(".jsonc") || hasComments) {
-					const lines = content.split("\n");
-					const filtered = lines.filter((line) => {
-						const trimmed = line.trim();
-						return !trimmed.startsWith("//");
-					});
-					content = filtered.join("\n");
+        if (file.endsWith(".jsonc") || hasComments) {
+          const lines = content.split("\n");
+          const filtered = lines.filter((line) => {
+            const trimmed = line.trim();
+            return !trimmed.startsWith("//");
+          });
+          content = filtered.join("\n");
 
-					content = content.replace(/\s*\/\/[^\n]*$/gm, "");
-					content = content.replace(/\/\*[\s\S]*?\*\//g, "");
-					content = content.replace(/,(\s*[}\]])/g, "$1");
-				}
+          content = content.replace(/\s*\/\/[^\n]*$/gm, "");
+          content = content.replace(/\/\*[\s\S]*?\*\//g, "");
+          content = content.replace(/,(\s*[}\]])/g, "$1");
+        }
 
-				JSON.parse(content);
-			} catch {
-				if (!file.endsWith(".jsonc")) {
-					issues.push({
-						severity: "error",
-						message: `Invalid JSON syntax: ${file}`,
-						file,
-					});
-				}
-			}
-		}
+        JSON.parse(content);
+      } catch {
+        if (!file.endsWith(".jsonc")) {
+          issues.push({
+            severity: "error",
+            message: `Invalid JSON syntax: ${file}`,
+            file,
+          });
+        }
+      }
+    }
 
-		return {
-			ruleName: `All ${jsonFiles.length} JSON files are valid`,
-			passed: issues.length === 0,
-			issues,
-		};
-	},
+    return {
+      ruleName: `All ${jsonFiles.length} JSON files are valid`,
+      passed: issues.length === 0,
+      issues,
+    };
+  },
 };
 
 // ========================================================================
@@ -439,116 +439,116 @@ const Rules = {
 // ========================================================================
 
 class Validator {
-	private config: Config;
+  private config: Config;
 
-	constructor(config: Config) {
-		this.config = config;
-	}
+  constructor(config: Config) {
+    this.config = config;
+  }
 
-	/**
-	 * Run a single rule
-	 */
-	runRule(rule: Rule): ValidationResult {
-		if (this.config.verbose) {
-			verbose(this.config, "Checking...");
-		}
-		return rule();
-	}
+  /**
+   * Run a single rule
+   */
+  runRule(rule: Rule): ValidationResult {
+    if (this.config.verbose) {
+      verbose(this.config, "Checking...");
+    }
+    return rule();
+  }
 
-	/**
-	 * Run multiple rules and collect results
-	 */
-	runRules(rules: Rule[]): ValidationResult[] {
-		return rules.map((rule) => this.runRule(rule));
-	}
+  /**
+   * Run multiple rules and collect results
+   */
+  runRules(rules: Rule[]): ValidationResult[] {
+    return rules.map((rule) => this.runRule(rule));
+  }
 
-	/**
-	 * Print a validation result
-	 */
-	printResult(result: ValidationResult): void {
-		// Use helper functions for clean, semantic logging
-		if (result.passed) {
-			success(result.ruleName);
-		} else {
-			failure(result.ruleName);
-		}
+  /**
+   * Print a validation result
+   */
+  printResult(result: ValidationResult): void {
+    // Use helper functions for clean, semantic logging
+    if (result.passed) {
+      success(result.ruleName);
+    } else {
+      failure(result.ruleName);
+    }
 
-		for (const issue of result.issues) {
-			const fileStr = issue.file ? ` (${issue.file})` : "";
-			const message = `  ${issue.message}${fileStr}`;
+    for (const issue of result.issues) {
+      const fileStr = issue.file ? ` (${issue.file})` : "";
+      const message = `  ${issue.message}${fileStr}`;
 
-			// Use appropriate helper based on severity
-			if (issue.severity === "error") {
-				failure(message);
-			} else if (issue.severity === "warning") {
-				warning(message);
-			} else {
-				info(message);
-			}
+      // Use appropriate helper based on severity
+      if (issue.severity === "error") {
+        failure(message);
+      } else if (issue.severity === "warning") {
+        warning(message);
+      } else {
+        info(message);
+      }
 
-			if (issue.fixSuggestion) {
-				info(`    ${issue.fixSuggestion}`);
-			}
-		}
-	}
+      if (issue.fixSuggestion) {
+        info(`    ${issue.fixSuggestion}`);
+      }
+    }
+  }
 
-	/**
-	 * Summarize results and return exit code
-	 */
-	summarize(results: ValidationResult[]): number {
-		log(`\n${Color.bold}${"=".repeat(60)}${Color.reset}`);
+  /**
+   * Summarize results and return exit code
+   */
+  summarize(results: ValidationResult[]): number {
+    log(`\n${Color.bold}${"=".repeat(60)}${Color.reset}`);
 
-		const totalIssues = results.reduce((acc, r) => acc + r.issues.length, 0);
-		const errors = results.reduce(
-			(acc, r) => acc + r.issues.filter((i) => i.severity === "error").length,
-			0,
-		);
-		const warnings = totalIssues - errors;
+    const totalIssues = results.reduce((acc, r) => acc + r.issues.length, 0);
+    const errors = results.reduce(
+      (acc, r) => acc + r.issues.filter((i) => i.severity === "error").length,
+      0
+    );
+    const warnings = totalIssues - errors;
 
-		if (errors > 0) {
-			failure(
-				`Validation failed: ${totalIssues} issue(s) found (${errors} errors, ${warnings} warnings)`,
-			);
+    if (errors > 0) {
+      failure(
+        `Validation failed: ${totalIssues} issue(s) found (${errors} errors, ${warnings} warnings)`
+      );
 
-			if (this.config.fixMode) {
-				log(`\n${Color.bold}Fix suggestions:${Color.reset}\n`);
+      if (this.config.fixMode) {
+        log(`\n${Color.bold}Fix suggestions:${Color.reset}\n`);
 
-				const ignoredFiles = results
-					.flatMap((r) => r.issues)
-					.filter((i) => i.fixSuggestion?.includes(".gitignore"))
-					.map((i) => i.file)
-					.filter(Boolean) as string[];
+        const ignoredFiles = results
+          .flatMap((r) => r.issues)
+          .filter((i) => i.fixSuggestion?.includes(".gitignore"))
+          .map((i) => i.file)
+          .filter(Boolean) as string[];
 
-				if (ignoredFiles.length > 0) {
-					info("Add these lines to .gitignore:");
-					for (const file of ignoredFiles) {
-						success(`  !${file}`);
-					}
-					log("");
-				}
+        if (ignoredFiles.length > 0) {
+          info("Add these lines to .gitignore:");
+          for (const file of ignoredFiles) {
+            success(`  !${file}`);
+          }
+          log("");
+        }
 
-				const untrackedFiles = results
-					.flatMap((r) => r.issues)
-					.filter((i) => i.fixSuggestion?.includes("git add"))
-					.map((i) => i.file)
-					.filter(Boolean) as string[];
+        const untrackedFiles = results
+          .flatMap((r) => r.issues)
+          .filter((i) => i.fixSuggestion?.includes("git add"))
+          .map((i) => i.file)
+          .filter(Boolean) as string[];
 
-				if (untrackedFiles.length > 0) {
-					info("Run this command to track files:");
-					success(`  git add ${untrackedFiles.join(" ")}`);
-					log("");
-				}
-			}
+        if (untrackedFiles.length > 0) {
+          info("Run this command to track files:");
+          success(`  git add ${untrackedFiles.join(" ")}`);
+          log("");
+        }
+      }
 
-			return 1;
-		} else if (warnings > 0) {
-			warning(`Validation completed with ${warnings} warning(s)`);
-			return 0;
-		} else {
-			success("All validations passed!\n");
-			return 0;
-		}
-	}
+      return 1;
+    } else if (warnings > 0) {
+      warning(`Validation completed with ${warnings} warning(s)`);
+      return 0;
+    } else {
+      success("All validations passed!\n");
+      return 0;
+    }
+  }
 }
 
 // ========================================================================
@@ -556,16 +556,16 @@ class Validator {
 // ========================================================================
 
 async function main() {
-	const { values } = parseArgs({
-		options: {
-			fix: { type: "boolean", short: "f", default: false },
-			verbose: { type: "boolean", short: "v", default: false },
-			help: { type: "boolean", short: "h", default: false },
-		},
-	});
+  const { values } = parseArgs({
+    options: {
+      fix: { type: "boolean", short: "f", default: false },
+      verbose: { type: "boolean", short: "v", default: false },
+      help: { type: "boolean", short: "h", default: false },
+    },
+  });
 
-	if (values.help) {
-		console.log(`
+  if (values.help) {
+    console.log(`
 Usage: validate-dotfiles.ts [options]
 
 Options:
@@ -578,41 +578,41 @@ Exit codes:
   1 - Validation failures found
   2 - Critical error
 `);
-		process.exit(0);
-	}
+    process.exit(0);
+  }
 
-	const dotfilesDir =
-		process.env.DOTFILES_DIR || resolve(import.meta.dir, "..");
+  const dotfilesDir =
+    process.env.DOTFILES_DIR || resolve(import.meta.dir, "..");
 
-	const config: Config = {
-		dotfilesDir,
-		verbose: values.verbose || false,
-		fixMode: values.fix || false,
-	};
+  const config: Config = {
+    dotfilesDir,
+    verbose: values.verbose || false,
+    fixMode: values.fix || false,
+  };
 
-	log(`\n${Color.bold}Validating dotfiles repository...${Color.reset}\n`);
+  log(`\n${Color.bold}Validating dotfiles repository...${Color.reset}\n`);
 
-	// Define all validation rules
-	const rules: Rule[] = [
-		() => Rules.dotterConfigsExist(config),
-		() => Rules.dotterFilesTracked(config),
-		() => Rules.noBrokenSymlinks(config),
-		() => Rules.tomlFilesValid(config),
-		() => Rules.jsonFilesValid(config),
-	];
+  // Define all validation rules
+  const rules: Rule[] = [
+    () => Rules.dotterConfigsExist(config),
+    () => Rules.dotterFilesTracked(config),
+    () => Rules.noBrokenSymlinks(config),
+    () => Rules.tomlFilesValid(config),
+    () => Rules.jsonFilesValid(config),
+  ];
 
-	// Create validator and run rules
-	const validator = new Validator(config);
-	const results = validator.runRules(rules);
+  // Create validator and run rules
+  const validator = new Validator(config);
+  const results = validator.runRules(rules);
 
-	// Print each result
-	for (const result of results) {
-		validator.printResult(result);
-	}
+  // Print each result
+  for (const result of results) {
+    validator.printResult(result);
+  }
 
-	// Summarize and exit
-	const exitCode = validator.summarize(results);
-	process.exit(exitCode);
+  // Summarize and exit
+  const exitCode = validator.summarize(results);
+  process.exit(exitCode);
 }
 
 main();
