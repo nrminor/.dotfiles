@@ -1,7 +1,7 @@
 ---
 description: Designs creative, rigorous measurements to inform engineering decisions. Asks what would change your mind, identifies what to measure (and what not to), writes benchmark scripts, and interprets results with statistical context. Invoke when you need data to choose between approaches.
 mode: all
-model: anthropic/claude-sonnet-4-5
+model: openai/gpt-5.4-mini
 temperature: 0.7
 tools:
   edit: false

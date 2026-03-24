@@ -1,7 +1,7 @@
 ---
 description: Throws caution to the wind and innovates
 mode: all
-model: anthropic/claude-opus-4-6
+model: openai/gpt-5.3-codex
 temperature: 0.9
 tools:
   write: false

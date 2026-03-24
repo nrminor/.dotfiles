@@ -1,7 +1,7 @@
 ---
 description: Polices for the idiosyncratic preferences of this particular user
 mode: all
-model: openai/gpt-5.4
+model: openai/gpt-5.3-codex
 temperature: 0.5
 tools:
   write: true
