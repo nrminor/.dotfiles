@@ -3,11 +3,11 @@
     "anthropic-skills": {
       "flake": false,
       "locked": {
-        "lastModified": 1772827583,
-        "narHash": "sha256-GzNpraXV85qUwyGs5XDe0zHYr2AazqFppWtH9JvO3QE=",
+        "lastModified": 1774196161,
+        "narHash": "sha256-QAy9ulbKaK5QWiGiXYsxav+bMhhmqU8pCS7P0fWxLlk=",
         "owner": "anthropics",
         "repo": "skills",
-        "rev": "b0cbd3df1533b396d281a6886d5132f623393a9c",
+        "rev": "887114fd09f8f24a7e6c907f9ee505348498ab6a",
         "type": "github"
       },
       "original": {
@@ -135,11 +135,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774007980,
-        "narHash": "sha256-FOnZjElEI8pqqCvB6K/1JRHTE8o4rer8driivTpq2uo=",
+        "lastModified": 1774379316,
+        "narHash": "sha256-0nGNxWDUH2Hzlj/R3Zf4FEK6fsFNB/dvewuboSRZqiI=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "9670de2921812bc4e0452f6e3efd8c859696c183",
+        "rev": "1eb0549a1ab3fe3f5acf86668249be15fa0e64f7",
         "type": "github"
       },
       "original": {
@@ -151,11 +151,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1774100742,
-        "narHash": "sha256-iJXVu2AHV1gSiwmPhw+5lwngB4MDXNtiVj8Wvmz6yqM=",
+        "lastModified": 1774382695,
+        "narHash": "sha256-mvV2c2FUj9GWOKDleiiUD0x1YkpfO/0P/IUsNKM2/7g=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "370037e0047568d451224772e7f75dad7fe5c7ea",
+        "rev": "53b40fd94e6853b898e376386bef96cc4f6e7573",
         "type": "github"
       },
       "original": {
@@ -167,11 +167,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1774107489,
-        "narHash": "sha256-NhVybEZMyVjOFHohFUeSnAWZN0rgF9cLVf3wPfa9IRY=",
+        "lastModified": 1774388511,
+        "narHash": "sha256-yZjf/l7k38fxtzI/U+7kloIma258n8xqTBt/G++21nQ=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "cac3148e9698ce08ede65c1053d095d2f106395f",
+        "rev": "7691b9e1b95b944dedff606089e759f137fa7862",
         "type": "github"
       },
       "original": {
@@ -202,11 +202,11 @@
     "kdense-scientific-skills": {
       "flake": false,
       "locked": {
-        "lastModified": 1774025992,
-        "narHash": "sha256-Alokqt2q6eJpf8hKEsy8ViG3eUZaZG/EvdtSDI9F3mk=",
+        "lastModified": 1774308425,
+        "narHash": "sha256-TNaQzg8+zIKRR3XFQeP9R3ucmBlc5Df7TYoDDt0PWl4=",
         "owner": "K-Dense-AI",
         "repo": "claude-scientific-skills",
-        "rev": "903caa6a26a6613c41ee90511b65c28cc3426d5e",
+        "rev": "cb364cc3d8d0ae7a26367cb61cfd323af5da0ea1",
         "type": "github"
       },
       "original": {
@@ -287,11 +287,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1773840656,
-        "narHash": "sha256-9tpvMGFteZnd3gRQZFlRCohVpqooygFuy9yjuyRL2C0=",
+        "lastModified": 1774273680,
+        "narHash": "sha256-a++tZ1RQsDb1I0NHrFwdGuRlR5TORvCEUksM459wKUA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9cf7092bdd603554bd8b63c216e8943cf9b12512",
+        "rev": "fdc7b8f7b30fdbedec91b71ed82f36e1637483ed",
         "type": "github"
       },
       "original": {

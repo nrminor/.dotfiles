@@ -105,11 +105,11 @@ in
   # ===== Development Tools =====
   pkgs.just
   pkgs.mask
-  pkgs.direnv
-  pkgs.mise
+  pkgs-stable.direnv
+  pkgs-stable.mise
   pkgs.devbox
   pkgs.watchexec
-  pkgs.watchman
+  # pkgs.watchman
   pkgs.dotter
   pkgs.lychee
   pkgs.gnuplot
