@@ -33,7 +33,8 @@ if (which nix | is-not-empty) {
 # Nushell config settings
 
 $env.config = {
-  buffer_editor: "hx"
+  # buffer_editor: "hx"
+  buffer_editor: "nvim"
   show_banner: false
   # edit_mode: "vi"
 

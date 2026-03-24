@@ -10,8 +10,10 @@
 # CORE EDITOR CONFIGURATION
 # ============================================================================
 $env.VISUAL = "hx"
+$env.VISUAL = "nvim"
 $env.EDITOR = $env.VISUAL
 $env.GIT_EDITOR = "hx"
+$env.GIT_EDITOR = "nvim"
 
 # ============================================================================
 # LOCALE SETTINGS

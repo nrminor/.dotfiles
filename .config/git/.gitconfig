@@ -12,7 +12,7 @@
 [http]
 	postBuffer = 157286400
 [core]
-	editor = hx
+	editor = nvim
 [merge]
     conflictstyle = zdiff3
 # [diff]

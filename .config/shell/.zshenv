@@ -10,9 +10,9 @@ typeset -TU PKG_CONFIG_PATH pkg_config_path
 
 # CORE EDITOR CONFIGURATION
 # ---------------------------------------------------------------------------
-export VISUAL=hx
+export VISUAL=nvim
 export EDITOR="$VISUAL"
-export GIT_EDITOR=hx
+export GIT_EDITOR=nvim
 
 # LOCALE SETTINGS
 # ---------------------------------------------------------------------------
