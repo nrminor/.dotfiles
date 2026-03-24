@@ -5,8 +5,55 @@ name = "Nick Minor"
 email = "nicholasrminor@gmail.com"
 
 [ui]
+editor = "nvim"
 default-command = ["log", "--no-pager", "--reversed"]
 diff-editor = ":builtin"
 
 [aliases]
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+bm = ["bookmark"]
+gf = ["git", "fetch"]
+gp = ["git", "push"]
+# Show your entire connected stack
+stack = ["log", "-r", "stack()"]
+
+[revset-aliases]
+# Find commits authored by you
+'mine()' = 'author("Nicholas Minor")'
+'minor()' = 'author("Nicholas Minor")'
+
+# Your commits that aren't immutable (trunk/tags/remote branches)
+# Shows all your mutable work across the repo
+'wip()' = 'mine() ~ immutable()'
+
+# Your commits not yet merged into trunk
+# Shows your unmerged/unpushed work
+'open()' = 'mine() ~ ::trunk()'
+
+# Find the nearest bookmark in ancestry from a revision
+# Used by tug alias to find which bookmark to advance
+'closest_bookmark(to)' = 'heads(::to & bookmarks())'
+
+# Find the nearest "pushable" commit - non-empty with a description
+# Skips empty WIP commits when advancing bookmarks
+'closest_pushable(to)' = 'heads(::to & mutable() & ~description(exact:"") & (~empty() | merges()))'
+
+# Show current branch from @ to its leaf commits
+'current()' = '@:: & mutable()'
+
+# Show your entire stack - all mutable commits connected to @
+# reachable() finds commits reachable in any direction (ancestors + descendants)
+# within the mutable() set (excludes immutable trunk/tags)
+'stack()' = 'reachable(@, mutable())'
+
+# [fsmonitor]
+# # Use Watchman for faster working copy snapshots in large repos
+# backend = "watchman"
+
+# cool trick to stash for later: use a different email for projects organized into
+# my work projects! Borrowed from: https://github.com/dmmulroy/.dotfiles/blob/main/home/.config/jj/config.toml
+# [[--scope]]
+# --when.repositories = ["~/Code/work"]
+#
+# [--scope.user]
+# email = "dillon@cloudflare.com"

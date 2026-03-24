@@ -35,17 +35,6 @@ in
     # Turn off highlighted results
     (nnoremap "<leader>no" "<cmd>noh<cr>" "[N]o Highlight")
 
-    # Rebind Escape
-    {
-      mode = "i";
-      key = "jj";
-      action = "<Esc>";
-      options = {
-        desc = "Exit Insert Mode";
-        nowait = true;
-      };
-    }
-
     # Save and Quit
     {
       mode = "n";

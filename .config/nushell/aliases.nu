@@ -55,6 +55,8 @@ export alias g. = hx .
 export alias x = hx
 export alias z. = zed .
 export alias v = nvim
+export alias nv = nvim
+export alias nvi = nvim
 export alias v. = nvim .
 
 # ============================================================================
@@ -84,6 +86,7 @@ export alias "jj push" = jj git push
 export alias "jj ::@" = jj -r '::@'
 export alias "jj@" = jj -r '::@'
 export alias "j@" = jj -r '::@'
+export alias jjr = jj -r
 
 # ============================================================================
 # ZELLIJ (Terminal Multiplexer)
