@@ -269,6 +269,17 @@ reload:
 
 alias rl := reload
 
+# Rebuild/apply Home Manager user config (fast path for Neovim changes)
+[group('dev')]
+nvim-rebuild:
+    @echo "Building Home Manager activation package..."
+    nix build {{ FLAKE_DIR }}#darwinConfigurations.starter.config.home-manager.users.nickminor.home.activationPackage
+    @echo "Activating Home Manager generation..."
+    {{ DOTFILES_DIR }}/result/activate
+    @echo "✓ Home Manager config applied (restart nvim to pick up changes)"
+
+alias nv := nvim-rebuild
+
 # Show flake inputs and their versions
 [group('dev')]
 show-inputs:
