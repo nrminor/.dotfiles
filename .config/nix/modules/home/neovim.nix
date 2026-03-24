@@ -6,7 +6,7 @@
 { inputs, pkgs, ... }:
 
 let
-  fffPlugin = inputs.fff-nvim.packages.${pkgs.system}.fff-nvim;
+  fffPlugin = inputs.fff-nvim.packages.${pkgs.stdenv.hostPlatform.system}.fff-nvim;
 in
 {
   imports = [

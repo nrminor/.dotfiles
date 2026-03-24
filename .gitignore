@@ -96,6 +96,8 @@
 # Neovim (nixvim config)
 !/.config/neovim
 !/.config/neovim/*.nix
+!/.config/neovim/colors
+!/.config/neovim/colors/*.lua
 !/.config/neovim/plugins
 !/.config/neovim/plugins/*.nix
 !/.config/neovim/plugins/languages
