@@ -28,5 +28,13 @@
         desc = "Flash treesitter select";
       };
     }
+    {
+      mode = "x";
+      key = "S";
+      action = ''<esc><cmd>lua MiniSurround.add("visual")<cr>'';
+      options = {
+        desc = "Surround visual selection";
+      };
+    }
   ];
 }

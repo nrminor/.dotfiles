@@ -8,7 +8,15 @@ in
     ##########################################################################
 
     # Disabled Keys
-    (nnoremap "<space>" "<nop>" "Disable Space Bar")
+    {
+      mode = "n";
+      key = "<space>";
+      action = "<nop>";
+      options = {
+        silent = true;
+        noremap = true;
+      };
+    }
 
     # Movement
     (nnoremap "L" "$" "Jump End of [L]ine")
