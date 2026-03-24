@@ -30,6 +30,12 @@ in
 {
   extraPackages = [ nextflow-lsp ];
 
+  # Reuse the Groovy parser for Nextflow buffers so Tree-sitter highlighting
+  # works for .nf files.
+  plugins.treesitter.languageRegister = {
+    groovy = "nextflow";
+  };
+
   # Register the filetype and LSP manually since nextflow isn't in nvim-lspconfig
   extraConfigLua = ''
     vim.filetype.add({
@@ -37,8 +43,8 @@ in
         nf = "nextflow",
       },
       pattern = {
-        ["nextflow.config"] = "nextflow",
-        ["*.nf.test"] = "nextflow",
+        ["nextflow%.config"] = "nextflow",
+        [".*%.nf%.test"] = "nextflow",
       },
     })
 
