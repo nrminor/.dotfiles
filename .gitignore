@@ -278,6 +278,14 @@
 !/.config/.claude/skills/back-of-envelope
 !/.config/.claude/skills/back-of-envelope/SKILL.md
 
+# grill-me skill
+!/.config/.claude/skills/grill-me
+!/.config/.claude/skills/grill-me/SKILL.md
+
+# ubiquitous-language skill
+!/.config/.claude/skills/ubiquitous-language
+!/.config/.claude/skills/ubiquitous-language/SKILL.md
+
 # logging skill
 !/.config/.claude/skills/logging
 !/.config/.claude/skills/logging/SKILL.md

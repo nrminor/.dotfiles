@@ -144,3 +144,5 @@
 ".config/.claude/skills/tigerstyle" = { target = "~/.claude/skills/tigerstyle", type = "symbolic" }
 ".config/.claude/skills/effect-ts" = { target = "~/.claude/skills/effect-ts", type = "symbolic" }
 ".config/.claude/skills/design-engineering" = { target = "~/.claude/skills/design-engineering", type = "symbolic" }
+".config/.claude/skills/ubiquitous-language" = { target = "~/.claude/skills/ubiquitous-language", type = "symbolic" }
+".config/.claude/skills/grill-me" = { target = "~/.claude/skills/grill-me", type = "symbolic" }
