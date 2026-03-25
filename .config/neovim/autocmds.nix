@@ -35,5 +35,34 @@
       pattern = [ "qf" ];
       command = "nnoremap <buffer> <CR> <CR>:cclose<CR>";
     }
+    {
+      desc = "Open fff when starting on a directory";
+      event = [ "VimEnter" ];
+      callback = {
+        __raw =
+          # lua
+          ''
+            function()
+              if vim.fn.argc() ~= 1 then
+                return
+              end
+
+              local arg = vim.fn.argv(0)
+              if vim.fn.isdirectory(arg) == 0 then
+                return
+              end
+
+              if vim.bo.filetype == "netrw" then
+                vim.cmd("enew")
+              end
+
+              vim.cmd.cd(vim.fn.fnamemodify(arg, ":p"))
+              vim.schedule(function()
+                require("fff").find_files()
+              end)
+            end
+          '';
+      };
+    }
   ];
 }

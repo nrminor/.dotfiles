@@ -108,25 +108,25 @@
         {
           mode = "n";
           key = "<leader>fd";
-          action = ''<cmd>lua Snacks.picker.diagnostics_buffer()<cr>'';
+          action = "<cmd>lua Snacks.picker.diagnostics_buffer()<cr>";
           options.desc = "Find buffer diagnostics";
         }
         {
           mode = "n";
           key = "<leader>d";
-          action = ''<cmd>lua Snacks.picker.diagnostics_buffer()<cr>'';
+          action = "<cmd>lua Snacks.picker.diagnostics_buffer()<cr>";
           options.desc = "Buffer diagnostics (short)";
         }
         {
           mode = "n";
           key = "<leader>fD";
-          action = ''<cmd>lua Snacks.picker.diagnostics()<cr>'';
+          action = "<cmd>lua Snacks.picker.diagnostics()<cr>";
           options.desc = "Find workspace diagnostics";
         }
         {
           mode = "n";
           key = "<leader>D";
-          action = ''<cmd>lua Snacks.picker.diagnostics()<cr>'';
+          action = "<cmd>lua Snacks.picker.diagnostics()<cr>";
           options.desc = "Workspace diagnostics (short)";
         }
 
@@ -134,37 +134,37 @@
         {
           mode = "n";
           key = "<leader>fs";
-          action = ''<cmd>lua Snacks.picker.lsp_symbols()<cr>'';
+          action = "<cmd>lua Snacks.picker.lsp_symbols()<cr>";
           options.desc = "Find lsp document symbols";
         }
         {
           mode = "n";
           key = "<leader>s";
-          action = ''<cmd>lua Snacks.picker.lsp_symbols()<cr>'';
+          action = "<cmd>lua Snacks.picker.lsp_symbols()<cr>";
           options.desc = "Document symbols (short)";
         }
         {
           mode = "n";
           key = "<leader>ld";
-          action = ''<cmd>lua Snacks.picker.lsp_definitions()<cr>'';
+          action = "<cmd>lua Snacks.picker.lsp_definitions()<cr>";
           options.desc = "Goto Definition";
         }
         {
           mode = "n";
           key = "<leader>li";
-          action = ''<cmd>lua Snacks.picker.lsp_implementation()<cr>'';
+          action = "<cmd>lua Snacks.picker.lsp_implementation()<cr>";
           options.desc = "Goto Implementation";
         }
         {
           mode = "n";
           key = "<leader>lD";
-          action = ''<cmd>lua Snacks.picker.lsp_references()<cr>'';
+          action = "<cmd>lua Snacks.picker.lsp_references()<cr>";
           options.desc = "Find references";
         }
         {
           mode = "n";
           key = "<leader>lt";
-          action = ''<cmd>lua Snacks.picker.lsp_type_definitions()<cr>'';
+          action = "<cmd>lua Snacks.picker.lsp_type_definitions()<cr>";
           options.desc = "Goto Type Definition";
         }
 
@@ -172,37 +172,37 @@
         {
           mode = "n";
           key = "<leader>fb";
-          action = ''<cmd>lua Snacks.picker.buffers()<cr>'';
+          action = "<cmd>lua Snacks.picker.buffers()<cr>";
           options.desc = "Find buffers";
         }
         {
           mode = "n";
           key = "<leader>fo";
-          action = ''<cmd>lua Snacks.picker.recent()<cr>'';
+          action = "<cmd>lua Snacks.picker.recent()<cr>";
           options.desc = "Find recent files";
         }
         {
           mode = "n";
           key = "<leader>fO";
-          action = ''<cmd>lua Snacks.picker.smart()<cr>'';
+          action = "<cmd>lua Snacks.picker.smart()<cr>";
           options.desc = "Find Smart (Frecency)";
         }
         {
           mode = "n";
           key = "<leader>f?";
-          action = ''<cmd>lua Snacks.picker.grep_buffers()<cr>'';
+          action = "<cmd>lua Snacks.picker.grep_buffers()<cr>";
           options.desc = "Fuzzy find in open buffers";
         }
         {
           mode = "n";
           key = "<leader>f/";
-          action = ''<cmd>lua Snacks.picker.lines()<cr>'';
+          action = "<cmd>lua Snacks.picker.lines()<cr>";
           options.desc = "Fuzzy find in current buffer";
         }
         {
           mode = "n";
           key = "<leader>fr";
-          action = ''<cmd>lua Snacks.picker.resume()<cr>'';
+          action = "<cmd>lua Snacks.picker.resume()<cr>";
           options.desc = "Resume find";
         }
 
@@ -210,61 +210,61 @@
         {
           mode = "n";
           key = "<leader>fh";
-          action = ''<cmd>lua Snacks.picker.help()<cr>'';
+          action = "<cmd>lua Snacks.picker.help()<cr>";
           options.desc = "Find help tags";
         }
         {
           mode = "n";
           key = "<leader>fk";
-          action = ''<cmd>lua Snacks.picker.keymaps()<cr>'';
+          action = "<cmd>lua Snacks.picker.keymaps()<cr>";
           options.desc = "Find keymaps";
         }
         {
           mode = "n";
           key = "<leader>fp";
-          action = ''<cmd>lua Snacks.picker.projects()<cr>'';
+          action = "<cmd>lua Snacks.picker.projects()<cr>";
           options.desc = "Find projects";
         }
         {
           mode = "n";
           key = "<leader>fm";
-          action = ''<cmd>lua Snacks.picker.man()<cr>'';
+          action = "<cmd>lua Snacks.picker.man()<cr>";
           options.desc = "Find man pages";
         }
         {
           mode = "n";
           key = "<leader>fq";
-          action = ''<cmd>lua Snacks.picker.qflist()<cr>'';
+          action = "<cmd>lua Snacks.picker.qflist()<cr>";
           options.desc = "Find quickfix";
         }
         {
           mode = "n";
           key = "<leader>fT";
-          action = ''<cmd>lua Snacks.picker.colorschemes()<cr>'';
+          action = "<cmd>lua Snacks.picker.colorschemes()<cr>";
           options.desc = "Find theme";
         }
         {
           mode = "n";
           key = "<leader>fH";
-          action = ''<cmd>lua Snacks.picker.highlights()<cr>'';
+          action = "<cmd>lua Snacks.picker.highlights()<cr>";
           options.desc = "Find highlights";
         }
         {
           mode = "n";
           key = "<leader>fS";
-          action = ''<cmd>lua Snacks.picker.spell_suggest()<cr>'';
+          action = "<cmd>lua Snacks.picker.spell_suggest()<cr>";
           options.desc = "Find spelling suggestions";
         }
         {
           mode = "n";
           key = "<leader>fr";
-          action = ''<cmd>lua Snacks.picker.registers()<cr>'';
+          action = "<cmd>lua Snacks.picker.registers()<cr>";
           options.desc = "Find registers";
         }
         {
           mode = "n";
           key = "<leader>f'";
-          action = ''<cmd>lua Snacks.picker.marks()<cr>'';
+          action = "<cmd>lua Snacks.picker.marks()<cr>";
           options.desc = "Find marks";
         }
 
@@ -272,19 +272,19 @@
         {
           mode = "n";
           key = "<leader>gB";
-          action = ''<cmd>lua Snacks.picker.git_branches()<cr>'';
+          action = "<cmd>lua Snacks.picker.git_branches()<cr>";
           options.desc = "Find git branches";
         }
         {
           mode = "n";
           key = "<leader>gs";
-          action = ''<cmd>lua Snacks.picker.git_status()<cr>'';
+          action = "<cmd>lua Snacks.picker.git_status()<cr>";
           options.desc = "Find git status";
         }
         {
           mode = "n";
           key = "<leader>gS";
-          action = ''<cmd>lua Snacks.picker.git_stash()<cr>'';
+          action = "<cmd>lua Snacks.picker.git_stash()<cr>";
           options.desc = "Find git stashes";
         }
       ];

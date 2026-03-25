@@ -23,6 +23,10 @@
       mapleader = " ";
       maplocalleader = " ";
 
+      # Disable netrw so opening a directory can be handled by our own picker flow.
+      loaded_netrw = 1;
+      loaded_netrwPlugin = 1;
+
       floating_window_options = {
         border = "rounded";
         winblend = 10;

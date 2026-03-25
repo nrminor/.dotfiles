@@ -63,6 +63,8 @@
     };
 
     settings = {
+      default_file_explorer = false;
+
       use_default_keymaps = false;
 
       preview = {
@@ -126,7 +128,7 @@
     {
       mode = "n";
       key = "<leader>e";
-      action = ''<cmd>Oil --float<cr>'';
+      action = "<cmd>Oil --float<cr>";
       options = {
         desc = "Open Oil";
       };

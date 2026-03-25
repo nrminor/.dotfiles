@@ -7,9 +7,19 @@
       settings = {
         check = {
           command = "clippy";
+          extraArgs = [
+            "--all-features"
+          ];
+        };
+        checkOnSave = {
+          enable = true;
+          command = "clippy";
+          extraArgs = [
+            "--all-features"
+          ];
         };
         inlayHints = {
-          enable = true;
+          enable = false;
           lifetimeElisionHints = {
             enable = "skip_trivial";
             useParameterNames = true;

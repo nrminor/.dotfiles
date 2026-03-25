@@ -21,10 +21,10 @@ in
     # Movement
     (nnoremap "L" "$" "Jump End of [L]ine")
     (nnoremap "H" "^" "Jump Start of [L]ine")
-    (nnoremap "j" "jzz" "Vertically Center Cursor Down")
-    (nnoremap "k" "kzz" "Vertically Center Cursor Up")
-    (nnoremap "gg" "ggzz" "Vertically Center Cursor Start Of File")
-    (nnoremap "G" "Gzz" "Vertically Center Cursor End Of File")
+    # (nnoremap "j" "jzz" "Vertically Center Cursor Down")
+    # (nnoremap "k" "kzz" "Vertically Center Cursor Up")
+    # (nnoremap "gg" "ggzz" "Vertically Center Cursor Start Of File")
+    # (nnoremap "G" "Gzz" "Vertically Center Cursor End Of File")
 
     # Redo
     (nnoremap "U" "<C-r>" "Redo")
