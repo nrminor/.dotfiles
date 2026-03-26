@@ -1,20 +1,12 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   extraPackages = with pkgs; [
     ruff
-    basedpyright
   ];
 
   plugins.lsp.servers = {
-    basedpyright = {
+    ty = {
       enable = true;
-      settings = {
-        basedpyright = {
-          analysis = {
-            typeCheckingMode = "basic";
-          };
-        };
-      };
     };
 
     ruff = {
@@ -23,7 +15,13 @@
         lineLength = 100;
         lint = {
           select = [ "ALL" ];
-          ignore = [ "D" "S101" "E501" "PTH123" "TD003" ];
+          ignore = [
+            "D"
+            "S101"
+            "E501"
+            "PTH123"
+            "TD003"
+          ];
         };
       };
     };

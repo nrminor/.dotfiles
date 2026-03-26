@@ -168,7 +168,7 @@ in
   # pkgs.uv
   # pkgs.pixi
   pkgs.ruff
-  # pkgs.ty
+  pkgs.ty
   pkgs.basedpyright
   # pkgs.pylyzer
   pkgs.marimo
