@@ -15,7 +15,6 @@
     enable = true;
 
     lintersByFt = {
-      lua = [ "selene" ];
       nix = [ "statix" ];
     };
 

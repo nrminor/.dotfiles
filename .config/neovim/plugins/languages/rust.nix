@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   plugins.lsp.servers = {
     rust_analyzer = {
@@ -34,5 +35,12 @@
         };
       };
     };
+
   };
+
+  extraPlugins = [
+    pkgs.vimPlugins.crates-nvim
+  ];
+
+  extraConfigLua = builtins.readFile ./crates.lua;
 }

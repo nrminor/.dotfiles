@@ -101,8 +101,9 @@
 !/.config/neovim/plugins
 !/.config/neovim/plugins/*.nix
 !/.config/neovim/plugins/languages
-!/.config/neovim/plugins/languages/*.nix
 !/.config/neovim/plugins/languages/queries
+!/.config/neovim/plugins/languages/*.nix
+!/.config/neovim/plugins/languages/*.lua
 !/.config/neovim/plugins/languages/queries/markdown
 !/.config/neovim/plugins/languages/queries/markdown/*.scm
 !/.config/neovim/plugins/snacks
