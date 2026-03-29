@@ -1,8 +1,8 @@
 {
-  # OCaml LSP — assumes ocaml-lsp-server is on PATH via opam.
-  # We don't install via nix because opam manages the toolchain
-  # and ocamllsp needs to match the project's compiler version.
-  # If ocamllsp isn't installed, nvim works fine — LSP just won't attach.
+  # OCaml LSP — assumes ocamllsp is on PATH via opam/switch env.
+  # We intentionally do not pin via nixpkgs because ocamllsp must match
+  # the project's compiler switch version.
+  # If ocamllsp isn't available in PATH, LSP simply won't attach.
   plugins.lsp.servers.ocamllsp = {
     enable = true;
     package = null;

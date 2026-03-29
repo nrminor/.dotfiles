@@ -27,6 +27,10 @@
       loaded_netrw = 1;
       loaded_netrwPlugin = 1;
 
+      # Disable default OCaml ftplugin keymaps (<LocalLeader>s, <LocalLeader>t, etc.)
+      # so they don't shadow our core leader mappings (e.g. symbol search).
+      no_ocaml_maps = 1;
+
       floating_window_options = {
         border = "rounded";
         winblend = 10;

@@ -43,15 +43,24 @@
         __raw =
           # lua
           ''
-            function(bufnr)
-              -- Disable with a global or buffer-local variable
-              if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+            function(buffer_number)
+              -- Returning nil skips formatting for this save.
+              -- Returning an options table tells Conform how to format.
+              if vim.g.disable_autoformat or vim.b[buffer_number].disable_autoformat then
                 return
               end
+
+              local filetype = vim.bo[buffer_number].filetype
+              local is_ocaml_filetype = filetype == "ocaml"
+                or filetype == "ocamlinterface"
+                or filetype == "ocamllex"
+                or filetype == "menhir"
+
               return {
-                lsp_format = "prefer",
+                -- Match Helix behavior for OCaml: always use ocamlformat.
+                lsp_format = is_ocaml_filetype and "never" or "prefer",
                 stop_after_first = true,
-                timeout_ms = 500,
+                timeout_ms = is_ocaml_filetype and 2000 or 500,
                 async = true,
               }
             end
@@ -70,12 +79,38 @@
           javascriptreact = js_common;
           typescript = js_common;
           typescriptreact = js_common;
+          ocaml = [ "ocamlformat_impl" ];
+          ocamlinterface = [ "ocamlformat_intf" ];
+          ocamllex = [ "ocamlformat_impl" ];
+          menhir = [ "ocamlformat_impl" ];
           nu = [ "topiary" ];
         };
       formatters = {
         topiary = {
           command = "topiary";
-          args = [ "format" "--language" "nu" ];
+          args = [
+            "format"
+            "--language"
+            "nu"
+          ];
+          stdin = true;
+        };
+        ocamlformat_impl = {
+          command = "ocamlformat";
+          args = [
+            "-"
+            "--impl"
+            "--enable-outside-detected-project"
+          ];
+          stdin = true;
+        };
+        ocamlformat_intf = {
+          command = "ocamlformat";
+          args = [
+            "-"
+            "--intf"
+            "--enable-outside-detected-project"
+          ];
           stdin = true;
         };
       };

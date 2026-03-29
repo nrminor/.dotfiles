@@ -96,6 +96,14 @@
             '';
         };
       };
+
+      # OCaml LSP commonly reports top-level `let` bindings as `Variable` symbols.
+      # Include all symbol kinds for OCaml buffers so Snacks lsp_symbols doesn't
+      # filter out legitimate definitions.
+      lsp_symbols.filter = {
+        ocaml = true;
+        ocamlinterface = true;
+      };
     };
   };
 

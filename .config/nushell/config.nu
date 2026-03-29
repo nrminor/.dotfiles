@@ -90,6 +90,13 @@ source $"($nu.cache-dir)/carapace.nu"
 if ("~/.config/nushell/local.nu" | path exists) {
   overlay use "~/.config/nushell/local.nu"
 }
+
+# ocaml & opam setup
+if ("~/.opam" | path exists) {
+  # launch the ocaml/opam environment using this trick:
+  # https://stackoverflow.com/questions/79760891/how-do-i-use-eval-opam-env-with-nushell
+  opam env --shell=powershell | parse "$env:{key} = '{val}'" | transpose -rd | load-env
+}
 # -------------------------------------------------------------------------------------
 
 # Managing Node/NVM with fnm
