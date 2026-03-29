@@ -41,6 +41,7 @@ in
   pkgs.ast-grep
   pkgs.fd
   pkgs.skim
+  pkgs.television
   pkgs.fzf
   pkgs.fzf-make
   pkgs.bat
