@@ -152,7 +152,7 @@
         {
           mode = "n";
           key = "<leader>li";
-          action = "<cmd>lua Snacks.picker.lsp_implementation()<cr>";
+          action = "<cmd>lua Snacks.picker.lsp_implementations()<cr>";
           options.desc = "Goto Implementation";
         }
         {
