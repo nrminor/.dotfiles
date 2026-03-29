@@ -6,7 +6,10 @@
 { inputs, pkgs, ... }:
 
 let
-  fffPlugin = inputs.fff-nvim.packages.${pkgs.stdenv.hostPlatform.system}.fff-nvim;
+  system = pkgs.stdenv.hostPlatform.system;
+  fffPlugin = inputs.fff-nvim.packages.${system}.fff-nvim;
+  rustowlPlugin = inputs.rustowl-flake.packages.${system}.rustowl-nvim;
+  rustowl = inputs.rustowl-flake.packages.${system}.rustowl;
 in
 {
   imports = [
@@ -16,6 +19,8 @@ in
   programs.nixvim = {
     enable = true;
     imports = [ ../../../neovim ];
-    _module.args.fffPlugin = fffPlugin;
+    _module.args = {
+      inherit fffPlugin rustowlPlugin rustowl;
+    };
   };
 }

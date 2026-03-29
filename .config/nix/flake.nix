@@ -40,6 +40,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    rustowl-flake = {
+      url = "github:nix-community/rustowl-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };

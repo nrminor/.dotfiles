@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, rustowlPlugin, ... }:
 {
   plugins.lsp.servers = {
     rust_analyzer = {
@@ -40,7 +40,11 @@
 
   extraPlugins = [
     pkgs.vimPlugins.crates-nvim
+    rustowlPlugin
   ];
 
-  extraConfigLua = builtins.readFile ./crates.lua;
+  extraConfigLua = builtins.concatStringsSep "\n" [
+    (builtins.readFile ./crates.lua)
+    (builtins.readFile ./rustowl.lua)
+  ];
 }
