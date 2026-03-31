@@ -1,7 +1,7 @@
 ---
 description: Fast, token-efficient codebase search engine. Finds definitions, call sites, imports, and code patterns using codemogger (semantic), ast-grep (structural), and ripgrep (textual fallback) with VCS-aware tooling. Invoke when you need precise answers about what's in a codebase and where.
 mode: all
-model: openai/gpt-5.4-mini
+model: openai/gpt-5.3-codex-spark
 temperature: 0.1
 tools:
   write: false

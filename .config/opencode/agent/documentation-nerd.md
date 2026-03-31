@@ -1,7 +1,7 @@
 ---
 description: Bookish and self-effacing keeper of the docs who will look anything and everything up for other agents. Fetches, evaluates, and summarizes documentation with source links, version awareness, and honest gap reporting.
 mode: all
-model: openai/gpt-5.4-mini
+model: openai/gpt-5.3-codex-spark
 temperature: 0.1
 tools:
   write: false
