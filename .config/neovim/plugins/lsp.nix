@@ -1,5 +1,5 @@
 let
-  inherit (import ../utilities.nix) inoremap nnoremap;
+  inherit (import ../utilities.nix) inoremap nnoremap xnoremap;
 in
 {
   plugins = {
@@ -55,6 +55,23 @@ in
 
         extra = [
           (inoremap "<C-k>" "<cmd>lua vim.lsp.buf.signature_help()<cr>" "LSP: [S]ignature [H]elp")
+          (xnoremap "<leader>ca" {
+            __raw =
+              # lua
+              ''
+                function()
+                  local start_pos = vim.api.nvim_buf_get_mark(0, "<")
+                  local end_pos = vim.api.nvim_buf_get_mark(0, ">")
+
+                  vim.lsp.buf.code_action({
+                    range = {
+                      start = start_pos,
+                      ["end"] = end_pos,
+                    },
+                  })
+                end
+              '';
+          } "LSP: [C]ode [A]ction (Selection)")
           (nnoremap "<leader>d" {
             __raw =
               # lua

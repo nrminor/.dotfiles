@@ -18,7 +18,10 @@
       flake = false;
     };
 
-    jj-starship.url = "github:dmmulroy/jj-starship";
+    jj-starship = {
+      url = "github:dmmulroy/jj-starship";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Claude/OpenCode skills (not flakes, just fetch the repos)
     anthropic-skills = {

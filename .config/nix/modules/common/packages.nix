@@ -253,7 +253,7 @@ in
   # ===== BEAM VM (Erlang/Elixir/Gleam) =====
   pkgs.erlang
   pkgs.rebar3
-  pkgs.gleam
+  # pkgs.gleam
   pkgs.beam28Packages.elixir
   pkgs.beam28Packages.elixir-ls
 

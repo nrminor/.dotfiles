@@ -20,8 +20,7 @@
       };
 
       ts-context-commentstring = {
-        enable = true;
-        disableAutoInitialization = false;
+        enable = false;
       };
 
       # Enable the plugin but configure via raw Lua (nixvim's declarative

@@ -1,4 +1,13 @@
-{ pkgs, rustowlPlugin, ... }:
+{
+  lib,
+  pkgs,
+  rustowlPlugin ? null,
+  optionalNeovimFeatures ? { },
+  ...
+}:
+let
+  rustowlEnabled = lib.attrByPath [ "rustowl" ] false optionalNeovimFeatures;
+in
 {
   plugins.lsp.servers = {
     rust_analyzer = {
@@ -38,13 +47,10 @@
 
   };
 
-  extraPlugins = [
-    pkgs.vimPlugins.crates-nvim
-    rustowlPlugin
-  ];
+  extraPlugins = [ pkgs.vimPlugins.crates-nvim ] ++ lib.optionals rustowlEnabled [ rustowlPlugin ];
 
-  extraConfigLua = builtins.concatStringsSep "\n" [
-    (builtins.readFile ./crates.lua)
-    (builtins.readFile ./rustowl.lua)
-  ];
+  extraConfigLua = builtins.concatStringsSep "\n" (
+    [ (builtins.readFile ./crates.lua) ]
+    ++ lib.optionals rustowlEnabled [ (builtins.readFile ./rustowl.lua) ]
+  );
 }

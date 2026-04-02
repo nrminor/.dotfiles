@@ -8,8 +8,17 @@
 let
   system = pkgs.stdenv.hostPlatform.system;
   fffPlugin = inputs.fff-nvim.packages.${system}.fff-nvim;
-  rustowlPlugin = inputs.rustowl-flake.packages.${system}.rustowl-nvim;
-  rustowl = inputs.rustowl-flake.packages.${system}.rustowl;
+  optionalNeovimFeatures = {
+    gleam = false;
+    rustowl = false;
+  };
+  rustowlPlugin =
+    if optionalNeovimFeatures.rustowl then
+      inputs.rustowl-flake.packages.${system}.rustowl-nvim
+    else
+      null;
+  rustowl =
+    if optionalNeovimFeatures.rustowl then inputs.rustowl-flake.packages.${system}.rustowl else null;
 in
 {
   imports = [
@@ -20,7 +29,12 @@ in
     enable = true;
     imports = [ ../../../neovim ];
     _module.args = {
-      inherit fffPlugin rustowlPlugin rustowl;
+      inherit
+        fffPlugin
+        rustowlPlugin
+        rustowl
+        optionalNeovimFeatures
+        ;
     };
   };
 }
