@@ -93,6 +93,7 @@ in
   # ===== Git & Version Control =====
   pkgs.git
   pkgs.gh
+  pkgs.gh-dash
   pkgs.jujutsu
   pkgs.lazygit
   pkgs.difftastic
@@ -101,7 +102,7 @@ in
   inputs.jj-starship.packages.${pkgs.stdenv.hostPlatform.system}.jj-starship
   pkgs.mergiraf
   pkgs.git-cliff
-  pkgs.gitlogue
+  pkgs.gitlogue # for funzies
 
   # ===== Development Tools =====
   pkgs.just
