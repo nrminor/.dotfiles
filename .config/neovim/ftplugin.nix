@@ -1,16 +1,16 @@
 let
-  javascriptOpts = {
+  jjDescriptionOpts = {
     extraConfigVim =
       # vimscript
       ''
-        " Disable inserting comment leader after pressing 'o' or 'O'
-        set formatoptions-=o
+        " Disable hard wrapping while typing commit descriptions.
+        setlocal textwidth=0
+        setlocal formatoptions-=t
       '';
   };
 in
 {
   files = {
-    "after/ftplugin/javascript.vim" = javascriptOpts;
-    "after/ftplugin/typescript.vim" = javascriptOpts;
+    "after/ftplugin/jjdescription.vim" = jjDescriptionOpts;
   };
 }
