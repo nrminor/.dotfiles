@@ -58,6 +58,7 @@ export alias v = nvim
 export alias nv = nvim
 export alias nvi = nvim
 export alias v. = nvim .
+export alias n. = nvim .
 
 # ============================================================================
 # SYSTEM TOOLS
