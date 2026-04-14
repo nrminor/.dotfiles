@@ -27,6 +27,10 @@ in
             action = "hover";
             desc = "Hover Documentation";
           };
+          "<D-k>" = {
+            action = "hover";
+            desc = "Hover Documentation (Cmd-K)";
+          };
           "<leader>ca" = {
             action = "code_action";
             desc = "LSP: [C]ode [A]ction";
