@@ -8,9 +8,11 @@ font-thicken = true
 # font-thicken-strength = 255
 
 # window configurations
-theme = Catppuccin Macchiato
-background-opacity = 0.85
-background-blur-radius = 25
+# theme = Catppuccin Macchiato
+theme = Catppuccin Latte
+background-opacity = 0.8
+unfocused-split-opacity = 0.8
+background-blur-radius = 90
 window-inherit-font-size = false
 window-width = 165
 window-height = 50
@@ -29,7 +31,7 @@ copy-on-select = clipboard
 cursor-style-blink = false
 
 # quick term settings
-quick-terminal-position = right
+quick-terminal-position = left
 quick-terminal-screen = main
 
 # macos-specific configurations
