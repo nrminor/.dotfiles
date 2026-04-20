@@ -4,6 +4,12 @@
     indent = {
       enabled = false;
     };
+
+    scope = {
+      # enabled = false;
+      hl = "Comment";
+    };
+
     chunk = {
       enabled = true;
       only_current = true;
@@ -12,7 +18,7 @@
         corner_top = "╭";
         corner_bottom = "╰";
       };
-      hl = "SnacksIndentScope";
+      hl = "Comment";
     };
   };
 }
