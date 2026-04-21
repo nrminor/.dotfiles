@@ -13,7 +13,8 @@ let
         inherit desc;
         silent = true;
         noremap = true;
-      } // opts;
+      }
+      // opts;
     };
 in
 {

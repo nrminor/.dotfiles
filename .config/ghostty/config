@@ -8,8 +8,8 @@ font-thicken = true
 # font-thicken-strength = 255
 
 # window configurations
-theme = Catppuccin Latte
-# theme = dark:Catppuccin Macchiato,light:Catppuccin Latte
+# theme = Catppuccin Latte
+theme = dark:Catppuccin Macchiato,light:Catppuccin Latte
 background-opacity = 0.8
 unfocused-split-opacity = 0.8
 background-blur-radius = 90

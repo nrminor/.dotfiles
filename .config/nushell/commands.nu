@@ -5,6 +5,7 @@
 # git workflow, process management, bioinformatics tools, and development tools
 
 use std/assert
+export use theme.nu *
 
 # ============================================================================
 # DIRECTORY NAVIGATION
@@ -69,6 +70,7 @@ export def uvs [] {
 export def --env ycd [
   ...args: string # Arguments to pass to yazi
 ] {
+  theme sync yazi
   let tmp = (^mktemp -t "yazi-cwd.XXXXXX" | str trim)
   ^yazi ...$args --cwd-file $tmp
   let cwd = (open $tmp | str trim)
@@ -76,6 +78,26 @@ export def --env ycd [
     cd $cwd
   }
   rm -f $tmp
+}
+
+# Launch Yazi after synchronizing runtime theme flavor symlinks.
+#
+# Accepts any arguments supported by `yazi` and passes them through unchanged.
+export def yazi-themed [
+  ...args: string # Arguments to pass to yazi
+] {
+  theme sync yazi
+  ^yazi ...$args
+}
+
+# Launch btop after synchronizing ~/.config/btop/themes/current.theme.
+#
+# Accepts any arguments supported by `btop` and passes them through unchanged.
+export def btop-themed [
+  ...args: string # Arguments to pass to btop
+] {
+  theme sync btop
+  ^btop ...$args
 }
 
 # Change to the local directory storing DHOLK experiment directories. See

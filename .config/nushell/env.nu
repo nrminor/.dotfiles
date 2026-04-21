@@ -126,7 +126,7 @@ $env.NVM_DIR = ($env.HOME | path join ".config" "nvm")
 # ============================================================================
 # TOOL CONFIGURATION
 # ============================================================================
-$env.BAT_THEME = "Catppuccin Macchiato"
+$env.BAT_THEME = (^nu ($env.XDG_CONFIG_HOME | path join "nushell" "theme.nu") get bat | str trim)
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense,clap'
 $env.TOPIARY_CONFIG_FILE = ($env.XDG_CONFIG_HOME | path join "topiary" "languages.ncl")
 $env.TOPIARY_LANGUAGE_DIR = ($env.XDG_CONFIG_HOME | path join "topiary" "languages")

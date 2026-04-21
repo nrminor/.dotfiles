@@ -15,6 +15,7 @@
 ".config/nushell/config.nu" = "~/.config/nushell/config.nu"
 ".config/nushell/env.nu" = "~/.config/nushell/env.nu"
 ".config/nushell/commands.nu" = "~/.config/nushell/commands.nu"
+".config/nushell/theme.nu" = "~/.config/nushell/theme.nu"
 ".config/nushell/aliases.nu" = "~/.config/nushell/aliases.nu"
 ".config/atuin/init.nu" = "~/.config/atuin/init.nu"
 
@@ -45,6 +46,8 @@
 ".config/yazi/theme.toml" = "~/.config/yazi/theme.toml"
 ".config/yazi/keymap.toml" = "~/.config/yazi/keymap.toml"
 ".config/yazi/init.lua" = "~/.config/yazi/init.lua"
+".config/yazi/flavors/catppuccin-latte.yazi" = { target = "~/.config/yazi/flavors/catppuccin-latte.yazi", type = "symbolic" }
+".config/yazi/flavors/catppuccin-macchiato.yazi" = { target = "~/.config/yazi/flavors/catppuccin-macchiato.yazi", type = "symbolic" }
 
 # Zellij terminal multiplexer
 [zellij.files]
@@ -60,6 +63,8 @@
 # btop system monitor
 [btop.files]
 ".config/btop/btop.conf" = "~/.config/btop/btop.conf"
+".config/btop/themes/catppuccin-latte.theme" = "~/.config/btop/themes/catppuccin-latte.theme"
+".config/btop/themes/catppuccin-macchiato.theme" = "~/.config/btop/themes/catppuccin-macchiato.theme"
 
 # Marimo Python notebooks
 [marimo.files]

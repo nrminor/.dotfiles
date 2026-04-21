@@ -36,7 +36,11 @@ in
     catppuccin = {
       enable = true;
       settings = {
-        flavour = "latte";
+        flavour = "auto";
+        background = {
+          light = "latte";
+          dark = "macchiato";
+        };
         transparent_background = true;
         no_bold = true;
         no_italic = true;

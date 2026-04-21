@@ -63,9 +63,9 @@ export alias n. = nvim .
 # ============================================================================
 # SYSTEM TOOLS
 # ============================================================================
-export alias b = btop
+export alias b = btop-themed
 export alias ff = fastfetch
-export alias y = yazi
+export alias y = yazi-themed
 export alias o. = ^open . # open the current directory in Finder on macOS
 
 # ============================================================================

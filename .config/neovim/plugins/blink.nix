@@ -61,7 +61,8 @@
           "buffer"
           "snippets"
           "path"
-        ] ++ (lib.optionals config.plugins.codecompanion.enable [ "codecompanion" ]);
+        ]
+        ++ (lib.optionals config.plugins.codecompanion.enable [ "codecompanion" ]);
         providers = {
           lsp = {
             score_offset = 4;
