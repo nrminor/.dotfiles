@@ -200,8 +200,8 @@ in
   # ===== Go Ecosystem =====
   pkgs.go
   pkgs.gopls
-  pkgs.gotools
-  pkgs.goreleaser
+  # pkgs.gotools
+  # pkgs.goreleaser
 
   # ===== Zig Ecosystem =====
   pkgs.zig
