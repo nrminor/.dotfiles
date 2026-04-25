@@ -89,30 +89,6 @@ $env.ENV_CONVERSIONS = {
 }
 
 # ============================================================================
-# LIBRARY AND COMPILER PATHS
-# ============================================================================
-# These are used by compilers and linkers (must be colon-separated strings)
-
-$env.LIBRARY_PATH = (
-  [
-    ($env.BREW_PREFIX | path join "lib")
-    "/opt/homebrew/opt/libiconv/lib"
-    ($env.BREW_PREFIX | path join "opt" "libiconv" "lib")
-    ($env.BREW_PREFIX | path join "opt" "zlib" "lib")
-  ] | str join ":"
-)
-
-$env.LDFLAGS = $"-L/opt/homebrew/opt/libiconv/lib -L($env.BREW_PREFIX)/opt/zlib/lib"
-
-$env.CPPFLAGS = $"-I/opt/homebrew/opt/libiconv/include -I($env.BREW_PREFIX)/opt/zlib/include"
-
-$env.PKG_CONFIG_PATH = (
-  [
-    ($env.BREW_PREFIX | path join "opt" "zlib" "lib" "pkgconfig")
-  ] | str join ":"
-)
-
-# ============================================================================
 # LANGUAGE-SPECIFIC ENVIRONMENTS
 # ============================================================================
 
