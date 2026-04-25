@@ -28,7 +28,7 @@
 
             # Nix tooling
             nixd
-            nixfmt-rfc-style
+            nixfmt
             nil
 
             # Formatters for various languages
@@ -43,7 +43,7 @@
 
             # JavaScript/TypeScript development (minimal setup)
             nodejs # Required to run typescript-language-server
-            nodePackages.typescript-language-server # LSP for IDE features
+            typescript-language-server # LSP for IDE features
             biome # Formatting & linting (standalone binary)
 
             # Rust development
