@@ -2,6 +2,7 @@
 description: Polices for the idiosyncratic preferences of this particular user
 mode: all
 model: openai/gpt-5.5
+reasoningEffort: high
 temperature: 0.5
 tools:
   write: true
