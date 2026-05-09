@@ -15,6 +15,10 @@
 
     local function set_background_from_system()
       local theme_script = vim.fn.expand("~/.config/nushell/theme.nu")
+      if vim.fn.executable("nu") == 0 or vim.fn.filereadable(theme_script) == 0 then
+        return
+      end
+
       local result = vim.system({ "nu", theme_script, "mode" }, { text = true }):wait()
 
       if result.code ~= 0 then

@@ -280,6 +280,22 @@ nvim-rebuild:
 
 alias nv := nvim-rebuild
 
+# Export a portable Neovim config/plugin bundle for machines without Nix/nixvim.
+# The generated bundle does not require Nix, Nushell, or just at runtime;
+# language servers and other binaries are resolved from the target PATH.
+[group('dev')]
+nvim-export-portable:
+    nu {{ DOTFILES_DIR }}/scripts/export-nvim-portable.nu --dotfiles-dir {{ DOTFILES_DIR }} --flake-dir {{ FLAKE_DIR }} --out-dir {{ DOTFILES_DIR }}/dist/nvim-portable
+
+alias nep := nvim-export-portable
+
+# Export the portable Neovim bundle and create a tar.gz archive for copying.
+[group('dev')]
+nvim-export-portable-archive:
+    nu {{ DOTFILES_DIR }}/scripts/export-nvim-portable.nu --dotfiles-dir {{ DOTFILES_DIR }} --flake-dir {{ FLAKE_DIR }} --out-dir {{ DOTFILES_DIR }}/dist/nvim-portable --archive
+
+alias nepa := nvim-export-portable-archive
+
 # Show flake inputs and their versions
 [group('dev')]
 show-inputs:
