@@ -154,6 +154,7 @@ in
   pkgs.cargo-readme
   pkgs.crate2nix
   pkgs.dioxus-cli
+  pkgs.rust-cbindgen
 
   # ===== WebAssembly =====
   pkgs.wasm-pack
