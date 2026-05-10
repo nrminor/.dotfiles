@@ -68,18 +68,18 @@ inside the block. State persists across tests within the block.
 
 ```ts
 import { assert, it, layer } from "@effect/vitest"
-import { Array, Effect, Layer, Ref, ServiceMap } from "effect"
+import { Array, Context, Effect, Layer, Ref } from "effect"
 
 // Test implementation backed by a Ref (not mocks)
 class TodoRepoTestRef
-  extends ServiceMap.Service<TodoRepoTestRef, Ref.Ref<Array<Todo>>>()(
+  extends Context.Service<TodoRepoTestRef, Ref.Ref<Array<Todo>>>()(
     "app/TodoRepoTestRef"
   )
 {
   static readonly layer = Layer.effect(TodoRepoTestRef, Ref.make(Array.empty()))
 }
 
-class TodoRepo extends ServiceMap.Service<TodoRepo, {
+class TodoRepo extends Context.Service<TodoRepo, {
   create(title: string): Effect.Effect<Todo>
   readonly list: Effect.Effect<ReadonlyArray<Todo>>
 }>()(
@@ -131,7 +131,7 @@ When testing a service that depends on other services, compose the test layers
 and provide them inline or via `layer()`:
 
 ```ts
-class TodoService extends ServiceMap.Service<TodoService, {
+class TodoService extends Context.Service<TodoService, {
   addAndCount(title: string): Effect.Effect<number>
   readonly titles: Effect.Effect<ReadonlyArray<string>>
 }>()(

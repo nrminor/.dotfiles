@@ -274,7 +274,7 @@ const draftsModel = yield* DraftPlan.withRequirements
 ### Tools and toolkits
 
 ```ts
-import { Schema } from "effect"
+import { Effect, Schema } from "effect"
 import { Tool, Toolkit } from "effect/unstable/ai"
 
 const SearchProducts = Tool.make("SearchProducts", {
@@ -353,8 +353,9 @@ while (true) {
 For stateful services distributed across machines:
 
 ```ts
-import { Schema } from "effect"
-import { Entity, Rpc } from "effect/unstable/cluster"
+import { Effect, Ref, Schema } from "effect"
+import { ClusterSchema, Entity } from "effect/unstable/cluster"
+import { Rpc } from "effect/unstable/rpc"
 
 // Define RPCs with typed payloads and responses
 const Increment = Rpc.make("Increment", {

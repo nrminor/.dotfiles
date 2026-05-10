@@ -6,7 +6,7 @@ The `HttpClient` module provides a composable HTTP client that integrates with
 Effect's service, error, and tracing systems.
 
 ```ts
-import { Effect, flow, Layer, Schedule, Schema, ServiceMap } from "effect"
+import { Context, Effect, flow, Layer, Schedule, Schema } from "effect"
 import {
   FetchHttpClient, HttpClient, HttpClientRequest, HttpClientResponse
 } from "effect/unstable/http"
@@ -23,7 +23,7 @@ export class JsonPlaceholderError extends Schema.TaggedErrorClass<JsonPlaceholde
   { cause: Schema.Defect }
 ) {}
 
-export class JsonPlaceholder extends ServiceMap.Service<JsonPlaceholder, {
+export class JsonPlaceholder extends Context.Service<JsonPlaceholder, {
   readonly allTodos: Effect.Effect<ReadonlyArray<Todo>, JsonPlaceholderError>
   getTodo(id: number): Effect.Effect<Todo, JsonPlaceholderError>
   createTodo(todo: Omit<Todo, "id">): Effect.Effect<Todo, JsonPlaceholderError>
@@ -90,7 +90,7 @@ export class JsonPlaceholder extends ServiceMap.Service<JsonPlaceholder, {
 
 Key patterns:
 
-- The `HttpClient` is itself a service — `yield*` it from the service map
+- The `HttpClient` is itself a service — access it with `yield*` from `Context`
 - Configure with middleware via pipe: `mapRequest`, `filterStatusOk`, `retryTransient`
 - Validate responses with `HttpClientResponse.schemaBodyJson(MySchema)`
 - Build complex requests with `HttpClientRequest.post()`, `.bodyJsonUnsafe()`, etc.
@@ -190,7 +190,7 @@ export class SystemApi extends HttpApiGroup.make("system", { topLevel: true })
 
 ```ts
 // api/Authorization.ts
-export class CurrentUser extends ServiceMap.Service<CurrentUser, User>()(
+export class CurrentUser extends Context.Service<CurrentUser, User>()(
   "app/Authorization/CurrentUser"
 ) {}
 
@@ -300,7 +300,7 @@ const AuthorizationClient = HttpApiMiddleware.layerClient(
 )
 
 // Generated client as a service
-export class ApiClient extends ServiceMap.Service<
+export class ApiClient extends Context.Service<
   ApiClient,
   HttpApiClient.ForApi<typeof Api>
 >()(

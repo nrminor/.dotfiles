@@ -1,6 +1,6 @@
 ---
 name: effect-ts
-description: Write TypeScript with the Effect V4 library. Covers the core Effect type, generator syntax (Effect.gen/Effect.fn), typed errors, services and dependency injection via ServiceMap/Layer, resource management, streams, HTTP client/server, CLI, child processes, testing, observability, AI modules, and cluster. Use when writing or reviewing Effect code, migrating vanilla TypeScript to Effect, or when you need to understand Effect's service/layer/error model.
+description: Write TypeScript with the Effect V4 library. Covers the core Effect type, generator syntax (Effect.gen/Effect.fn), typed errors, services and dependency injection via Context/Layer, resource management, streams, HTTP client/server, CLI, child processes, testing, observability, AI modules, and cluster. Use when writing or reviewing Effect code, migrating vanilla TypeScript to Effect, or when you need to understand Effect's service/layer/error model.
 ---
 
 # Effect V4 for TypeScript
@@ -10,9 +10,10 @@ dependency injection, concurrency, resource management, and observability with a
 single composable system. The core type `Effect<A, E, R>` tracks success (`A`),
 typed errors (`E`), and required dependencies (`R`) at the type level.
 
-This skill covers Effect V4, which introduces `ServiceMap.Service` (replacing
-the older `Context.Tag` pattern), `Effect.fn` (replacing functions that return
-`Effect.gen`), and several new modules under `effect/unstable/*`.
+This skill covers Effect V4, which introduces `Context.Service` (replacing the
+older `Context.Tag`, `Effect.Tag`, and `Effect.Service` patterns), `Effect.fn`
+(replacing functions that return `Effect.gen`), and several new modules under
+`effect/unstable/*`.
 
 ## Detailed references
 
@@ -85,8 +86,8 @@ export const processOrder = Effect.fn("processOrder")(
     const order = yield* fetchOrder(orderId)
     return yield* chargeCard(order)
   },
-  // Trailing combinators are preferred — co-locates operational behavior
-  // at the definition site. But .pipe() also works.
+  // Pass combinators as trailing arguments. Do not wrap the resulting function
+  // in .pipe(); keep operational behavior at the definition site.
   Effect.retry(Schedule.exponential("200 millis")),
   Effect.annotateLogs({ module: "orders" })
 )
@@ -206,14 +207,15 @@ effect.pipe(
 
 ## Services and dependency injection
 
-### ServiceMap.Service
+### Context.Service
 
-The V4 way to define a service. Replaces the older `Context.Tag` pattern.
+The V4 way to define a service. Replaces the older `Context.Tag`,
+`Effect.Tag`, and `Effect.Service` patterns.
 
 ```ts
-import { Effect, Layer, Schema, ServiceMap } from "effect"
+import { Context, Effect, Layer, Schema } from "effect"
 
-export class Database extends ServiceMap.Service<Database, {
+export class Database extends Context.Service<Database, {
   query(sql: string): Effect.Effect<Array<unknown>, DatabaseError>
 }>()(
   "myapp/db/Database"  // namespaced identifier
@@ -241,10 +243,10 @@ Effect.gen(function*() {
 })
 ```
 
-### ServiceMap.Reference — config and feature flags
+### Context.Reference — config and feature flags
 
 ```ts
-export const FeatureFlag = ServiceMap.Reference<boolean>("myapp/FeatureFlag", {
+export const FeatureFlag = Context.Reference<boolean>("myapp/FeatureFlag", {
   defaultValue: () => false
 })
 ```
@@ -269,7 +271,7 @@ const AppLayer = Layer.mergeAll(HttpServerLayer, WorkerLayer, MetricsLayer)
 The standard pattern for services with dependencies:
 
 ```ts
-export class UserRepository extends ServiceMap.Service<UserRepository, {
+export class UserRepository extends Context.Service<UserRepository, {
   findById(id: string): Effect.Effect<Option.Option<User>, UserRepoError>
 }>()(
   "myapp/UserRepository"
@@ -467,7 +469,7 @@ Schema.String.annotate({ description: "The search query" })
 
 ```ts
 // Core — most modules live here
-import { Effect, Layer, Schema, ServiceMap, Stream, PubSub, ... } from "effect"
+import { Context, Effect, Layer, Schema, Stream, PubSub, ... } from "effect"
 
 // Unstable modules (newer APIs, may change)
 import { FetchHttpClient, HttpClient, HttpRouter } from "effect/unstable/http"
@@ -478,7 +480,8 @@ import { ChildProcess, ChildProcessSpawner } from "effect/unstable/process"
 import { Argument, Command, Flag } from "effect/unstable/cli"
 import { LanguageModel, Tool, Toolkit, Chat } from "effect/unstable/ai"
 import { SqlClient } from "effect/unstable/sql"
-import { Entity, Rpc } from "effect/unstable/cluster"
+import { ClusterSchema, Entity } from "effect/unstable/cluster"
+import { Rpc } from "effect/unstable/rpc"
 
 // Platform-specific
 import { NodeRuntime, NodeHttpServer, NodeServices } from "@effect/platform-node"
