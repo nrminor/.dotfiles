@@ -32,6 +32,10 @@
       url = "github:K-Dense-AI/claude-scientific-skills";
       flake = false;
     };
+    impeccable = {
+      url = "github:pbakaus/impeccable";
+      flake = false;
+    };
 
     nixvim = {
       url = "github:nix-community/nixvim";

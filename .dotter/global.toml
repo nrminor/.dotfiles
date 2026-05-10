@@ -104,6 +104,7 @@
 ".config/opencode/agent/codebase-searcher.md" = "~/.config/opencode/agent/codebase-searcher.md"
 ".config/opencode/agent/measurement-guru.md" = "~/.config/opencode/agent/measurement-guru.md"
 ".config/opencode/command" = "~/.config/opencode/command"
+".config/opencode/skills/grill-me" = { target = "~/.config/opencode/skills/grill-me", type = "symbolic" }
 # ".config/opencode/plugin" = "~/.config/opencode/plugin"
 
 # Lazygit terminal UI for git
@@ -150,4 +151,4 @@
 ".config/.claude/skills/effect-ts" = { target = "~/.claude/skills/effect-ts", type = "symbolic" }
 ".config/.claude/skills/design-engineering" = { target = "~/.claude/skills/design-engineering", type = "symbolic" }
 ".config/.claude/skills/ubiquitous-language" = { target = "~/.claude/skills/ubiquitous-language", type = "symbolic" }
-".config/.claude/skills/grill-me" = { target = "~/.claude/skills/grill-me", type = "symbolic" }
+".config/.claude/skills/handoff" = { target = "~/.claude/skills/handoff", type = "symbolic" }

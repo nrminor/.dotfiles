@@ -208,6 +208,9 @@
 !/.config/opencode/agent/*.md
 !/.config/opencode/command
 !/.config/opencode/command/*.md
+!/.config/opencode/skills
+!/.config/opencode/skills/grill-me
+!/.config/opencode/skills/grill-me/SKILL.md
 !/.config/opencode/plugin
 !/.config/opencode/plugin/*.ts
 !/.config/opencode/plugin/*.js
@@ -283,9 +286,9 @@
 !/.config/.claude/skills/back-of-envelope
 !/.config/.claude/skills/back-of-envelope/SKILL.md
 
-# grill-me skill
-!/.config/.claude/skills/grill-me
-!/.config/.claude/skills/grill-me/SKILL.md
+# handoff skill
+!/.config/.claude/skills/handoff
+!/.config/.claude/skills/handoff/SKILL.md
 
 # ubiquitous-language skill
 !/.config/.claude/skills/ubiquitous-language
