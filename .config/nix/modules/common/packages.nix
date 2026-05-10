@@ -34,6 +34,7 @@ in
   pkgs.parallel
   pkgs.curl
   pkgs.wget
+  pkgs.zoxide
   pkgs.unixtools.watch
   pkgs.jq
   pkgs.ripgrep
@@ -57,7 +58,6 @@ in
   pkgs.tailspin
 
   # ===== Shell & Prompt =====
-  pkgs.zoxide
   pkgs.fastfetch
   pkgs.starship
   pkgs.atuin
@@ -66,7 +66,6 @@ in
   # ===== Nushell Ecosystem =====
   pkgs.nushell
   pkgs.nushellPlugins.polars
-  # pkgs.nushellPlugins.units
   pkgs.nushellPlugins.query
   pkgs.nushellPlugins.highlight
   pkgs.nushellPlugins.gstat
@@ -111,7 +110,7 @@ in
   pkgs-stable.mise
   pkgs.devbox
   pkgs.watchexec
-  # pkgs.watchman
+  pkgs.watchman
   pkgs.dotter
   pkgs.lychee
   pkgs.gnuplot
@@ -171,28 +170,19 @@ in
   # pkgs.pixi
   pkgs.ruff
   pkgs.ty
-  pkgs.basedpyright
-  # pkgs.pylyzer
   pkgs.marimo
   pkgs.python313Packages.ipython
   pkgs.python313Packages.notebook
-  # pkgs.python313Packages.marimo
   pkgs.python313Packages.jupyter-core
   pkgs.python313Packages.jupyterlab
   pkgs.python313Packages.ipykernel
-  # pkgs.python313Packages.polars
-  # pkgs.python313Packages.biopython
-  # pkgs.python313Packages.pysam
 
   # ===== R Ecosystem =====
   pkgs-stable.R
-  # pkgs.rstudio
-  # pkgs.radian # pulls in unstable R + texlive; install via pip if needed
+  pkgs.radian # pulls in unstable R + texlive; install via pip if needed
   # Note: R packages may conflict in home.packages buildEnv - testing
   # pkgs.rPackages.languageserver
   pkgs.air-formatter
-  # pkgs.rPackages.tidyverse
-  # pkgs.rPackages.BiocManager
 
   # ===== TOML =====
   pkgs.taplo
@@ -254,9 +244,14 @@ in
   # ===== BEAM VM (Erlang/Elixir/Gleam) =====
   pkgs.erlang
   pkgs.rebar3
-  # pkgs.gleam
+  pkgs.gleam
   pkgs.beam28Packages.elixir
   pkgs.beam28Packages.elixir-ls
+
+  # ===== Elm =====
+  # pkgs.elmPackages.elm
+  # pkgs.elmPackages.elm-language-server
+  # pkgs.tree-sitter-grammars.tree-sitter-elm
 
   # ===== Authoring & Documentation =====
   # pkgs.marksman # commented out because of the .NET and Swift transitive dependencies, which both get compiled from source
@@ -266,9 +261,8 @@ in
   pkgs.typstyle
   pkgs.tinymist
   pkgs.pandoc
-  # pkgs.quarto
+  pkgs.quarto
   pkgs.presenterm
-  # pkgs.d2
 
   # ===== Media Processing =====
   pkgs.poppler
