@@ -152,3 +152,4 @@
 ".config/.claude/skills/design-engineering" = { target = "~/.claude/skills/design-engineering", type = "symbolic" }
 ".config/.claude/skills/ubiquitous-language" = { target = "~/.claude/skills/ubiquitous-language", type = "symbolic" }
 ".config/.claude/skills/handoff" = { target = "~/.claude/skills/handoff", type = "symbolic" }
+".config/.claude/skills/improve-codebase-architecture" = { target = "~/.claude/skills/improve-codebase-architecture", type = "symbolic" }

@@ -315,3 +315,7 @@
 # design-engineering skill
 !/.config/.claude/skills/design-engineering
 !/.config/.claude/skills/design-engineering/SKILL.md
+
+# improve-codebase-architecture skill from https://github.com/mattpocock/skills
+!/.config/.claude/skills/improve-codebase-architecture
+!/.config/.claude/skills/improve-codebase-architecture/*.md
