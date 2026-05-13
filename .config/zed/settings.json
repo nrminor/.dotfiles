@@ -27,8 +27,8 @@
     "buffer_font_family": "Berkeley Mono",
     "restore_on_startup": "none",
     "base_keymap": "VSCode",
-    "helix_mode": false,
-    "vim_mode": true,
+    "helix_mode": true,
+    "vim_mode": false,
     "relative_line_numbers": "enabled",
     "cursor_blink": false,
 
