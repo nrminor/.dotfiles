@@ -103,6 +103,7 @@
 ".config/opencode/agent/opencode-expert.md" = "~/.config/opencode/agent/opencode-expert.md"
 ".config/opencode/agent/codebase-searcher.md" = "~/.config/opencode/agent/codebase-searcher.md"
 ".config/opencode/agent/measurement-guru.md" = "~/.config/opencode/agent/measurement-guru.md"
+".config/opencode/agent/move-37.md" = "~/.config/opencode/agent/move-37.md"
 ".config/opencode/command" = "~/.config/opencode/command"
 ".config/opencode/skills/grill-me" = { target = "~/.config/opencode/skills/grill-me", type = "symbolic" }
 # ".config/opencode/plugin" = "~/.config/opencode/plugin"
