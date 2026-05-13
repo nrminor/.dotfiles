@@ -319,3 +319,7 @@
 # improve-codebase-architecture skill from https://github.com/mattpocock/skills
 !/.config/.claude/skills/improve-codebase-architecture
 !/.config/.claude/skills/improve-codebase-architecture/*.md
+
+# tigerstyle skill. constructred from https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md
+!/.config/.claude/skills/tigerstyle
+!/.config/.claude/skills/tigerstyle/*.md
