@@ -125,3 +125,5 @@ if not (which fnm | is-empty) {
 overlay use commands.nu as commands
 overlay use aliases.nu as aliases
 # -------------------------------------------------------------------------------------
+
+use ($nu.default-config-dir | path join mise.nu)

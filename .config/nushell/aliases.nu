@@ -69,7 +69,7 @@ export alias y = yazi-themed
 export alias o. = ^open . # open the current directory in Finder on macOS
 
 # ============================================================================
-# GIT & VERSION CONTROL
+# GIT/JUJUTSU & VERSION CONTROL
 # ============================================================================
 export alias lg = lazygit
 export alias gu = gitui
@@ -91,6 +91,8 @@ export alias "jj ::@" = jj -r '::@'
 export alias "jj@" = jj -r '::@'
 export alias "j@" = jj -r '::@'
 export alias jjr = jj -r
+export alias lu = lumen diff
+export alias lud = lumen diff
 
 # ============================================================================
 # ZELLIJ (Terminal Multiplexer)

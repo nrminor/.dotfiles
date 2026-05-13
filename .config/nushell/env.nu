@@ -106,3 +106,6 @@ $env.BAT_THEME = (^nu ($env.XDG_CONFIG_HOME | path join "nushell" "theme.nu") ge
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense,clap'
 $env.TOPIARY_CONFIG_FILE = ($env.XDG_CONFIG_HOME | path join "topiary" "languages.ncl")
 $env.TOPIARY_LANGUAGE_DIR = ($env.XDG_CONFIG_HOME | path join "topiary" "languages")
+
+let mise_path = $nu.default-config-dir | path join mise.nu
+^mise activate nu | save $mise_path --force
