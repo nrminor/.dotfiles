@@ -110,7 +110,7 @@ in
   pkgs-stable.mise
   pkgs.devbox
   pkgs.watchexec
-  pkgs.watchman
+  pkgs-stable.watchman
   pkgs.dotter
   pkgs.lychee
   pkgs.gnuplot

@@ -44,14 +44,14 @@ let
   # Anthropic official skills (in 'skills/' subdirectory)
   anthropicSkills = mkSkillFiles "${inputs.anthropic-skills}/skills";
 
-  # K-Dense scientific skills (in 'scientific-skills/' subdirectory)
-  kdenseSkills = mkSkillFiles "${inputs.kdense-scientific-skills}/scientific-skills";
+  # K-Dense scientific skills (in 'skills/' subdirectory)
+  kdenseSkills = mkSkillFiles "${inputs.kdense-scientific-skills}/skills";
 
   # Impeccable ships OpenCode support as a repo-local .opencode tree.
   # The README recommends copying `.opencode` into a project. For this
   # user-wide setup, link the OpenCode skill into the directory where Dotter
   # deploys the rest of the OpenCode configuration.
-  impeccableOpenCode = {
+  openCodeSkills = {
     ".config/opencode/skills/impeccable" = {
       source = "${inputs.impeccable}/.opencode/skills/impeccable";
     };
@@ -60,5 +60,5 @@ let
 in
 {
   # Merge all skill sources (later entries override earlier on conflict)
-  home.file = anthropicSkills // kdenseSkills // impeccableOpenCode;
+  home.file = anthropicSkills // kdenseSkills // openCodeSkills;
 }
