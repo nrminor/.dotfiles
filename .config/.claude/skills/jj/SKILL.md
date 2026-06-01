@@ -1,6 +1,6 @@
 ---
 name: jj
-description: Jujutsu (jj) version control for the user's preferred workflow — graph-aware, describe-first, split-oriented, with stacked PRs. Use when working with jj repositories, manipulating the commit graph, creating PRs, or any version control operation in a jj repo. Load the vcs-detect skill first if unsure whether the repo uses jj.
+description: Jujutsu (jj) version control for the user's preferred workflow — graph-aware, describe-first, split-oriented, with stacked PRs. Use when working with jj repositories, manipulating the commit graph, creating PRs, or any version control operation in a jj repo.
 ---
 
 # Jujutsu (jj) Version Control

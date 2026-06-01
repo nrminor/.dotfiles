@@ -14,13 +14,9 @@ Where `<prd-name>` matches `.opencode/state/<prd-name>/prd.json`
 
 ## Before Starting
 
-First, invoke the skill tool to detect the VCS:
-
-```
-skill({ name: 'vcs-detect' })
-```
-
-Use the detected VCS (jj or git) for all version control operations.
+Detect the VCS before any version control operation. Prefer `jj` when `jj root`
+succeeds; otherwise use `git` when `git rev-parse --show-toplevel` succeeds.
+If neither command succeeds, warn that the directory is not version controlled.
 
 ## File Locations
 

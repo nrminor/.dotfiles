@@ -338,7 +338,7 @@ git bisect run cargo test --test specific_test
 jj log -r 'ancestors(@) & ~ancestors(tag("v1.0.0"))' --stat
 ```
 
-Always detect the VCS first (see the **vcs-detect** skill) — use `jj` commands
+Always detect the VCS first — use `jj` commands
 in jj repos and `git` commands in git repos.
 
 ## Acquiring Source Code
@@ -352,7 +352,7 @@ source, an upstream library, a reference implementation. Before cloning:
 2. **Ask the user before cloning.** Specifically:
    - **Where** should the clone go? Don't put repos in arbitrary locations.
    - **Which VCS** — `jj git clone` or `git clone`? Detect the project's VCS
-     preference with the **vcs-detect** skill and suggest accordingly.
+     preference and suggest accordingly.
    - **Shallow or deep?** Default to shallow (`git clone --depth 1` or
      `jj git clone --depth 1`) unless the user needs full history for bisect or
      blame.
