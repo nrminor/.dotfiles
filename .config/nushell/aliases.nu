@@ -67,6 +67,7 @@ export alias b = btop-themed
 export alias ff = fastfetch
 export alias y = yazi-themed
 export alias o. = ^open . # open the current directory in Finder on macOS
+export alias sg = ast-grep 
 
 # ============================================================================
 # GIT/JUJUTSU & VERSION CONTROL
@@ -104,7 +105,7 @@ export alias zja = zellij a
 export alias zjd = zellij d
 
 # ============================================================================
-# FZF & FUZZY COMMANDS
+# FUZZY-FINDING COMMANDS
 # ============================================================================
 export alias f = fzf
 export alias fhis = fh

@@ -137,7 +137,6 @@
 ".config/.claude/skills/typst" = { target = "~/.claude/skills/typst", type = "symbolic" }
 ".config/.claude/skills/allocations" = { target = "~/.claude/skills/allocations", type = "symbolic" }
 ".config/.claude/skills/self-doubt" = { target = "~/.claude/skills/self-doubt", type = "symbolic" }
-".config/.claude/skills/vcs-detect" = { target = "~/.claude/skills/vcs-detect", type = "symbolic" }
 ".config/.claude/skills/prd" = { target = "~/.claude/skills/prd", type = "symbolic" }
 ".config/.claude/skills/ralph" = { target = "~/.claude/skills/ralph", type = "symbolic" }
 ".config/.claude/skills/tdd" = { target = "~/.claude/skills/tdd", type = "symbolic" }
