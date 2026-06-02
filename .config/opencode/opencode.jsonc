@@ -16,5 +16,5 @@
   "experimental": {
     "disable_paste_summary": true,
   },
-  // "plugin": ["opencode-anthropic-auth"]
+  "plugin": ["@prevalentware/opencode-goal-plugin"],
 }
