@@ -34,6 +34,7 @@ in
   pkgs.parallel
   pkgs.curl
   pkgs.wget
+  pkgs.rclone
   pkgs.zoxide
   pkgs.unixtools.watch
   pkgs.jq
