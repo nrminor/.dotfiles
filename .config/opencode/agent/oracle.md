@@ -3,7 +3,7 @@ description: Senior engineering advisor for code reviews, architecture decisions
 mode: subagent
 model: openai/gpt-5.5
 # Extended thinking - maxed out for deepest reasoning
-reasoningEffort: high
+reasoningEffort: xhigh
 options:
   thinking:
     type: enabled
