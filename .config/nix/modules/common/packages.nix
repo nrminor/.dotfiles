@@ -109,13 +109,13 @@ in
   pkgs.mask
   pkgs-stable.direnv
   pkgs-stable.mise
-  pkgs.devbox
+  # pkgs.devbox
   pkgs.watchexec
   pkgs-stable.watchman
   pkgs.dotter
   pkgs.lychee
   pkgs.gnuplot
-  pkgs.wiki-tui
+  # pkgs.wiki-tui
   pkgs.tlrc
   pkgs.binsider
   pkgs.tree-sitter
@@ -262,7 +262,7 @@ in
   pkgs.typstyle
   pkgs.tinymist
   pkgs.pandoc
-  pkgs.quarto
+  # pkgs.quarto # can't install quarto this way because it will hardcode the nix python install instead of using local venvs
   pkgs.presenterm
 
   # ===== Media Processing =====
