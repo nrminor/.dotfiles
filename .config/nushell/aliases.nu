@@ -68,6 +68,8 @@ export alias ff = fastfetch
 export alias y = yazi-themed
 export alias o. = ^open . # open the current directory in Finder on macOS
 export alias sg = ast-grep 
+export alias pterm = presenterm 
+export alias present = presenterm 
 
 # ============================================================================
 # GIT/JUJUTSU & VERSION CONTROL
