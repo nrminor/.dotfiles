@@ -404,6 +404,8 @@ alias cf := check-flake
 # Run all checks
 [group('lint')]
 check: lint-shell check-flake
+    @echo "Validating dotfiles (Nushell)..."
+    nu {{ DOTFILES_DIR }}/scripts/validate-dotfiles.nu
     @echo "✓ All checks passed"
 
 alias c := check

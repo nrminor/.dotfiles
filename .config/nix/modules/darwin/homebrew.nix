@@ -66,9 +66,9 @@
 
     # Behavior on darwin-rebuild
     onActivation = {
-      cleanup = "zap";
-      autoUpdate = true;
-      upgrade = true;
+      cleanup = "none";
+      autoUpdate = false;
+      upgrade = false;
     };
   };
 }

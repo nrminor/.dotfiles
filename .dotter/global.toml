@@ -104,8 +104,6 @@
 ".config/opencode/agent/codebase-searcher.md" = "~/.config/opencode/agent/codebase-searcher.md"
 ".config/opencode/agent/measurement-guru.md" = "~/.config/opencode/agent/measurement-guru.md"
 ".config/opencode/agent/move-37.md" = "~/.config/opencode/agent/move-37.md"
-".config/opencode/command" = "~/.config/opencode/command"
-".config/opencode/skills/grill-me" = { target = "~/.config/opencode/skills/grill-me", type = "symbolic" }
 # ".config/opencode/plugin" = "~/.config/opencode/plugin"
 
 # Lazygit terminal UI for git
@@ -129,27 +127,3 @@
 [oxc.files]
 ".config/.oxfmtrc.json" = "~/.oxfmtrc.json"
 # ".config/.oxfmtrc.jsonc" = "~/.oxfmtrc.jsonc"
-
-# Custom Claude/OpenCode skills (Anthropic skills are managed by Nix/home-manager)
-# type = "symbolic" prevents Dotter from treating {{ }} in files as Handlebars templates
-[skills.files]
-".config/.claude/skills/duckdb" = { target = "~/.claude/skills/duckdb", type = "symbolic" }
-".config/.claude/skills/typst" = { target = "~/.claude/skills/typst", type = "symbolic" }
-".config/.claude/skills/allocations" = { target = "~/.claude/skills/allocations", type = "symbolic" }
-".config/.claude/skills/self-doubt" = { target = "~/.claude/skills/self-doubt", type = "symbolic" }
-".config/.claude/skills/prd" = { target = "~/.claude/skills/prd", type = "symbolic" }
-".config/.claude/skills/ralph" = { target = "~/.claude/skills/ralph", type = "symbolic" }
-".config/.claude/skills/tdd" = { target = "~/.claude/skills/tdd", type = "symbolic" }
-".config/.claude/skills/design-an-interface" = { target = "~/.claude/skills/design-an-interface", type = "symbolic" }
-".config/.claude/skills/request-refactor-plan" = { target = "~/.claude/skills/request-refactor-plan", type = "symbolic" }
-".config/.claude/skills/codebase-searcher" = { target = "~/.claude/skills/codebase-searcher", type = "symbolic" }
-".config/.claude/skills/back-of-envelope" = { target = "~/.claude/skills/back-of-envelope", type = "symbolic" }
-".config/.claude/skills/logging" = { target = "~/.claude/skills/logging", type = "symbolic" }
-".config/.claude/skills/local-ci" = { target = "~/.claude/skills/local-ci", type = "symbolic" }
-".config/.claude/skills/jj" = { target = "~/.claude/skills/jj", type = "symbolic" }
-".config/.claude/skills/tigerstyle" = { target = "~/.claude/skills/tigerstyle", type = "symbolic" }
-".config/.claude/skills/effect-ts" = { target = "~/.claude/skills/effect-ts", type = "symbolic" }
-".config/.claude/skills/design-engineering" = { target = "~/.claude/skills/design-engineering", type = "symbolic" }
-".config/.claude/skills/ubiquitous-language" = { target = "~/.claude/skills/ubiquitous-language", type = "symbolic" }
-".config/.claude/skills/handoff" = { target = "~/.claude/skills/handoff", type = "symbolic" }
-".config/.claude/skills/improve-codebase-architecture" = { target = "~/.claude/skills/improve-codebase-architecture", type = "symbolic" }

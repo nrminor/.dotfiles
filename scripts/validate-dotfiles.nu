@@ -132,7 +132,7 @@ def is-broken-symlink [filepath: string] {
   # Check if the path is a symlink using ls command
   let result = (do -i { ^ls -l $filepath } | complete)
   if $result.exit_code != 0 {
-    return true
+    return false
   }
 
   # If it's a symlink (contains ->), check if target exists
@@ -264,6 +264,67 @@ def rule-dotter-files-tracked [config: record] {
 
   let passed = ($issues | where severity == "error" | is-empty)
   return (create-validation-result "Dotter files exist and are tracked" $passed $issues)
+}
+
+# Rule: Dotter does not own static AI assets
+def rule-dotter-does-not-own-static-ai-assets [config: record] {
+  let global_toml = ($config.dotfiles_dir | path join ".dotter" "global.toml")
+  let macos_toml = ($config.dotfiles_dir | path join ".dotter" "macos.toml")
+
+  let global_files = (parse-toml-file $global_toml)
+  let macos_files = (parse-toml-file $macos_toml)
+  let all_files = ($global_files | append $macos_files)
+
+  let static_ai_files = (
+    $all_files | where {|file|
+      [
+        ($file.group == "skills")
+        ($file.source | str starts-with ".config/.claude/skills")
+        ($file.source | str starts-with ".config/opencode/command")
+        ($file.source | str starts-with ".config/opencode/skills")
+        ($file.target | str contains "~/.claude/skills")
+        ($file.target | str contains "~/.config/opencode/command")
+        ($file.target | str contains "~/.config/opencode/skills")
+      ] | any {|condition| $condition }
+    }
+  )
+
+  let issues = (
+    $static_ai_files | each {|file|
+      create-issue "error" $"Dotter still owns static AI asset: ($file.source) -> ($file.target)" --file ".dotter/global.toml" --fix "Move this mapping to .config/nix/modules/home/skills.nix"
+    }
+  )
+
+  return (create-validation-result "Dotter does not own static AI assets" ($issues | is-empty) $issues)
+}
+
+# Rule: Local Claude skill source directories have SKILL.md
+def rule-local-claude-skills-have-skill-md [config: record] {
+  let skills_dir = ($config.dotfiles_dir | path join ".config" ".claude" "skills")
+
+  if not ($skills_dir | path exists) {
+    let issue = (
+      create-issue "error" "Local Claude skills directory is missing" --file ".config/.claude/skills"
+    )
+    return (create-validation-result "Local Claude skills have SKILL.md" false [$issue])
+  }
+
+  let issues = (
+    ls $skills_dir
+    | where type == dir
+    | each {|entry|
+        let skill_md = ($entry.name | path join "SKILL.md")
+        if not ($skill_md | path exists) {
+          let rel = ($entry.name | path relative-to $config.dotfiles_dir)
+          create-issue "error" $"Local Claude skill directory lacks SKILL.md: ($rel)" --file $rel --fix "Add SKILL.md or remove the obsolete directory"
+        } else {
+          null
+        }
+      }
+    | compact
+  )
+
+  return (create-validation-result "Local Claude skills have SKILL.md" ($issues | is-empty) $issues)
 }
 
 # Rule: No broken symlinks
@@ -484,6 +545,8 @@ Exit codes:
   let rules = [
     {|c| rule-dotter-configs-exist $c }
     {|c| rule-dotter-files-tracked $c }
+    {|c| rule-dotter-does-not-own-static-ai-assets $c }
+    {|c| rule-local-claude-skills-have-skill-md $c }
     {|c| rule-no-broken-symlinks $c }
     {|c| rule-toml-files-valid $c }
     {|c| rule-json-files-valid $c }

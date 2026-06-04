@@ -28,12 +28,16 @@
       url = "github:anthropics/skills";
       flake = false;
     };
-    kdense-scientific-skills = {
-      url = "github:K-Dense-AI/claude-scientific-skills";
+    matt-pocock-skills = {
+      url = "github:mattpocock/skills";
       flake = false;
     };
     impeccable = {
       url = "github:pbakaus/impeccable";
+      flake = false;
+    };
+    autoresearch = {
+      url = "github:uditgoenka/autoresearch/master";
       flake = false;
     };
 

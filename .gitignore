@@ -199,7 +199,8 @@
 !/.config/tlrc
 !/.config/tlrc/config.toml
 
-# opencode config
+# OpenCode config and local command sources. Static OpenCode skills are managed
+# from Nix inputs in Home Manager, not vendored here.
 !/.config/opencode
 !/.config/opencode/opencode.json
 !/.config/opencode/opencode.jsonc
@@ -208,9 +209,6 @@
 !/.config/opencode/agent/*.md
 !/.config/opencode/command
 !/.config/opencode/command/*.md
-!/.config/opencode/skills
-!/.config/opencode/skills/grill-me
-!/.config/opencode/skills/grill-me/SKILL.md
 !/.config/opencode/plugin
 !/.config/opencode/plugin/*.ts
 !/.config/opencode/plugin/*.js
@@ -270,13 +268,11 @@
 !.config/.claude/skills/ralph
 !.config/.claude/skills/ralph/SKILL.md
 
-# interface, refactor, and TDD skills from https://github.com/mattpocock/skills
+# local interface and refactor skills
 !.config/.claude/skills/request-refactor-plan
 !.config/.claude/skills/request-refactor-plan/SKILL.md
 !.config/.claude/skills/design-an-interface
 !.config/.claude/skills/design-an-interface/SKILL.md
-!.config/.claude/skills/tdd
-!.config/.claude/skills/tdd/*.md
 
 # codebase-searcher skill
 !/.config/.claude/skills/codebase-searcher
@@ -285,10 +281,6 @@
 # back-of-envelope skill
 !/.config/.claude/skills/back-of-envelope
 !/.config/.claude/skills/back-of-envelope/SKILL.md
-
-# handoff skill
-!/.config/.claude/skills/handoff
-!/.config/.claude/skills/handoff/SKILL.md
 
 # ubiquitous-language skill
 !/.config/.claude/skills/ubiquitous-language
@@ -315,10 +307,6 @@
 # design-engineering skill
 !/.config/.claude/skills/design-engineering
 !/.config/.claude/skills/design-engineering/SKILL.md
-
-# improve-codebase-architecture skill from https://github.com/mattpocock/skills
-!/.config/.claude/skills/improve-codebase-architecture
-!/.config/.claude/skills/improve-codebase-architecture/*.md
 
 # tigerstyle skill. constructred from https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md
 !/.config/.claude/skills/tigerstyle

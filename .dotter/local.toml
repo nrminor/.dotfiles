@@ -26,5 +26,4 @@ packages = [
   "rumdl",
   "prettier",
   "oxc",
-  "skills",
 ]
