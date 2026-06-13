@@ -37,7 +37,7 @@ This is how the user works. Internalize it:
 1. **Start a new commit and declare intent.** `jj new` to create a fresh
    working copy commit, then `jj describe -m "feat: implement X"` to state what
    this commit will contain. The description is a contract — it says what the
-   commit is *for* before any code is written.
+   commit is _for_ before any code is written.
 
 2. **Implement.** Write code in the working copy. jj tracks everything
    automatically — there's no staging area.
@@ -93,6 +93,13 @@ jj describe -m "message"      # Set description of working copy (@)
 jj describe -r <id> -m "msg"  # Set description of a specific commit
 jj commit -m "message"        # Shorthand: describe @ and create new @
 ```
+
+IMPORTANT: in most cases, it is wasteful of tokens to propose a commit
+description and then run `jj describe -m ""` when the user will need to give
+permission for the command anyway. **Just run `jj describe -m ""` directly with
+your commit message** and allow the normal command permission model to serve as
+the proposal. If the description is insufficient for any reason, the user will
+reject it with feedback.
 
 ### Splitting and Squashing
 
