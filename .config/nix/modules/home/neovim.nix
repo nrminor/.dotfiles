@@ -27,6 +27,7 @@ in
 
   programs.nixvim = {
     enable = true;
+    nixpkgs.source = inputs.nixpkgs;
     imports = [ ../../../neovim ];
     _module.args = {
       inherit
