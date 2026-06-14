@@ -59,6 +59,7 @@ let
     # Local personal Claude skills.
     ".claude/skills/allocations" = link "${configDir}/.claude/skills/allocations";
     ".claude/skills/back-of-envelope" = link "${configDir}/.claude/skills/back-of-envelope";
+    ".claude/skills/code-sketches" = link "${configDir}/.claude/skills/code-sketches";
     ".claude/skills/codebase-searcher" = link "${configDir}/.claude/skills/codebase-searcher";
     ".claude/skills/design-an-interface" = link "${configDir}/.claude/skills/design-an-interface";
     ".claude/skills/design-engineering" = link "${configDir}/.claude/skills/design-engineering";

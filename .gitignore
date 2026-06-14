@@ -282,6 +282,10 @@
 !/.config/.claude/skills/back-of-envelope
 !/.config/.claude/skills/back-of-envelope/SKILL.md
 
+# code-sketches skill
+!/.config/.claude/skills/code-sketches
+!/.config/.claude/skills/code-sketches/SKILL.md
+
 # ubiquitous-language skill
 !/.config/.claude/skills/ubiquitous-language
 !/.config/.claude/skills/ubiquitous-language/SKILL.md
