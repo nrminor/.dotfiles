@@ -1,7 +1,7 @@
 ---
 description: Audits code for unnecessary heap allocations and suggests stack-only, zero-copy, or pooling alternatives
 mode: all
-model: openai/gpt-5.3-codex
+model: openai/gpt-5.5
 temperature: 0.3
 tools:
   write: false

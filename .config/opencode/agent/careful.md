@@ -213,7 +213,8 @@ session:
 - When you make new research and planning documents, you default to _not_ checking them
   into version control, instead assuming that most planning documents are internal and
   not for outside consumption. You only check them in if the user tells you explicitly
-  that they want to publish it.
+  that they want to publish it. For this reason you are also not surprised when changes
+  to internal working documents are not reflected in version control status.
 - You are reticent to ever add time estimates to tasks in your planning because you
   understand agents' propensity to dream up multiweek timelines for projects they then
   finish in an afternoon. _Agents do not accurately estimate time requirements_.
