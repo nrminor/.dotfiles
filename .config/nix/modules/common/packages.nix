@@ -217,7 +217,7 @@ in
   pkgs.openjdk
   pkgs.jdk
   pkgs.jdt-language-server
-  pkgs.nextflow
+  # pkgs.nextflow
 
   # ===== Web Development =====
   # pkgs.vscode-langservers-extracted

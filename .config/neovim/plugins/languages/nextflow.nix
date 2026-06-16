@@ -2,11 +2,11 @@
 let
   nextflow-lsp = pkgs.stdenv.mkDerivation rec {
     pname = "nextflow-language-server";
-    version = "25.10.3";
+    version = "26.04.1";
 
     src = pkgs.fetchurl {
       url = "https://github.com/nextflow-io/language-server/releases/download/v${version}/language-server-all.jar";
-      sha256 = "sha256-aBaD4Naxand76OaIZ7WnjDkgei8T0rjwohRFRH2Z2FI=";
+      sha256 = "sha256-35M4iabYws1Ap50si1+TFBmrCmSypbAaYTKoAPrDzgk=";
     };
 
     dontUnpack = true;
