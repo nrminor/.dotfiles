@@ -50,6 +50,7 @@ let
     # Matt Pocock skills. These intentionally replace local vendored copies.
     ".claude/skills/grill-me" = link "${inputs.matt-pocock-skills}/skills/productivity/grill-me";
     ".claude/skills/handoff" = link "${inputs.matt-pocock-skills}/skills/productivity/handoff";
+    ".claude/skills/teach" = link "${inputs.matt-pocock-skills}/skills/productivity/teach";
     ".claude/skills/tdd" = link "${inputs.matt-pocock-skills}/skills/engineering/tdd";
     ".claude/skills/grill-with-docs" =
       link "${inputs.matt-pocock-skills}/skills/engineering/grill-with-docs";
