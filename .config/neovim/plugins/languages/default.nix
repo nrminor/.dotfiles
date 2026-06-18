@@ -19,6 +19,7 @@
     ./ocaml.nix
     ./python.nix
     ./r.nix
+    ./rune.nix
     ./rust.nix
     ./sql.nix
     ./toml.nix

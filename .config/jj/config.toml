@@ -7,7 +7,12 @@ email = "nicholasrminor@gmail.com"
 [ui]
 editor = "nvim"
 default-command = ["log", "--no-pager", "--reversed"]
-diff-editor = ":builtin"
+diff-editor = "oyui"
+diff-instructions = false
+
+[merge-tools.oyui]
+program = "oyui"
+edit-args = ["diff", "$left", "$right"]
 
 [aliases]
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]

@@ -97,6 +97,7 @@ in
   pkgs.jujutsu
   pkgs.lazygit
   pkgs.difftastic
+  inputs.oyui.packages.${pkgs.stdenv.hostPlatform.system}.default
   pkgs.prek
   pkgs.wrkflw
   inputs.jj-starship.packages.${pkgs.stdenv.hostPlatform.system}.jj-starship

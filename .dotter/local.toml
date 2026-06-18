@@ -3,6 +3,7 @@ packages = [
   "zsh",
   "nushell",
   "jj",
+  "oyui",
   "git",
   "nix",
   "direnv",

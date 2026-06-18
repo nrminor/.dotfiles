@@ -8,6 +8,7 @@
 let
   system = pkgs.stdenv.hostPlatform.system;
   fffPlugin = inputs.fff-nvim.packages.${system}.fff-nvim;
+  oyuiPackage = inputs.oyui.packages.${system}.default;
   optionalNeovimFeatures = {
     gleam = false;
     rustowl = false;
@@ -34,6 +35,7 @@ in
         fffPlugin
         rustowlPlugin
         rustowl
+        oyuiPackage
         optionalNeovimFeatures
         ;
     };

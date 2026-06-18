@@ -23,6 +23,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    oyui = {
+      url = "github:emilien-jegou/oyui";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Claude/OpenCode skills (not flakes, just fetch the repos)
     anthropic-skills = {
       url = "github:anthropics/skills";

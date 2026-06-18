@@ -1,0 +1,11 @@
+// Rune language documentation: https://rune-rs.github.io/
+
+pub fn config() {
+  theme::set("ansi");
+
+  if theme::is_dark() {
+    theme::syntax("catppuccin-macchiato");
+  } else {
+    theme::syntax("catppuccin-latte");
+  }
+}

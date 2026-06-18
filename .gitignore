@@ -78,6 +78,10 @@
 !/.config/jj
 !/.config/jj/config.toml
 
+# Oyui
+!/.config/oyui
+!/.config/oyui/config.rn
+
 # Zoxide
 !/.config/zoxide
 !/.config/zoxide/.zoxide.nu

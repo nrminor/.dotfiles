@@ -23,6 +23,10 @@
 [jj.files]
 ".config/jj/config.toml" = "~/.config/jj/config.toml"
 
+# Oyui diff editor configuration
+[oyui.files]
+".config/oyui/config.rn" = "~/.config/oyui/config.rn"
+
 # Git configuration
 [git.files]
 ".config/git/.gitconfig" = "~/.gitconfig"
