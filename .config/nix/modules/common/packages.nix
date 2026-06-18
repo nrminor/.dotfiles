@@ -155,6 +155,8 @@ in
   pkgs.crate2nix
   pkgs.dioxus-cli
   pkgs.rust-cbindgen
+  pkgs.rune
+  pkgs.rune-languageserver
 
   # ===== WebAssembly =====
   pkgs.wasm-pack
