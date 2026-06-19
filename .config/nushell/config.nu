@@ -114,6 +114,13 @@ if not (which fnm | is-empty) {
 }
 # -------------------------------------------------------------------------------------
 
+# nub node.js toolkit
+# -------------------------------------------------------------------------------------
+if ("~/.nub/bin/" | path exists) {
+  $env.PATH = $env.PATH | prepend "~/.nub/bin"
+}
+# -------------------------------------------------------------------------------------
+
 # LOAD CUSTOM MODULES
 # -------------------------------------------------------------------------------------
 # Import custom commands and aliases. We do this at the end of the config because some
@@ -127,3 +134,4 @@ overlay use aliases.nu as aliases
 # -------------------------------------------------------------------------------------
 
 use ($nu.default-config-dir | path join mise.nu)
+
