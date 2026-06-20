@@ -1,4 +1,5 @@
 ---@diagnostic disable: undefined-global
+require("duckdb"):setup()
 -- require("git"):setup()
 
 Status:children_add(function(self)
