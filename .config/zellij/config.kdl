@@ -1,4 +1,6 @@
 theme "catppuccin-macchiato"
+theme_dark "catppuccin-macchiato"
+theme_light "catppuccin-latte"
 default_shell "nu"
 pane_frames false
 // default_layout "default"
