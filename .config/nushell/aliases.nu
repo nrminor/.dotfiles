@@ -94,6 +94,10 @@ export alias "jj ::@" = jj -r '::@'
 export alias "jj@" = jj -r '::@'
 export alias "j@" = jj -r '::@'
 export alias jjr = jj -r
+export alias "jj w up" = jj workspace update-stale 
+export alias "jj ws up" = jj workspace update-stale 
+export alias "jj ws upd" = jj workspace update-stale 
+export alias jjwu = jj workspace update-stale 
 export alias lu = lumen diff
 export alias lud = lumen diff
 
