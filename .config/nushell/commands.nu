@@ -27,9 +27,11 @@ export def "pwd copy" [] {
 export def "pwd clip" [] { pwd copy }
 export def "pwd yank" [] { pwd copy }
 export def "pwd y" [] { pwd copy }
+export def "pwdy" [] { pwd copy }
 export def "path copy" [] { pwd copy }
 export def "path clip" [] { pwd copy }
 export def "path yank" [] { pwd copy }
+export def "get path" [] { pwd copy }
 
 # Create a directory and change into it
 #
