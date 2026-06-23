@@ -142,7 +142,6 @@ export alias pl = polars # https://www.nushell.sh/blog/2026-02-28-nushell_v0_111
 # NETWORK & REMOTE
 # ============================================================================
 export alias curll = curl -L
-export alias chtc = ssh nrminor@oconnor-ap.chtc.wisc.edu
 
 # ============================================================================
 # PYTHON & UV

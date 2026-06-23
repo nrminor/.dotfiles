@@ -87,9 +87,12 @@ source $"($nu.cache-dir)/carapace.nu"
 # CONDITIONAL TOOL INITIALIZATION
 # -------------------------------------------------------------------------------------
 # Local overrides
-if ("~/.config/nushell/local.nu" | path exists) {
-  overlay use "~/.config/nushell/local.nu"
+const local_module = if ("~/.config/nushell/local.nu" | path exists) {
+  "~/.config/nushell/local.nu"
+} else {
+  null
 }
+overlay use $local_module
 
 # ocaml & opam setup
 if ("~/.opam" | path exists) {
@@ -134,4 +137,3 @@ overlay use aliases.nu as aliases
 # -------------------------------------------------------------------------------------
 
 use ($nu.default-config-dir | path join mise.nu)
-
