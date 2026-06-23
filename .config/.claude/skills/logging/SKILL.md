@@ -1,6 +1,6 @@
 ---
 name: logging
-description: Write production logging that actually helps you debug. Teaches the wide event / canonical log line pattern — one rich, structured event per request per service instead of scattered log lines. Language-agnostic principles with idioms for Rust, Python, Go, and TypeScript. Use when adding logging, instrumentation, or observability to any codebase.
+description: Write production logging that actually helps you debug. Teaches the wide event / canonical log line pattern — one rich, structured event per request per service instead of scattered log lines. Covers business context, deployment context, single logger setup, middleware enrichment, tail sampling, and idioms for Rust, Python, Go, and TypeScript. Use when adding logging, instrumentation, or observability to any codebase.
 ---
 
 # Wide Events Logging
@@ -56,6 +56,8 @@ for this request, what would I need to know?" At minimum:
 - Timestamp (ISO 8601)
 - Request/trace ID (for correlation across services)
 - Service name and version
+- Deployment context: commit hash, deployment ID, environment, region, and
+  instance/container ID when available
 - HTTP method, path, and response status code
 - Total request duration
 - Outcome (`success`, `failure`, `error`)
@@ -70,6 +72,8 @@ for this request, what would I need to know?" At minimum:
 - Feature flags active for this request
 - Rate limit state (quota, remaining, decision)
 - Business context specific to the endpoint (cart value, item count, etc.)
+- Runtime context that explains host-specific failures (runtime version, memory
+  limit, availability zone, worker ID)
 
 **Don't include:**
 - Full request/response bodies (too large, potential PII)
@@ -98,6 +102,8 @@ stable:
 | URL path | `url.path` |
 | Service name | `service.name` |
 | Service version | `service.version` |
+| Service instance | `service.instance.id` |
+| Deployment environment | `deployment.environment.name` |
 | User ID | `user.id` |
 | DB system | `db.system` |
 | Error type | `error.type` |
@@ -109,6 +115,53 @@ pattern: lowercase, dot-namespaced, no abbreviations. `payment.provider`,
 
 If the project already has an established naming convention, follow it. Internal
 consistency beats external standards.
+
+## Implementation Shape
+
+Two structural choices make wide events much easier to keep consistent:
+
+1. **Configure one logger at process startup.** Put output format, level,
+   destination, and stable deployment context in one place. Import that logger;
+   don't create ad hoc logger instances in each module.
+2. **Put request-wide plumbing in middleware or a handler wrapper.** The wrapper
+   initializes timing, request IDs, common HTTP fields, deployment context, error
+   capture, and final emission. Handlers enrich the event with business context.
+
+That split keeps the interface small:
+
+```typescript
+// middleware / wrapper owns the lifecycle
+const event = startWideEvent(req, {
+  'service.name': serviceName,
+  'service.version': serviceVersion,
+  'deployment.id': deploymentId,
+  'deployment.environment.name': environment,
+  'service.instance.id': instanceId,
+})
+
+try {
+  await handle(req, event) // handler only enriches business context
+  event.set('http.response.status_code', res.statusCode)
+  event.set('outcome', res.statusCode < 400 ? 'success' : 'error')
+} catch (error) {
+  event.setError(error)
+  throw error
+} finally {
+  logger.info(event.toJSON(), 'request_finished')
+}
+```
+
+```typescript
+// handler code should read like business logic, not logging plumbing
+event.set('user.id', user.id)
+event.set('user.subscription_tier', user.subscriptionTier)
+event.set('cart.total_cents', cart.totalCents)
+event.set('feature_flags.new_checkout_flow', flags.newCheckoutFlow)
+```
+
+If a proposed logging change scatters `logger.info(...)` calls through handlers,
+ask whether the same information could be attached to the request's wide event
+instead. Most of the time, it can.
 
 ## Language Idioms
 
@@ -329,9 +382,17 @@ necessary but not sufficient. The user's subscription tier, their cart value,
 the feature flags they're seeing — this is what turns a log line into an
 actionable insight.
 
+**Missing deployment context.** If every event omits commit hash, deployment ID,
+region, and instance ID, you can't quickly answer whether a bug started with a
+deploy, only affects one region, or lives on one bad host/container.
+
 **Inconsistent field names.** If one service logs `userId` and another logs
 `user_id` and a third logs `user.id`, your queries will miss data. Pick a
 convention and enforce it.
+
+**Multiple logger instances.** Per-file loggers tend to drift in format, level,
+destination, or deployment metadata. Prefer one configured logger and child or
+contextual loggers derived from it when the language ecosystem supports that.
 
 **Using log levels as a filtering mechanism.** Don't emit debug-level wide
 events and info-level wide events for the same request. Emit one event. If you
@@ -350,5 +411,9 @@ event: `iterations=1000`, `failures=3`, `total_duration_ms=847`.
   — the philosophical case for wide events over traditional logging
 - [loggingsucks.com](https://loggingsucks.com/) — interactive guide to wide
   events by Boris Tane
+- [boristane/agent-skills: logging-best-practices](https://github.com/boristane/agent-skills/tree/main/skills/logging-best-practices)
+  — upstream Agent Skill companion to loggingsucks.com. If this local skill
+  seems stale, compare it with `npx add-skill boristane/agent-skills --skill
+  "logging-best-practices"` rather than installing over local customizations.
 - [OpenTelemetry Semantic Conventions](https://opentelemetry.io/docs/specs/semconv/)
   — the emerging standard for field naming
