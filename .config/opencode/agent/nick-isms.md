@@ -187,9 +187,9 @@ In no particular order, here's a list of "Nick-isms" you should be on the lookou
 - assertions should test positive and negative invariants
 - small functions are nice. But sometimes they need to be big. And that's okay.
 - too many arguments in a function almost always indicate a design problem. They indicate that there's probably some subproblem that can be factored out into its own abstraction and handled independently.
-- having multiple types, modules, functions, etc. with almost the same name that handle almost the same thing is one of the worst code smells and also a telltale sign of unscrupulous use of AI
+- having multiple types, modules, functions, etc. with almost the same name that handle almost the same thing is one of the worst code smells and also a telltale sign of unscrupulous use of AI. We need to perform "conceptual PCA" on our codebases, where software engineering is often about building a coherent vocabulary, and then lay down abstractions/vocabulary along the major axes in that PCA. Each abstraction should be crisp, singular, and orthogonal to other abstractions.
 - we should always strive to use types and other approaches to emphasize **self-documenting code** instead of comments. The benefit of self-documenting code and modeling the domain with types is that the compiler will verify for us that they're correct, whereas comments have a bad habit of degrading entropically through time.
-  - though note! Docstrings, especially module docstrings, are a notable exception to this. Docstrings have a different goal though and can be closer to essays than they are to comments _per se_.
+  - though note! Docstrings, especially module docstrings and doctests, are a critical exception to this. Docstrings have a different goal though and can be closer to essays than they are to comments _per se_.
 - Relatedly, code organization comments like the following are considered technical debt, as very often, they fall out of sync with the code. If we need further organization, consider using actual code organization primitives like modules/namespaces.
 
   ```text <!-- rumdl-disable-line MD046 -->
@@ -214,7 +214,6 @@ In no particular order, here's a list of "Nick-isms" you should be on the lookou
 
 #### Python
 
-- The user hates the dataframe library `pandas`. Never use it. Always use Polars. And when Polars is used, always use the lazy API unless you can't do something without materializing into the eager API.
 - Python for loops are a necessary evil, but if we can outsource operating on collections elsewhere, e.g. to Polars or Numpy, we should do it.
 - ALWAYS USE UV
 - use `uvx` for subtools
@@ -225,7 +224,7 @@ In no particular order, here's a list of "Nick-isms" you should be on the lookou
 - again, NO LOCAL IMPORTS unless you provide a compelling justification that is then approved by the user
 - one-off python scripts should only use the standard library
 - python projects should _always_ have a `pyproject.toml`
-- IMPORTANT: agents should use `bun` or `nushell` for quick little temporary scripts, _not python_. This is mostly to save CPU cycles.
+- The user hates the dataframe library `pandas`. Never use it. Always use Polars. And when Polars is used, always use the lazy API unless you can't do something without materializing into the eager API.
 
 #### Rust
 
@@ -243,17 +242,16 @@ In no particular order, here's a list of "Nick-isms" you should be on the lookou
 - the user likes putting private free functions used as helpers in a module in a private `utils` module, calling them with the `utils::` prefix to make it obvious that the function called is one of a bundle of utilities written just for the enclosing module, and not a free function from anywhere else.
   - and more generally, the user likes one level of qualified paths for many symbols, as they help readers disambiguate what they're looking at without the verbosity of a fully qualified path
 - you should be on the lookout for highly nested if-let blocks that can be replaced with declarative combinators or at least let-else expressions with early returns.
-- the user tends to dislike associated functions in most cases. Structs are for structuring data--_state_--and not for namespacing. If we find ourselves reaching for it to semantically group stateless functions, we should use a module, not a struct.
+- the user tends to dislike associated functions (sometimes called static methods) in most cases, with constructors being the exception. Structs are for structuring data--_state_--and not for namespacing. If we find ourselves reaching for it to semantically group stateless functions, we should use a module, not a struct.
 
 #### TypeScript
 
-- TypeScript would be the user's backup language after Rust
+- TypeScript would be the user's backup language after Rust. These dayas, this would almost always also include Effect, where you model data and errors with Effect Schema, define interfaces to required functionality with services, and implement services with layers. See the effect-ts skill for more on this way of writing TypeScript.
 - The user enjoys type-level programming and type wizardry that teach the compiler how to make running on invalid states impossible. If anything can be exposed to automated compile-time checks via the type system, the user often feels it should
 - the user advocates for the use of keywords like `readonly` to ringfence things that should be immutable, `satisfies` to prevent type broadening, template types, and other tricks made possible by the TypeScript compiler.
 - the user loves declarative, pipelined methods in TypeScript. Example libraries they take inspiration from include Effect.ts and D3. And conversely, they get an ick at JavaScript or TypeScript that looks too much like Go or C--procedural, imperative code has its place and is the right pattern in that place. But high-level programming in JavaScript is often not that place.
 - one of the main criticisms of JavaScript that the user is sympathetic to given their dislike of Python is that the language makes it very happy to be a happy-path programmer, only ever programming to the happy path and ignoring error or null paths. As such, the user will likely remind you about error handling, and you should do your best to get ahead of this. The user also dislikes just using `throw Error("")` and instead prefers custom error types reused across a library. And as an aside, one of the user's favorite things about Effect is how it exposes errors as part of the type system!
-- the user prefers static-site-generation and server-rendering to SPAs, generally.
-- Svelte and Solid are preferred over React, though they don't actually dislike React
+- For frontend rendering, the user prefers what they call "TypeScript-component-first" rendering frameworks over "markup-first" rendering frameworks, which is to say they prefer Solid, followed by React, though they dislike React's performance tradeoffs.
 
 #### Shell
 
