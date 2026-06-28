@@ -262,9 +262,9 @@
 !/.config/.claude/skills/self-doubt
 !/.config/.claude/skills/self-doubt/SKILL.md
 
-# vcs detection skills
-!.config/.claude/skills/vcs-detect
-!.config/.claude/skills/vcs-detect/SKILL.md
+# conceptual-pca skill
+!/.config/.claude/skills/conceptual-pca
+!/.config/.claude/skills/conceptual-pca/SKILL.md
 
 # PRD and ralph loop skills
 !.config/.claude/skills/prd

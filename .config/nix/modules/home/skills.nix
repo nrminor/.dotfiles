@@ -62,6 +62,7 @@ let
     ".claude/skills/back-of-envelope" = link "${configDir}/.claude/skills/back-of-envelope";
     ".claude/skills/code-sketches" = link "${configDir}/.claude/skills/code-sketches";
     ".claude/skills/codebase-searcher" = link "${configDir}/.claude/skills/codebase-searcher";
+    ".claude/skills/conceptual-pca" = link "${configDir}/.claude/skills/conceptual-pca";
     ".claude/skills/design-an-interface" = link "${configDir}/.claude/skills/design-an-interface";
     ".claude/skills/design-engineering" = link "${configDir}/.claude/skills/design-engineering";
     ".claude/skills/duckdb" = link "${configDir}/.claude/skills/duckdb";
