@@ -153,6 +153,7 @@ in
   pkgs.cargo-show-asm
   pkgs.cargo-generate
   pkgs.cargo-readme
+  pkgs.cargo-sweep
   pkgs.crate2nix
   pkgs.dioxus-cli
   pkgs.rust-cbindgen
