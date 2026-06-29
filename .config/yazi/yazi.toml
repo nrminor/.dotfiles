@@ -9,7 +9,6 @@ prepend_previewers = [
   { url = "*.json", run = "duckdb" },
   { url = "*.parquet", run = "duckdb" },
   { url = "*.txt", run = "duckdb" },
-  { url = "*.xlsx", run = "duckdb" },
   { url = "*.db", run = "duckdb" },
   { url = "*.duckdb", run = "duckdb" },
 ]
@@ -20,5 +19,4 @@ prepend_preloaders = [
   { url = "*.json", run = "duckdb" },
   { url = "*.parquet", run = "duckdb" },
   { url = "*.txt", run = "duckdb" },
-  { url = "*.xlsx", run = "duckdb" },
 ]
