@@ -121,7 +121,7 @@ export def --env dholk [] {
 
 # Fuzzy find and cd into a directory
 #
-# Uses fd to find directories and fzf for interactive selection with tree preview.
+# Uses fd to find directories and skim for interactive selection with tree preview.
 # By default, respects .gitignore and ignores common directories like .git and node_modules.
 # Use --no-ignore to include all directories.
 #
@@ -137,13 +137,13 @@ export def --env fcd [
     ^fd --type d --no-ignore . $path
     | lines
     | to text
-    | ^fzf --height 70% --preview='tree -C {} | head -200'
+    | ^sk --height 70% --preview='tree -C {} | head -200'
     | str trim
   } else {
     ^fd --type d . $path
     | lines
     | to text
-    | ^fzf --height 70% --preview='tree -C {} | head -200'
+    | ^sk --height 70% --preview='tree -C {} | head -200'
     | str trim
   }
 
@@ -202,7 +202,7 @@ export def trash [
 
 # Fuzzy find and open files or directories
 #
-# Uses fd to find files and fzf for interactive multi-selection.
+# Uses fd to find files and skim for interactive multi-selection.
 # Shows tree preview for directories and bat preview for files.
 # Opens selected items with the system default application (in parallel!).
 #
@@ -216,7 +216,7 @@ export def fopen [
     ^fd . $path
     | lines
     | to text
-    | ^fzf -m --height 70% --reverse --preview='[ -d {} ] && tree -C {} || bat -p --paging=never {} --color=always'
+    | ^sk -m --height 70% --reverse --preview='[ -d {} ] && tree -C {} || bat -p --paging=never {} --color=always'
     | lines
   )
 
@@ -229,7 +229,7 @@ export def fopen [
 
 # Fuzzy find and remove files (move to trash)
 #
-# Uses fd to find files in the current directory (non-recursive) and fzf for interactive multi-selection.
+# Uses fd to find files in the current directory (non-recursive) and skim for interactive multi-selection.
 # Selected items are moved to trash (safe on macOS, permanent delete on Linux).
 #
 # Examples:
@@ -242,7 +242,7 @@ export def frm [
     ^fd --max-depth 1 . $path
     | lines
     | to text
-    | ^fzf --multi --height 75% --preview='[ -d {} ] && tree -C {} || bat -p --paging=never {} --color=always'
+    | ^sk --multi --height 75% --preview='[ -d {} ] && tree -C {} || bat -p --paging=never {} --color=always'
     | str trim
     | split row "\n"
     | where $it != ""
@@ -294,7 +294,7 @@ export def convert_file [
 
 # Fuzzy find and open files in Helix editor
 #
-# Uses fd to find files and fzf for interactive multi-selection.
+# Uses fd to find files and skim for interactive multi-selection.
 # Opens all selected files in Helix, with directories opening as project roots.
 #
 # Examples:
@@ -307,7 +307,7 @@ export def fzo [
     ^fd . $path
     | lines
     | to text
-    | ^fzf --height 70% -m --preview='[ -d {} ] && tree -C {} || bat -p --paging=never {} --color=always'
+    | ^sk --height 70% -m --preview='[ -d {} ] && tree -C {} || bat -p --paging=never {} --color=always'
     | str trim
     | split row "\n"
     | where $it != ""
@@ -324,7 +324,7 @@ export def fzo [
 # Preview shows matching lines with context. Opens selected files in Helix with vertical splits.
 #
 # Examples:
-#   > hxs                    # Interactive search (type query in fzf)
+#   > hxs                    # Interactive search (type query in skim)
 #   > hxs "function"         # Search for "function"
 export def hxs [
   query: string = "" # Initial search query (optional)
@@ -332,7 +332,7 @@ export def hxs [
   let rg_prefix = "rg -i --files-with-matches"
 
   let files = (
-    ^fzf
+    ^sk
     --disabled # Start with search disabled (phony mode)
     --ansi
     --multi
@@ -758,7 +758,7 @@ export def --env fgb [] {
     | str replace "remotes/origin/" ""
     | uniq
     | to text
-    | ^fzf --height 70% --reverse
+    | ^sk --height 70% --reverse
     | str trim
   )
 
@@ -779,7 +779,7 @@ export def --env fco [] {
     ^git log --pretty=oneline --abbrev-commit
     | lines
     | to text
-    | ^fzf --height 70% --reverse
+    | ^sk --height 70% --reverse
     | str trim
     | split row " "
     | first
@@ -807,7 +807,7 @@ export def fkill [] {
     | lines
     | skip 1 # Skip header
     | to text
-    | ^fzf -m --height 70% --reverse --preview 'echo {}'
+    | ^sk -m --height 70% --reverse --preview 'echo {}'
     | lines
     | each {|line|
       $line | split row -r '\s+' | get 1
@@ -962,7 +962,7 @@ export def fseq [
     ^seqkit seq -i -n $infile
     | lines
     | to text
-    | ^fzf --height 70% --multi --preview $"seqkit grep -p {} '($infile)' | bat --wrap=auto --style=numbers,grid --color=always --theme=ansi"
+    | ^sk --height 70% --multi --preview $"seqkit grep -p {} '($infile)' | bat --wrap=auto --style=numbers,grid --color=always --theme=ansi"
     | lines
   )
 

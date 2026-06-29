@@ -113,7 +113,7 @@ export alias zjd = zellij d
 # ============================================================================
 # FUZZY-FINDING COMMANDS
 # ============================================================================
-export alias f = fzf
+export alias f = sk
 export alias fhis = fh
 export alias fhist = fh
 export alias fop = fopen
