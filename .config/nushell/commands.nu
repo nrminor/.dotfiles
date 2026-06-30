@@ -991,6 +991,120 @@ export def bam2fq [] {
   | ^parallel -0 -j 6 'echo "Converting {}..."; samtools fastq {} | gzip -c > {.}.fastq.gz; echo "Finished {}"'
 }
 
+# Build an accession-to-label table from a TSV file.
+#
+# Private helper for `bam hist`. Headered TSVs default to `accession` and `label`
+# columns. Headerless TSVs are treated as two columns: accession, label.
+def "refmap from tsv" [
+  path: path # TSV file containing reference accessions and display labels
+  --accession-col: string = "accession" # Column name containing accessions
+  --label-col: string = "label" # Column name containing labels
+  --noheaders # Treat the TSV as a headerless accession/label file
+] {
+  if $noheaders {
+    open $path --raw
+    | from tsv --noheaders
+    | select column0 column1
+    | rename accession label
+  } else {
+    open $path --raw
+    | from tsv
+    | select $accession_col $label_col
+    | rename accession label
+  }
+}
+
+# Build an accession-to-label table from FASTA headers.
+#
+# Private helper for `bam hist`. Headers such as
+# `>NC_001701.1 Goose parvovirus` become accession=`NC_001701.1`,
+# label=`Goose parvovirus`.
+def "refmap from fasta" [
+  path: path # FASTA file whose headers contain accession followed by label
+] {
+  open $path --raw
+  | lines
+  | where {|line| $line | str starts-with ">" }
+  | str substring 1..
+  | each {|header|
+      let parts = ($header | split row -n 2 " ")
+      let accession = ($parts | get 0)
+      let label = ($parts | get --optional 1)
+
+      if ($label == null) {
+        {accession: $accession, label: ""}
+      } else {
+        {accession: $accession, label: $label}
+      }
+    }
+}
+
+# Replace samtools coverage histogram reference headers using an accession map.
+def remap-histogram-headers [
+  refmap: table # Table with accession and label columns
+] {
+  $in
+  | lines
+  | each {|line|
+      let first = ($line | split row " " | get --optional 0)
+      let hit = ($refmap | where accession == $first | first)
+
+      if ($hit == null) or ($hit.label | is-empty) {
+        $line
+      } else {
+        $line | str replace $first $"($hit.accession) ($hit.label)"
+      }
+    }
+  | str join "\n"
+}
+
+# Render a plain-text coverage histogram for a BAM file
+#
+# Uses `samtools coverage` to draw human-readable alignment histograms. Optional
+# remapping can replace accession-only reference names with labels from a FASTA
+# file or TSV map.
+#
+# Examples:
+#   > bam hist sample.bam
+#   > bam hist sample.bam --ascii
+#   > bam hist sample.bam --fasta references.fasta
+#   > bam hist sample.bam --map refs.tsv
+#   > bam hist sample.bam --map refs.tsv --map-noheaders
+export def "bam hist" [
+  bam: path # Input BAM file
+  --bins: int = 100 # Number of histogram bins
+  --ascii # Use ASCII plot characters instead of Unicode blocks
+  --fasta: path # FASTA file to use for accession-to-label remapping
+  --map: path # TSV file to use for accession-to-label remapping
+  --map-accession-col: string = "accession" # TSV accession column name
+  --map-label-col: string = "label" # TSV label column name
+  --map-noheaders # Treat --map as a headerless two-column TSV
+] {
+  if ($fasta != null) and ($map != null) {
+    error make {msg: "Use only one reference remapping source: --fasta or --map"}
+  }
+
+  let refmap = if ($fasta != null) {
+    refmap from fasta $fasta
+  } else if ($map != null) {
+    refmap from tsv $map --accession-col $map_accession_col --label-col $map_label_col --noheaders=$map_noheaders
+  } else {
+    []
+  }
+
+  let args = if $ascii {
+    [coverage --ascii --n-bins ($bins | into string) $bam]
+  } else {
+    [coverage --n-bins ($bins | into string) $bam]
+  }
+
+  if ($refmap | is-empty) {
+    ^samtools ...$args
+  } else {
+    ^samtools ...$args | remap-histogram-headers $refmap
+  }
+}
+
 # Generate statistics for sequence files
 #
 # Runs seqkit stats on all FASTA/FASTQ files in a directory.
