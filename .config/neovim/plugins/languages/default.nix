@@ -4,6 +4,7 @@
     ./awk.nix
     ./bash.nix
     ./css.nix
+    ./csv.nix
     ./gleam.nix
     ./golang.nix
     ./haskell.nix
