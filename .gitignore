@@ -108,6 +108,7 @@
 !/.config/neovim/colors/*.lua
 !/.config/neovim/plugins
 !/.config/neovim/plugins/*.nix
+!/.config/neovim/plugins/*.lua
 !/.config/neovim/plugins/languages
 !/.config/neovim/plugins/languages/queries
 !/.config/neovim/plugins/languages/*.nix

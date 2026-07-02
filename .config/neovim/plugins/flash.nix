@@ -1,4 +1,9 @@
 {
+  extraFiles."flash-helix-word-jump.lua" = {
+    source = ./flash.lua;
+    target = "lua/user/flash.lua";
+  };
+
   plugins.flash = {
     enable = true;
     settings = {
@@ -15,9 +20,9 @@
     {
       mode = "n";
       key = "<cr>";
-      action = ''<cmd>lua require("flash").jump()<cr>'';
+      action = ''<cmd>lua require("user.flash").helix_word_jump()<cr>'';
       options = {
-        desc = "Flash jump (goto word)";
+        desc = "Flash Helix-style word jump";
       };
     }
     {
