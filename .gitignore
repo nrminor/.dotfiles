@@ -125,6 +125,10 @@
 !/.config/neovim/plugins/snippets/typescript
 !/.config/neovim/plugins/snippets/typescript/*.lua
 
+# Direnv
+!/.config/direnv
+!/.config/direnv/direnv.toml
+
 # Nix Direnv
 !/.config/nix-direnv
 !/.config/nix-direnv/config.toml

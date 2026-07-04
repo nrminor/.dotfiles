@@ -88,6 +88,7 @@
 
 # Direnv environment management
 [direnv.files]
+".config/direnv/direnv.toml" = "~/.config/direnv/direnv.toml"
 ".config/shell/.direnvrc" = "~/.direnvrc"
 ".config/nix-direnv/config.toml" = "~/.config/nix-direnv/config.toml"
 
