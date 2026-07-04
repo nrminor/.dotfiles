@@ -77,10 +77,6 @@ source ~/.zoxide.nu
 # that properly defers to Nushell's internal completer for built-in commands.
 source $"($nu.cache-dir)/carapace.nu"
 
-# mise
-let mise_path = $nu.default-config-dir | path join mise.nu
-^mise activate nu | save $mise_path --force
-
 # Prompt (Starship)
 # One-time setup (if needed):
 # mkdir ($nu.data-dir | path join "vendor/autoload")

@@ -14,6 +14,7 @@
 [nushell.files]
 ".config/nushell/config.nu" = "~/.config/nushell/config.nu"
 ".config/nushell/env.nu" = "~/.config/nushell/env.nu"
+".config/nushell/mise.nu" = "~/.config/nushell/mise.nu"
 ".config/nushell/commands.nu" = "~/.config/nushell/commands.nu"
 ".config/nushell/theme.nu" = "~/.config/nushell/theme.nu"
 ".config/nushell/aliases.nu" = "~/.config/nushell/aliases.nu"

@@ -110,7 +110,7 @@ in
   pkgs.mask
   pkgs-stable.direnv
   pkgs-stable.mise
-  # pkgs.devbox
+  pkgs.usage
   pkgs.watchexec
   pkgs-stable.watchman
   pkgs.dotter
