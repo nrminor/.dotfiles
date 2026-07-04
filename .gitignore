@@ -90,6 +90,10 @@
 !/.config/marimo
 !/.config/marimo/config.toml
 
+# Mise
+!/.config/mise
+!/.config/mise/config.toml
+
 # Nix (modular cross-platform config)
 !/.config/nix
 !/.config/nix/flake.nix

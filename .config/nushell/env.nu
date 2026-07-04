@@ -60,7 +60,6 @@ $env.PATH = (
     ($env.BREW_PREFIX | path join "sbin")
 
     # Runtime environments
-    ($env.HOME | path join ".deno" "bin") # Deno
     ($env.HOME | path join ".bun" "bin") # Bun
     ($env.HOME | path join "go" "bin") # Go
     ($env.HOME | path join ".local" "bin") # Local scripts
@@ -106,6 +105,3 @@ $env.BAT_THEME = (^nu ($env.XDG_CONFIG_HOME | path join "nushell" "theme.nu") ge
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense,clap'
 $env.TOPIARY_CONFIG_FILE = ($env.XDG_CONFIG_HOME | path join "topiary" "languages.ncl")
 $env.TOPIARY_LANGUAGE_DIR = ($env.XDG_CONFIG_HOME | path join "topiary" "languages")
-
-let mise_path = $nu.default-config-dir | path join mise.nu
-^mise activate nu | save $mise_path --force

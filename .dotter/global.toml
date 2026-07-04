@@ -74,6 +74,10 @@
 [marimo.files]
 ".config/marimo/config.toml" = "~/.marimo.toml"
 
+# Mise development environment manager
+[mise.files]
+".config/mise/config.toml" = "~/.config/mise/config.toml"
+
 # Starship prompt
 [starship.files]
 ".config/starship.toml" = "~/.config/starship.toml"
