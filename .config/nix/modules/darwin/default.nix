@@ -36,6 +36,14 @@
   # Allow closed-source packages
   nixpkgs.config.allowUnfree = true;
 
+  # Avoid building nix-darwin's generated HTML manual. This has broken before
+  # when nixpkgs' nixos-render-docs CLI changed ahead of nix-darwin.
+  documentation.doc.enable = false;
+
+  # The generated uninstaller evaluates a separate uninstall system that can
+  # still pull in nix-darwin's HTML manual even when docs are disabled here.
+  system.tools.darwin-uninstaller.enable = false;
+
   # Nix daemon configuration
   nix = {
     settings.experimental-features = "nix-command flakes";

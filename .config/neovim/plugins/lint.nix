@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-stable, ... }:
 {
   autoGroups = {
     lint = {
@@ -8,7 +8,7 @@
 
   extraPackages = with pkgs; [
     selene
-    statix
+    pkgs-stable.statix
   ];
 
   plugins.lint = {

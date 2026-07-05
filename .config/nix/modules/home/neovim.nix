@@ -7,6 +7,7 @@
 
 let
   system = pkgs.stdenv.hostPlatform.system;
+  pkgs-stable = inputs.nixpkgs-stable.legacyPackages.${system};
   fffPlugin = inputs.fff-nvim.packages.${system}.fff-nvim;
   oyuiPackage = inputs.oyui.packages.${system}.default;
   optionalNeovimFeatures = {
@@ -37,6 +38,7 @@ in
         rustowl
         oyuiPackage
         optionalNeovimFeatures
+        pkgs-stable
         ;
     };
   };

@@ -247,11 +247,11 @@ in
   # pkgs.haskellPackages.fourmolu
 
   # ===== BEAM VM (Erlang/Elixir/Gleam) =====
-  pkgs.erlang
+  pkgs.beamPackages.erlang
   pkgs.rebar3
   pkgs.gleam
-  pkgs.beam28Packages.elixir
-  pkgs.beam28Packages.elixir-ls
+  pkgs.beamPackages.elixir
+  pkgs.beamPackages.elixir-ls
 
   # ===== Elm =====
   # pkgs.elmPackages.elm
