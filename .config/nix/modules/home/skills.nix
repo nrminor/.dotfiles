@@ -68,6 +68,8 @@ let
     ".claude/skills/duckdb" = link "${configDir}/.claude/skills/duckdb";
     ".claude/skills/effect-ts" = link "${configDir}/.claude/skills/effect-ts";
     ".claude/skills/jj" = link "${configDir}/.claude/skills/jj";
+    ".claude/skills/jj-preemptive-conflict-resolution" =
+      link "${configDir}/.claude/skills/jj-preemptive-conflict-resolution";
     ".claude/skills/local-ci" = link "${configDir}/.claude/skills/local-ci";
     ".claude/skills/logging" = link "${configDir}/.claude/skills/logging";
     ".claude/skills/prd" = link "${configDir}/.claude/skills/prd";

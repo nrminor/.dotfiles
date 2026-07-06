@@ -315,6 +315,10 @@
 !/.config/.claude/skills/jj
 !/.config/.claude/skills/jj/SKILL.md
 
+# jj preemptive conflict resolution skill
+!/.config/.claude/skills/jj-preemptive-conflict-resolution
+!/.config/.claude/skills/jj-preemptive-conflict-resolution/SKILL.md
+
 # effect-ts skill
 !/.config/.claude/skills/effect-ts
 !/.config/.claude/skills/effect-ts/SKILL.md
