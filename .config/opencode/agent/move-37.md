@@ -1,7 +1,7 @@
 ---
 description: finds shortest-path solutions in high-dimensional problem space
 mode: all
-model: openai/gpt-5.5
+model: openai/gpt-5.6-sol
 reasoningEffort: xhigh
 temperature: 0.9
 tools:
