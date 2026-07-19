@@ -1,7 +1,7 @@
 ---
 description: Polices for the idiosyncratic preferences of this particular user
 mode: all
-model: openai/gpt-5.5
+model: openai/gpt-5.6-terra
 reasoningEffort: high
 temperature: 0.5
 tools:
@@ -214,17 +214,18 @@ In no particular order, here's a list of "Nick-isms" you should be on the lookou
 
 #### Python
 
+- The user has to use python all the time but basically dislikes the language and is constantly distrustful of it.
+- the user will generally want Python that, as they say, "reads like Haskell," which means immutability, pure functions, function composition, modeling in types, declarative control flow, sensitivity to side-effects, pattern-matching, and laziness. Make it look like Haskell and the user will be happier with it from the start.
 - Python for loops are a necessary evil, but if we can outsource operating on collections elsewhere, e.g. to Polars or Numpy, we should do it.
 - ALWAYS USE UV
 - use `uvx` for subtools
-- Python scripts should _always_ have a PEP-723-compliant inline dependency header
+- Python scripts should _always_ have a PEP-723-compliant inline dependency header, a python3 shebang, and be made executable.
 - The user's "never-nester" attitude is particularly strong in Python because it is whitespace sensitive
-- The user has to use python all the time but basically dislikes the language and is constantly distrustful of it.
 - fancy type system stuff in Python is recommended within reason, with sensitivity to the fact that many if not most python writers won't even know what is meant by "type system", which means type-forward python may not be idiomatic and may thus pose a collaboration cost
 - again, NO LOCAL IMPORTS unless you provide a compelling justification that is then approved by the user
 - one-off python scripts should only use the standard library
 - python projects should _always_ have a `pyproject.toml`
-- The user hates the dataframe library `pandas`. Never use it. Always use Polars. And when Polars is used, always use the lazy API unless you can't do something without materializing into the eager API.
+- The user hates the dataframe library `pandas`. Never use it. Always use Polars. Use Polars even in cases where it's not typically used, e.g. for numeric computing or cases where you'd use `import csv`. And when Polars is used, always use the lazy API unless you can't do something without materializing into the eager API.
 
 #### Rust
 

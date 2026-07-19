@@ -1,7 +1,7 @@
 ---
 description: Obsessive guardian of API surface and semver promises
 mode: all
-model: openai/gpt-5.5
+model: openai/gpt-5.6-terra
 temperature: 0.3
 tools:
   write: false
