@@ -271,8 +271,8 @@ export def convert_file [
 ] {
   assert ($src | path exists) $"The source file provided, ($src), does not exist."
 
-  let src_ext = $src | path parse | get extension | str downcase
-  let dest_ext = $dest | path parse | get extension | str downcase
+  let src_ext = $src | path parse | get extension | str lowercase
+  let dest_ext = $dest | path parse | get extension | str lowercase
 
   let supported = ["csv" "tsv" "parquet" "json" "ndjson"]
 
@@ -1027,16 +1027,16 @@ def "refmap from fasta" [
   | where {|line| $line | str starts-with ">" }
   | str substring 1..
   | each {|header|
-      let parts = ($header | split row -n 2 " ")
-      let accession = ($parts | get 0)
-      let label = ($parts | get --optional 1)
+    let parts = ($header | split row -n 2 " ")
+    let accession = ($parts | get 0)
+    let label = ($parts | get --optional 1)
 
-      if ($label == null) {
-        {accession: $accession, label: ""}
-      } else {
-        {accession: $accession, label: $label}
-      }
+    if ($label == null) {
+      {accession: $accession label: ""}
+    } else {
+      {accession: $accession label: $label}
     }
+  }
 }
 
 # Replace samtools coverage histogram reference headers using an accession map.
@@ -1046,15 +1046,15 @@ def remap-histogram-headers [
   $in
   | lines
   | each {|line|
-      let first = ($line | split row " " | get --optional 0)
-      let hit = ($refmap | where accession == $first | first)
+    let first = ($line | split row " " | get --optional 0)
+    let hit = ($refmap | where accession == $first | first)
 
-      if ($hit == null) or ($hit.label | is-empty) {
-        $line
-      } else {
-        $line | str replace $first $"($hit.accession) ($hit.label)"
-      }
+    if ($hit == null) or ($hit.label | is-empty) {
+      $line
+    } else {
+      $line | str replace $first $"($hit.accession) ($hit.label)"
     }
+  }
   | str join "\n"
 }
 
@@ -1292,7 +1292,7 @@ export def mo [
     print -n $"Keep ($file)? [y/N]: "
     let keep = (input)
 
-    if ($keep | str downcase) in ["y" "yes"] {
+    if ($keep | str lowercase) in ["y" "yes"] {
       print -n $"Rename ($file)? (leave empty to keep name): "
       let newname = (input)
 

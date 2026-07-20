@@ -5,10 +5,10 @@ def "parse vars" [] {
 def --env "update-env" [] {
   for var in $in {
     if $var.op == "set" {
-      if ($var.name | str upcase) == "PATH" {
+      if ($var.name | str uppercase) == "PATH" {
         $env.PATH = ($var.value | split row (char esep))
       } else {
-        load-env { ($var.name): $var.value }
+        load-env {($var.name): $var.value}
       }
     } else if $var.op == "hide" and $var.name in $env {
       hide-env $var.name
@@ -53,11 +53,11 @@ def mise_completer [spans: list<string>] {
   ^usage complete-word -f $spec_file --shell nu -- ...$spans
   | lines
   | each {|line|
-      let parts = ($line | split row "\t")
-      let description = if ($parts | length) > 1 { $parts.1 } else { "" }
+    let parts = ($line | split row "\t")
+    let description = if ($parts | length) > 1 { $parts.1 } else { "" }
 
-      { value: $parts.0, description: $description }
-    }
+    {value: $parts.0 description: $description}
+  }
 }
 
 export-env {
@@ -74,8 +74,8 @@ export-env {
 }
 
 @complete mise_completer
-export def --env --wrapped main [command?: string, --help, ...rest: string] {
-  let env_commands = ["deactivate", "shell", "sh"]
+export def --env --wrapped main [command?: string --help ...rest: string] {
+  let env_commands = ["deactivate" "shell" "sh"]
 
   if $command == null {
     ^mise
