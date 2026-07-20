@@ -47,15 +47,29 @@ let
     ) skillDirs;
 
   explicitFiles = {
-    # Matt Pocock skills. These intentionally replace local vendored copies.
+    # Matt Pocock productivity skills. These intentionally replace local vendored copies.
     ".claude/skills/grill-me" = link "${inputs.matt-pocock-skills}/skills/productivity/grill-me";
+    ".claude/skills/grilling" = link "${inputs.matt-pocock-skills}/skills/productivity/grilling";
     ".claude/skills/handoff" = link "${inputs.matt-pocock-skills}/skills/productivity/handoff";
     ".claude/skills/teach" = link "${inputs.matt-pocock-skills}/skills/productivity/teach";
-    ".claude/skills/tdd" = link "${inputs.matt-pocock-skills}/skills/engineering/tdd";
+    ".claude/skills/writing-great-skills" =
+      link "${inputs.matt-pocock-skills}/skills/productivity/writing-great-skills";
+
+    # Matt Pocock engineering skills.
+    ".claude/skills/domain-modeling" =
+      link "${inputs.matt-pocock-skills}/skills/engineering/domain-modeling";
     ".claude/skills/grill-with-docs" =
       link "${inputs.matt-pocock-skills}/skills/engineering/grill-with-docs";
     ".claude/skills/improve-codebase-architecture" =
       link "${inputs.matt-pocock-skills}/skills/engineering/improve-codebase-architecture";
+    ".claude/skills/prototype" = link "${inputs.matt-pocock-skills}/skills/engineering/prototype";
+    ".claude/skills/research" = link "${inputs.matt-pocock-skills}/skills/engineering/research";
+    ".claude/skills/setup-matt-pocock-skills" =
+      link "${inputs.matt-pocock-skills}/skills/engineering/setup-matt-pocock-skills";
+    ".claude/skills/tdd" = link "${inputs.matt-pocock-skills}/skills/engineering/tdd";
+    ".claude/skills/to-spec" = link "${inputs.matt-pocock-skills}/skills/engineering/to-spec";
+    ".claude/skills/to-tickets" = link "${inputs.matt-pocock-skills}/skills/engineering/to-tickets";
+    ".claude/skills/wayfinder" = link "${inputs.matt-pocock-skills}/skills/engineering/wayfinder";
 
     # Local personal Claude skills.
     ".claude/skills/allocations" = link "${configDir}/.claude/skills/allocations";
