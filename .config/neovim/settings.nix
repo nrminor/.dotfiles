@@ -1,8 +1,5 @@
 {
   config = {
-    # Enable manpages
-    enableMan = true;
-
     # Alias `vi` and `vim` to `nvim`
     viAlias = true;
     vimAlias = true;

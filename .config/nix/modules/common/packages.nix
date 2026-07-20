@@ -284,7 +284,7 @@ in
   pkgs.bcftools
 
   # ===== Music =====
-  pkgs.ncspot
+  # pkgs.ncspot
 
   # ===== AI =====
   # pkgs.opencode
