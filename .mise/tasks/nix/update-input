@@ -1,0 +1,8 @@
+#!/usr/bin/env nu
+#MISE description="Update one system flake input"
+#USAGE arg "<input>" help="Flake input to update"
+
+def main [input: string] {
+  cd ($env.MISE_PROJECT_ROOT | path join ".config" "nix")
+  ^nix flake update $input
+}

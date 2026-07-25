@@ -1,0 +1,5 @@
+#!/usr/bin/env nu
+#MISE description="Build the nix-darwin system without activating it"
+
+let flake = $env.MISE_PROJECT_ROOT | path join ".config" "nix"
+^darwin-rebuild build --flake $"($flake)#starter"

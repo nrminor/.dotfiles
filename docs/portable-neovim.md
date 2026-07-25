@@ -11,7 +11,7 @@ The key constraint is that native artifacts should belong to the target machine,
 From this dotfiles repository on a machine with Nix and Nushell:
 
 ```sh
-just nvim-export-portable-archive
+mise run nvim:export --archive
 ```
 
 This writes:
@@ -45,7 +45,7 @@ Make sure `~/.local/bin` is on `PATH`. If your shell startup files do not alread
 export PATH="$HOME/.local/bin:$PATH"
 ```
 
-The launcher uses POSIX `sh`, not Nushell. At runtime the bundle does not require Nix, Nushell, or just.
+The launcher uses POSIX `sh`, not Nushell. At runtime the bundle does not require Nix, Nushell, or mise.
 
 ## Check Neovim first
 

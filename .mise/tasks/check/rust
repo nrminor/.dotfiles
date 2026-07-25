@@ -1,0 +1,5 @@
+#!/usr/bin/env nu
+#MISE description="Lint the Rust validator"
+
+cd $env.MISE_PROJECT_ROOT
+^cargo clippy --all-targets

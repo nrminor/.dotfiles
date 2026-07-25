@@ -1,0 +1,6 @@
+#!/usr/bin/env nu
+#MISE description="Rebuild and activate the nix-darwin system"
+#MISE alias="b"
+
+let flake = $env.MISE_PROJECT_ROOT | path join ".config" "nix"
+^sudo darwin-rebuild switch --flake $"($flake)#starter"

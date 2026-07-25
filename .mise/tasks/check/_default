@@ -1,0 +1,9 @@
+#!/usr/bin/env nu
+#MISE description="Run exhaustive repository verification"
+#MISE alias="c"
+
+^mise run hooks:run
+^mise run check:nix
+^mise run check:typescript
+^mise run check:rust
+^mise run check:nu

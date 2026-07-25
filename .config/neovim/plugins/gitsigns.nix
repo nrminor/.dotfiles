@@ -6,7 +6,7 @@
         __raw =
           # lua
           ''
-            function(bufnr) 
+            function(bufnr)
               local gitsigns = require("gitsigns")
 
               local function map(mode, l, r, opts)

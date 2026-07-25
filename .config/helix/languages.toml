@@ -227,7 +227,7 @@ auto-format = true
 [language-server.astro-ls]
 command = "astro-ls"
 args = ["--stdio"]
-config = { typescript = { tsdk = "/Users/nickminor/.bun/install/global/node_modules/typescript/lib" }, environment = "node" }
+config = { environment = "node" }
 
 [[language]]
 name = "astro"

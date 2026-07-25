@@ -1,0 +1,4 @@
+#!/usr/bin/env nu
+#MISE description="Roll back to the previous nix-darwin generation"
+
+^sudo darwin-rebuild --rollback

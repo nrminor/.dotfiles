@@ -102,28 +102,6 @@ if ("~/.opam" | path exists) {
 }
 # -------------------------------------------------------------------------------------
 
-# Managing Node/NVM with fnm
-# -------------------------------------------------------------------------------------
-if not (which fnm | is-empty) {
-  ^fnm env --log-level=error --json | from json | load-env
-
-  $env.PATH = $env.PATH | prepend ($env.FNM_MULTISHELL_PATH | path join (if $nu.os-info.name == 'windows' { '' } else { 'bin' }))
-  $env.config.hooks.env_change.PWD = (
-    $env.config.hooks.env_change.PWD? | append {
-      condition: {|| ['.nvmrc' '.node-version' 'package.json'] | any {|el| $el | path exists } }
-      code: {|| ^fnm use --install-if-missing --silent-if-unchanged --log-level=error }
-    }
-  )
-}
-# -------------------------------------------------------------------------------------
-
-# nub node.js toolkit
-# -------------------------------------------------------------------------------------
-if ("~/.nub/bin/" | path exists) {
-  $env.PATH = $env.PATH | prepend "~/.nub/bin"
-}
-# -------------------------------------------------------------------------------------
-
 # LOAD CUSTOM MODULES
 # -------------------------------------------------------------------------------------
 # Import custom commands and aliases. We do this at the end of the config because some

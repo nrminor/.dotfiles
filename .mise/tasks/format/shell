@@ -1,0 +1,14 @@
+#!/usr/bin/env nu
+#MISE description="Format shell scripts and zsh configuration"
+
+let root = $env.MISE_PROJECT_ROOT
+let files = (
+  ^jj file list
+  | lines
+  | where {|file|
+      ($file | str ends-with ".sh") or (($file | path basename) in [".zshrc" ".zprofile" ".zshenv" ".direnvrc"])
+    }
+  | each {|file| $root | path join $file }
+)
+
+^shfmt --write --indent 0 --case-indent ...$files

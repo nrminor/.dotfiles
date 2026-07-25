@@ -1,0 +1,4 @@
+#!/usr/bin/env nu
+#MISE description="List nix-darwin system generations"
+
+^darwin-rebuild --list-generations

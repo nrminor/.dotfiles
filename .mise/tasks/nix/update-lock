@@ -1,0 +1,5 @@
+#!/usr/bin/env nu
+#MISE description="Update all system flake inputs without rebuilding"
+
+cd ($env.MISE_PROJECT_ROOT | path join ".config" "nix")
+^nix flake update

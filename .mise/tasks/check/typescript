@@ -1,0 +1,5 @@
+#!/usr/bin/env nu
+#MISE description="Type-check the TypeScript validator"
+
+cd $env.MISE_PROJECT_ROOT
+^tsc --noEmit --target ESNext --module NodeNext --moduleResolution NodeNext --types node scripts/validate-dotfiles.ts

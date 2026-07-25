@@ -1,0 +1,20 @@
+#!/usr/bin/env nu
+#MISE description="Check Nushell source files for syntax errors"
+
+let root = $env.MISE_PROJECT_ROOT
+let files = (
+  ^jj file list
+  | lines
+  | where {|file|
+      ($file | str ends-with ".nu") or ($file | str starts-with ".mise/tasks/")
+    }
+  | each {|file| $root | path join $file }
+)
+let invalid = $files | where {|file| not (nu-check $file) }
+
+if ($invalid | is-not-empty) {
+  error make {
+    msg: "Nushell syntax checks failed"
+    help: ($invalid | str join (char newline))
+  }
+}

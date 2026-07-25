@@ -1,124 +1,170 @@
-# A growing bundle of dotfiles for doing bioinformatics and software development
+# A growing bundle of dotfiles for bioinformatics and software development
 
-That's right. It's yet another guy's dotfiles. Though I use lots of tools as a
-bioinformatician and data scientist, most of my configurations are for a core
-set of developer tools:
+That's right: another person's dotfiles. I use a lot of tools as a
+bioinformatician and data scientist, but most of this repository supports a
+small core environment:
 
-1. [nushell](https://www.nushell.sh/), my shell and command-line environment
-2. [Helix](https://helix-editor.com/) my text editor and development environment
-3. [Ghostty](https://ghostty.org/), my terminal of choice
-4. [Jujutsu](https://github.com/jj-vcs/jj), the git-compatible version control system
-5. [OpenCode](https://opencode.ai/), an AI coding agent harness
+1. [Nushell](https://www.nushell.sh/), my shell and command-line environment
+2. [Neovim](https://neovim.io/), my text editor and development environment
+3. [Ghostty](https://ghostty.org/), my terminal
+4. [Jujutsu](https://github.com/jj-vcs/jj), my Git-compatible version control system
+5. [OpenCode](https://opencode.ai/), my AI coding-agent harness
 
-(Yes, I do almost everything in the command line)
+The wider system includes scientific tooling, notebook environments, language
+servers, terminal utilities, and desktop applications. The complete global
+package set lives in
+[`.config/nix/modules/common/packages.nix`](.config/nix/modules/common/packages.nix),
+while Nushell commands and aliases live under [`.config/nushell`](.config/nushell).
 
-That said, the setup comes with VSCode, the Python notebook systems Marimo and
-Jupyter, RStudio, etc. Other goodies include
-[Raycast](https://www.raycast.com/), [DuckDB](https://duckdb.org/),
-[Typst](https://typst.app/), language servers for Bash and awk,
-[Atuin](https://atuin.sh/), [Ouch](https://github.com/ouch-org/ouch),
-[fzf](https://junegunn.github.io/fzf/),
-[btop](https://github.com/aristocratos/btop),
-[imagemagick](https://github.com/ImageMagick/ImageMagick), and much, much more.
-See all installed packages [here](https://github.com/nrminor/.dotfiles/blob/main/.config/nix/modules/common/packages.nix)
-and my growing list of handy aliases
-[here](https://github.com/nrminor/.dotfiles/blob/main/.config/nushell/aliases.nu)
+This setup is deliberately peculiar to me and changes frequently. Treat it as
+a reference or starting point rather than a general-purpose macOS distribution.
 
-If you do bioinformatics and data science and use these tools on Apple computers
-like me, read on!
+## How the environment is divided
 
-### Setup on a new Apple machine <!-- rumdl-disable-line MD001 -->
+Two tools divide system and repository responsibilities:
 
-The point of this repository is to make setting up my development environment on
-different machines easy. To do so, I use [NixOS](https://nixos.org/), and
-ultimately [nix-darwin](https://github.com/LnL7/nix-darwin), to install packages
-from the Nix Package Repository, from Homebrew, and from the Mac App Store. Nix
-also handles downloading and deploying my dotfiles (which is to say this repo)
-with [dotter](https://github.com/SuperCuber/dotter). With these tools, we can
-take a very tedious series of manual installs, all of which tend toward bloat,
-and reduce them to just a few commands on a new machine.
+```text
+nix-darwin  machine configuration, applications, and global command-line tools
+mise        tools, environment variables, and tasks for this repository
+```
 
-First, assuming you've fired up a Terminal window on a fresh Mac, you'll need
-git. If you don't have it yet, running `git` will prompt you to install the
-Xcode command line tools. Once that's done, clone this repo:
+Nix remains the source of truth for the machine. Mise replaces the former root
+development flake and exposes repository workflows through `mise run`.
+Project-local Node dependencies are pinned in the pnpm-compatible
+`pnpm-lock.yaml`.
+
+Just and direnv remain installed globally for compatibility with other
+repositories, but this repository has neither a justfile nor an `.envrc`.
+
+## Set up a new Apple machine
+
+On a fresh Mac, invoking `git` prompts macOS to install the Xcode command-line
+tools if they are not already present. Clone the repository after that finishes:
 
 ```bash
 git clone https://github.com/nrminor/.dotfiles.git ~/.dotfiles
 ```
 
-Next, install Nix (the package manager, not NixOS the Linux distribution):
+Install Nix and enable flakes:
 
 ```bash
 sh <(curl -L https://nixos.org/nix/install)
+mkdir -p ~/.config/nix
+printf 'experimental-features = nix-command flakes\n' >> ~/.config/nix/nix.conf
 ```
 
-Before running the nix-darwin installer (which sets up macOS system management), you'll need to enable flakes. Create
-or edit `~/.config/nix/nix.conf` and add:
-
-```
-experimental-features = nix-command flakes
-```
-
-Then restart your terminal (or run `source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh`)
-and run the installer:
+Restart the terminal, or load the Nix daemon profile in the current shell, and
+apply the initial nix-darwin configuration:
 
 ```bash
+source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 nix run nix-darwin -- switch --flake ~/.dotfiles/.config/nix#starter
 ```
 
-This will take a while on the first run—it's installing everything from the
-flake, including Homebrew packages and Mac App Store apps. Once it completes,
-you'll have `just` available and can use the recipes described below for
-subsequent updates.
-
-All said, this setup is very peculiar to me and should be expected to change
-frequently. Use at your own risk—or, use as a starting point for your own Nix
-journey!
-
-### Working with the system day-to-day
-
-Once the system is set up, you'll rarely need to run `darwin-rebuild` directly.
-Instead, there's a justfile at the root of this repo with recipes for common
-operations. Run `just` to see what's available, or `just --list` for a more
-organized view.
-
-The most common workflow is updating the system after pulling changes or editing
-the flake:
+The first rebuild installs the global environment, including mise, Nushell,
+Dotter, and Prek. Prepare the checkout after opening a fresh shell:
 
 ```bash
-just b          # rebuild the system (alias for `just rebuild`)
-just u          # update flake inputs and rebuild
-just d          # deploy dotfiles with dotter
+cd ~/.dotfiles
+mise trust
+mise run setup
 ```
 
-If you want to do everything at once—update the flake, rebuild, and deploy
-dotfiles—there's a recipe for that:
+`setup` installs the tools pinned by `mise.lock`, installs the locked Node
+dependencies, and installs the repository hooks. It does not rebuild the system
+or deploy dotfiles.
+
+The preferred mise executable may be a self-updating installation in
+`~/.local/bin`; nix-darwin also provides a fallback. The project declares the
+oldest mise version its configuration supports rather than requiring both
+installations to be on the same patch release.
+
+## Work with the system day to day
+
+The common workflows are intentionally short:
 
 ```bash
-just fu         # full update
+mise run rebuild       # rebuild and activate nix-darwin
+mise run update        # update the system flake, then rebuild
+mise run deploy        # deploy managed dotfiles
+mise run full-update   # update, rebuild, then deploy
 ```
 
-The justfile also has recipes for maintenance tasks like garbage collection
-(`just gc`), checking for broken symlinks (`just check-links`), and viewing how
-much disk space the Nix store is consuming (`just store-size`). If something
-goes wrong, `just rollback` will switch back to the previous generation.
-
-For editing, there are shortcuts that open the relevant files in Helix:
+The corresponding high-frequency aliases are available through mise:
 
 ```bash
-just ef         # edit the nix flake
-just ed         # edit dotter configuration
-just ez         # edit zshrc
-just eh         # edit helix config
+mise run b   # rebuild
+mise run u   # update
+mise run d   # deploy
+mise run f   # format
+mise run c   # check
+mise run v   # validate
 ```
 
-Finally, there are formatting and validation recipes. Before committing changes,
-`just fmt` will format all Nix, shell, TOML, and JSON files, and `just check`
-will run linters. The `just validate` recipe runs a custom dotfiles validator
-(implementations exist in TypeScript, Rust, and Nushell for funzies—run `just validate all`
-to benchmark them against each other).
+Run `mise tasks` to see the complete task surface. Longer workflows are
+executable Nushell file tasks under `.mise/tasks`; short leaf tasks are declared
+in `mise.toml`.
 
-The full list of recipes is extensive, but the aliases are designed to be
-memorable: `b` for build, `u` for update, `d` for deploy, `f` for format, and so
-on. When in doubt, `just health` will tell you if everything is wired up
-correctly.
+### System administration
+
+The `nix:*` namespace keeps less-frequent operations explicit:
+
+```bash
+mise run nix:build
+mise run nix:update-lock
+mise run nix:update-input nixpkgs
+mise run nix:generations
+mise run nix:rollback
+mise run nix:switch-generation 42
+```
+
+Manual cleanup remains available for periods of heavy Nix iteration:
+
+```bash
+mise run nix:gc
+mise run nix:clean-generations
+mise run nix:clean
+mise run nix:store-size
+```
+
+Automatic garbage collection still runs through nix-darwin; these tasks are
+deliberate ways to reclaim space sooner.
+
+### Formatting and verification
+
+Formatting is mutating; checking is not:
+
+```bash
+mise run format
+mise run check
+```
+
+`format` runs the maintained Nix, shell, and TOML formatters. `check` runs all
+Prek hooks, Statix and the system flake checks, the TypeScript compiler, Clippy,
+and Nushell syntax checks. Prek remains the low-level Git-hook and file-selection
+engine beneath mise's orchestration.
+
+The custom repository validator has TypeScript, Rust, and Nushell
+implementations:
+
+```bash
+mise run validate             # TypeScript by default
+mise run validate rust
+mise run validate nu
+mise run validate all
+```
+
+TypeScript and `typescript-language-server` are project dependencies so editors
+resolve the compiler associated with this checkout. Mise adds
+`node_modules/.bin` to `PATH`, making the checkout's compiler and language
+server available alongside its mise-managed Node runtime.
+
+### Neovim workflows
+
+Two specialized tasks retain the repository-specific Neovim workflows:
+
+```bash
+mise run nvim:rebuild
+mise run nvim:export
+mise run nvim:export --archive
+```

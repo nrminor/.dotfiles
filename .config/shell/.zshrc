@@ -63,31 +63,6 @@ zsh" >/dev/null 2>/dev/null
 # Local environment scripts
 [ -f "$HOME/.local/bin/env" ] && source "$HOME/.local/bin/env"
 
-# Bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# NVM (Node Version Manager) - lazy-loads when first called for interactive shells
-nvm() {
-	unset -f nvm node npm npx
-	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-	nvm "$@"
-}
-node() {
-	unset -f nvm node npm npx
-	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-	node "$@"
-}
-npm() {
-	unset -f nvm node npm npx
-	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-	npm "$@"
-}
-npx() {
-	unset -f nvm node npm npx
-	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-	npx "$@"
-}
-eval "$(fnm env --use-on-cd --shell zsh)"
 # -------------------------------------------------------------------------------------
 
 # CUSTOM FUNCTIONS
@@ -256,19 +231,19 @@ seqstats() {
 	# Parse arguments
 	while [[ $# -gt 0 ]]; do
 		case "$1" in
-		-o)
-			output_file="$2"
-			shift 2
-			;;
-		*)
-			if [[ "$1" != -* ]]; then
-				dir="$1"
-				shift
-			else
-				echo "Unknown option: $1" >&2
-				return 1
-			fi
-			;;
+			-o)
+				output_file="$2"
+				shift 2
+				;;
+			*)
+				if [[ "$1" != -* ]]; then
+					dir="$1"
+					shift
+				else
+					echo "Unknown option: $1" >&2
+					return 1
+				fi
+				;;
 		esac
 	done
 
@@ -332,20 +307,20 @@ mo() {
 		read -r keep
 
 		case "$keep" in
-		[yY][eE][sS] | [yY])
-			print -n "Rename $file? (leave empty to keep name): "
-			read -r newname
-			if [[ -n "$newname" ]]; then
-				mv -- "$file" "$newname"
-				echo "Saved as $newname"
-			else
-				echo "Keeping as $file"
-			fi
-			;;
-		*)
-			rm -f -- "$file"
-			echo "Deleted $file"
-			;;
+			[yY][eE][sS] | [yY])
+				print -n "Rename $file? (leave empty to keep name): "
+				read -r newname
+				if [[ -n "$newname" ]]; then
+					mv -- "$file" "$newname"
+					echo "Saved as $newname"
+				else
+					echo "Keeping as $file"
+				fi
+				;;
+			*)
+				rm -f -- "$file"
+				echo "Deleted $file"
+				;;
 		esac
 	fi
 }
@@ -435,8 +410,8 @@ alias oc="opencode"
 alias code="opencode"
 # -------------------------------------------------------------------------------------
 
-# bun completions
-[ -s "/Users/nickminor/.bun/_bun" ] && source "/Users/nickminor/.bun/_bun"
-
 # NVD shell integration
 eval "$(nvd setup shell-hook)"
+
+# Project tools, environments, and tasks. Keep this after other PATH mutations.
+eval "$(mise activate zsh)"

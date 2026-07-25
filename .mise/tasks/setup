@@ -1,0 +1,6 @@
+#!/usr/bin/env nu
+#MISE description="Prepare this checkout for development"
+
+^mise run tools:install
+^mise run deps:install
+^mise run hooks:install

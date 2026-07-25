@@ -1,0 +1,4 @@
+#!/usr/bin/env nu
+#MISE description="Delete old system generations while keeping five"
+
+^sudo nix-env --delete-generations +5 --profile /nix/var/nix/profiles/system

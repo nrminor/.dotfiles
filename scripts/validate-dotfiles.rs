@@ -6,6 +6,9 @@
 //! and rules can be easily composed together.
 //!
 //! ```cargo
+//! [package]
+//! edition = "2024"
+//!
 //! [dependencies]
 //! anyhow = "1.0"
 //! clap = { version = "4.5", features = ["derive"] }
@@ -354,11 +357,11 @@ fn json_files_valid(config: &Config) -> Result<ValidationResult> {
     for file in &json_files {
         let path = config.dotfiles_dir.join(file);
         if let Ok(mut content) = fs::read_to_string(&path) {
-            // Check if file has comments
-            let has_comments = content.contains("//") || content.contains("/*");
+            let supports_comments =
+                file.ends_with(".jsonc") || file.starts_with(".config/zed/");
 
-            // Strip comments from JSONC files or JSON files with comments
-            if file.ends_with(".jsonc") || has_comments {
+            // Strip comments from files whose format permits them.
+            if supports_comments {
                 // Remove line comments (lines starting with //)
                 let lines: Vec<&str> = content
                     .lines()

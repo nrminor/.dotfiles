@@ -1,0 +1,7 @@
+#!/usr/bin/env nu
+#MISE description="Format supported repository files"
+#MISE alias="f"
+
+^mise run format:nix
+^mise run format:shell
+^mise run format:toml

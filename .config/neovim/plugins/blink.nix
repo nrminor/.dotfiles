@@ -75,8 +75,8 @@
                 ''
                   function(ctx)
                     return not (
-                      ctx.trigger.initial_kind == "manual" or 
-                      ctx.trigger.initial_kind == "trigger_character" 
+                      ctx.trigger.initial_kind == "manual" or
+                      ctx.trigger.initial_kind == "trigger_character"
                     )
                   end
                 '';

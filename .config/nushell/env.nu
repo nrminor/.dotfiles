@@ -60,7 +60,6 @@ $env.PATH = (
     ($env.BREW_PREFIX | path join "sbin")
 
     # Runtime environments
-    ($env.HOME | path join ".bun" "bin") # Bun
     ($env.HOME | path join "go" "bin") # Go
     ($env.HOME | path join ".local" "bin") # Local scripts
 
@@ -94,9 +93,6 @@ $env.ENV_CONVERSIONS = {
 # Go
 $env.GOPATH = ($env.HOME | path join "go")
 $env.GOBIN = ($env.GOPATH | path join "bin")
-
-# Node.js / NVM
-$env.NVM_DIR = ($env.HOME | path join ".config" "nvm")
 
 # ============================================================================
 # TOOL CONFIGURATION

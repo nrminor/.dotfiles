@@ -1779,8 +1779,8 @@ export def startup [] {
       (if (which atuin | is-not-empty) { "atuin" })
       (if (which zoxide | is-not-empty) { "zoxide" })
       (if (which carapace | is-not-empty) { "carapace" })
-      (if (which fnm | is-not-empty) { "fnm" })
       (if (which direnv | is-not-empty) { "direnv" })
+      (if (which mise | is-not-empty) { "mise" })
       (if (which starship | is-not-empty) { "starship" })
     ]
     | compact

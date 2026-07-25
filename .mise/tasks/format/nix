@@ -1,0 +1,12 @@
+#!/usr/bin/env nu
+#MISE description="Format Nix files"
+
+let root = $env.MISE_PROJECT_ROOT
+let files = (
+  ^jj file list
+  | lines
+  | where {|file| $file | str ends-with ".nix" }
+  | each {|file| $root | path join $file }
+)
+
+^nixfmt ...$files

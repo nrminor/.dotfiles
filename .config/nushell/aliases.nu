@@ -67,9 +67,9 @@ export alias b = btop-themed
 export alias ff = fastfetch
 export alias y = yazi-themed
 export alias o. = ^open . # open the current directory in Finder on macOS
-export alias sg = ast-grep 
-export alias pterm = presenterm 
-export alias present = presenterm 
+export alias sg = ast-grep
+export alias pterm = presenterm
+export alias present = presenterm
 
 # ============================================================================
 # GIT/JUJUTSU & VERSION CONTROL
@@ -82,7 +82,7 @@ export alias gst = git status
 export alias gitcc = gitcd
 export alias jja = jj abandon
 export alias jjs = jj status
-export alias js = jj status 
+export alias js = jj status
 export alias jju = jj undo
 export alias jje = jj edit
 export alias j = jj
@@ -94,10 +94,10 @@ export alias "jj ::@" = jj -r '::@'
 export alias "jj@" = jj -r '::@'
 export alias "j@" = jj -r '::@'
 export alias jjr = jj -r
-export alias "jj w up" = jj workspace update-stale 
-export alias "jj ws up" = jj workspace update-stale 
-export alias "jj ws upd" = jj workspace update-stale 
-export alias jjwu = jj workspace update-stale 
+export alias "jj w up" = jj workspace update-stale
+export alias "jj ws up" = jj workspace update-stale
+export alias "jj ws upd" = jj workspace update-stale
+export alias jjwu = jj workspace update-stale
 export alias lu = lumen diff
 export alias lud = lumen diff
 export alias "jj watch" = watchexec --quiet --interactive jj

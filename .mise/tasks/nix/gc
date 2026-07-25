@@ -1,0 +1,4 @@
+#!/usr/bin/env nu
+#MISE description="Delete unreachable user generations and store paths"
+
+^nix-collect-garbage --delete-old

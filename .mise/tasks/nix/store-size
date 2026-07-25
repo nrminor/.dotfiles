@@ -1,0 +1,15 @@
+#!/usr/bin/env nu
+#MISE description="Show Nix store disk usage and its largest paths"
+
+print "Nix store disk usage:"
+^du -sh /nix/store
+
+print "\nLargest store paths:"
+^nix path-info --all --json
+| from json
+| sort-by narSize --reverse
+| first 10
+| select narSize path
+| update narSize {|row| $row.narSize | into filesize }
+| table
+| print

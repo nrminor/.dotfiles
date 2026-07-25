@@ -34,7 +34,7 @@ repos:
       # TypeScript validator for dotfiles structure
       - id: validate-dotfiles
         name: Validate Dotfiles Repository
-        entry: bun run scripts/validate-dotfiles.ts
+        entry: nub scripts/validate-dotfiles.ts
         language: system
         pass_filenames: false
         always_run: true
@@ -50,10 +50,11 @@ repos:
         files: '\.nix$'
         pass_filenames: true
 
-      # Format TOML files
+      # Ensure TOML files are formatted
       - id: taplo-format
-        name: Format TOML Files
+        name: Check TOML Formatting
         entry: taplo format
+        args: ['--check']
         language: system
         files: '\.toml$'
         pass_filenames: true

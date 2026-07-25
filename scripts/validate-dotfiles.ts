@@ -1,4 +1,4 @@
-#!/usr/bin/env bun
+#!/usr/bin/env nub
 
 /**
  * Dotfiles Repository Validation Script (TypeScript Edition)
@@ -10,8 +10,11 @@
 
 import { execSync } from "node:child_process";
 import { existsSync, lstatSync, readFileSync, statSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
+
+const moduleDir = dirname(fileURLToPath(import.meta.url));
 
 // ========================================================================
 // TYPES
@@ -132,12 +135,20 @@ function getTrackedFiles(config: Config): string[] {
 }
 
 function isBrokenSymlink(filepath: string): boolean {
+  let stats;
+
   try {
-    const stats = lstatSync(filepath);
-    if (stats.isSymbolicLink()) {
-      statSync(filepath);
-      return false;
-    }
+    stats = lstatSync(filepath);
+  } catch {
+    return false;
+  }
+
+  if (!stats.isSymbolicLink()) {
+    return false;
+  }
+
+  try {
+    statSync(filepath);
     return false;
   } catch {
     return true;
@@ -399,9 +410,10 @@ const Rules = {
       try {
         let content = readFileSync(path, "utf-8");
 
-        const hasComments = /\/\/|\/\*/.test(content);
+        const supportsComments =
+          file.endsWith(".jsonc") || file.startsWith(".config/zed/");
 
-        if (file.endsWith(".jsonc") || hasComments) {
+        if (supportsComments) {
           const lines = content.split("\n");
           const filtered = lines.filter((line) => {
             const trimmed = line.trim();
@@ -582,7 +594,7 @@ Exit codes:
   }
 
   const dotfilesDir =
-    process.env.DOTFILES_DIR || resolve(import.meta.dir, "..");
+    process.env.DOTFILES_DIR || resolve(moduleDir, "..");
 
   const config: Config = {
     dotfilesDir,

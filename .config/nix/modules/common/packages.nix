@@ -22,6 +22,7 @@ in
   pkgs.nixd
   pkgs.nixfmt
   pkgs.nil
+  pkgs.statix
 
   # ===== Editors =====
   # pkgs.neovim  # Managed by nixvim via home-manager (see modules/home/neovim.nix)
@@ -109,7 +110,7 @@ in
   pkgs.just
   pkgs.mask
   pkgs-stable.direnv
-  pkgs-stable.mise
+  pkgs.mise
   pkgs.usage
   pkgs.watchexec
   pkgs-stable.watchman
@@ -228,10 +229,8 @@ in
   # ===== Web Development =====
   # pkgs.vscode-langservers-extracted
   pkgs.superhtml
-  pkgs.fnm
   # pkgs.nodejs_23
   # pkgs.deno
-  # pkgs.bun
   # pkgs.typescript
   # pkgs.typescript-language-server
   # pkgs.javascript-typescript-langserver

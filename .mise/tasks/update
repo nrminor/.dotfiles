@@ -1,0 +1,6 @@
+#!/usr/bin/env nu
+#MISE description="Update the system flake and rebuild"
+#MISE alias="u"
+
+^mise run nix:update-lock
+^mise run rebuild

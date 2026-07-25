@@ -43,7 +43,6 @@ path=(
 
 	# Runtime environments
 	$HOME/.deno/bin  # Deno
-	$HOME/.bun/bin   # Bun
 	$HOME/go/bin     # Go
 	$HOME/.local/bin # Local scripts
 
@@ -83,9 +82,6 @@ export PKG_CONFIG_PATH
 # Go
 export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
-
-# Node.js / NVM
-export NVM_DIR="$HOME/.config/nvm"
 
 # nu / nushell
 export TOPIARY_CONFIG_FILE=$XDG_CONFIG_HOME/topiary/languages.ncl

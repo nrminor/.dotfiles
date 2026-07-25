@@ -1,0 +1,17 @@
+#!/usr/bin/env nu
+#MISE description="Export the portable Neovim bundle"
+#USAGE flag "--archive" help="Also create a compressed archive"
+
+def main [--archive] {
+  let root = $env.MISE_PROJECT_ROOT
+  let script = $root | path join "scripts" "export-nvim-portable.nu"
+  let flake = $root | path join ".config" "nix"
+  let output = $root | path join "dist" "nvim-portable"
+  mut args = ["--dotfiles-dir", $root, "--flake-dir", $flake, "--out-dir", $output]
+
+  if $archive {
+    $args = $args | append "--archive"
+  }
+
+  ^nu $script ...$args
+}

@@ -6,13 +6,12 @@
 # ============================================================================
 
 !.gitignore
-!.envrc
 !.pre-commit-config.yaml
-!flake.nix
-!flake.lock
+!mise.toml
+!mise.lock
+!pnpm-lock.yaml
 !package.json
 !Cargo.toml
-!justfile
 !README.md
 !LICENSE
 !docs
@@ -21,6 +20,11 @@
 # ============================================================================
 # Project Directories
 # ============================================================================
+
+# Mise project tasks
+!/.mise
+!/.mise/tasks
+!/.mise/tasks/**
 
 # Dotter configuration
 !/.dotter

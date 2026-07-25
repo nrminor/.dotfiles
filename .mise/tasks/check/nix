@@ -1,0 +1,9 @@
+#!/usr/bin/env nu
+#MISE description="Lint and evaluate the nix-darwin configuration"
+
+let root = $env.MISE_PROJECT_ROOT
+let flake = $root | path join ".config" "nix"
+
+^statix check $root
+cd $flake
+^nix flake check

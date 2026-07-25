@@ -1,0 +1,32 @@
+min_version = "2026.7.5"
+
+[tools]
+node = "24"
+nub = "0.5"
+
+[env]
+_.path = "node_modules/.bin"
+
+[tasks."tools:install"]
+description = "Install project tools declared in mise.toml"
+run = "mise install"
+
+[tasks."deps:install"]
+description = "Install locked project dependencies with Nub"
+run = "nub install --frozen-lockfile"
+
+[tasks."hooks:install"]
+description = "Install repository hooks with Prek"
+run = "prek install --overwrite"
+
+[tasks."hooks:run"]
+description = "Run all Prek hooks against the repository"
+run = "prek run --all-files"
+
+[tasks."hooks:update"]
+description = "Update pinned Prek hook revisions"
+run = "prek auto-update"
+
+[tasks."hooks:uninstall"]
+description = "Remove installed Prek hooks"
+run = "prek uninstall"

@@ -4,13 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "validate": "bun run scripts/validate-dotfiles.ts",
-    "validate:verbose": "bun run scripts/validate-dotfiles.ts --verbose",
-    "validate:fix": "bun run scripts/validate-dotfiles.ts --fix"
+    "validate": "nub scripts/validate-dotfiles.ts",
+    "validate:verbose": "nub scripts/validate-dotfiles.ts --verbose",
+    "validate:fix": "nub scripts/validate-dotfiles.ts --fix"
   },
   "devDependencies": {
     "@types/node": "^20.19.24",
-    "@types/bun": "^1.3.2"
+    "typescript": "^7.0.2",
+    "typescript-language-server": "^5.3.0"
   },
   "dependencies": {
     "@opencode-ai/plugin": "^1.1.40"

@@ -1,0 +1,7 @@
+#!/usr/bin/env nu
+#MISE description="Switch to a specific nix-darwin generation"
+#USAGE arg "<generation>" help="Generation number"
+
+def main [generation: int] {
+  ^sudo darwin-rebuild --switch-generation $generation
+}
