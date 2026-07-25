@@ -154,6 +154,8 @@ in
   pkgs.cargo-generate
   pkgs.cargo-readme
   pkgs.cargo-sweep
+  pkgs.cargo-semver-checks
+  # pkgs-stable.release-plz
   pkgs.crate2nix
   pkgs.dioxus-cli
   pkgs.rust-cbindgen
