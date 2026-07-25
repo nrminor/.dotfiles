@@ -185,3 +185,5 @@ export alias agent = opencode
 # "CUTE STUFF"
 # ============================================================================
 export alias noise = ^relax-player
+export alias bearcli = /Applications/Bear.app/Contents/MacOS/bearcli
+export alias bear = bearcli

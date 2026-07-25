@@ -12,9 +12,20 @@
       "url": "http://127.0.0.1:29979/mcp",
       "enabled": true,
     },
+    "bear": {
+      "command": [
+        "/Applications/Bear.app/Contents/MacOS/bearcli",
+        "mcp-server",
+      ],
+      "enabled": true,
+      "type": "local",
+    },
   },
   "experimental": {
     "disable_paste_summary": true,
+    "batch_tool": true,
+    "openTelemetry": true,
+    "continue_loop_on_deny": true,
   },
   "plugin": ["@prevalentware/opencode-goal-plugin"],
 }
