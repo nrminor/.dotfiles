@@ -291,16 +291,16 @@ functionLikeReturnTypes.enabled = false
 enumMemberValues.enabled = false
 
 [language-server.biome]
-command = "bunx"
-args = ["biome", "lsp-proxy"]
+command = "nub"
+args = ["dlx", "-p", "@biomejs/biome", "biome", "lsp-proxy"]
 
 [language-server.oxlint]
-command = "bunx"
-args = ["oxlint", "--lsp"]
+command = "nub"
+args = ["dlx", "oxlint", "--lsp"]
 
 [language-server.oxfmt]
-command = "bunx"
-args = ["oxfmt", "--lsp"]
+command = "nub"
+args = ["dlx", "oxfmt", "--lsp"]
 
 # SQL
 # **************************************************************************************
@@ -320,8 +320,8 @@ formatter = { command = "uvx", args = [
 # language-servers = ["sql-language-server"]
 
 [language-server.sql-language-server]
-command = "bunx"
-args = ["sql-language-server", "up", "--method", "stdio"]
+command = "nub"
+args = ["dlx", "sql-language-server", "up", "--method", "stdio"]
 
 # GO
 # **************************************************************************************
@@ -437,7 +437,12 @@ language-servers = ["rumdl", "marksman", "markdown-oxide"]
 indent = { tab-width = 2, unit = "  " }
 # formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md"] }
 # formatter = { command = 'rumdl', args = ["fmt", "-", "--quiet"] }
-formatter = { command = "bunx", args = ["prettier", "--parser", "markdown"] }
+formatter = { command = "nub", args = [
+  "dlx",
+  "prettier",
+  "--parser",
+  "markdown",
+] }
 auto-format = true
 
 [language-server.rumdl]

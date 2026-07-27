@@ -68,8 +68,8 @@ permission:
     "uv run *": allow
     "pixi run": allow
     "pixi run *": allow
-    "bun": allow
-    "bun *": allow
+    "nub": allow
+    "nub *": allow
     "node": allow
     "node *": allow
 

@@ -44,7 +44,7 @@ confidently misleading. Before fetching docs:
 
 - Use `read` and `glob` to check the project's lockfiles and manifests
   (`Cargo.toml`, `Cargo.lock`, `pyproject.toml`, `uv.lock`, `package.json`,
-  `bun.lock`, `go.mod`, etc.) for the version currently in use.
+  `pnpm-lock.yaml`, `go.mod`, etc.) for the version currently in use.
 - Target your documentation search to that version. Many doc sites support
   versioned URLs — use them.
 - If the docs you find don't specify a version, or you can only find docs for a

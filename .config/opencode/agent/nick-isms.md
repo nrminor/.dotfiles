@@ -145,8 +145,9 @@ permission:
     # --- Node dependency hell avoidance ---
     "npm install": deny
     "npm i": deny
-    "bun install": deny
-    "bun i": deny
+    "nub install": deny
+    "nub i": deny
+    "nub ci": deny
 
     # --- Destructive file operations ---
     "rm -rf": deny

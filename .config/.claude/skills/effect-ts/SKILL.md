@@ -483,9 +483,8 @@ import { SqlClient } from "effect/unstable/sql"
 import { ClusterSchema, Entity } from "effect/unstable/cluster"
 import { Rpc } from "effect/unstable/rpc"
 
-// Platform-specific
+// Node platform
 import { NodeRuntime, NodeHttpServer, NodeServices } from "@effect/platform-node"
-import { BunRuntime } from "@effect/platform-bun"
 
 // AI providers
 import { AnthropicClient, AnthropicLanguageModel } from "@effect/ai-anthropic"

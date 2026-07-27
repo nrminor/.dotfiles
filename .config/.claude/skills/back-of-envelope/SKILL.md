@@ -1,6 +1,6 @@
 ---
 name: back-of-envelope
-description: Quick, disposable experiments to verify reasoning — runtime behavior with Bun TypeScript, type system contracts with TypeScript or Rust, data questions with DuckDB or nushell. Use when you need to check an assumption, sketch an API shape, or test whether an idea works before committing to it.
+description: Quick, disposable experiments to verify reasoning — runtime behavior with Nub and TypeScript, type system contracts with TypeScript or Rust, data questions with DuckDB or nushell. Use when you need to check an assumption, sketch an API shape, or test whether an idea works before committing to it.
 ---
 
 # Back-of-Envelope Sketching
@@ -35,10 +35,11 @@ codebase.
 
 ## Tool Selection
 
-### Bun + TypeScript — the default
+### Nub + TypeScript — the default
 
-Use `bun run` for most sketches. Bun starts fast, TypeScript gives you type
-checking, and the feedback loop is near-instant. This is your first choice for:
+Use `nub` for most TypeScript sketches. Nub runs TypeScript directly on the
+project-selected Node runtime, keeping the feedback loop short. This is your
+first choice for:
 
 - Runtime behavior experiments ("what does this function return for these
   inputs?")
@@ -49,17 +50,17 @@ checking, and the feedback loop is near-instant. This is your first choice for:
 
 ```bash
 # Inline one-liner
-bun -e "console.log([1,2,3].flatMap(x => [x, x*2]))"
+nub -e "console.log([1,2,3].flatMap(x => [x, x*2]))"
 
 # Quick file (write, run, delete)
-bun run sketch.ts
+nub sketch.ts
 ```
 
 For type-level sketches in TypeScript — where you're checking whether the
 compiler accepts a design, not running anything — write the file and run
-`bun build sketch.ts` or `bunx tsc --noEmit sketch.ts` to type-check without
-executing. The question being answered is "does this compile?" not "what does
-this output?"
+`nub dlx -p typescript tsc --noEmit sketch.ts` to type-check without executing.
+The question being answered is "does this compile?" not "what does this
+output?"
 
 TypeScript's type system is expressive enough for most contract sketching:
 conditional types, mapped types, template literal types, discriminated unions,

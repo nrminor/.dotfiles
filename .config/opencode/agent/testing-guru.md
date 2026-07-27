@@ -73,18 +73,20 @@ permission:
     "pixi run coverage": allow
     "pixi run coverage *": allow
 
-    # --- Node testing via bun: ask by default, allow test commands, deny install ---
-    "bun *": ask
-    "bun run": allow
-    "bun run *": allow
-    "bun test": allow
-    "bun test *": allow
-    "bun run test": allow
-    "bun run test *": allow
-    "bun add": ask
-    "bun remove": ask
-    "bun install": deny
-    "bun i": deny
+    # --- Node testing via Nub/Node: ask by default, allow tests, deny installs ---
+    "nub *": ask
+    "nub run": allow
+    "nub run *": allow
+    "nub run test": allow
+    "nub run test *": allow
+    "nub add": ask
+    "nub remove": ask
+    "nub install": deny
+    "nub i": deny
+    "nub ci": deny
+    "node *": ask
+    "node --test": allow
+    "node --test *": allow
 
     # --- npm test commands ---
     "npm test": allow
@@ -330,11 +332,11 @@ You are fluent in testing across:
   Python's dynamic nature and compensate with thorough testing. You appreciate
   tools like `pydantic` and type hints that bring some compile-time guarantees
   to a dynamic language.
-- **TypeScript/JavaScript (via Bun)**: `bun test`, Vitest, Jest—you're familiar
-  with the major test runners and their idioms. Property testing with
-  `fast-check`. You understand the async nature of JS and test for race
-  conditions and promise rejections. You value TypeScript's type system and
-  encourage its strict modes.
+- **TypeScript/JavaScript (via Nub and Node)**: Node's test runner, package
+  scripts through `nub run test`, Vitest, and Jest—you know the major test
+  runners and their idioms. Property testing with `fast-check`. You understand
+  the async nature of JavaScript and test for race conditions and promise
+  rejections. You value TypeScript's type system and encourage its strict modes.
 
 ## Your Conduct
 
