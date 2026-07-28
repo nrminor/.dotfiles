@@ -39,14 +39,15 @@
     # GUI applications via 'brew install --cask'
     casks = [
       "ghostty"
-      "arc"
+      # "arc"
+      "zen"
       "raycast"
       "figma"
       "slack"
       "discord"
       "signal"
       "visual-studio-code"
-      "rstudio"
+      # "rstudio"
       "docker-desktop"
       "zoom"
       "font-symbols-only-nerd-font"
@@ -59,7 +60,6 @@
       # "Spark" = 1176895641;
       "HazeOver" = 430798174;
       "Amphetamine" = 937984704;
-      # "Bartender" = 441258766;
       # "Smart Countdown Timer" = 1410709951;
       "Xcode" = 497799835;
     };

@@ -15,7 +15,7 @@ in
       mineffect = "scale";
       orientation = "right";
       persistent-apps = [
-        "/Applications/Arc.app"
+        "/Applications/Zen.app"
         "/Applications/Superhuman.app"
         "/Applications/Bear.app"
         "/Applications/Ghostty.app"

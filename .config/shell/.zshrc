@@ -47,6 +47,9 @@ eval "$(starship init zsh)"
 
 # Shell history
 eval "$(atuin init zsh)"
+
+# Project tools, environments, and tasks. Keep this after other PATH mutations.
+eval "$(mise activate zsh)"
 # -------------------------------------------------------------------------------------
 
 # CONDITIONAL TOOL INITIALIZATION
@@ -412,6 +415,3 @@ alias code="opencode"
 
 # NVD shell integration
 eval "$(nvd setup shell-hook)"
-
-# Project tools, environments, and tasks. Keep this after other PATH mutations.
-eval "$(mise activate zsh)"

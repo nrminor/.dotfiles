@@ -31,51 +31,50 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 # PATH CONSTRUCTION
 # ---------------------------------------------------------------------------
 # Build PATH with priority order (highest priority first)
-path=(
-	# User binaries (highest priority)
-	/usr/local/bin
-	$HOME/.cargo/bin # Rust
-	$HOME/.pixi/bin  # Pixi (Python)
-
-	# Homebrew
-	$BREW_PREFIX/bin
-	$BREW_PREFIX/sbin
-
-	# Runtime environments
-	$HOME/.deno/bin  # Deno
-	$HOME/go/bin     # Go
-	$HOME/.local/bin # Local scripts
-
-	# Nix (if present)
-	$HOME/.nix-profile/bin
-	/etc/profiles/per-user/$USER/bin # home-manager packages
-	/run/current-system/sw/bin
-	/nix/var/nix/profiles/default/bin
-
-	# System paths (lowest priority)
-	$path # Preserve existing system paths
-)
+# path=(
+# 	# User binaries (highest priority)
+# 	/usr/local/bin
+# 	$HOME/.cargo/bin # Rust
+# 	$HOME/.pixi/bin  # Pixi (Python)
+#
+# 	# Homebrew
+# 	$BREW_PREFIX/bin
+# 	$BREW_PREFIX/sbin
+#
+# 	# Runtime environments
+# 	$HOME/go/bin     # Go
+# 	$HOME/.local/bin # Local scripts
+#
+# 	# Nix (if present)
+# 	$HOME/.nix-profile/bin
+# 	/etc/profiles/per-user/$USER/bin # home-manager packages
+# 	/run/current-system/sw/bin
+# 	/nix/var/nix/profiles/default/bin
+#
+# 	# System paths (lowest priority)
+# 	$path # Preserve existing system paths
+# )
 
 # LIBRARY AND COMPILER PATHS
 # ---------------------------------------------------------------------------
-library_path=(
-	$BREW_PREFIX/lib
-	/opt/homebrew/opt/libiconv/lib
-	$BREW_PREFIX/opt/libiconv/lib
-	$BREW_PREFIX/opt/zlib/lib
-	$library_path
-)
-export LIBRARY_PATH
+# library_path=(
+# 	$BREW_PREFIX/lib
+# 	/opt/homebrew/opt/libiconv/lib
+# 	$BREW_PREFIX/opt/libiconv/lib
+# 	$BREW_PREFIX/opt/zlib/lib
+# 	$library_path
+# )
+# export LIBRARY_PATH
 
-export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib -L$BREW_PREFIX/opt/zlib/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include
--I$BREW_PREFIX/opt/zlib/include"
+# export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib -L$BREW_PREFIX/opt/zlib/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include
+# -I$BREW_PREFIX/opt/zlib/include"
 
-pkg_config_path=(
-	$BREW_PREFIX/opt/zlib/lib/pkgconfig
-	$pkg_config_path
-)
-export PKG_CONFIG_PATH
+# pkg_config_path=(
+# 	$BREW_PREFIX/opt/zlib/lib/pkgconfig
+# 	$pkg_config_path
+# )
+# export PKG_CONFIG_PATH
 
 # LANGUAGE-SPECIFIC ENVIRONMENTS
 # ---------------------------------------------------------------------------

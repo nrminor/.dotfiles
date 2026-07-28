@@ -3,67 +3,12 @@
 # For config settings, custom commands, aliases, and tool initialization
 # ============================================================================
 
-# INTERACTIVE SHELL INITIALIZATION
-# -------------------------------------------------------------------------------------
-# Display system info on startup
-print ""
-fastfetch
-print ""
-
-# Nix Flake Update Reminder
-if (which nix | is-not-empty) {
-  let flake_dir = ($env.XDG_CONFIG_HOME | path join "nix")
-  let flake_lock = ($flake_dir | path join "flake.lock")
-
-  if ($flake_lock | path exists) {
-    # Follow symlink to get the real file's modification time
-    let real_lock = ($flake_lock | path expand)
-    let lock_info = (ls -l $real_lock | first)
-    let lock_age = ($lock_info.modified | into int) / 1_000_000_000 # Convert to seconds
-    let now = (date now | into int) / 1_000_000_000
-    let age_days = (($now - $lock_age) / 86400 | math floor)
-
-    if $age_days > 7 {
-      print $"💡 Tip: Your nix flake hasn't been updated in ($age_days) days."
-      print $"   Run: sysupdate"
-    }
-  }
-}
-
-# Nushell config settings
-
-$env.config = {
-  # buffer_editor: "hx"
-  buffer_editor: "nvim"
-  show_banner: false
-  # edit_mode: "vi"
-
-  hooks: {
-    pre_prompt: [
-      {||
-        # Direnv integration
-        if (which direnv | is-empty) {
-          return
-        }
-
-        let direnv_data = (direnv export json | from json | default {})
-
-        # Handle PATH separately to keep it as a list
-        if 'PATH' in $direnv_data {
-          $env.PATH = ($direnv_data.PATH | split row (char esep))
-          let other_vars = ($direnv_data | reject PATH)
-          load-env $other_vars
-        } else {
-          load-env $direnv_data
-        }
-      }
-    ]
-  }
-}
-
 # EXTERNAL TOOL INITIALIZATION
 # -------------------------------------------------------------------------------------
 # Only initialize these for interactive shells
+
+# mise!
+use ($nu.default-config-dir | path join mise.nu)
 
 # Shell history
 source ~/.config/atuin/init.nu
@@ -114,4 +59,59 @@ overlay use commands.nu as commands
 overlay use aliases.nu as aliases
 # -------------------------------------------------------------------------------------
 
-use ($nu.default-config-dir | path join mise.nu)
+# INTERACTIVE SHELL INITIALIZATION
+# -------------------------------------------------------------------------------------
+# Display system info on startup
+print ""
+fastfetch
+print ""
+
+# Nix Flake Update Reminder
+if (which nix | is-not-empty) {
+  let flake_dir = ($env.XDG_CONFIG_HOME | path join "nix")
+  let flake_lock = ($flake_dir | path join "flake.lock")
+
+  if ($flake_lock | path exists) {
+    # Follow symlink to get the real file's modification time
+    let real_lock = ($flake_lock | path expand)
+    let lock_info = (ls -l $real_lock | first)
+    let lock_age = ($lock_info.modified | into int) / 1_000_000_000 # Convert to seconds
+    let now = (date now | into int) / 1_000_000_000
+    let age_days = (($now - $lock_age) / 86400 | math floor)
+
+    if $age_days > 7 {
+      print $"💡 Tip: Your nix flake hasn't been updated in ($age_days) days."
+      print $"   Run: sysupdate"
+    }
+  }
+}
+
+# Nushell config settings
+$env.config = {
+  # buffer_editor: "hx"
+  buffer_editor: "nvim"
+  show_banner: false
+  # edit_mode: "vi"
+
+  hooks: {
+    pre_prompt: [
+      {||
+        # Direnv integration
+        if (which direnv | is-empty) {
+          return
+        }
+
+        let direnv_data = (direnv export json | from json | default {})
+
+        # Handle PATH separately to keep it as a list
+        if 'PATH' in $direnv_data {
+          $env.PATH = ($direnv_data.PATH | split row (char esep))
+          let other_vars = ($direnv_data | reject PATH)
+          load-env $other_vars
+        } else {
+          load-env $direnv_data
+        }
+      }
+    ]
+  }
+}
