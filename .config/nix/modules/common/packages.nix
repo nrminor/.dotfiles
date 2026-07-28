@@ -18,12 +18,6 @@ in
   pkgs.llvm
   pkgs.gettext
 
-  # ===== Nix Tooling =====
-  pkgs.nixd
-  pkgs.nixfmt
-  pkgs.nil
-  pkgs.statix
-
   # ===== Editors =====
   # pkgs.neovim  # Managed by nixvim via home-manager (see modules/home/neovim.nix)
   pkgs.helix
@@ -62,7 +56,7 @@ in
   # ===== Shell & Prompt =====
   pkgs.fastfetch
   pkgs.starship
-  pkgs.atuin
+  # pkgs.atuin # --> moved to installation & management by mise
   pkgs.carapace
 
   # ===== Nushell Tooling =====
@@ -112,10 +106,33 @@ in
   pkgs.dotter
   pkgs.lychee
   pkgs.gnuplot
-  # pkgs.wiki-tui
   pkgs.tlrc
   pkgs.binsider
   pkgs.tree-sitter
+
+  # ===== Media Processing =====
+  pkgs.poppler
+  pkgs.ffmpeg
+  pkgs.imagemagick
+  pkgs.ghostscript
+  pkgs.graphviz
+
+  # ===== Bioinformatics =====
+  pkgs.seqkit
+  pkgs.minimap2
+  pkgs.bedtools
+  pkgs.samtools
+  pkgs.bcftools
+
+  # ===== Authoring & Documentation =====
+  pkgs.markdown-oxide
+  pkgs.rumdl
+  pkgs.typst
+  pkgs.typstyle
+  pkgs.tinymist
+  pkgs.pandoc
+  # pkgs.quarto # can't install quarto this way because it will hardcode the nix python install instead of using local venvs
+  pkgs.presenterm
 
   # ===== Bash/Zsh =====
   pkgs-stable.bash-language-server
@@ -150,8 +167,9 @@ in
   pkgs.cargo-generate
   pkgs.cargo-readme
   pkgs.cargo-sweep
+  pkgs.cargo-cache
   pkgs.cargo-semver-checks
-  # pkgs-stable.release-plz
+  # pkgs-stable.release-plz --> installed and managed with mise
   pkgs.crate2nix
   pkgs.dioxus-cli
   pkgs.rust-cbindgen
@@ -164,47 +182,34 @@ in
   # ===== SQL & Data =====
   pkgs.duckdb
   pkgs.tabiew
-  # pkgs.harlequin
-  # pkgs.visidata
 
   # ===== Python Ecosystem =====
   pkgs.python313
-  # pkgs.uv
-  # pkgs.pixi
+  # pkgs.uv --> installed & managed with mise
+  # pkgs.pixi --> installed & managed with mise
   pkgs.ruff
   pkgs.ty
-  pkgs.marimo
-  pkgs.python313Packages.ipython
-  pkgs.python313Packages.notebook
-  pkgs.python313Packages.jupyter-core
-  pkgs.python313Packages.jupyterlab
-  pkgs.python313Packages.ipykernel
-
-  # ===== R Ecosystem =====
-  pkgs-stable.R
-  pkgs.radian # pulls in unstable R + texlive; install via pip if needed
-  # Note: R packages may conflict in home.packages buildEnv - testing
-  # pkgs.rPackages.languageserver
-  pkgs.air-formatter
-
-  # ===== TOML =====
-  pkgs.taplo
 
   # ===== Go Ecosystem =====
   pkgs.go
   pkgs.gopls
-  # pkgs.gotools
-  # pkgs.goreleaser
-
-  # ===== Zig Ecosystem =====
-  pkgs.zig
-  pkgs.zls
-
-  # ===== Docker =====
-  pkgs.docker-ls
+  pkgs.gotools
+  pkgs.goreleaser
 
   # ===== YAML =====
   pkgs.yaml-language-server
+
+  # ===== TOML =====
+  pkgs.taplo
+
+  # ===== Nix Tooling =====
+  pkgs.nixd
+  pkgs.nixfmt
+  pkgs.nil
+  pkgs.statix
+
+  # ===== Docker =====
+  pkgs.docker-ls
 
   # ===== Lua Ecosystem =====
   # Note: lua, luau, and luajit conflict (all provide /bin/lua)
@@ -215,22 +220,18 @@ in
   pkgs.lua-language-server
   pkgs.stylua
 
+  # ===== R Ecosystem =====
+  pkgs-stable.R
+  pkgs.radian # pulls in unstable R + texlive; install via pip if needed
+  # Note: R packages may conflict in home.packages buildEnv - testing
+  # pkgs.rPackages.languageserver
+  pkgs.air-formatter
+
   # ===== Java & JVM =====
   pkgs.openjdk
   pkgs.jdk
   pkgs.jdt-language-server
   # pkgs.nextflow
-
-  # ===== Web Development =====
-  # pkgs.vscode-langservers-extracted
-  pkgs.superhtml
-  # pkgs.nodejs_23
-  # pkgs.deno
-  # pkgs.typescript
-  # pkgs.typescript-language-server
-  # pkgs.javascript-typescript-langserver
-  # pkgs.biome
-  # pkgs.oxlint
 
   # ===== OCaml =====
   pkgs.ocaml
@@ -246,42 +247,4 @@ in
   pkgs.beamPackages.erlang
   pkgs.rebar3
   pkgs.gleam
-  pkgs.beamPackages.elixir
-  pkgs.beamPackages.elixir-ls
-
-  # ===== Elm =====
-  # pkgs.elmPackages.elm
-  # pkgs.elmPackages.elm-language-server
-  # pkgs.tree-sitter-grammars.tree-sitter-elm
-
-  # ===== Authoring & Documentation =====
-  # pkgs.marksman # commented out because of the .NET and Swift transitive dependencies, which both get compiled from source
-  pkgs.markdown-oxide
-  pkgs.rumdl
-  pkgs.typst
-  pkgs.typstyle
-  pkgs.tinymist
-  pkgs.pandoc
-  # pkgs.quarto # can't install quarto this way because it will hardcode the nix python install instead of using local venvs
-  pkgs.presenterm
-
-  # ===== Media Processing =====
-  pkgs.poppler
-  pkgs.ffmpeg
-  pkgs.imagemagick
-  pkgs.ghostscript
-  pkgs.graphviz
-
-  # ===== Bioinformatics =====
-  pkgs.seqkit
-  pkgs.minimap2
-  pkgs.bedtools
-  pkgs.samtools
-  pkgs.bcftools
-
-  # ===== Music =====
-  # pkgs.ncspot
-
-  # ===== AI =====
-  # pkgs.opencode
 ]
