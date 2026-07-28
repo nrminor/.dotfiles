@@ -80,7 +80,6 @@ in
     postActivation.text =
       let
         yaziPluginsDir = "${userHome}/.config/yazi/plugins";
-        nushellPluginsDir = "${userHome}/.local/share/nushell-plugins";
       in
       ''
         # ===== Yazi Plugins =====
@@ -108,33 +107,6 @@ in
         '') plugins.yazi}
 
         echo "Yazi plugins setup complete!" >&2
-
-        # ===== Nushell Plugins =====
-        echo "Setting up Nushell plugins..." >&2
-
-        mkdir -p "${nushellPluginsDir}"
-
-        # Remove old nix-managed plugin symlinks
-        for plugin in "${nushellPluginsDir}"/nu_plugin_*; do
-          if [ -L "$plugin" ] && readlink "$plugin" | grep -q "^/nix/store"; then
-            echo "Removing old Nix plugin symlink: $plugin" >&2
-            rm "$plugin"
-          fi
-        done
-
-        # Create symlinks for each plugin binary
-        ${pkgs.lib.concatMapStringsSep "\n" (plugin: ''
-          for binary in "${plugin}"/bin/nu_plugin_*; do
-            if [ -f "$binary" ]; then
-              plugin_name=$(basename "$binary")
-              echo "Linking $plugin_name..." >&2
-              ln -sf "$binary" "${nushellPluginsDir}/$plugin_name"
-              chown -h ${username}:staff "${nushellPluginsDir}/$plugin_name"
-            fi
-          done
-        '') plugins.nushell}
-
-        echo "Nushell plugins setup complete!" >&2
       '';
   };
 }

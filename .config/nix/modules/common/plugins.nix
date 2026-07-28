@@ -1,8 +1,6 @@
 # Common plugin lists
 #
-# Lists of plugins for tools like Yazi and Nushell. This is pure data -
-# it returns an attribute set of lists. The consuming module decides
-# how to install/symlink them.
+# Yazi plugins to symlink during system activation.
 { pkgs }:
 
 {
@@ -18,14 +16,5 @@
     chmod
     git
     lazygit
-    duckdb
-  ];
-
-  nushell = with pkgs.nushellPlugins; [
-    polars
-    query
-    highlight
-    gstat
-    formats
   ];
 }

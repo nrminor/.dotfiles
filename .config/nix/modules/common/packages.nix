@@ -65,13 +65,8 @@ in
   pkgs.atuin
   pkgs.carapace
 
-  # ===== Nushell Ecosystem =====
-  pkgs.nushell
-  pkgs.nushellPlugins.polars
-  pkgs.nushellPlugins.query
-  pkgs.nushellPlugins.highlight
-  pkgs.nushellPlugins.gstat
-  pkgs.nushellPlugins.formats
+  # ===== Nushell Tooling =====
+  # Nushell and its plugins are managed together by Home Manager.
   pkgs.topiary
   pkgs.nufmt
 
