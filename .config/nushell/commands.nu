@@ -528,12 +528,24 @@ export def --env gitcd [
 #   # Immediately open the cloned directory into the editor set up with $VISUAL,
 #   # falling back to $EDITOR
 #   review --edit https://github.com/nushell/nushell.git
+#
+#   # Review a specific branch or revision
+#   review --branch fix/parser https://github.com/nushell/nushell.git
+#   review --revision 8f3c2ab https://github.com/nushell/nushell.git
 export def --env review [
   repo: string # URL for repository to clone
   directory?: string # override default behavior and place the repo in this destination
   --no-create (-n) # fail instead of creating a code-reviews parent directory
   --edit (-e) # open editor once the clone is complete
+  --branch (-b): string # fetch and review a specific remote branch
+  --revision (-r): string # review a specific fetched revision
 ] {
+  if ($branch != null) and ($revision != null) {
+    error make {
+      msg: "`--branch` and `--revision` cannot be used together."
+    }
+  }
+
   # link up the components of a directory for code reviews (note that this path will
   # not be idiomatic on windows)
   let reviews_dir = match $directory {
@@ -563,15 +575,31 @@ export def --env review [
   # change to the reviews dir that we now know exists
   cd $reviews_dir
 
-  # if the repo directory already exists, just cd into it, fetch updates, and optionally open editor
+  # if the repo directory already exists, just cd into it, fetch updates, select
+  # the requested target, and optionally open the editor
   if ($repo_name | path exists) {
     print $"Repository '($repo_name)' already exists, switching to it."
     cd $repo_name
 
     # try to fetch updates with jj, falling back to git
-    try { jj git fetch } catch {
+    let jj_fetch_args = if $branch == null { [] } else { [--branch $branch] }
+    try { jj git fetch ...$jj_fetch_args } catch {
       try { git fetch } catch {
         print "WARNING: failed to fetch updates (you may be offline)."
+      }
+    }
+
+    if $branch != null {
+      if (".jj" | path exists) {
+        ^jj new $"($branch)@origin"
+      } else {
+        ^git switch $branch
+      }
+    } else if $revision != null {
+      if (".jj" | path exists) {
+        ^jj new $revision
+      } else {
+        ^git switch --detach $revision
       }
     }
 
@@ -595,12 +623,27 @@ export def --env review [
   }
 
   # try to clone with `jj`, falling back to git if needed
-  try { jj git clone $repo } catch {
+  let jj_clone_args = if $branch == null { [] } else { [--branch $branch] }
+  let git_clone_args = if $branch != null {
+    [--branch $branch]
+  } else if $revision != null {
+    [--revision $revision]
+  } else {
+    []
+  }
+
+  try { jj git clone ...$jj_clone_args $repo } catch {
     print "WARNING: failed to clone with Jujutsu; falling back to git."
-    git clone $repo
+    git clone ...$git_clone_args $repo
   }
 
   cd $repo_name
+
+  # jj has no clone-time revision option, so create its empty working-copy
+  # change on the requested revision after importing the repository.
+  if ($revision != null) and (".jj" | path exists) {
+    ^jj new $revision
+  }
 
   # if the user doesn't want to immediately open their editor, we're done here
   if not $edit { return }
