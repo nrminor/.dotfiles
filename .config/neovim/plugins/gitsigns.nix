@@ -7,6 +7,10 @@
           # lua
           ''
             function(bufnr)
+              if vim.fs.root(bufnr, ".jj") then
+                return false
+              end
+
               local gitsigns = require("gitsigns")
 
               local function map(mode, l, r, opts)

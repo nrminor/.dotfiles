@@ -38,7 +38,7 @@
         }
         {
           __unkeyed-1 = "<leader>h";
-          group = "Git hunks";
+          group = "VCS hunks";
         }
         {
           __unkeyed-1 = "<leader>l";

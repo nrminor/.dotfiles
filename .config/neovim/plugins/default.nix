@@ -20,6 +20,7 @@
     ./snacks
     ./tmux-navigator.nix
     ./treesitter.nix
+    ./vcsigns.nix
     ./visual-multi.nix
     ./web-devicons.nix
     ./which-key.nix
