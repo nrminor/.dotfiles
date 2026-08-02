@@ -32,6 +32,9 @@
 # -------------------------------------------------------------------------------------
 # Only initialize these for interactive shells
 
+# for the work before the work
+eval "$(mise activate zsh)"
+
 # nicer tab completions
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace zsh)
@@ -47,9 +50,6 @@ eval "$(starship init zsh)"
 
 # Shell history
 eval "$(atuin init zsh)"
-
-# Project tools, environments, and tasks. Keep this after other PATH mutations.
-eval "$(mise activate zsh)"
 # -------------------------------------------------------------------------------------
 
 # CONDITIONAL TOOL INITIALIZATION
