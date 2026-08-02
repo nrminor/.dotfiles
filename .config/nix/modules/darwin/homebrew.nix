@@ -1,74 +1,14 @@
-# Homebrew configuration for macOS
+# Homebrew runtime for macOS
 #
-# Manages Homebrew installation (via nix-homebrew) and declares
-# all brews, casks, and Mac App Store apps.
-{
-  inputs,
-  username,
-  ...
-}:
+# nix-homebrew continues to provide the Homebrew executable while package
+# declarations migrate from nix-darwin to mise and native application updaters.
+{ username, ... }:
 
 {
-  # nix-homebrew: manages the Homebrew installation itself
   nix-homebrew = {
     enable = true;
     enableRosetta = false;
     user = username;
     autoMigrate = true;
-  };
-
-  # homebrew: what to install via Homebrew
-  homebrew = {
-    enable = true;
-
-    # CLI tools via 'brew install'
-    brews = [
-      "mas"
-      "gcc"
-      "lld"
-      "llvm"
-      "libiconv"
-      # "zlib"
-      # "pkgconf"
-      # "xz"
-      # "bzip2"
-      "sevenzip"
-      "opam"
-    ];
-
-    # GUI applications via 'brew install --cask'
-    casks = [
-      "ghostty"
-      # "arc"
-      "zen"
-      "raycast"
-      "figma"
-      "slack"
-      "discord"
-      "signal"
-      "visual-studio-code"
-      # "rstudio"
-      "docker-desktop"
-      "zoom"
-      "font-symbols-only-nerd-font"
-    ];
-
-    # Mac App Store apps (IDs from 'mas search <name>')
-    masApps = {
-      "Bear" = 1091189122;
-      "Instapaper" = 288545208;
-      # "Spark" = 1176895641;
-      "HazeOver" = 430798174;
-      "Amphetamine" = 937984704;
-      # "Smart Countdown Timer" = 1410709951;
-      "Xcode" = 497799835;
-    };
-
-    # Behavior on darwin-rebuild
-    onActivation = {
-      cleanup = "none";
-      autoUpdate = false;
-      upgrade = false;
-    };
   };
 }

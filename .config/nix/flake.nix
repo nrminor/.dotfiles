@@ -9,14 +9,6 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
 
     jj-starship = {
       url = "github:dmmulroy/jj-starship";
@@ -68,7 +60,7 @@
           };
 
           modules = [
-            # Third-party module for Homebrew management
+            # Provide the Homebrew runtime during the staged package migration
             nix-homebrew.darwinModules.nix-homebrew
 
             # Home-manager integration (user-level packages and config)

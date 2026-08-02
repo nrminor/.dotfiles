@@ -167,38 +167,6 @@
         "type": "github"
       }
     },
-    "homebrew-cask": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1785946507,
-        "narHash": "sha256-1gPJ1icUGOGPh5qnGjEYhd8hltju1pVm3Ej/kdHlj3k=",
-        "owner": "homebrew",
-        "repo": "homebrew-cask",
-        "rev": "576830d389f0fd0b33b706b07bcb691b35f48114",
-        "type": "github"
-      },
-      "original": {
-        "owner": "homebrew",
-        "repo": "homebrew-cask",
-        "type": "github"
-      }
-    },
-    "homebrew-core": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1785946199,
-        "narHash": "sha256-wGAw/75zc7GqoC2hHAMKF+Gf+P3NYXOSCZtDyLlbRww=",
-        "owner": "homebrew",
-        "repo": "homebrew-core",
-        "rev": "f800dc30e01b3d451b95a19e323fcc90f4f55e8f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "homebrew",
-        "repo": "homebrew-core",
-        "type": "github"
-      }
-    },
     "jj-starship": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -354,8 +322,6 @@
       "inputs": {
         "fff-nvim": "fff-nvim",
         "home-manager": "home-manager",
-        "homebrew-cask": "homebrew-cask",
-        "homebrew-core": "homebrew-core",
         "jj-starship": "jj-starship",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
