@@ -12,15 +12,7 @@ let
   oyuiPackage = inputs.oyui.packages.${system}.default;
   optionalNeovimFeatures = {
     gleam = false;
-    rustowl = false;
   };
-  rustowlPlugin =
-    if optionalNeovimFeatures.rustowl then
-      inputs.rustowl-flake.packages.${system}.rustowl-nvim
-    else
-      null;
-  rustowl =
-    if optionalNeovimFeatures.rustowl then inputs.rustowl-flake.packages.${system}.rustowl else null;
 in
 {
   imports = [
@@ -34,8 +26,6 @@ in
     _module.args = {
       inherit
         fffPlugin
-        rustowlPlugin
-        rustowl
         oyuiPackage
         optionalNeovimFeatures
         pkgs-stable
