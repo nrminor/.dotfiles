@@ -109,6 +109,7 @@
 !/.config/nix/modules/darwin/*.nix
 !/.config/nix/modules/home
 !/.config/nix/modules/home/*.nix
+!/.config/nix/modules/home/*.patch
 # Neovim (nixvim config)
 !/.config/neovim
 !/.config/neovim/*.nix
