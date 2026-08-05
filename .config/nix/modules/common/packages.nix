@@ -11,7 +11,11 @@ in
 [
   # ===== Build Tools & System Libraries =====
   pkgs.cmake
+]
+++ pkgs.lib.optionals (!pkgs.stdenv.isDarwin) [
   pkgs.clang
+]
+++ [
   pkgs.libiconv
   pkgs.pkgconf # Modern pkg-config replacement
   pkgs.zlib
