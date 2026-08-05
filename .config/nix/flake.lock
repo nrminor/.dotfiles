@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "antithesis-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1785618479,
+        "narHash": "sha256-QTafSEDpP+VZ2DiCwZ4x1AWjkR9ccPwyj5mNra3VxCI=",
+        "owner": "antithesishq",
+        "repo": "antithesis-skills",
+        "rev": "2b145ffbfee5432c837df8b83824cd627d112c83",
+        "type": "github"
+      },
+      "original": {
+        "owner": "antithesishq",
+        "repo": "antithesis-skills",
+        "type": "github"
+      }
+    },
     "autoresearch": {
       "flake": false,
       "locked": {
@@ -76,11 +92,11 @@
         "zig-overlay": "zig-overlay"
       },
       "locked": {
-        "lastModified": 1785464249,
-        "narHash": "sha256-/yxNCSj78sHoY99aBBwhgFsFtZa5KpFeK2Xx7Aq5fy4=",
+        "lastModified": 1785903554,
+        "narHash": "sha256-oLRW+DchKy9P+ZJ9uCNI8StU9Iy59jkrLNxqsDdogwI=",
         "owner": "dmtrKovalenko",
         "repo": "fff.nvim",
-        "rev": "1eb913e509b846e77111cde2aeeb77a05243c003",
+        "rev": "086044f5f710e7577b0756828d085604aa137a2f",
         "type": "github"
       },
       "original": {
@@ -187,11 +203,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785531816,
-        "narHash": "sha256-vkMnV0JIyw+g/NmcfoajlGaAO+9a0ezia+FZohQJrik=",
+        "lastModified": 1785944609,
+        "narHash": "sha256-oVALwpE6ztz2Ll6vGlCHJs7fhblEmOFz3/TTcgZnrqM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "bf9ce9fec78f95f374e8dd3b503863a3ec128ebe",
+        "rev": "44a1a0ab16b1b6b8e6b673227d870c3a89cab35e",
         "type": "github"
       },
       "original": {
@@ -203,11 +219,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1785796096,
-        "narHash": "sha256-ChzpeFUU/s2syX841nuxJxnS4KTHFcKhqdcPpnasHHw=",
+        "lastModified": 1785946507,
+        "narHash": "sha256-1gPJ1icUGOGPh5qnGjEYhd8hltju1pVm3Ej/kdHlj3k=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "b9c3eb567536ec2294d46b5efeff43f045e06875",
+        "rev": "576830d389f0fd0b33b706b07bcb691b35f48114",
         "type": "github"
       },
       "original": {
@@ -219,11 +235,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1785795218,
-        "narHash": "sha256-SdLFL9h9wenSXteBj6+kfFV+W2Ho/OSoJaBsbmllyAo=",
+        "lastModified": 1785946199,
+        "narHash": "sha256-wGAw/75zc7GqoC2hHAMKF+Gf+P3NYXOSCZtDyLlbRww=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "47c512893bb40e6deebf5761165094fd66c4bcf6",
+        "rev": "f800dc30e01b3d451b95a19e323fcc90f4f55e8f",
         "type": "github"
       },
       "original": {
@@ -235,11 +251,11 @@
     "impeccable": {
       "flake": false,
       "locked": {
-        "lastModified": 1785794549,
-        "narHash": "sha256-/4WOkDyuSZQawe9HMxu4U+1x3alaA6VaIqHaUIBVB7w=",
+        "lastModified": 1785877837,
+        "narHash": "sha256-efbINjnGr0WneoroeiqTWVeiiqEdiGVeesLBs3aM+ew=",
         "owner": "pbakaus",
         "repo": "impeccable",
-        "rev": "14d2641685a3fae643eceb74d9c843c54fb33bf8",
+        "rev": "ae5e95101a6979e7f7973a4ff57680b3c7adc1ec",
         "type": "github"
       },
       "original": {
@@ -272,11 +288,11 @@
     "matt-pocock-skills": {
       "flake": false,
       "locked": {
-        "lastModified": 1785230297,
-        "narHash": "sha256-dQtG6usJWlg/FqTajrjcs8GSdymH92WsgLiUaCfvKPA=",
+        "lastModified": 1785940365,
+        "narHash": "sha256-u2kFjowk/EvlL4J4WIAddrdeVJPZK0oXKxUfGfxqtz0=",
         "owner": "mattpocock",
         "repo": "skills",
-        "rev": "2ab958093e83e0ec752e6c1c5932da465bf23e0c",
+        "rev": "0986ebaf5d29e812162702b2633a2942c30200d2",
         "type": "github"
       },
       "original": {
@@ -418,6 +434,7 @@
     "root": {
       "inputs": {
         "anthropic-skills": "anthropic-skills",
+        "antithesis-skills": "antithesis-skills",
         "autoresearch": "autoresearch",
         "fff-nvim": "fff-nvim",
         "home-manager": "home-manager",

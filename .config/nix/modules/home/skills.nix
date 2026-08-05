@@ -11,6 +11,7 @@
 #
 # Upstreams:
 #   - anthropics/skills (official Anthropic skills)
+#   - antithesishq/antithesis-skills (Antithesis testing workflow)
 #   - mattpocock/skills (curated engineering/productivity skills)
 #   - pbakaus/impeccable (OpenCode frontend design skill)
 #   - uditgoenka/autoresearch (OpenCode autoresearch skill and commands)
@@ -46,14 +47,28 @@ let
       name: _: lib.nameValuePair ".claude/skills/${name}" (link "${root}/${name}")
     ) skillDirs;
 
+  antithesisSkills =
+    let
+      root = inputs.antithesis-skills;
+      contents = builtins.readDir root;
+      skillDirs = lib.filterAttrs (
+        name: type:
+        type == "directory" && builtins.pathExists "${root}/${name}/SKILL.md"
+      ) contents;
+    in
+    lib.mapAttrs' (
+      name: _: lib.nameValuePair ".claude/skills/${name}" (link "${root}/${name}")
+    ) skillDirs;
+
   explicitFiles = {
     # Matt Pocock productivity skills. These intentionally replace local vendored copies.
     ".claude/skills/grill-me" = link "${inputs.matt-pocock-skills}/skills/productivity/grill-me";
     ".claude/skills/grilling" = link "${inputs.matt-pocock-skills}/skills/productivity/grilling";
     ".claude/skills/handoff" = link "${inputs.matt-pocock-skills}/skills/productivity/handoff";
     ".claude/skills/teach" = link "${inputs.matt-pocock-skills}/skills/productivity/teach";
-    ".claude/skills/writing-great-skills" =
-      link "${inputs.matt-pocock-skills}/skills/productivity/writing-great-skills";
+    ".claude/skills/wait-what" = link "${inputs.matt-pocock-skills}/skills/productivity/wait-what";
+    ".claude/skills/writing-for-agents" =
+      link "${inputs.matt-pocock-skills}/skills/productivity/writing-for-agents";
 
     # Matt Pocock engineering skills.
     ".claude/skills/domain-modeling" =
@@ -146,6 +161,7 @@ in
 {
   home.file = lib.mkMerge [
     anthropicSkills
+    antithesisSkills
     explicitFiles
   ];
 }

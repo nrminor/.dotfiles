@@ -33,6 +33,10 @@
       url = "github:anthropics/skills";
       flake = false;
     };
+    antithesis-skills = {
+      url = "github:antithesishq/antithesis-skills";
+      flake = false;
+    };
     matt-pocock-skills = {
       url = "github:mattpocock/skills";
       flake = false;
