@@ -28,28 +28,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Claude/OpenCode skills (not flakes, just fetch the repos)
-    anthropic-skills = {
-      url = "github:anthropics/skills";
-      flake = false;
-    };
-    antithesis-skills = {
-      url = "github:antithesishq/antithesis-skills";
-      flake = false;
-    };
-    matt-pocock-skills = {
-      url = "github:mattpocock/skills";
-      flake = false;
-    };
-    impeccable = {
-      url = "github:pbakaus/impeccable";
-      flake = false;
-    };
-    autoresearch = {
-      url = "github:uditgoenka/autoresearch/master";
-      flake = false;
-    };
-
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";

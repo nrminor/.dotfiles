@@ -266,7 +266,7 @@ def rule-dotter-files-tracked [config: record] {
   return (create-validation-result "Dotter files exist and are tracked" $passed $issues)
 }
 
-# Rule: Dotter does not own static AI assets
+# Rule: Dotter does not own mutable AI assets
 def rule-dotter-does-not-own-static-ai-assets [config: record] {
   let global_toml = ($config.dotfiles_dir | path join ".dotter" "global.toml")
   let macos_toml = ($config.dotfiles_dir | path join ".dotter" "macos.toml")
@@ -291,40 +291,11 @@ def rule-dotter-does-not-own-static-ai-assets [config: record] {
 
   let issues = (
     $static_ai_files | each {|file|
-      create-issue "error" $"Dotter still owns static AI asset: ($file.source) -> ($file.target)" --file ".dotter/global.toml" --fix "Move this mapping to .config/nix/modules/home/skills.nix"
+      create-issue "error" $"Dotter still owns mutable AI asset: ($file.source) -> ($file.target)" --file ".dotter/global.toml" --fix "Move the asset to its source repository and install it through the global mise bootstrap"
     }
   )
 
-  return (create-validation-result "Dotter does not own static AI assets" ($issues | is-empty) $issues)
-}
-
-# Rule: Local Claude skill source directories have SKILL.md
-def rule-local-claude-skills-have-skill-md [config: record] {
-  let skills_dir = ($config.dotfiles_dir | path join ".config" ".claude" "skills")
-
-  if not ($skills_dir | path exists) {
-    let issue = (
-      create-issue "error" "Local Claude skills directory is missing" --file ".config/.claude/skills"
-    )
-    return (create-validation-result "Local Claude skills have SKILL.md" false [$issue])
-  }
-
-  let issues = (
-    ls $skills_dir
-    | where type == dir
-    | each {|entry|
-        let skill_md = ($entry.name | path join "SKILL.md")
-        if not ($skill_md | path exists) {
-          let rel = ($entry.name | path relative-to $config.dotfiles_dir)
-          create-issue "error" $"Local Claude skill directory lacks SKILL.md: ($rel)" --file $rel --fix "Add SKILL.md or remove the obsolete directory"
-        } else {
-          null
-        }
-      }
-    | compact
-  )
-
-  return (create-validation-result "Local Claude skills have SKILL.md" ($issues | is-empty) $issues)
+  return (create-validation-result "Dotter does not own mutable AI assets" ($issues | is-empty) $issues)
 }
 
 # Rule: No broken symlinks
@@ -546,7 +517,6 @@ Exit codes:
     {|c| rule-dotter-configs-exist $c }
     {|c| rule-dotter-files-tracked $c }
     {|c| rule-dotter-does-not-own-static-ai-assets $c }
-    {|c| rule-local-claude-skills-have-skill-md $c }
     {|c| rule-no-broken-symlinks $c }
     {|c| rule-toml-files-valid $c }
     {|c| rule-json-files-valid $c }

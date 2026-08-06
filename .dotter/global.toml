@@ -78,6 +78,7 @@
 # Mise development environment manager
 [mise.files]
 ".config/mise/config.toml" = "~/.config/mise/config.toml"
+".config/mise/tasks/skills/sync" = "~/.config/mise/tasks/skills/sync"
 
 # Starship prompt
 [starship.files]

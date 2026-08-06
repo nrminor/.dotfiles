@@ -97,6 +97,8 @@
 # Mise
 !/.config/mise
 !/.config/mise/config.toml
+!/.config/mise/tasks
+!/.config/mise/tasks/**
 
 # Nix (modular cross-platform config)
 !/.config/nix
@@ -217,16 +219,14 @@
 !/.config/tlrc
 !/.config/tlrc/config.toml
 
-# OpenCode config and local command sources. Static OpenCode skills are managed
-# from Nix inputs in Home Manager, not vendored here.
+# OpenCode config. Skills and commands are installed by the global mise
+# bootstrap, not vendored here.
 !/.config/opencode
 !/.config/opencode/opencode.json
 !/.config/opencode/opencode.jsonc
 !/.config/opencode/tui.json
 !/.config/opencode/agent
 !/.config/opencode/agent/*.md
-!/.config/opencode/command
-!/.config/opencode/command/*.md
 !/.config/opencode/plugin
 !/.config/opencode/plugin/*.ts
 !/.config/opencode/plugin/*.js
@@ -250,90 +250,3 @@
 
 # Ignore build artifacts within .config
 /.config/.direnv/
-
-# ============================================================================
-# Custom Claude/OpenCode Skills (Anthropic skills managed by Nix/home-manager)
-# ============================================================================
-
-!/.config/.claude
-!/.config/.claude/skills
-
-# duckdb skill
-!/.config/.claude/skills/duckdb
-!/.config/.claude/skills/duckdb/SKILL.md
-
-# typst skill
-!/.config/.claude/skills/typst
-!/.config/.claude/skills/typst/SKILL.md
-
-# allocations skill
-!/.config/.claude/skills/allocations
-!/.config/.claude/skills/allocations/SKILL.md
-!/.config/.claude/skills/allocations/references
-!/.config/.claude/skills/allocations/references/*.md
-
-# self-doubt skill
-!/.config/.claude/skills/self-doubt
-!/.config/.claude/skills/self-doubt/SKILL.md
-
-# conceptual-pca skill
-!/.config/.claude/skills/conceptual-pca
-!/.config/.claude/skills/conceptual-pca/SKILL.md
-
-# PRD and ralph loop skills
-!.config/.claude/skills/prd
-!.config/.claude/skills/prd/SKILL.md
-!.config/.claude/skills/ralph
-!.config/.claude/skills/ralph/SKILL.md
-
-# local interface and refactor skills
-!.config/.claude/skills/request-refactor-plan
-!.config/.claude/skills/request-refactor-plan/SKILL.md
-!.config/.claude/skills/design-an-interface
-!.config/.claude/skills/design-an-interface/SKILL.md
-
-# codebase-searcher skill
-!/.config/.claude/skills/codebase-searcher
-!/.config/.claude/skills/codebase-searcher/SKILL.md
-
-# back-of-envelope skill
-!/.config/.claude/skills/back-of-envelope
-!/.config/.claude/skills/back-of-envelope/SKILL.md
-
-# code-sketches skill
-!/.config/.claude/skills/code-sketches
-!/.config/.claude/skills/code-sketches/SKILL.md
-
-# ubiquitous-language skill
-!/.config/.claude/skills/ubiquitous-language
-!/.config/.claude/skills/ubiquitous-language/SKILL.md
-
-# logging skill
-!/.config/.claude/skills/logging
-!/.config/.claude/skills/logging/SKILL.md
-
-# local-ci skill
-!/.config/.claude/skills/local-ci
-!/.config/.claude/skills/local-ci/SKILL.md
-
-# jj skill
-!/.config/.claude/skills/jj
-!/.config/.claude/skills/jj/SKILL.md
-
-# jj preemptive conflict resolution skill
-!/.config/.claude/skills/jj-preemptive-conflict-resolution
-!/.config/.claude/skills/jj-preemptive-conflict-resolution/SKILL.md
-
-# effect-ts skill
-!/.config/.claude/skills/effect-ts
-!/.config/.claude/skills/effect-ts/SKILL.md
-!/.config/.claude/skills/effect-ts/references
-!/.config/.claude/skills/effect-ts/references/*.md
-
-# design-engineering skill
-!/.config/.claude/skills/design-engineering
-!/.config/.claude/skills/design-engineering/SKILL.md
-
-# tigerstyle skill. constructred from https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md
-!/.config/.claude/skills/tigerstyle
-!/.config/.claude/skills/tigerstyle/*.md

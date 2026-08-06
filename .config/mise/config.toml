@@ -1,3 +1,18 @@
+min_version = "2026.8.2"
+
+[bootstrap.repos]
+"~/.local/share/agent-sources/autoresearch" = { url = "https://github.com/uditgoenka/autoresearch.git" }
+"~/.local/share/agent-sources/nrminor-skills" = { url = "https://github.com/nrminor/skills.git" }
+
+[dotfiles]
+"~/.config/opencode/command" = { source = "~/.local/share/agent-sources/autoresearch/.opencode/commands", mode = "symlink-each" }
+"~/.config/opencode/command/complete-next-task.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/complete-next-task.md" }
+"~/.config/opencode/command/describe-commit.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/describe-commit.md" }
+"~/.config/opencode/command/query.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/query.md" }
+"~/.config/opencode/command/run-multiphase-review.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/run-multiphase-review.md" }
+"~/.config/opencode/command/tidy-commit-graph.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/tidy-commit-graph.md" }
+"~/.config/opencode/command/update-working-document.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/update-working-document.md" }
+
 [tools]
 "aqua:dlvhdr/gh-dash" = "latest"
 "aqua:ouch-org/ouch" = "latest"
@@ -45,3 +60,7 @@ uv = "latest"
 vp = "latest"
 zellij = "latest"
 zoxide = "latest"
+
+[tasks.bootstrap]
+description = "Bootstrap mutable user-level state"
+run = [{ task = "skills:sync" }]

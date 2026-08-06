@@ -23,7 +23,6 @@ in
   imports = [
     ./packages.nix
     ./programs.nix
-    ./skills.nix
     ./neovim.nix
   ];
 

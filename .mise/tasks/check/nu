@@ -3,10 +3,13 @@
 
 let root = $env.MISE_PROJECT_ROOT
 let files = (
-  ^jj file list
+  ^jj --quiet file list
   | lines
   | where {|file|
-      ($file | str ends-with ".nu") or ($file | str starts-with ".mise/tasks/")
+      let is_nu_source = $file | str ends-with ".nu"
+      let is_project_task = $file | str starts-with ".mise/tasks/"
+      let is_global_task = $file | str starts-with ".config/mise/tasks/"
+      $is_nu_source or $is_project_task or $is_global_task
     }
   | each {|file| $root | path join $file }
 )
