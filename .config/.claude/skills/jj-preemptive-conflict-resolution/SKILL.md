@@ -1,6 +1,6 @@
 ---
 name: jj-preemptive-conflict-resolution
-description: Conflict microscope for Jujutsu repos: use when preemptively resolving future rebase conflicts, moving a commit under an active stack, making a later rebase clean, or deciding how to jj absorb/squash conflict resolutions into semantic owners without rebasing the whole stack.
+description: 'Conflict microscope for Jujutsu repos: use when preemptively resolving future rebase conflicts, moving a commit under an active stack, making a later rebase clean, or deciding how to jj absorb/squash conflict resolutions into semantic owners without rebasing the whole stack.'
 ---
 
 # JJ Preemptive Conflict Resolution
