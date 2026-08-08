@@ -98,8 +98,9 @@ export alias "jj w up" = jj workspace update-stale
 export alias "jj ws up" = jj workspace update-stale
 export alias "jj ws upd" = jj workspace update-stale
 export alias jjwu = jj workspace update-stale
-export alias lu = lumen diff
-export alias lud = lumen diff
+export alias lu = lumen diff --wrap
+export alias lud = lumen diff --wrap
+export alias cr = tuicr
 export alias "jj watch" = watchexec --quiet --interactive jj
 export alias "jjw" = watchexec --quiet --interactive jj
 
