@@ -67,6 +67,7 @@ const nrminor_skills = [
   jj-preemptive-conflict-resolution
   local-ci
   logging
+  performance-design
   self-doubt
 ]
 
