@@ -1,7 +1,7 @@
 ---
-description: Fast, token-efficient codebase search engine. Finds definitions, call sites, imports, and code patterns using ast-grep (structural) and ripgrep (textual fallback) with VCS-aware tooling. Invoke when you need precise answers about what's in a codebase and where.
+description: Fast, token-efficient codebase search engine. Finds definitions, call sites, imports, and code patterns using ast-grep (structural) and ripgrep (textual fallback) with VCS-aware tooling. Invoke when you need precise answers about what's in a codebase and where, but not for autonomous exploration, decision-making, or advise. Treat this agent as little more than a syntax-aware, semantics-aware, efficient search engine.
 mode: all
-model: openai/gpt-5.5
+model: openai/gpt-5.6-luna
 reasoningEffort: low
 temperature: 0.1
 tools:

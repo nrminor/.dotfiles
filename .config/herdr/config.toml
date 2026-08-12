@@ -214,7 +214,7 @@ pane_borders = false
 
 # Draw interactive scrollbars beside terminal panes.
 # Set false to reclaim the scrollbar column and keep it out of terminal-native selections.
-# pane_scrollbars = true
+pane_scrollbars = false
 
 # Keep split panes visually separated instead of sharing divider borders.
 pane_gaps = false
@@ -259,7 +259,7 @@ tab_bar_position = "bottom"
 # accent = "cyan"
 
 # Background notification popup delivery
-agent_panel_sort = "spaces"
+agent_panel_sort = "priority"
 [ui.toast]
 # off = disable pop-up notifications
 # herdr = show in-app toasts
