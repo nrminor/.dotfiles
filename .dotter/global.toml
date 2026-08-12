@@ -54,7 +54,11 @@
 ".config/yazi/flavors/catppuccin-latte.yazi" = { target = "~/.config/yazi/flavors/catppuccin-latte.yazi", type = "symbolic" }
 ".config/yazi/flavors/catppuccin-macchiato.yazi" = { target = "~/.config/yazi/flavors/catppuccin-macchiato.yazi", type = "symbolic" }
 
-# Zellij terminal multiplexer
+# herdr
+[herdr.files]
+".config/herdr/config.toml" = "~/.config/herdr/config.toml"
+
+# Zellij terminal multiplex
 [zellij.files]
 ".config/zellij/config.kdl" = "~/.config/zellij/config.kdl"
 

@@ -79,6 +79,7 @@ install-skills "anthropics/skills" "opencode" $anthropic_skills
 install-skills "antithesishq/antithesis-skills" "opencode" $antithesis_skills
 install-skills "mattpocock/skills" "opencode" $matt_pocock_skills
 install-skills "emilkowalski/skills" "opencode" [emil-design-eng]
+install-skills "herdrdev/herdr" "opencode" [herdr]
 install-skills "snarktank/ralph" "opencode" [prd ralph]
 install-skills "nrminor/skills" "opencode" $nrminor_skills
 install-skills "pbakaus/impeccable" "opencode" [impeccable]

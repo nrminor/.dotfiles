@@ -105,6 +105,15 @@ export alias "jj watch" = watchexec --quiet --interactive jj
 export alias "jjw" = watchexec --quiet --interactive jj
 
 # ============================================================================
+# herdr
+# ============================================================================
+export alias hrdr = herdr 
+export alias hdr = herdr 
+export alias hd = herdr 
+export alias hdr = herdr 
+export alias herd = herdr 
+
+# ============================================================================
 # ZELLIJ (Terminal Multiplexer)
 # ============================================================================
 export alias zj = zellij

@@ -3,8 +3,9 @@
 # ============================================================================
 
 git:
-  pagers:
+  diffRenderers:
     # Default lazygit diff view
-    - pager: ''
+    - type: rawGit
     # Difftastic - AST-aware structural diffs
-    - externalDiffCommand: difft --color=always
+    - command: difft --color=always
+      type: extDiff

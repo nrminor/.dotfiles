@@ -12,6 +12,7 @@ packages = [
   "ghostty",
   "helix",
   "yazi",
+  "herdr",
   "zellij",
   "atuin",
   "zoxide",

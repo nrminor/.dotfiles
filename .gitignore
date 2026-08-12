@@ -1,4 +1,4 @@
-# Ignore everything by default
+giti# Ignore everything by default
 *
 
 # ============================================================================
@@ -194,6 +194,10 @@
 !/.config/zed
 !/.config/zed/keymap.json
 !/.config/zed/settings.json
+
+# herdr
+!/.config/herdr
+!/.config/herdr/config.toml
 
 # Zellij
 !/.config/zellij
