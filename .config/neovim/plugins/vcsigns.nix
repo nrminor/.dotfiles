@@ -62,21 +62,29 @@ in
 
       vcsigns_actions.start_if_needed(bufnr)
 
-      local function map(lhs, rhs, desc)
-        vim.keymap.set("n", lhs, rhs, {
+      local function map(mode, lhs, rhs, desc)
+        vim.keymap.set(mode, lhs, rhs, {
           buffer = bufnr,
           desc = desc,
           silent = true,
         })
       end
 
-      map("]c", function()
+      map("n", "]c", function()
         vcsigns_actions.hunk_next(bufnr, vim.v.count1)
       end, "Next hunk")
 
-      map("[c", function()
+      map("n", "[c", function()
         vcsigns_actions.hunk_prev(bufnr, vim.v.count1)
       end, "Previous hunk")
+
+      map("n", "<leader>hr", function()
+        vcsigns_actions.hunk_undo(bufnr)
+      end, "Reset hunk")
+
+      map("x", "<leader>hr", function()
+        vcsigns_actions.hunk_undo(bufnr)
+      end, "Reset selected hunks")
     end
 
     vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
