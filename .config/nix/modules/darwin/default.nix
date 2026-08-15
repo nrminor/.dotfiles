@@ -14,7 +14,6 @@
 {
   imports = [
     ./packages.nix
-    ./homebrew.nix
     ./system.nix
     ./shell.nix
     ./environment.nix

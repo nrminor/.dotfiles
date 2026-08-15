@@ -23,10 +23,9 @@ export LANG=en_US.UTF-8
 # ---------------------------------------------------------------------------
 export XDG_CONFIG_HOME="$HOME/.config"
 
-# HOMEBREW CONFIGURATION
+# MISE-MANAGED FORMULA PREFIX
 # ---------------------------------------------------------------------------
-export BREW_PREFIX=/opt/homebrew # Hard-code for performance (avoid calling brew --prefix)
-export HOMEBREW_NO_AUTO_UPDATE=1
+export BREW_PREFIX=/opt/homebrew
 
 # PATH CONSTRUCTION
 # ---------------------------------------------------------------------------
@@ -37,7 +36,7 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 # 	$HOME/.cargo/bin # Rust
 # 	$HOME/.pixi/bin  # Pixi (Python)
 #
-# 	# Homebrew
+# 	# Formulae installed directly by mise
 # 	$BREW_PREFIX/bin
 # 	$BREW_PREFIX/sbin
 #

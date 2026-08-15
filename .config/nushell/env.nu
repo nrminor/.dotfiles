@@ -25,10 +25,9 @@ $env.LANG = "en_US.UTF-8"
 $env.XDG_CONFIG_HOME = ($env.HOME | path join ".config")
 
 # ============================================================================
-# HOMEBREW CONFIGURATION
+# MISE-MANAGED FORMULA PREFIX
 # ============================================================================
 $env.BREW_PREFIX = "/opt/homebrew"
-$env.HOMEBREW_NO_AUTO_UPDATE = "1"
 
 # ============================================================================
 # PATH CONSTRUCTION
@@ -46,7 +45,7 @@ $env.PATH = (
     ($env.HOME | path join ".cargo" "bin") # Rust
     ($env.HOME | path join ".pixi" "bin") # Pixi (Python)
 
-    # Homebrew
+    # Formulae installed directly by mise
     ($env.BREW_PREFIX | path join "bin")
     ($env.BREW_PREFIX | path join "sbin")
 

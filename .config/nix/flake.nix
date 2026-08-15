@@ -8,8 +8,6 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-
     jj-starship = {
       url = "github:dmmulroy/jj-starship";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,7 +37,6 @@
       self,
       nix-darwin,
       nixpkgs,
-      nix-homebrew,
       home-manager,
       ...
     }:
@@ -60,9 +57,6 @@
           };
 
           modules = [
-            # Provide the Homebrew runtime during the staged package migration
-            nix-homebrew.darwinModules.nix-homebrew
-
             # Home-manager integration (user-level packages and config)
             home-manager.darwinModules.home-manager
             {
