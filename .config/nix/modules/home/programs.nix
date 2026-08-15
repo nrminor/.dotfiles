@@ -7,25 +7,6 @@
 
 let
   pkgs-stable = inputs.nixpkgs-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-  nuPluginPolarsEthnumPatch = ./nu-plugin-polars-ethnum-1.5.3.patch;
-  nuPluginPolars = pkgs.nushellPlugins.polars.overrideAttrs (
-    oldAttrs:
-    let
-      cargoPatches = (oldAttrs.cargoPatches or [ ]) ++ [ nuPluginPolarsEthnumPatch ];
-      cargoHash = "sha256-Cpv58bqpx1o0Dz2AykqzFY+PQE/Updr5MusQflpEF74=";
-    in
-    {
-      # overrideAttrs runs after buildRustPackage derives `patches` and
-      # `cargoDeps`, so update both the source and vendored dependencies.
-      inherit cargoHash cargoPatches;
-      patches = (oldAttrs.patches or [ ]) ++ [ nuPluginPolarsEthnumPatch ];
-      cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
-        inherit (oldAttrs) pname version src;
-        hash = cargoHash;
-        patches = cargoPatches;
-      };
-    }
-  );
 in
 {
   # Generate the plugin registry with the same Nushell package that will load it.
@@ -35,7 +16,7 @@ in
     package = pkgs.nushell;
     configDir = ".config/nushell";
     plugins = [
-      nuPluginPolars
+      pkgs.nushellPlugins.polars
       pkgs.nushellPlugins.query
       pkgs.nushellPlugins.gstat
       pkgs.nushellPlugins.formats
