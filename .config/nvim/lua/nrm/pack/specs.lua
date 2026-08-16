@@ -27,8 +27,8 @@ return {
 	{ src = "https://github.com/akinsho/bufferline.nvim", name = "bufferline.nvim" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim", name = "lualine.nvim" },
 	{
-		src = "https://github.com/alexghergh/nvim-tmux-navigation",
-		name = "nvim-tmux-navigation",
+		src = "https://github.com/christoomey/vim-tmux-navigator",
+		name = "vim-tmux-navigator",
 	},
 	{ src = "https://github.com/mfussenegger/nvim-lint", name = "nvim-lint" },
 	{ src = "https://github.com/stevearc/conform.nvim", name = "conform.nvim" },

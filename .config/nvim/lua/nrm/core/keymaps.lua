@@ -1,8 +1,13 @@
 local function map(mode, lhs, rhs, description, options)
-	vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("force", {
-		desc = description,
-		silent = true,
-	}, options or {}))
+	vim.keymap.set(
+		mode,
+		lhs,
+		rhs,
+		vim.tbl_extend("force", {
+			desc = description,
+			silent = true,
+		}, options or {})
+	)
 end
 
 map("n", "<Space>", "<Nop>")
@@ -26,6 +31,27 @@ map("n", "<Leader>w|", "<C-w>v", "Split [W]indow Horizontal")
 map("n", "<Leader>wd", "<C-w>c", "Delete [W]indow")
 map("n", "<Leader>wr", "<C-w>c", "Rotate [W]indow")
 map("n", "<Leader>=", "<C-w>=", "Resize Windows Equal")
+
+local window_directions = { Left = "h", Down = "j", Up = "k", Right = "l" }
+
+local function navigate(direction)
+	return function()
+		local kitty_command = "KittyNavigate" .. direction
+		local tmux_command = "TmuxNavigate" .. direction
+		if vim.fn.exists(":" .. kitty_command) ~= 0 and vim.env.TERM == "xterm-kitty" then
+			vim.cmd(kitty_command)
+		elseif vim.fn.exists(":" .. tmux_command) ~= 0 then
+			vim.cmd(tmux_command)
+		else
+			vim.cmd.wincmd(window_directions[direction])
+		end
+	end
+end
+
+map("n", "<C-h>", navigate("Left"), "Navigate Window Left")
+map("n", "<C-j>", navigate("Down"), "Navigate Window Down")
+map("n", "<C-k>", navigate("Up"), "Navigate Window Up")
+map("n", "<C-l>", navigate("Right"), "Navigate Window Right")
 
 map("n", "<Leader><Tab><Tab>", "<Cmd>tabnew<CR>", "Open new tab")
 map("n", "<Leader><Tab>d", "<Cmd>tabclose<CR>", "Close current tab")

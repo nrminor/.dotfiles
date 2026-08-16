@@ -137,6 +137,8 @@ giti# Ignore everything by default
 !/.config/nvim
 !/.config/nvim/init.lua
 !/.config/nvim/nvim-pack-lock.json
+!/.config/nvim/colors
+!/.config/nvim/colors/*.lua
 !/.config/nvim/lua
 !/.config/nvim/lua/**
 !/.config/nvim/after

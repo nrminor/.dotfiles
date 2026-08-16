@@ -89,10 +89,6 @@
       "rev": "51dbf5359da86721662c87ca10eb73add973737b",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
-    "nvim-tmux-navigation": {
-      "rev": "4898c98702954439233fdaf764c39636681e2861",
-      "src": "https://github.com/alexghergh/nvim-tmux-navigation"
-    },
     "nvim-treesitter": {
       "rev": "074aa4422bf029908338e855d0c0f71470a971bb",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
@@ -163,6 +159,10 @@
     "vim-nix": {
       "rev": "7235c7ce2cea530cb6b59bc3e46d4bfe917d15c8",
       "src": "https://github.com/LnL7/vim-nix"
+    },
+    "vim-tmux-navigator": {
+      "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
+      "src": "https://github.com/christoomey/vim-tmux-navigator"
     },
     "vim-visual-multi": {
       "rev": "a6975e7c1ee157615bbc80fc25e4392f71c344d4",
