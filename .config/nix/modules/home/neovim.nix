@@ -22,7 +22,7 @@ in
   programs.nixvim = {
     enable = true;
     nixpkgs.source = inputs.nixpkgs;
-    imports = [ ../../../neovim ];
+    imports = [ ../../../nixvim ];
     _module.args = {
       inherit
         fffPlugin

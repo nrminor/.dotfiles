@@ -135,7 +135,7 @@ def copy-plugin-pack [pack_dir: path data_dir: path] {
 }
 
 def copy-snippets [dotfiles_dir: path config_nvim_dir: path] {
-  let source = ($dotfiles_dir | path join ".config" "neovim" "plugins" "snippets")
+  let source = ($dotfiles_dir | path join ".config" "nixvim" "plugins" "snippets")
   let target = ($config_nvim_dir | path join "snippets")
 
   if ($source | path exists) {

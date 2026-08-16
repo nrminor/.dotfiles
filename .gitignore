@@ -113,24 +113,24 @@ giti# Ignore everything by default
 !/.config/nix/modules/home/*.nix
 !/.config/nix/modules/home/*.patch
 # Neovim (nixvim config)
-!/.config/neovim
-!/.config/neovim/*.nix
-!/.config/neovim/colors
-!/.config/neovim/colors/*.lua
-!/.config/neovim/plugins
-!/.config/neovim/plugins/*.nix
-!/.config/neovim/plugins/*.lua
-!/.config/neovim/plugins/languages
-!/.config/neovim/plugins/languages/queries
-!/.config/neovim/plugins/languages/*.nix
-!/.config/neovim/plugins/languages/*.lua
-!/.config/neovim/plugins/languages/queries/markdown
-!/.config/neovim/plugins/languages/queries/markdown/*.scm
-!/.config/neovim/plugins/snacks
-!/.config/neovim/plugins/snacks/*.nix
-!/.config/neovim/plugins/snippets
-!/.config/neovim/plugins/snippets/typescript
-!/.config/neovim/plugins/snippets/typescript/*.lua
+!/.config/nixvim
+!/.config/nixvim/*.nix
+!/.config/nixvim/colors
+!/.config/nixvim/colors/*.lua
+!/.config/nixvim/plugins
+!/.config/nixvim/plugins/*.nix
+!/.config/nixvim/plugins/*.lua
+!/.config/nixvim/plugins/languages
+!/.config/nixvim/plugins/languages/queries
+!/.config/nixvim/plugins/languages/*.nix
+!/.config/nixvim/plugins/languages/*.lua
+!/.config/nixvim/plugins/languages/queries/markdown
+!/.config/nixvim/plugins/languages/queries/markdown/*.scm
+!/.config/nixvim/plugins/snacks
+!/.config/nixvim/plugins/snacks/*.nix
+!/.config/nixvim/plugins/snippets
+!/.config/nixvim/plugins/snippets/typescript
+!/.config/nixvim/plugins/snippets/typescript/*.lua
 
 # Direnv
 !/.config/direnv
