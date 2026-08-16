@@ -4,34 +4,6 @@ min_version = "2026.8.2"
 "~/.local/share/agent-sources/autoresearch" = { url = "https://github.com/uditgoenka/autoresearch.git" }
 "~/.local/share/agent-sources/nrminor-skills" = { url = "https://github.com/nrminor/skills.git" }
 
-[bootstrap.packages]
-# Homebrew formulae managed by mise during the staged migration from nix-darwin.
-"brew:mas" = "latest"
-"brew:gcc" = "latest"
-"brew:lld" = "latest"
-"brew:llvm" = "latest"
-"brew:libiconv" = "latest"
-"brew:sevenzip" = "latest"
-"brew:opam" = "latest"
-
-# macOS applications managed from Homebrew cask metadata
-"brew-cask:ghostty" = "latest"
-"brew-cask:zen" = "latest"
-"brew-cask:figma" = "latest"
-"brew-cask:slack" = "latest"
-"brew-cask:discord" = "latest"
-"brew-cask:signal" = "latest"
-"brew-cask:visual-studio-code" = "latest"
-"brew-cask:zoom" = "latest"
-"brew-cask:font-symbols-only-nerd-font" = "latest"
-
-# Mac App Store applications
-"mas:497799835" = "latest"  # Xcode
-"mas:1091189122" = "latest" # Bear
-"mas:288545208" = "latest"  # Instapaper
-"mas:430798174" = "latest"  # HazeOver
-"mas:937984704" = "latest"  # Amphetamine
-
 [dotfiles]
 "~/.config/opencode/command" = { source = "~/.local/share/agent-sources/autoresearch/.opencode/commands", mode = "symlink-each" }
 "~/.config/opencode/command/complete-next-task.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/complete-next-task.md" }

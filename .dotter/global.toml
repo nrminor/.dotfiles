@@ -85,7 +85,9 @@
 
 # Mise development environment manager
 [mise.files]
+".config/miserc.toml" = "~/.config/miserc.toml"
 ".config/mise/config.toml" = "~/.config/mise/config.toml"
+".config/mise/config.macos.toml" = "~/.config/mise/config.macos.toml"
 ".config/mise/tasks/skills/sync" = "~/.config/mise/tasks/skills/sync"
 
 # Starship prompt

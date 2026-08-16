@@ -96,8 +96,10 @@ giti# Ignore everything by default
 !/.config/marimo/config.toml
 
 # Mise
+!/.config/miserc.toml
 !/.config/mise
 !/.config/mise/config.toml
+!/.config/mise/config.macos.toml
 !/.config/mise/tasks
 !/.config/mise/tasks/**
 
