@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 #MISE description="Launch the native Neovim migration target"
-#MISE tools.neovim="latest"
+#MISE tools.neovim="0.12.4"
 
 def --wrapped main [...args: string] {
   with-env { NVIM_APPNAME: "nvim-next" } {
