@@ -21,3 +21,13 @@ backend = "npm:@nubjs/nub"
 
 [tools.nub.options]
 allow_builds = '["@nubjs/nub"]'
+
+[[tools.prek]]
+version = "0.4.13"
+backend = "aqua:j178/prek"
+
+[tools.prek."platforms.macos-arm64"]
+checksum = "sha256:776da7aa143b3cb11125f9c6f44ab5af157c176c992b7bfbafc1b155a44ac769"
+url = "https://github.com/j178/prek/releases/download/v0.4.13/prek-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/j178/prek/releases/assets/508529745"
+provenance = "github-attestations"

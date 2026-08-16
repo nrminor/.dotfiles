@@ -5,6 +5,7 @@ min_version = "2026.8.2"
 [tools]
 node = "24"
 nub = "0.5"
+prek = "0.4.13"
 
 [env]
 _.path = "node_modules/.bin"
