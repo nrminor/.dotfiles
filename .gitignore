@@ -39,6 +39,7 @@ giti# Ignore everything by default
 !/scripts/*.sh
 !/scripts/*.nu
 !/scripts/*.rs
+!/scripts/*.lua
 
 # ============================================================================
 # Dotfiles to be Deployed (Managed by Dotter)
@@ -131,6 +132,13 @@ giti# Ignore everything by default
 !/.config/nixvim/plugins/snippets
 !/.config/nixvim/plugins/snippets/typescript
 !/.config/nixvim/plugins/snippets/typescript/*.lua
+
+# Native Neovim
+!/.config/nvim
+!/.config/nvim/init.lua
+!/.config/nvim/nvim-pack-lock.json
+!/.config/nvim/lua
+!/.config/nvim/lua/**
 
 # Direnv
 !/.config/direnv

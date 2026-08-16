@@ -11,6 +11,7 @@ packages = [
   "zed",
   "ghostty",
   "helix",
+  "nvim-next",
   "yazi",
   "herdr",
   "zellij",

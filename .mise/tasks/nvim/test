@@ -1,0 +1,29 @@
+#!/usr/bin/env nu
+#MISE description="Run the bounded Neovim migration contracts"
+
+let root = $env.MISE_PROJECT_ROOT
+let runner = $root | path join "scripts" "test-nvim-startup.lua"
+
+def check-nixvim [] {
+  let executable = $"/etc/profiles/per-user/($env.USER)/bin/nvim"
+  with-env {
+    NVIM_APPNAME: "nvim",
+    NRM_EXPECTED_APP: "nvim",
+    NRM_EXPECTED_CONFIG: "nixvim",
+  } {
+    ^$executable --headless -c $"luafile ($runner)"
+  }
+}
+
+def check-native [] {
+  with-env {
+    NRM_EXPECTED_APP: "nvim-next",
+    NRM_EXPECTED_CONFIG: "native",
+    NRM_EXPECTED_CONFIG_SOURCE: ($root | path join ".config" "nvim" "init.lua"),
+  } {
+    ^mise run nvim:next -- --headless -c $"luafile ($runner)"
+  }
+}
+
+check-nixvim
+check-native
