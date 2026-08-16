@@ -1,0 +1,4 @@
+#!/usr/bin/env nu
+#MISE description="Preview managed dotfile changes"
+
+^mise bootstrap dotfiles apply --dry-run

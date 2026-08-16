@@ -17,7 +17,7 @@ source ~/.config/atuin/init.nu
 source ~/.zoxide.nu
 
 # Completions (carapace for external commands)
-# This file is managed by dotter and symlinked to the cache directory.
+# This file is managed by mise and symlinked to the cache directory.
 # See .config/nushell/carapace.nu in the dotfiles repo for the customized version
 # that properly defers to Nushell's internal completer for built-in commands.
 source $"($nu.cache-dir)/carapace.nu"
@@ -53,7 +53,7 @@ if ("~/.opam" | path exists) {
 # commands and aliases depend on all the above having happened first.
 #
 # NOTE: We use `overlay use ... as` instead of `use` to work around a nushell bug (#15859)
-# where loading modules from symlinks (which dotter creates) corrupts PWD tracking
+# where loading modules through managed symlinks corrupts PWD tracking
 # for built-in completions.
 overlay use commands.nu as commands
 overlay use aliases.nu as aliases

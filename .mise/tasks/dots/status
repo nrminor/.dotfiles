@@ -1,0 +1,4 @@
+#!/usr/bin/env nu
+#MISE description="Report missing or drifted dotfiles"
+
+^mise bootstrap dotfiles status --missing

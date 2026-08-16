@@ -1,4 +1,0 @@
-#!/usr/bin/env nu
-#MISE description="Preview a dotfiles deployment"
-
-^dotter deploy --dry-run --noconfirm

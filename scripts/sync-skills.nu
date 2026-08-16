@@ -1,7 +1,4 @@
 #!/usr/bin/env nu
-#MISE description="Install or refresh globally managed agent skills"
-#MISE tools.node="24"
-#MISE tools.nub="0.5"
 
 const anthropic_skills = [
   # algorithmic-art

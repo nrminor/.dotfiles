@@ -86,7 +86,6 @@ min_version = "2026.8.2"
 "~/.config/miserc.toml" = { source = "~/.dotfiles/.config/miserc.toml" }
 "~/.config/mise/config.toml" = { source = "~/.dotfiles/.config/mise/config.toml" }
 "~/.config/mise/config.macos.toml" = { source = "~/.dotfiles/.config/mise/config.macos.toml" }
-"~/.config/mise/tasks/skills/sync" = { source = "~/.dotfiles/.config/mise/tasks/skills/sync" }
 
 [tools]
 "aqua:dlvhdr/gh-dash" = "latest"
@@ -137,6 +136,11 @@ vp = "latest"
 zellij = "latest"
 zoxide = "latest"
 
+[tasks."skills:sync"]
+description = "Install or refresh globally managed agent skills"
+tools = { node = "24", nub = "0.5" }
+run = "nu ~/.dotfiles/scripts/sync-skills.nu"
+
 [tasks.bootstrap]
 description = "Bootstrap mutable user-level state"
-run = [{ task = "skills:sync" }]
+run = [{ task = "setup" }, { task = "skills:sync" }]

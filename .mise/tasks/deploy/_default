@@ -1,5 +1,0 @@
-#!/usr/bin/env nu
-#MISE description="Deploy managed dotfiles"
-#MISE alias="d"
-
-^dotter deploy --force --verbose --noconfirm

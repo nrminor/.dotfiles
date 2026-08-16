@@ -77,19 +77,6 @@ in
           chown -R ${username}:staff ${userHome}/Documents/screenshots
         fi
 
-        # Clone dotfiles if not present
-        echo "Looking for dotfiles directory..."
-        if [ ! -d "${userHome}/.dotfiles" ]; then
-          echo "Cloning dotfiles repository..."
-          git clone https://github.com/nrminor/.dotfiles.git "${userHome}/.dotfiles"
-        else
-          echo "dotfiles directory found."
-        fi
-
-        # Deploy dotfiles with dotter
-        cd "${userHome}/.dotfiles"
-        echo "Deploying dotfiles with dotter..."
-        sudo -u ${username} env HOME=${userHome} "${pkgs.dotter}/bin/dotter" deploy -f -y -v
       '';
 
     # Plugin symlinks (runs after system setup)

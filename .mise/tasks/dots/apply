@@ -1,0 +1,4 @@
+#!/usr/bin/env nu
+#MISE description="Apply managed dotfiles"
+
+^mise bootstrap dotfiles apply --yes

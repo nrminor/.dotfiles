@@ -21,17 +21,16 @@ a reference or starting point rather than a general-purpose macOS distribution.
 
 ## How the environment is divided
 
-Three tools divide system and user-environment responsibilities:
+Two tools divide system and user-environment responsibilities:
 
 ```text
 nix-darwin  machine configuration, applications, and bootstrap tools
-mise        global and project tools, environment variables, and tasks
-Dotter      configuration-file deployment
+mise        tools, source repositories, dotfiles, bootstrap, and tasks
 ```
 
-Nix remains the source of truth for the machine. Mise owns portable user-level
-tools, replaces the former root development flake, and exposes repository
-workflows through `mise run`.
+Nix remains the source of truth for the machine. Mise explicitly converges the
+user environment and exposes repository workflows through `mise run`; a system
+rebuild never deploys user dotfiles as a side effect.
 Project-local Node dependencies are pinned in the pnpm-compatible
 `pnpm-lock.yaml`.
 
@@ -40,14 +39,24 @@ repositories, but this repository has neither a justfile nor an `.envrc`.
 
 ## Set up a new Apple machine
 
-On a fresh Mac, invoking `git` prompts macOS to install the Xcode command-line
-tools if they are not already present. Clone the repository after that finishes:
+Install mise using its upstream installation instructions. On a fresh Mac,
+invoking `git` prompts macOS to install the Xcode command-line tools if they are
+not already present. Clone and bootstrap the user environment after that
+finishes:
 
 ```bash
 git clone https://github.com/nrminor/.dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+mise trust
+mise bootstrap --yes
 ```
 
-Install Nix and enable flakes:
+Bootstrap installs platform packages, converges secondary source repositories,
+applies dotfiles, installs declared tools, prepares this checkout, and finally
+synchronizes globally managed agent skills. `mise run setup` remains available
+when only this checkout's locked dependencies and repository hooks need repair.
+
+Install Nix separately to establish the macOS system layer and enable flakes:
 
 ```bash
 sh <(curl -L https://nixos.org/nix/install)
@@ -63,18 +72,9 @@ source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 nix run nix-darwin -- switch --flake ~/.dotfiles/.config/nix#starter
 ```
 
-The first rebuild installs the global environment, including mise, Nushell,
-Dotter, and Prek. Prepare the checkout after opening a fresh shell:
-
-```bash
-cd ~/.dotfiles
-mise trust
-mise run setup
-```
-
-`setup` installs the tools pinned by `mise.lock`, installs the locked Node
-dependencies, and installs the repository hooks. It does not rebuild the system
-or deploy dotfiles.
+The initial nix-darwin activation configures the machine but does not clone this
+repository or deploy user configuration. Later rebuilds consume the flake
+directly from `~/.dotfiles/.config/nix`.
 
 The preferred mise executable may be a self-updating installation in
 `~/.local/bin`; nix-darwin also provides a fallback. The project declares the
@@ -88,8 +88,9 @@ The common workflows are intentionally short:
 ```bash
 mise run rebuild       # rebuild and activate nix-darwin
 mise run update        # update the system flake, then rebuild
-mise run deploy        # deploy managed dotfiles
-mise run full-update   # update, rebuild, then deploy
+mise run dots          # apply managed dotfiles
+mise run dots:dry      # preview dotfile changes
+mise run dots:status   # report missing or drifted dotfiles
 ```
 
 The corresponding high-frequency aliases are available through mise:
@@ -97,7 +98,6 @@ The corresponding high-frequency aliases are available through mise:
 ```bash
 mise run b   # rebuild
 mise run u   # update
-mise run d   # deploy
 mise run f   # format
 mise run c   # check
 mise run v   # validate

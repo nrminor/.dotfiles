@@ -1,5 +1,0 @@
-#!/usr/bin/env nu
-#MISE description="Update and rebuild the system, then deploy dotfiles"
-
-^mise run update
-^mise run deploy

@@ -345,7 +345,6 @@ alias z.="zed ."
 alias vi="nvim"
 alias vim="nvim"
 alias o.="open ." # open the current directory in Finder on MacOS
-alias dots="dotter deploy -f -v -y"
 alias ls="eza -1a --group-directories-first --color=always"
 alias ll="eza -la --group-directories-first --icons --color=always"
 alias la="ll"
