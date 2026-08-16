@@ -5,7 +5,7 @@
 let root = $env.MISE_PROJECT_ROOT
 let runner = $root | path join "scripts" "test-nvim-startup.lua"
 let lockfile = $root | path join ".config" "nvim" "nvim-pack-lock.json"
-let sandbox = $env.TMPDIR | path join $"nvim-next-bootstrap-(random uuid)"
+let sandbox = $env.TMPDIR | path join $"nvim-bootstrap-(random uuid)"
 let lock_before = open --raw $lockfile | hash sha256
 
 mkdir $sandbox
@@ -21,8 +21,7 @@ def run-startup [check_parsers: bool] {
 
 let startup_error = try {
   with-env {
-    NVIM_APPNAME: "nvim-next",
-    NRM_EXPECTED_APP: "nvim-next",
+    NRM_EXPECTED_APP: "nvim",
     NRM_EXPECTED_CONFIG: "native",
     NRM_EXPECTED_CONFIG_SOURCE: ($root | path join ".config" "nvim" "init.lua"),
     XDG_DATA_HOME: ($sandbox | path join "data"),
@@ -54,4 +53,4 @@ if $lock_before != $lock_after {
   error make { msg: "Plugin restoration changed nvim-pack-lock.json" }
 }
 
-print "PASS nvim-next clean and warm bootstrap"
+print "PASS nvim clean and warm bootstrap"

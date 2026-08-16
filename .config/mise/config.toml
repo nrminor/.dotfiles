@@ -71,6 +71,7 @@ jq = "latest"
 jujutsu = "latest"
 lazygit = "latest"
 node = "latest"
+neovim = "0.12.4"
 "npm:scriptc" = "latest"
 nub = { version = "latest", allow_builds = ["@nubjs/nub"] }
 opencode = "latest"

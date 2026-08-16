@@ -14,85 +14,47 @@ def require-success [label: string] {
   }
 }
 
-def check-nixvim [] {
-  let executable = $"/etc/profiles/per-user/($env.USER)/bin/nvim"
+def check-startup [] {
   with-env {
-    NVIM_APPNAME: "nvim",
     NRM_EXPECTED_APP: "nvim",
-    NRM_EXPECTED_CONFIG: "nixvim",
-  } {
-    ^$executable --headless -c $"luafile ($startup_runner)"
-    require-success "nixvim startup contract"
-  }
-}
-
-def check-native [] {
-  with-env {
-    NRM_EXPECTED_APP: "nvim-next",
     NRM_EXPECTED_CONFIG: "native",
     NRM_EXPECTED_CONFIG_SOURCE: ($root | path join ".config" "nvim" "init.lua"),
   } {
-    ^mise run nvim:next -- --headless -c $"luafile ($startup_runner)"
+    ^nvim --headless -c $"luafile ($startup_runner)"
     require-success "native Neovim startup contract"
   }
 }
 
-def check-nixvim-editing [] {
-  let executable = $"/etc/profiles/per-user/($env.USER)/bin/nvim"
-  with-env { NVIM_APPNAME: "nvim" } {
-    ^$executable --headless -c $"luafile ($editing_runner)"
-    require-success "nixvim structured-editing contract"
-  }
-}
-
-def check-native-editing [] {
-  ^mise run nvim:next -- --headless -c $"luafile ($editing_runner)"
+def check-structured-editing [] {
+  ^nvim --headless -c $"luafile ($editing_runner)"
   require-success "native Neovim structured-editing contract"
 }
 
-def check-native-typescript [] {
+def check-typescript [] {
   with-env {
-    NRM_EXPECTED_APP: "nvim-next",
+    NRM_EXPECTED_APP: "nvim",
     NRM_REPO_ROOT: $root,
   } {
-    ^mise run nvim:next -- --headless -c $"luafile ($typescript_runner)"
+    ^nvim --headless -c $"luafile ($typescript_runner)"
     require-success "native Neovim TypeScript contract"
   }
 }
 
-def check-nixvim-interface [] {
-  let executable = $"/etc/profiles/per-user/($env.USER)/bin/nvim"
-  with-env { NVIM_APPNAME: "nvim" } {
-    ^$executable --headless -c $"luafile ($interface_runner)"
-    require-success "nixvim interface/navigation contract"
+def check-interface [] {
+  with-env { NRM_EXPECTED_CONFIG: "native" } {
+    ^nvim --headless -c $"luafile ($interface_runner)"
+    require-success "native Neovim interface/navigation contract"
   }
-}
-
-def check-native-interface [] {
-  ^mise run nvim:next -- --headless -c $"luafile ($interface_runner)"
-  require-success "native Neovim interface/navigation contract"
 }
 
 # Contract scenario 6: public repository navigation behavior in a disposable colocated JJ/Git fixture.
-def check-nixvim-repository-navigation [] {
-  let executable = $"/etc/profiles/per-user/($env.USER)/bin/nvim"
-  with-env { NVIM_APPNAME: "nvim" } {
-    ^$executable --headless -c $"luafile ($repository_navigation_runner)"
-    require-success "nixvim repository-navigation contract"
-  }
-}
-
-def check-native-repository-navigation [] {
-  ^mise run nvim:next -- --headless -c $"luafile ($repository_navigation_runner)"
+def check-repository-navigation [] {
+  ^nvim --headless -c $"luafile ($repository_navigation_runner)"
   require-success "native Neovim repository-navigation contract"
 }
 
-check-nixvim
-check-native
-check-nixvim-editing
-check-native-editing
-check-native-typescript
-check-nixvim-interface
-check-native-interface
-check-nixvim-repository-navigation
-check-native-repository-navigation
+check-startup
+check-structured-editing
+check-typescript
+check-interface
+check-repository-navigation

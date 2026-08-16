@@ -40,9 +40,9 @@
 ".config/helix/runtime/themes/catppuccin_macchiato.toml" = "~/.config/helix/runtime/themes/catppuccin_macchiato.toml"
 ".config/helix/runtime/themes/catppuccin_mocha.toml" = "~/.config/helix/runtime/themes/catppuccin_mocha.toml"
 
-# Native Neovim migration target
-[nvim-next.files]
-".config/nvim" = { target = "~/.config/nvim-next", type = "symbolic" }
+# Neovim
+[nvim.files]
+".config/nvim" = { target = "~/.config/nvim", type = "symbolic" }
 
 # Zed editor
 [zed.files]

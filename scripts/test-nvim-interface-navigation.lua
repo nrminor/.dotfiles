@@ -1,4 +1,5 @@
 local app = vim.env.NVIM_APPNAME or "nvim"
+local native = vim.env.NRM_EXPECTED_CONFIG == "native"
 local failures = {}
 
 local function check(label, actual, expected)
@@ -61,6 +62,7 @@ local mappings = {
 	{ "n", "<Leader>e", "Open Oil", "oil" },
 	{ "n", "<Leader>ff", "Find files (fff)", "find_files" },
 	{ "n", "<Leader>fw", "Live grep (fff)", "live_grep" },
+	{ "n", "<Leader>gs", "Find changed files", "callback" },
 	{ "n", "<CR>", "Flash Helix-style word jump", "helix_word_jump" },
 }
 
@@ -77,7 +79,7 @@ local navigation = {
 
 for _, mapping in ipairs(navigation) do
 	local lhs, direction, legacy_rhs = unpack(mapping)
-	if app == "nvim-next" then
+	if native then
 		check_mapping("n", lhs, "Navigate Window " .. direction, "callback")
 	else
 		check_mapping("n", lhs, nil, legacy_rhs)

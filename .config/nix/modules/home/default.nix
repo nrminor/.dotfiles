@@ -23,7 +23,6 @@ in
   imports = [
     ./packages.nix
     ./programs.nix
-    ./neovim.nix
   ];
 
   # Required: username and home directory
