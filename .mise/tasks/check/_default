@@ -5,5 +5,4 @@
 ^mise run hooks:run
 ^mise run check:nix
 ^mise run check:typescript
-^mise run check:rust
 ^mise run check:nu

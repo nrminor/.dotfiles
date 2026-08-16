@@ -142,18 +142,14 @@ mise run check
 ```
 
 `format` runs the maintained Nix, shell, and TOML formatters. `check` runs all
-Prek hooks, Statix and the system flake checks, the TypeScript compiler, Clippy,
-and Nushell syntax checks. Prek remains the low-level Git-hook and file-selection
+Prek hooks, Statix and the system flake checks, the TypeScript compiler, and
+Nushell syntax checks. Prek remains the low-level Git-hook and file-selection
 engine beneath mise's orchestration.
 
-The custom repository validator has TypeScript, Rust, and Nushell
-implementations:
+The custom repository validator is implemented in TypeScript:
 
 ```bash
-mise run validate             # TypeScript by default
-mise run validate rust
-mise run validate nu
-mise run validate all
+mise run validate
 ```
 
 TypeScript is a project dependency so tools resolve the compiler associated

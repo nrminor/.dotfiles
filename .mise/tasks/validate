@@ -1,14 +1,10 @@
 #!/usr/bin/env nu
 #MISE description="Validate the dotfiles repository"
 #MISE alias="v"
-#USAGE arg "[language]" help="Validator implementation" default="ts" {
-#USAGE   choices "ts" "typescript" "rust" "rs" "nu" "nushell" "all"
-#USAGE }
 #USAGE flag "-v --verbose" help="Show detailed validator output"
 #USAGE flag "-f --fix" help="Show suggested fixes"
 
 def main [
-  language: string = "ts"
   --verbose (-v)
   --fix (-f)
 ] {
@@ -23,23 +19,5 @@ def main [
     $flags = $flags | append "--fix"
   }
 
-  match $language {
-    "ts" | "typescript" => {
-      ^nub ($root | path join "scripts" "validate-dotfiles.ts") ...$flags
-    }
-    "rs" | "rust" => {
-      ^rust-script ($root | path join "scripts" "validate-dotfiles.rs") ...$flags
-    }
-    "nu" | "nushell" => {
-      ^nu ($root | path join "scripts" "validate-dotfiles.nu") ...$flags
-    }
-    "all" => {
-      ^nub ($root | path join "scripts" "validate-dotfiles.ts") ...$flags
-      ^rust-script ($root | path join "scripts" "validate-dotfiles.rs") ...$flags
-      ^nu ($root | path join "scripts" "validate-dotfiles.nu") ...$flags
-    }
-    _ => {
-      error make { msg: $"Unknown validator language: ($language)" }
-    }
-  }
+  ^nub ($root | path join "scripts" "validate-dotfiles.ts") ...$flags
 }

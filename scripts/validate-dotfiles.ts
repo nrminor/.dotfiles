@@ -8,11 +8,12 @@
  * and rules can be easily composed together.
  */
 
-import { execSync } from "node:child_process";
-import { existsSync, lstatSync, readFileSync, statSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
+import { execFileSync, spawnSync } from "node:child_process";
+import { existsSync, lstatSync, readdirSync, readFileSync, statSync } from "node:fs";
+import { delimiter, dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
+import { parse as parseToml } from "smol-toml";
 
 const moduleDir = dirname(fileURLToPath(import.meta.url));
 
@@ -100,7 +101,7 @@ function verbose(config: Config, message: string): void {
 
 function isTrackedByGit(config: Config, filepath: string): boolean {
   try {
-    execSync(`git ls-files --error-unmatch "${filepath}"`, {
+    execFileSync("git", ["ls-files", "--error-unmatch", "--", filepath], {
       cwd: config.dotfilesDir,
       stdio: "pipe",
     });
@@ -112,7 +113,7 @@ function isTrackedByGit(config: Config, filepath: string): boolean {
 
 function isIgnoredByGit(config: Config, filepath: string): boolean {
   try {
-    const output = execSync(`git check-ignore "${filepath}"`, {
+    const output = execFileSync("git", ["check-ignore", "--", filepath], {
       cwd: config.dotfilesDir,
       stdio: "pipe",
     });
@@ -124,7 +125,7 @@ function isIgnoredByGit(config: Config, filepath: string): boolean {
 
 function getTrackedFiles(config: Config): string[] {
   try {
-    const output = execSync("git ls-files", {
+    const output = execFileSync("git", ["ls-files"], {
       cwd: config.dotfilesDir,
       stdio: "pipe",
     });
@@ -156,97 +157,143 @@ function isBrokenSymlink(filepath: string): boolean {
 }
 
 // ========================================================================
-// TOML PARSING (Simple)
+// MISE DOTFILE DECLARATIONS
 // ========================================================================
 
-// Type for parsed TOML data
-// Structure: { section: { subsection: { key: value } } } or { section: { key: value } }
-interface TomlData {
-  [section: string]: Record<string, string | Record<string, string>>;
-}
-
-interface DotterFile {
-  source: string;
+interface DotfileDeclaration {
   target: string;
-  group: string;
+  source?: string;
+  mode?: string;
+  exclude: string[];
+  problems: string[];
+  configFile: string;
 }
 
-function parseToml(filepath: string): TomlData {
-  const content = readFileSync(filepath, "utf-8");
-  const lines = content.split("\n");
-  // Use Record with explicit any for dynamic TOML structure
-  const sections: Record<string, Record<string, unknown>> = {};
-  let currentSection: string | null = null;
-  let currentSubsection: string | null = null;
+interface ParsedMiseConfig {
+  dotfiles?: Record<string, unknown>;
+  bootstrap?: {
+    repos?: Record<string, unknown>;
+  };
+}
 
-  for (const line of lines) {
-    const trimmed = line.trim();
+function miseConfigPaths(config: Config): string[] {
+  return [
+    join(config.dotfilesDir, ".config", "mise", "config.toml"),
+    join(config.dotfilesDir, ".config", "mise", "config.macos.toml"),
+  ];
+}
 
-    if (!trimmed || trimmed.startsWith("#")) continue;
+function readMiseConfig(filepath: string): ParsedMiseConfig {
+  return parseToml(readFileSync(filepath, "utf-8")) as ParsedMiseConfig;
+}
 
-    const sectionMatch = trimmed.match(/^\[([^\]]+)\]$/);
-    if (sectionMatch) {
-      const parts = sectionMatch[1].split(".");
-      currentSection = parts[0];
-      currentSubsection = parts.length > 1 ? parts[1] : null;
-
-      if (!sections[currentSection]) {
-        sections[currentSection] = {};
+function extractDotfileDeclarations(config: Config): DotfileDeclaration[] {
+  return miseConfigPaths(config).flatMap((configFile) => {
+    const parsed = readMiseConfig(configFile);
+    return Object.entries(parsed.dotfiles ?? {}).map(([target, value]) => {
+      if (typeof value === "string") {
+        return {
+          target,
+          source: value,
+          exclude: [],
+          problems: value.length > 0 ? [] : ["source must not be empty"],
+          configFile,
+        };
       }
-      if (currentSubsection && !sections[currentSection][currentSubsection]) {
-        sections[currentSection][currentSubsection] = {};
-      }
-      continue;
-    }
 
-    const kvMatch = trimmed.match(/^"?([^"=]+)"?\s*=\s*"([^"]+)"$/);
-    if (kvMatch && currentSection) {
-      const [, key, value] = kvMatch;
-      if (currentSubsection) {
-        // Ensure nested structure exists
-        const subsectionData = sections[currentSection][currentSubsection] as
-          | Record<string, string>
-          | undefined;
-        if (!subsectionData || typeof subsectionData !== "object") {
-          sections[currentSection][currentSubsection] = {};
+      if (typeof value === "object" && value !== null) {
+        const entry = value as Record<string, unknown>;
+        const problems: string[] = [];
+        const source = typeof entry.source === "string" ? entry.source : undefined;
+        const mode = typeof entry.mode === "string" ? entry.mode : undefined;
+        const exclude = Array.isArray(entry.exclude)
+          ? entry.exclude.filter((item): item is string => typeof item === "string")
+          : [];
+
+        if (!source) problems.push("source must be a non-empty string");
+        if ("content" in entry) problems.push("content entries are not supported here");
+        if ("mode" in entry && !mode) problems.push("mode must be a string");
+        if (mode && !["symlink", "symlink-each", "copy", "template"].includes(mode)) {
+          problems.push(`unsupported mode: ${mode}`);
         }
-        (sections[currentSection][currentSubsection] as Record<string, string>)[
-          key
-        ] = value;
-      } else {
-        sections[currentSection][key] = value;
-      }
-    }
-  }
+        if (
+          "exclude" in entry &&
+          (!Array.isArray(entry.exclude) || exclude.length !== entry.exclude.length)
+        ) {
+          problems.push("exclude must be a list of strings");
+        }
 
-  // Single type assertion at the end
-  return sections as TomlData;
+        return {
+          target,
+          source,
+          mode,
+          exclude,
+          problems,
+          configFile,
+        };
+      }
+
+      return {
+        target,
+        exclude: [],
+        problems: ["declaration must be a source string or table"],
+        configFile,
+      };
+    });
+  });
 }
 
-function extractDotterFiles(tomlData: TomlData): DotterFile[] {
-  const files: DotterFile[] = [];
-
-  for (const [group, subsections] of Object.entries(tomlData)) {
-    // Comprehensive type guard
-    if (
-      typeof subsections === "object" &&
-      subsections !== null &&
-      "files" in subsections &&
-      typeof subsections.files === "object" &&
-      subsections.files !== null
-    ) {
-      const filesSection = subsections.files as Record<string, string>;
-      for (const [sourceFile, targetPath] of Object.entries(filesSection)) {
-        files.push({
-          source: sourceFile,
-          target: targetPath,
-          group,
-        });
-      }
-    }
+function expandHome(filepath: string): string {
+  const home = process.env.HOME;
+  if (!home || (filepath !== "~" && !filepath.startsWith("~/"))) {
+    return filepath;
   }
+  return filepath === "~" ? home : join(home, filepath.slice(2));
+}
 
-  return files;
+function normalizeTarget(target: string): string {
+  return resolve(expandHome(target));
+}
+
+function resolveSource(declaration: DotfileDeclaration): string | undefined {
+  if (!declaration.source) return undefined;
+  if (declaration.source === "~/.dotfiles") return resolveRoot(declaration);
+  if (declaration.source.startsWith("~/.dotfiles/")) {
+    return join(
+      resolveRoot(declaration),
+      declaration.source.slice("~/.dotfiles/".length)
+    );
+  }
+  const expanded = expandHome(declaration.source);
+  return resolve(
+    isAbsolute(expanded) ? expanded : join(dirname(declaration.configFile), expanded)
+  );
+}
+
+function resolveRoot(declaration: DotfileDeclaration): string {
+  return resolve(declaration.configFile, "..", "..", "..");
+}
+
+function isWithin(parent: string, child: string): boolean {
+  const pathFromParent = relative(resolve(parent), resolve(child));
+  return (
+    pathFromParent === "" ||
+    (!pathFromParent.startsWith(`..${sep}`) && pathFromParent !== "..")
+  );
+}
+
+function bootstrapRepoRoots(config: Config): string[] {
+  return miseConfigPaths(config).flatMap((configFile) => {
+    const parsed = readMiseConfig(configFile);
+    return Object.keys(parsed.bootstrap?.repos ?? {}).map(normalizeTarget);
+  });
+}
+
+function collectFiles(directory: string): string[] {
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(directory, entry.name);
+    return entry.isDirectory() ? collectFiles(path) : [path];
+  });
 }
 
 // ========================================================================
@@ -255,89 +302,345 @@ function extractDotterFiles(tomlData: TomlData): DotterFile[] {
 
 const Rules = {
   /**
-   * Rule: Dotter configuration files exist
+   * Rule: Mise configuration files exist and enable platform loading
    */
-  dotterConfigsExist: (config: Config): ValidationResult => {
-    const globalToml = join(config.dotfilesDir, ".dotter", "global.toml");
-
+  miseConfigsValid: (config: Config): ValidationResult => {
+    const miserc = join(config.dotfilesDir, ".config", "miserc.toml");
+    const requiredFiles = [...miseConfigPaths(config), miserc];
     const issues: Issue[] = [];
 
-    if (!existsSync(globalToml)) {
+    for (const filepath of requiredFiles) {
+      const repoPath = relative(config.dotfilesDir, filepath);
+      if (!existsSync(filepath)) {
+        issues.push({
+          severity: "error",
+          message: `Required mise configuration missing: ${repoPath}`,
+          file: repoPath,
+        });
+      } else if (!isTrackedByGit(config, repoPath)) {
+        issues.push({
+          severity: "error",
+          message: `Required mise configuration is not tracked: ${repoPath}`,
+          file: repoPath,
+          fixSuggestion: `Run: jj file track ${repoPath}`,
+        });
+      }
+    }
+
+    if (existsSync(miserc)) {
+      try {
+        const settings = parseToml(readFileSync(miserc, "utf-8")) as Record<
+          string,
+          unknown
+        >;
+        if (settings.auto_env !== true) {
+          issues.push({
+            severity: "error",
+            message: ".config/miserc.toml must set auto_env = true",
+            file: ".config/miserc.toml",
+          });
+        }
+      } catch (error) {
+        issues.push({
+          severity: "error",
+          message: `Unable to parse .config/miserc.toml: ${String(error)}`,
+          file: ".config/miserc.toml",
+        });
+      }
+    }
+
+    return {
+      ruleName: "Mise dotfile configuration is present and tracked",
+      passed: issues.length === 0,
+      issues,
+    };
+  },
+
+  /** Rule: Declarations use the narrow, supported mise shape. */
+  miseDeclarationsValid: (config: Config): ValidationResult => {
+    const issues: Issue[] = [];
+    try {
+      for (const declaration of extractDotfileDeclarations(config)) {
+        if (!(declaration.target.startsWith("~/") || isAbsolute(declaration.target))) {
+          declaration.problems.push("target must be absolute or start with ~/");
+        }
+        for (const problem of declaration.problems) {
+          issues.push({
+            severity: "error",
+            message: `Invalid mise dotfile declaration for ${declaration.target}: ${problem}`,
+            file: relative(config.dotfilesDir, declaration.configFile),
+          });
+        }
+      }
+
+      for (const configFile of miseConfigPaths(config)) {
+        const repos = readMiseConfig(configFile).bootstrap?.repos ?? {};
+        for (const [target, value] of Object.entries(repos)) {
+          const entry =
+            typeof value === "object" && value !== null
+              ? (value as Record<string, unknown>)
+              : {};
+          if (typeof entry.url !== "string" || entry.url.length === 0) {
+            issues.push({
+              severity: "error",
+              message: `bootstrap.repos entry requires a non-empty url: ${target}`,
+              file: relative(config.dotfilesDir, configFile),
+            });
+          }
+          if ("ref" in entry && typeof entry.ref !== "string") {
+            issues.push({
+              severity: "error",
+              message: `bootstrap.repos ref must be a string: ${target}`,
+              file: relative(config.dotfilesDir, configFile),
+            });
+          }
+        }
+      }
+    } catch (error) {
       issues.push({
         severity: "error",
-        message: "Dotter global.toml not found",
-        file: globalToml,
+        message: `Unable to validate mise declarations: ${String(error)}`,
       });
     }
 
     return {
-      ruleName: "Dotter configuration files exist",
+      ruleName: "Mise declarations use supported shapes",
       passed: issues.length === 0,
       issues,
     };
   },
 
   /**
-   * Rule: All files referenced in dotter config exist and are tracked
+   * Rule: Local dotfile sources exist and are tracked
    */
-  dotterFilesTracked: (config: Config): ValidationResult => {
-    const globalToml = join(config.dotfilesDir, ".dotter", "global.toml");
-    const macosToml = join(config.dotfilesDir, ".dotter", "macos.toml");
+  miseSourcesTracked: (config: Config): ValidationResult => {
+    const issues: Issue[] = [];
+    let declarations: DotfileDeclaration[] = [];
 
-    const parseConfig = (path: string): DotterFile[] => {
-      if (!existsSync(path)) return [];
-      try {
-        const tomlData = parseToml(path);
-        return extractDotterFiles(tomlData);
-      } catch {
-        return [];
-      }
-    };
-
-    const globalFiles = parseConfig(globalToml);
-    const macosFiles = parseConfig(macosToml);
-    const allFiles = [...globalFiles, ...macosFiles];
-
-    if (config.verbose) {
-      info(`Found ${allFiles.length} files referenced in dotter configs`);
+    try {
+      declarations = extractDotfileDeclarations(config);
+    } catch (error) {
+      issues.push({
+        severity: "error",
+        message: `Unable to parse mise dotfile declarations: ${String(error)}`,
+      });
     }
 
-    const issues: Issue[] = [];
+    if (config.verbose) {
+      info(`Found ${declarations.length} mise dotfile declarations`);
+    }
 
-    for (const { source, group } of allFiles) {
-      const filepath = join(config.dotfilesDir, source);
+    for (const declaration of declarations) {
+      const sourcePath = resolveSource(declaration);
+      if (!sourcePath) {
+        continue;
+      }
 
-      if (!existsSync(filepath)) {
+      if (!isWithin(config.dotfilesDir, sourcePath)) continue;
+
+      const repoPath = relative(config.dotfilesDir, sourcePath);
+
+      if (!existsSync(sourcePath)) {
         issues.push({
           severity: "error",
-          message: `File missing: ${source} (from ${group})`,
-          file: source,
+          message: `Local dotfile source missing: ${repoPath}`,
+          file: repoPath,
         });
         continue;
       }
 
-      if (!isTrackedByGit(config, source)) {
-        if (isIgnoredByGit(config, source)) {
+      const sourceFiles = lstatSync(sourcePath).isDirectory()
+        ? collectFiles(sourcePath).map((filepath) => relative(config.dotfilesDir, filepath))
+        : [repoPath];
+
+      for (const sourceFile of sourceFiles) {
+        if (isTrackedByGit(config, sourceFile)) continue;
+        if (isIgnoredByGit(config, sourceFile)) {
           issues.push({
             severity: "error",
-            message: `File ignored by git: ${source} (from ${group})`,
-            file: source,
-            fixSuggestion: `Add to .gitignore: !${source}`,
+            message: `Local dotfile source is ignored: ${sourceFile}`,
+            file: sourceFile,
+            fixSuggestion: `Add an allowlist entry for ${sourceFile}`,
           });
         } else {
           issues.push({
-            severity: "warning",
-            message: `File not tracked: ${source} (from ${group})`,
-            file: source,
-            fixSuggestion: `Run: git add ${source}`,
+            severity: "error",
+            message: `Local dotfile source is not tracked: ${sourceFile}`,
+            file: sourceFile,
+            fixSuggestion: `Run: jj file track ${sourceFile}`,
           });
         }
       }
     }
 
     return {
-      ruleName: "Dotter files exist and are tracked",
-      passed: issues.every((i) => i.severity === "warning"),
+      ruleName: "Mise local dotfile sources exist and are tracked",
+      passed: issues.length === 0,
+      issues,
+    };
+  },
+
+  /** Rule: No target is declared more than once across shared/platform config. */
+  miseTargetsUnique: (config: Config): ValidationResult => {
+    const issues: Issue[] = [];
+    const seen = new Map<string, DotfileDeclaration>();
+
+    try {
+      for (const declaration of extractDotfileDeclarations(config)) {
+        const normalized = normalizeTarget(declaration.target);
+        const previous = seen.get(normalized);
+        if (previous) {
+          issues.push({
+            severity: "error",
+            message: `Duplicate mise dotfile target: ${declaration.target}`,
+            file: `${relative(config.dotfilesDir, previous.configFile)} and ${relative(config.dotfilesDir, declaration.configFile)}`,
+          });
+        } else {
+          seen.set(normalized, declaration);
+        }
+      }
+    } catch (error) {
+      issues.push({
+        severity: "error",
+        message: `Unable to inspect mise dotfile targets: ${String(error)}`,
+      });
+    }
+
+    return {
+      ruleName: "Mise dotfile targets are unique",
+      passed: issues.length === 0,
+      issues,
+    };
+  },
+
+  /** Rule: Mutable OpenCode commands come from bootstrap-managed repositories. */
+  opencodeCommandsExternal: (config: Config): ValidationResult => {
+    const issues: Issue[] = [];
+    const commandTarget = normalizeTarget("~/.config/opencode/command");
+    const vendoredCommands = getTrackedFiles(config).filter((filepath) =>
+      filepath.startsWith(".config/opencode/command/")
+    );
+
+    for (const filepath of vendoredCommands) {
+      issues.push({
+        severity: "error",
+        message: "Mutable OpenCode commands must not be stored in this repository",
+        file: filepath,
+      });
+    }
+
+    try {
+      const repoRoots = bootstrapRepoRoots(config);
+      const declarations = extractDotfileDeclarations(config);
+      for (const declaration of declarations) {
+        const target = normalizeTarget(declaration.target);
+        if (!isWithin(commandTarget, target)) continue;
+
+        const source = resolveSource(declaration);
+        if (!source || isWithin(config.dotfilesDir, source)) {
+          issues.push({
+            severity: "error",
+            message: `OpenCode command target must use an external source: ${declaration.target}`,
+            file: relative(config.dotfilesDir, declaration.configFile),
+          });
+        } else if (!repoRoots.some((repoRoot) => isWithin(repoRoot, source))) {
+          issues.push({
+            severity: "error",
+            message: `OpenCode command source is not provided by bootstrap.repos: ${declaration.source}`,
+            file: relative(config.dotfilesDir, declaration.configFile),
+          });
+        }
+      }
+
+      for (const parent of declarations.filter(
+        (declaration) => declaration.mode === "symlink-each"
+      )) {
+        const parentTarget = normalizeTarget(parent.target);
+        for (const child of declarations) {
+          const childTarget = normalizeTarget(child.target);
+          if (childTarget === parentTarget || !isWithin(parentTarget, childTarget)) continue;
+          const childPath = relative(parentTarget, childTarget);
+          const reserved = parent.exclude.some(
+            (pattern) => childPath === pattern || childPath.startsWith(`${pattern}${sep}`)
+          );
+          if (!reserved) {
+            issues.push({
+              severity: "error",
+              message: `symlink-each target ${parent.target} must exclude child declaration ${child.target}`,
+              file: relative(config.dotfilesDir, parent.configFile),
+            });
+          }
+        }
+      }
+
+      const staticOpenCode = declarations.find(
+        (declaration) => normalizeTarget(declaration.target) === normalizeTarget("~/.config/opencode")
+      );
+      for (const required of ["command", "plugin"]) {
+        if (!staticOpenCode?.exclude.includes(required)) {
+          issues.push({
+            severity: "error",
+            message: `~/.config/opencode symlink-each must exclude ${required}`,
+            file: ".config/mise/config.toml",
+          });
+        }
+      }
+    } catch (error) {
+      issues.push({
+        severity: "error",
+        message: `Unable to validate OpenCode command ownership: ${String(error)}`,
+      });
+    }
+
+    return {
+      ruleName: "OpenCode commands use external bootstrap repositories",
+      passed: issues.length === 0,
+      issues,
+    };
+  },
+
+  /** Rule: Mise can produce a machine-readable bootstrap plan. */
+  miseBootstrapPlanValid: (config: Config): ValidationResult => {
+    const issues: Issue[] = [];
+    const result = spawnSync(
+      "mise",
+      ["bootstrap", "plan", "--json", "--detailed-exitcode"],
+      {
+        cwd: config.dotfilesDir,
+        encoding: "utf-8",
+        env: {
+          ...process.env,
+          MISE_GLOBAL_CONFIG_FILE: miseConfigPaths(config)[0],
+          MISE_GLOBAL_CONFIG_ROOT: config.dotfilesDir,
+          MISE_TRUSTED_CONFIG_PATHS: [
+            process.env.MISE_TRUSTED_CONFIG_PATHS,
+            config.dotfilesDir,
+          ]
+            .filter(Boolean)
+            .join(delimiter),
+        },
+      }
+    );
+
+    if (result.status !== 0 && result.status !== 2) {
+      issues.push({
+        severity: "error",
+        message: `mise bootstrap plan --json failed: ${result.stderr.trim()}`,
+      });
+    } else {
+      try {
+        JSON.parse(result.stdout);
+      } catch (error) {
+        issues.push({
+          severity: "error",
+          message: `mise bootstrap plan --json returned invalid JSON: ${String(error)}`,
+        });
+      }
+    }
+
+    return {
+      ruleName: "Mise bootstrap plan succeeds",
+      passed: issues.length === 0,
       issues,
     };
   },
@@ -372,13 +675,15 @@ const Rules = {
    */
   tomlFilesValid: (config: Config): ValidationResult => {
     const tracked = getTrackedFiles(config);
-    const tomlFiles = tracked.filter((f) => f.endsWith(".toml"));
+    const tomlFiles = tracked.filter(
+      (f) => f.endsWith(".toml") && existsSync(join(config.dotfilesDir, f))
+    );
     const issues: Issue[] = [];
 
     for (const file of tomlFiles) {
       const path = join(config.dotfilesDir, file);
       try {
-        parseToml(path);
+        parseToml(readFileSync(path, "utf-8"));
       } catch {
         issues.push({
           severity: "error",
@@ -401,7 +706,9 @@ const Rules = {
   jsonFilesValid: (config: Config): ValidationResult => {
     const tracked = getTrackedFiles(config);
     const jsonFiles = tracked.filter(
-      (f) => f.endsWith(".json") || f.endsWith(".jsonc")
+      (f) =>
+        (f.endsWith(".json") || f.endsWith(".jsonc")) &&
+        existsSync(join(config.dotfilesDir, f))
     );
     const issues: Issue[] = [];
 
@@ -606,8 +913,12 @@ Exit codes:
 
   // Define all validation rules
   const rules: Rule[] = [
-    () => Rules.dotterConfigsExist(config),
-    () => Rules.dotterFilesTracked(config),
+    () => Rules.miseConfigsValid(config),
+    () => Rules.miseDeclarationsValid(config),
+    () => Rules.miseSourcesTracked(config),
+    () => Rules.miseTargetsUnique(config),
+    () => Rules.opencodeCommandsExternal(config),
+    () => Rules.miseBootstrapPlanValid(config),
     () => Rules.noBrokenSymlinks(config),
     () => Rules.tomlFilesValid(config),
     () => Rules.jsonFilesValid(config),

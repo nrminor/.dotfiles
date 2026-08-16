@@ -5,13 +5,88 @@ min_version = "2026.8.2"
 "~/.local/share/agent-sources/nrminor-skills" = { url = "https://github.com/nrminor/skills.git" }
 
 [dotfiles]
-"~/.config/opencode/command" = { source = "~/.local/share/agent-sources/autoresearch/.opencode/commands", mode = "symlink-each" }
+"~/.config/opencode/command" = { source = "~/.local/share/agent-sources/autoresearch/.opencode/commands", mode = "symlink-each", exclude = [
+  "complete-next-task.md",
+  "describe-commit.md",
+  "query.md",
+  "run-multiphase-review.md",
+  "tidy-commit-graph.md",
+  "update-working-document.md",
+] }
 "~/.config/opencode/command/complete-next-task.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/complete-next-task.md" }
 "~/.config/opencode/command/describe-commit.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/describe-commit.md" }
 "~/.config/opencode/command/query.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/query.md" }
 "~/.config/opencode/command/run-multiphase-review.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/run-multiphase-review.md" }
 "~/.config/opencode/command/tidy-commit-graph.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/tidy-commit-graph.md" }
 "~/.config/opencode/command/update-working-document.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/update-working-document.md" }
+
+# Shell entrypoints
+"~/.zshrc" = { source = "~/.dotfiles/.config/shell/.zshrc" }
+"~/.zprofile" = { source = "~/.dotfiles/.config/shell/.zprofile" }
+"~/.zshenv" = { source = "~/.dotfiles/.config/shell/.zshenv" }
+"~/.hushlogin" = { source = "~/.dotfiles/.config/shell/.hushlogin" }
+
+# Nushell and shell-generated integration files
+"~/.config/nushell/config.nu" = { source = "~/.dotfiles/.config/nushell/config.nu" }
+"~/.config/nushell/env.nu" = { source = "~/.dotfiles/.config/nushell/env.nu" }
+"~/.config/nushell/mise.nu" = { source = "~/.dotfiles/.config/nushell/mise.nu" }
+"~/.config/nushell/commands.nu" = { source = "~/.dotfiles/.config/nushell/commands.nu" }
+"~/.config/nushell/theme.nu" = { source = "~/.dotfiles/.config/nushell/theme.nu" }
+"~/.config/nushell/aliases.nu" = { source = "~/.dotfiles/.config/nushell/aliases.nu" }
+"~/.config/atuin/init.nu" = { source = "~/.dotfiles/.config/atuin/init.nu" }
+
+# Version control and editors
+"~/.config/jj/config.toml" = { source = "~/.dotfiles/.config/jj/config.toml" }
+"~/.config/oyui/config.rn" = { source = "~/.dotfiles/.config/oyui/config.rn" }
+"~/.gitconfig" = { source = "~/.dotfiles/.config/git/.gitconfig" }
+"~/.config/helix/config.toml" = { source = "~/.dotfiles/.config/helix/config.toml" }
+"~/.config/helix/languages.toml" = { source = "~/.dotfiles/.config/helix/languages.toml" }
+"~/.config/helix/runtime/themes/custom.toml" = { source = "~/.dotfiles/.config/helix/runtime/themes/custom.toml" }
+"~/.config/helix/runtime/themes/catppuccin_macchiato.toml" = { source = "~/.dotfiles/.config/helix/runtime/themes/catppuccin_macchiato.toml" }
+"~/.config/helix/runtime/themes/catppuccin_mocha.toml" = { source = "~/.dotfiles/.config/helix/runtime/themes/catppuccin_mocha.toml" }
+"~/.config/nvim" = { source = "~/.dotfiles/.config/nvim", mode = "symlink" }
+"~/.config/zed/settings.json" = { source = "~/.dotfiles/.config/zed/settings.json" }
+"~/.config/zed/keymap.json" = { source = "~/.dotfiles/.config/zed/keymap.json" }
+
+# Shared application trees preserve unmanaged neighbors.
+"~/.config/yazi" = { source = "~/.dotfiles/.config/yazi", mode = "symlink-each", exclude = [
+  "flavors/catppuccin-frappe.yazi",
+  "flavors/catppuccin-mocha.yazi",
+  "flavors/dracula.yazi",
+] }
+"~/.config/opencode" = { source = "~/.dotfiles/.config/opencode", mode = "symlink-each", exclude = [
+  "command",
+  "plugin",
+] }
+
+# Terminal and command-line applications
+"~/.config/herdr/config.toml" = { source = "~/.dotfiles/.config/herdr/config.toml" }
+"~/.config/tuicr/config.toml" = { source = "~/.dotfiles/.config/tuicr/config.toml" }
+"~/.config/zellij/config.kdl" = { source = "~/.dotfiles/.config/zellij/config.kdl" }
+"~/.config/atuin/config.toml" = { source = "~/.dotfiles/.config/atuin/config.toml" }
+"~/.zoxide.nu" = { source = "~/.dotfiles/.config/zoxide/.zoxide.nu" }
+"~/.config/btop/btop.conf" = { source = "~/.dotfiles/.config/btop/btop.conf" }
+"~/.config/btop/themes/catppuccin-latte.theme" = { source = "~/.dotfiles/.config/btop/themes/catppuccin-latte.theme" }
+"~/.config/btop/themes/catppuccin-macchiato.theme" = { source = "~/.dotfiles/.config/btop/themes/catppuccin-macchiato.theme" }
+"~/.marimo.toml" = { source = "~/.dotfiles/.config/marimo/config.toml" }
+"~/.config/starship.toml" = { source = "~/.dotfiles/.config/starship.toml" }
+"~/.config/bat/config" = { source = "~/.dotfiles/.config/bat/config" }
+"~/.config/direnv/direnv.toml" = { source = "~/.dotfiles/.config/direnv/direnv.toml" }
+"~/.direnvrc" = { source = "~/.dotfiles/.config/shell/.direnvrc" }
+"~/.config/nix-direnv/config.toml" = { source = "~/.dotfiles/.config/nix-direnv/config.toml" }
+"~/.config/fastfetch/config.jsonc" = { source = "~/.dotfiles/.config/fastfetch/config.jsonc" }
+"~/.config/lazygit/config.yml" = { source = "~/.dotfiles/.config/lazygit/config.yml" }
+"~/.config/gitui/key_bindings.ron" = { source = "~/.dotfiles/.config/gitui/key_bindings.ron" }
+"~/.config/gitui/theme.ron" = { source = "~/.dotfiles/.config/gitui/theme.ron" }
+"~/.config/rumdl/.rumdl.toml" = { source = "~/.dotfiles/.config/rumdl/.rumdl.toml" }
+"~/.prettierrc" = { source = "~/.dotfiles/.config/.prettierrc" }
+"~/.oxfmtrc.json" = { source = "~/.dotfiles/.config/.oxfmtrc.json" }
+
+# Mise manages its own global configuration after the repository exists.
+"~/.config/miserc.toml" = { source = "~/.dotfiles/.config/miserc.toml" }
+"~/.config/mise/config.toml" = { source = "~/.dotfiles/.config/mise/config.toml" }
+"~/.config/mise/config.macos.toml" = { source = "~/.dotfiles/.config/mise/config.macos.toml" }
+"~/.config/mise/tasks/skills/sync" = { source = "~/.dotfiles/.config/mise/tasks/skills/sync" }
 
 [tools]
 "aqua:dlvhdr/gh-dash" = "latest"
