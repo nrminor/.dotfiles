@@ -195,6 +195,10 @@ giti# Ignore everything by default
 !/.config/herdr
 !/.config/herdr/config.toml
 
+# tuicr
+!/.config/tuicr
+!/.config/tuicr/config.toml
+
 # Zellij
 !/.config/zellij
 !/.config/zellij/config.kdl

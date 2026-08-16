@@ -62,6 +62,10 @@
 [herdr.files]
 ".config/herdr/config.toml" = "~/.config/herdr/config.toml"
 
+# tuicr
+[tuicr.files]
+".config/tuicr/config.toml" = "~/.config/tuicr/config.toml"
+
 # Zellij terminal multiplex
 [zellij.files]
 ".config/zellij/config.kdl" = "~/.config/zellij/config.kdl"
