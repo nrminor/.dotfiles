@@ -139,6 +139,8 @@ giti# Ignore everything by default
 !/.config/nvim/nvim-pack-lock.json
 !/.config/nvim/lua
 !/.config/nvim/lua/**
+!/.config/nvim/after
+!/.config/nvim/after/**
 
 # Direnv
 !/.config/direnv
