@@ -23,7 +23,7 @@ in
   pkgs.gettext
 
   # ===== Editors =====
-  # pkgs.neovim  # Managed by nixvim via home-manager (see modules/home/neovim.nix)
+  # pkgs.neovim  # Installed and managed with mise
   pkgs.helix
   # pkgs.ghostty
 

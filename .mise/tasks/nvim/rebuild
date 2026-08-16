@@ -1,9 +1,0 @@
-#!/usr/bin/env nu
-#MISE description="Build and activate the Home Manager Neovim configuration"
-
-let root = $env.MISE_PROJECT_ROOT
-let flake = $root | path join ".config" "nix"
-
-cd $root
-^nix build $"($flake)#darwinConfigurations.starter.config.home-manager.users.nickminor.home.activationPackage"
-^($root | path join "result" "activate")

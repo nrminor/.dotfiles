@@ -11,25 +11,27 @@ small core environment:
 5. [OpenCode](https://opencode.ai/), my AI coding-agent harness
 
 The wider system includes scientific tooling, notebook environments, language
-servers, terminal utilities, and desktop applications. The complete global
-package set lives in
-[`.config/nix/modules/common/packages.nix`](.config/nix/modules/common/packages.nix),
-while Nushell commands and aliases live under [`.config/nushell`](.config/nushell).
+servers, terminal utilities, and desktop applications. System packages and
+bootstrap tools live under [`.config/nix`](.config/nix), while user-level tools
+live in [mise's global configuration](.config/mise/config.toml). Nushell
+commands and aliases live under [`.config/nushell`](.config/nushell).
 
 This setup is deliberately peculiar to me and changes frequently. Treat it as
 a reference or starting point rather than a general-purpose macOS distribution.
 
 ## How the environment is divided
 
-Two tools divide system and repository responsibilities:
+Three tools divide system and user-environment responsibilities:
 
 ```text
-nix-darwin  machine configuration, applications, and global command-line tools
-mise        tools, environment variables, and tasks for this repository
+nix-darwin  machine configuration, applications, and bootstrap tools
+mise        global and project tools, environment variables, and tasks
+Dotter      configuration-file deployment
 ```
 
-Nix remains the source of truth for the machine. Mise replaces the former root
-development flake and exposes repository workflows through `mise run`.
+Nix remains the source of truth for the machine. Mise owns portable user-level
+tools, replaces the former root development flake, and exposes repository
+workflows through `mise run`.
 Project-local Node dependencies are pinned in the pnpm-compatible
 `pnpm-lock.yaml`.
 
@@ -154,17 +156,14 @@ mise run validate nu
 mise run validate all
 ```
 
-TypeScript and `typescript-language-server` are project dependencies so editors
-resolve the compiler associated with this checkout. Mise adds
-`node_modules/.bin` to `PATH`, making the checkout's compiler and language
-server available alongside its mise-managed Node runtime.
+TypeScript is a project dependency so tools resolve the compiler associated
+with this checkout. Mise adds `node_modules/.bin` to `PATH`, making the compiler
+available alongside its mise-managed Node runtime.
 
-### Neovim workflows
+### Neovim
 
-Two specialized tasks retain the repository-specific Neovim workflows:
-
-```bash
-mise run nvim:rebuild
-mise run nvim:export
-mise run nvim:export --archive
-```
+Mise supplies Neovim, Dotter deploys the ordinary Lua configuration under
+`.config/nvim`, and Neovim's built-in `vim.pack` restores plugins at the
+revisions in `nvim-pack-lock.json`. Language servers, formatters, linters, and
+additional Tree-sitter parsers come from the active development environment or
+explicit editor installation rather than from the editor bootstrap.
