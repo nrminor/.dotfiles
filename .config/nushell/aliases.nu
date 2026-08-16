@@ -77,7 +77,6 @@ export alias present = presenterm
 # GIT/JUJUTSU & VERSION CONTROL
 # ============================================================================
 export alias lg = lazygit
-export alias gu = gitui
 export alias lj = lazyjj
 export alias mj = majjit
 export alias gst = git status
@@ -116,15 +115,6 @@ export alias hdr = herdr
 export alias herd = herdr
 
 # ============================================================================
-# ZELLIJ (Terminal Multiplexer)
-# ============================================================================
-export alias zj = zellij
-export alias zjs = zellij ls
-export alias zjls = zellij ls
-export alias zja = zellij a
-export alias zjd = zellij d
-
-# ============================================================================
 # FUZZY-FINDING COMMANDS
 # ============================================================================
 export alias f = sk
@@ -147,7 +137,6 @@ export alias fzmake = fzf-make
 # DATABASE & DATA TOOLS
 # ============================================================================
 export alias db = duckdb
-export alias hq = harlequin
 export alias tw = tw --theme catppuccin
 export alias tab = tw
 export alias pl = polars # https://www.nushell.sh/blog/2026-02-28-nushell_v0_111_0.html#type-polars-less-now

@@ -83,10 +83,6 @@ giti# Ignore everything by default
 !/.config/zoxide
 !/.config/zoxide/.zoxide.nu
 
-# Marimo
-!/.config/marimo
-!/.config/marimo/config.toml
-
 # Mise
 !/.config/miserc.toml
 !/.config/mise
@@ -121,10 +117,6 @@ giti# Ignore everything by default
 # Direnv
 !/.config/direnv
 !/.config/direnv/direnv.toml
-
-# Nix Direnv
-!/.config/nix-direnv
-!/.config/nix-direnv/config.toml
 
 # Shell
 !/.config/shell
@@ -189,10 +181,6 @@ giti# Ignore everything by default
 !/.config/tuicr
 !/.config/tuicr/config.toml
 
-# Zellij
-!/.config/zellij
-!/.config/zellij/config.kdl
-
 # bat config
 !/.config/bat
 !/.config/bat/config
@@ -200,11 +188,6 @@ giti# Ignore everything by default
 # lazygit
 !/.config/lazygit
 !/.config/lazygit/config.yml
-
-# gitui
-!/.config/gitui
-!/.config/gitui/key_bindings.ron
-!/.config/gitui/theme.ron
 
 # starship config
 !/.config/starship.toml
@@ -224,13 +207,6 @@ giti# Ignore everything by default
 !/.config/opencode/plugin
 !/.config/opencode/plugin/*.ts
 !/.config/opencode/plugin/*.js
-
-# harlequin
-!/.config/.harlequin.toml
-
-# rumdl
-!/.config/rumdl
-!/.config/rumdl/.rumdl.toml
 
 # prettier
 !/.config/.prettierrc

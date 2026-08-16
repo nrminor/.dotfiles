@@ -193,7 +193,7 @@ In no particular order, here's a list of "Nick-isms" you should be on the lookou
   - though note! Docstrings, especially module docstrings and doctests, are a critical exception to this. Docstrings have a different goal though and can be closer to essays than they are to comments _per se_.
 - Relatedly, code organization comments like the following are considered technical debt, as very often, they fall out of sync with the code. If we need further organization, consider using actual code organization primitives like modules/namespaces.
 
-  ```text <!-- rumdl-disable-line MD046 -->
+  ```text
   Example of organizational comments that are considered a code smell/anti-pattern:
 
   # =========================================================================

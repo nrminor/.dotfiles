@@ -76,7 +76,6 @@ in
   # pkgs.bottom
 
   # ===== Terminal Multiplexer =====
-  # pkgs.zellij --> installed and managed with mise
   # pkgs.tmux --> installed and managed with mise
 
   # ===== File Management =====
@@ -128,7 +127,6 @@ in
 
   # ===== Authoring & Documentation =====
   pkgs.markdown-oxide
-  pkgs.rumdl
   pkgs.typst
   pkgs.typstyle
   pkgs.tinymist

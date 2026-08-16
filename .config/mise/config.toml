@@ -62,23 +62,17 @@ min_version = "2026.8.2"
 # Terminal and command-line applications
 "~/.config/herdr/config.toml" = { source = "~/.dotfiles/.config/herdr/config.toml" }
 "~/.config/tuicr/config.toml" = { source = "~/.dotfiles/.config/tuicr/config.toml" }
-"~/.config/zellij/config.kdl" = { source = "~/.dotfiles/.config/zellij/config.kdl" }
 "~/.config/atuin/config.toml" = { source = "~/.dotfiles/.config/atuin/config.toml" }
 "~/.zoxide.nu" = { source = "~/.dotfiles/.config/zoxide/.zoxide.nu" }
 "~/.config/btop/btop.conf" = { source = "~/.dotfiles/.config/btop/btop.conf" }
 "~/.config/btop/themes/catppuccin-latte.theme" = { source = "~/.dotfiles/.config/btop/themes/catppuccin-latte.theme" }
 "~/.config/btop/themes/catppuccin-macchiato.theme" = { source = "~/.dotfiles/.config/btop/themes/catppuccin-macchiato.theme" }
-"~/.marimo.toml" = { source = "~/.dotfiles/.config/marimo/config.toml" }
 "~/.config/starship.toml" = { source = "~/.dotfiles/.config/starship.toml" }
 "~/.config/bat/config" = { source = "~/.dotfiles/.config/bat/config" }
 "~/.config/direnv/direnv.toml" = { source = "~/.dotfiles/.config/direnv/direnv.toml" }
 "~/.direnvrc" = { source = "~/.dotfiles/.config/shell/.direnvrc" }
-"~/.config/nix-direnv/config.toml" = { source = "~/.dotfiles/.config/nix-direnv/config.toml" }
 "~/.config/fastfetch/config.jsonc" = { source = "~/.dotfiles/.config/fastfetch/config.jsonc" }
 "~/.config/lazygit/config.yml" = { source = "~/.dotfiles/.config/lazygit/config.yml" }
-"~/.config/gitui/key_bindings.ron" = { source = "~/.dotfiles/.config/gitui/key_bindings.ron" }
-"~/.config/gitui/theme.ron" = { source = "~/.dotfiles/.config/gitui/theme.ron" }
-"~/.config/rumdl/.rumdl.toml" = { source = "~/.dotfiles/.config/rumdl/.rumdl.toml" }
 "~/.prettierrc" = { source = "~/.dotfiles/.config/.prettierrc" }
 "~/.oxfmtrc.json" = { source = "~/.dotfiles/.config/.oxfmtrc.json" }
 
@@ -133,7 +127,6 @@ tmux = "latest"
 tree-sitter = "latest"
 uv = "latest"
 vp = "latest"
-zellij = "latest"
 zoxide = "latest"
 
 [tasks."skills:sync"]

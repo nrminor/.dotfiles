@@ -433,10 +433,9 @@ file-types = [
   "workbook",
   "mdx",
 ]
-language-servers = ["rumdl", "marksman", "markdown-oxide"]
+language-servers = ["marksman", "markdown-oxide"]
 indent = { tab-width = 2, unit = "  " }
 # formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md"] }
-# formatter = { command = 'rumdl', args = ["fmt", "-", "--quiet"] }
 formatter = { command = "nub", args = [
   "dlx",
   "prettier",
@@ -444,10 +443,6 @@ formatter = { command = "nub", args = [
   "markdown",
 ] }
 auto-format = true
-
-[language-server.rumdl]
-command = "rumdl"
-args = ["server", "--stdio"]
 
 [[language]]
 name = "typst"

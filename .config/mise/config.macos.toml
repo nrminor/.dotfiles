@@ -31,4 +31,3 @@
 "~/Library/Application Support/tlrc/config.toml" = { source = "~/.dotfiles/.config/tlrc/config.toml" }
 "~/Library/Application Support/nushell/vendor/autoload/starship.nu" = { source = "~/.dotfiles/.config/nushell/starship.nu" }
 "~/Library/Caches/nushell/carapace.nu" = { source = "~/.dotfiles/.config/nushell/carapace.nu" }
-"~/Library/Application Support/harlequin/config.toml" = { source = "~/.dotfiles/.config/.harlequin.toml" }

@@ -1314,44 +1314,6 @@ export def allow_ghostty [
   ^infocmp -x | ^ssh $location -- tic -x -
 }
 
-# Launch Marimo notebook with interactive cleanup
-#
-# Opens a Marimo Python notebook with common data science libraries.
-# For scratch files, prompts to keep/rename/delete after closing.
-#
-# Examples:
-#   > mo                     # Create/edit scratch.py
-#   > mo analysis.py         # Edit specific file (no cleanup prompt)
-export def mo [
-  file: string = "scratch.py" # Notebook file to edit
-] {
-  let user_provided = ($file != "scratch.py")
-
-  # Run marimo with common libraries
-  ^env RUST_LOG=warn uvx --with polars --with biopython --with pysam --with polars-bio --with altair --with plotnine marimo edit $file
-
-  # Only prompt for cleanup if using default scratch file
-  if not $user_provided {
-    print -n $"Keep ($file)? [y/N]: "
-    let keep = (input)
-
-    if ($keep | str lowercase) in ["y" "yes"] {
-      print -n $"Rename ($file)? (leave empty to keep name): "
-      let newname = (input)
-
-      if ($newname | is-not-empty) {
-        mv $file $newname
-        print $"Saved as ($newname)"
-      } else {
-        print $"Keeping as ($file)"
-      }
-    } else {
-      rm -f $file
-      print $"Deleted ($file)"
-    }
-  }
-}
-
 # ============================================================================
 # RALPH WIGGUM AGENT LOOP
 # ============================================================================
