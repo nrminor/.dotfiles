@@ -7,5 +7,6 @@ require("nrm.languages.lsp")
 require("nrm.languages.quality")
 require("nrm.languages.ecosystems")
 require("nrm.languages.data")
+require("nrm.plugins.vcs")
 
 vim.g.nrm_config_loaded = true

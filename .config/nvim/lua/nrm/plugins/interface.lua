@@ -15,7 +15,6 @@ require("catppuccin").setup({
 	no_italic = true,
 	integrations = {
 		blink_cmp = true,
-		gitsigns = true,
 		indent_blankline = { enabled = false, scope_color = "sapphire", colored_indent_levels = false },
 		native_lsp = { enabled = true },
 		symbols_outline = true,
@@ -57,7 +56,7 @@ require("lualine").setup({
 	},
 	sections = {
 		lualine_a = { "mode" },
-		lualine_b = { { "branch", icon = "" } },
+		lualine_b = {},
 		lualine_c = { { "filename", path = 1, symbols = { modified = "[+]", readonly = "[RO]" } } },
 		lualine_x = { "diagnostics", "selectioncount" },
 		lualine_y = {
@@ -235,9 +234,7 @@ for _, mapping in ipairs({
 	{ "<leader>fS", Snacks.picker.spelling, "Find spelling suggestions" },
 	{ "<leader>fr", Snacks.picker.registers, "Find registers" },
 	{ "<leader>f'", Snacks.picker.marks, "Find marks" },
-	{ "<leader>gB", Snacks.picker.git_branches, "Find git branches" },
-	{ "<leader>gs", Snacks.picker.git_status, "Find git status" },
-	{ "<leader>gS", Snacks.picker.git_stash, "Find git stashes" },
+	{ "<leader>gs", Snacks.picker.git_status, "Find changed files" },
 }) do
 	map(mapping[1], mapping[2], mapping[3])
 end

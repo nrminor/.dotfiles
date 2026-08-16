@@ -6,6 +6,7 @@ let startup_runner = $root | path join "scripts" "test-nvim-startup.lua"
 let editing_runner = $root | path join "scripts" "test-nvim-structured-editing.lua"
 let interface_runner = $root | path join "scripts" "test-nvim-interface-navigation.lua"
 let typescript_runner = $root | path join "scripts" "test-nvim-typescript.lua"
+let repository_navigation_runner = $root | path join "scripts" "test-nvim-repository-navigation.lua"
 
 def require-success [label: string] {
   if $env.LAST_EXIT_CODE != 0 {
@@ -72,6 +73,20 @@ def check-native-interface [] {
   require-success "native Neovim interface/navigation contract"
 }
 
+# Contract scenario 6: public repository navigation behavior in a disposable colocated JJ/Git fixture.
+def check-nixvim-repository-navigation [] {
+  let executable = $"/etc/profiles/per-user/($env.USER)/bin/nvim"
+  with-env { NVIM_APPNAME: "nvim" } {
+    ^$executable --headless -c $"luafile ($repository_navigation_runner)"
+    require-success "nixvim repository-navigation contract"
+  }
+}
+
+def check-native-repository-navigation [] {
+  ^mise run nvim:next -- --headless -c $"luafile ($repository_navigation_runner)"
+  require-success "native Neovim repository-navigation contract"
+}
+
 check-nixvim
 check-native
 check-nixvim-editing
@@ -79,3 +94,5 @@ check-native-editing
 check-native-typescript
 check-nixvim-interface
 check-native-interface
+check-nixvim-repository-navigation
+check-native-repository-navigation

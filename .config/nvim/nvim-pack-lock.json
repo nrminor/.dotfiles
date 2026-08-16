@@ -53,14 +53,6 @@
       "rev": "b6346946d10d07998efee029fb0f7a593806d0cd",
       "src": "https://github.com/folke/flash.nvim"
     },
-    "git-worktree.nvim": {
-      "rev": "d71df5062996021b8b34cd73bf189f91a36809be",
-      "src": "https://github.com/IMax153/git-worktree.nvim"
-    },
-    "gitsigns.nvim": {
-      "rev": "5be654f2232c10ddcad19c1607a67b6b4b78fc29",
-      "src": "https://github.com/lewis6991/gitsigns.nvim"
-    },
     "lualine.nvim": {
       "rev": "221ce6b2d999187044529f49da6554a92f740a96",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
@@ -139,10 +131,6 @@
       "rev": "3abc464a7f21151bfdd596089ddcab80be658eb3",
       "src": "https://github.com/KimNorgaard/vim-frign",
       "version": "'3abc464a7f21151bfdd596089ddcab80be658eb3'"
-    },
-    "vim-fugitive": {
-      "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
-      "src": "https://github.com/tpope/vim-fugitive"
     },
     "vim-tmux-navigator": {
       "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
