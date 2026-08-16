@@ -1,8 +1,7 @@
 # Home-manager program configurations
 #
-# Program-specific settings that benefit from home-manager's
-# module system. We keep this minimal since dotter manages
-# most dotfiles.
+# Program-specific settings that benefit from Home Manager's module system.
+# User-level dotfile deployment remains mise's responsibility.
 { pkgs, inputs, ... }:
 
 let
@@ -25,12 +24,11 @@ in
   # The registry is generated state; replace stale mutable copies on activation.
   home.file.".config/nushell/plugin.msgpackz".force = true;
 
-  # Direnv: automatically load/unload environment variables per directory
-  # home-manager handles shell integration for bash/zsh/fish/nushell
+  # Direnv loads project-specific environments; nix-direnv caches `use flake`.
   programs.direnv = {
     enable = true;
     package = pkgs-stable.direnv;
-    nix-direnv.enable = true; # Makes 'use flake' fast by caching
+    nix-direnv.enable = true;
     enableNushellIntegration = false; # Nushell config already defines the hook
   };
 }

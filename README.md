@@ -158,8 +158,8 @@ available alongside its mise-managed Node runtime.
 
 ### Neovim
 
-Mise supplies Neovim, Dotter deploys the ordinary Lua configuration under
-`.config/nvim`, and Neovim's built-in `vim.pack` restores plugins at the
+Mise supplies Neovim and deploys the ordinary Lua configuration under
+`.config/nvim`. Neovim's built-in `vim.pack` restores plugins at the
 revisions in `nvim-pack-lock.json`. Language servers, formatters, linters, and
 additional Tree-sitter parsers come from the active development environment or
 explicit editor installation rather than from the editor bootstrap.

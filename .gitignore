@@ -25,23 +25,16 @@ giti# Ignore everything by default
 !/.mise/tasks
 !/.mise/tasks/**
 
-# Dotter configuration
-!/.dotter
-!/.dotter/global.toml
-!/.dotter/macos.toml
-!/.dotter/local.toml
-
 # Validation scripts
 !/scripts
 !/scripts/*.js
 !/scripts/*.ts
 !/scripts/*.sh
 !/scripts/*.nu
-!/scripts/*.rs
 !/scripts/*.lua
 
 # ============================================================================
-# Dotfiles to be Deployed (Managed by Dotter)
+# Managed dotfile sources
 # ============================================================================
 
 # Allow .config directory structure
@@ -99,8 +92,6 @@ giti# Ignore everything by default
 !/.config/mise
 !/.config/mise/config.toml
 !/.config/mise/config.macos.toml
-!/.config/mise/tasks
-!/.config/mise/tasks/**
 
 # Nix (modular cross-platform config)
 !/.config/nix

@@ -4,9 +4,8 @@
 # platforms (macOS, NixOS, standalone Linux). It imports sub-modules
 # and sets core home-manager options.
 #
-# Note: Dotfiles are managed by dotter, not home-manager.
-# We only use home-manager for packages and program integrations
-# that benefit from its module system (like direnv).
+# Mise owns user-level dotfiles. Home Manager remains responsible for packages
+# and program integrations that benefit from its module system, such as direnv.
 {
   pkgs,
   lib,

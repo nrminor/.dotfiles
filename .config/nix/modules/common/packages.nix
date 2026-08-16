@@ -106,7 +106,6 @@ in
   pkgs.usage
   pkgs.watchexec
   pkgs-stable.watchman
-  pkgs.dotter
   pkgs.lychee
   # pkgs.gnuplot
   pkgs.tlrc
