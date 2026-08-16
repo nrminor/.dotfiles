@@ -1,5 +1,4 @@
 return {
-	{ src = "https://github.com/nvim-lua/plenary.nvim", name = "plenary.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig", name = "nvim-lspconfig" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", name = "nvim-treesitter", version = "main" },
 	{
@@ -7,8 +6,6 @@ return {
 		name = "nvim-treesitter-textobjects",
 	},
 	{ src = "https://github.com/windwp/nvim-ts-autotag", name = "nvim-ts-autotag" },
-	{ src = "https://github.com/LnL7/vim-nix", name = "vim-nix" },
-	{ src = "https://github.com/figsoda/nix-develop.nvim", name = "nix-develop.nvim" },
 	{
 		src = "https://github.com/Saghen/blink.cmp",
 		name = "blink.cmp",
@@ -38,10 +35,6 @@ return {
 	{ src = "https://github.com/lewis6991/async.nvim", name = "async.nvim" },
 	{ src = "https://github.com/algmyr/vclib.nvim", name = "vclib.nvim" },
 	{ src = "https://github.com/algmyr/vcsigns.nvim", name = "vcsigns.nvim" },
-	{
-		src = "https://github.com/pmizio/typescript-tools.nvim",
-		name = "typescript-tools.nvim",
-	},
 	{ src = "https://github.com/Saecki/crates.nvim", name = "crates.nvim" },
 	{ src = "https://github.com/hat0uma/csvview.nvim", name = "csvview.nvim" },
 	{ src = "https://github.com/tpope/vim-dadbod", name = "vim-dadbod" },

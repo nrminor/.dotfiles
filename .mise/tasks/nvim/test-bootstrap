@@ -25,7 +25,6 @@ let startup_error = try {
     NRM_EXPECTED_APP: "nvim-next",
     NRM_EXPECTED_CONFIG: "native",
     NRM_EXPECTED_CONFIG_SOURCE: ($root | path join ".config" "nvim" "init.lua"),
-    NRM_EXPECTED_PACK_COUNT: "42",
     XDG_DATA_HOME: ($sandbox | path join "data"),
     XDG_STATE_HOME: ($sandbox | path join "state"),
     XDG_CACHE_HOME: ($sandbox | path join "cache"),

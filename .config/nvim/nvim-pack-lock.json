@@ -73,10 +73,6 @@
       "rev": "e58ad4b0c9e9376096b9704f98fc00d4c9448870",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
-    "nix-develop.nvim": {
-      "rev": "bfba63d6c129d8b5073fe9eb965c9acee04becb0",
-      "src": "https://github.com/figsoda/nix-develop.nvim"
-    },
     "nvim-autopairs": {
       "rev": "7b9923abad60b903ece7c52940e1321d39eccc79",
       "src": "https://github.com/windwp/nvim-autopairs"
@@ -110,10 +106,6 @@
       "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
       "src": "https://github.com/stevearc/oil.nvim"
     },
-    "plenary.nvim": {
-      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
-      "src": "https://github.com/nvim-lua/plenary.nvim"
-    },
     "quietlight.vim": {
       "rev": "61b00ed7c9678c2b23a5ceec8b895001f76af56b",
       "src": "https://github.com/aonemd/quietlight.vim",
@@ -122,10 +114,6 @@
     "snacks.nvim": {
       "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
       "src": "https://github.com/folke/snacks.nvim"
-    },
-    "typescript-tools.nvim": {
-      "rev": "c2f5910074103705661e9651aa841e0d7eea9932",
-      "src": "https://github.com/pmizio/typescript-tools.nvim"
     },
     "vclib.nvim": {
       "rev": "24c36d22ddd28c8d001d85e1fb69fcd2e38a8858",
@@ -155,10 +143,6 @@
     "vim-fugitive": {
       "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
       "src": "https://github.com/tpope/vim-fugitive"
-    },
-    "vim-nix": {
-      "rev": "7235c7ce2cea530cb6b59bc3e46d4bfe917d15c8",
-      "src": "https://github.com/LnL7/vim-nix"
     },
     "vim-tmux-navigator": {
       "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",

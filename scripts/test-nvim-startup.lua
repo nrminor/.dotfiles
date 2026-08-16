@@ -42,13 +42,13 @@ if expected_config == "native" then
 	check("configuration source", config_source, vim.env.NRM_EXPECTED_CONFIG_SOURCE)
 	check("native configuration completion", vim.g.nrm_config_loaded, true)
 
-	local expected_pack_count = assert(tonumber(vim.env.NRM_EXPECTED_PACK_COUNT), "expected a plugin count")
 	local plugins = vim.pack.get()
 	local lockfile = vim.fn.stdpath("config") .. "/nvim-pack-lock.json"
 	local declared_plugins = {}
 	for _, spec in ipairs(assert(package.loaded["nrm.pack.specs"], "plugin specifications were not loaded")) do
 		declared_plugins[spec.name] = true
 	end
+	local expected_pack_count = #vim.tbl_keys(declared_plugins)
 	local managed_plugins = {}
 	check("managed plugin count", #plugins, expected_pack_count)
 	check("plugin lockfile", vim.fn.filereadable(lockfile), 1)

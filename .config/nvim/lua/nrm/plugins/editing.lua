@@ -8,6 +8,7 @@ vim.cmd.packadd("nvim-autopairs")
 
 local luasnip = require("luasnip")
 luasnip.config.setup({ updateevents = "TextChanged,TextChangedI" })
+require("luasnip.loaders.from_lua").lazy_load({ paths = vim.fn.stdpath("config") .. "/snippets" })
 
 vim.api.nvim_create_autocmd("ModeChanged", {
 	desc = "Leave snippet on mode change",
@@ -58,6 +59,8 @@ require("blink.cmp").setup({
 })
 
 require("nvim-treesitter").setup()
+vim.treesitter.language.register("markdown", "mdx")
+vim.treesitter.language.register("groovy", "nextflow")
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
 	callback = function(event)

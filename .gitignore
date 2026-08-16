@@ -141,6 +141,8 @@ giti# Ignore everything by default
 !/.config/nvim/colors/*.lua
 !/.config/nvim/lua
 !/.config/nvim/lua/**
+!/.config/nvim/snippets
+!/.config/nvim/snippets/**
 !/.config/nvim/after
 !/.config/nvim/after/**
 
