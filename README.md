@@ -19,24 +19,6 @@ commands and aliases live under [`.config/nushell`](.config/nushell).
 This setup is deliberately peculiar to me and changes frequently. Treat it as
 a reference or starting point rather than a general-purpose macOS distribution.
 
-## How the environment is divided
-
-Two tools divide system and user-environment responsibilities:
-
-```text
-nix-darwin  machine configuration, applications, and bootstrap tools
-mise        tools, source repositories, dotfiles, bootstrap, and tasks
-```
-
-Nix remains the source of truth for the machine. Mise explicitly converges the
-user environment and exposes repository workflows through `mise run`; a system
-rebuild never deploys user dotfiles as a side effect.
-Project-local Node dependencies are pinned in the pnpm-compatible
-`pnpm-lock.yaml`.
-
-Just and direnv remain installed globally for compatibility with other
-repositories, but this repository has neither a justfile nor an `.envrc`.
-
 ## Set up a new Apple machine
 
 Install mise using its upstream installation instructions. On a fresh Mac,
@@ -51,10 +33,10 @@ mise trust
 mise bootstrap --yes
 ```
 
-Bootstrap installs platform packages, converges secondary source repositories,
+Bootstrap installs platform packages, pulls in some source repositories,
 applies dotfiles, installs declared tools, prepares this checkout, and finally
-synchronizes globally managed agent skills. `mise run setup` remains available
-when only this checkout's locked dependencies and repository hooks need repair.
+synchronizes globally managed agent skills. `mise run setup` can also repeat this
+process as needed.
 
 Install Nix separately to establish the macOS system layer and enable flakes:
 
@@ -71,15 +53,6 @@ apply the initial nix-darwin configuration:
 source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 nix run nix-darwin -- switch --flake ~/.dotfiles/.config/nix#starter
 ```
-
-The initial nix-darwin activation configures the machine but does not clone this
-repository or deploy user configuration. Later rebuilds consume the flake
-directly from `~/.dotfiles/.config/nix`.
-
-The preferred mise executable may be a self-updating installation in
-`~/.local/bin`; nix-darwin also provides a fallback. The project declares the
-oldest mise version its configuration supports rather than requiring both
-installations to be on the same patch release.
 
 ## Work with the system day to day
 
@@ -142,19 +115,14 @@ mise run check
 ```
 
 `format` runs the maintained Nix, shell, and TOML formatters. `check` runs all
-Prek hooks, Statix and the system flake checks, the TypeScript compiler, and
-Nushell syntax checks. Prek remains the low-level Git-hook and file-selection
-engine beneath mise's orchestration.
+pre-commit hooks, Statix and the system flake checks, the TypeScript compiler, and
+Nushell syntax checks.
 
-The custom repository validator is implemented in TypeScript:
+The custom repository validator can be run with:
 
 ```bash
 mise run validate
 ```
-
-TypeScript is a project dependency so tools resolve the compiler associated
-with this checkout. Mise adds `node_modules/.bin` to `PATH`, making the compiler
-available alongside its mise-managed Node runtime.
 
 ### Neovim
 
