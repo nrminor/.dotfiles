@@ -60,7 +60,6 @@ require("blink.cmp").setup({
 
 require("nvim-treesitter").setup()
 vim.treesitter.language.register("markdown", "mdx")
-vim.treesitter.language.register("groovy", "nextflow")
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
 	callback = function(event)

@@ -1,6 +1,6 @@
 local specs = require("nrm.pack.specs")
+local parsers = require("nrm.pack.parsers")
 
-local parser_languages = { "lua", "typescript" }
 local maintenance_kinds = { install = true, update = true }
 
 local function activate(change)
@@ -8,6 +8,12 @@ local function activate(change)
 		vim.cmd.packadd(change.spec.name)
 	end
 end
+
+vim.api.nvim_create_autocmd("User", {
+	pattern = "TSUpdate",
+	desc = "Register custom Tree-sitter parsers",
+	callback = parsers.register_custom_parsers,
+})
 
 vim.api.nvim_create_autocmd("PackChanged", {
 	desc = "Maintain native Neovim plugin artifacts",
@@ -23,9 +29,11 @@ vim.api.nvim_create_autocmd("PackChanged", {
 		elseif change.spec.name == "nvim-treesitter" then
 			activate(change)
 			local treesitter = require("nvim-treesitter")
-			local task = change.kind == "install" and treesitter.install(parser_languages) or treesitter.update()
-			if task:wait(300000) ~= true then
-				error("Tree-sitter parser maintenance failed")
+			if treesitter.install(parsers.languages):wait(300000) ~= true then
+				error("Tree-sitter parser installation failed")
+			end
+			if change.kind == "update" and treesitter.update(parsers.languages):wait(300000) ~= true then
+				error("Tree-sitter parser update failed")
 			end
 		end
 	end,
