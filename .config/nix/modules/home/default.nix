@@ -16,7 +16,7 @@
 
 let
   # Determine home directory based on platform
-  homeDir = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
+  homeDir = if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else "/home/${username}";
 in
 {
   imports = [
