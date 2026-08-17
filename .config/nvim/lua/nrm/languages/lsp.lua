@@ -113,7 +113,6 @@ vim.lsp.enable({
 	"astro",
 	"awk_ls",
 	"bashls",
-	"tailwindcss",
 	"gopls",
 	"hls",
 	"superhtml",
