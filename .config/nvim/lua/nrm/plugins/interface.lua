@@ -234,7 +234,6 @@ for _, mapping in ipairs({
 	{ "<leader>fS", Snacks.picker.spelling, "Find spelling suggestions" },
 	{ "<leader>fr", Snacks.picker.registers, "Find registers" },
 	{ "<leader>f'", Snacks.picker.marks, "Find marks" },
-	{ "<leader>gs", Snacks.picker.git_status, "Find changed files" },
 }) do
 	map(mapping[1], mapping[2], mapping[3])
 end
