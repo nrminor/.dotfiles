@@ -33,7 +33,17 @@
 # Only initialize these for interactive shells
 
 # for the work before the work
-eval "$(mise activate zsh)"
+if [[ ! -x "$HOME/.local/bin/mise" ]]; then
+	return
+fi
+
+typeset _mise_parent_shell="${MISE_SHELL:-}"
+eval "$("$HOME/.local/bin/mise" activate zsh)"
+
+if [[ "${TERM_PROGRAM:-}" == "ghostty" && -o interactive && "$_mise_parent_shell" != "nu" ]] && command -v nu >/dev/null 2>&1; then
+	exec nu --login
+fi
+unset _mise_parent_shell
 
 # nicer tab completions
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'

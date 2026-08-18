@@ -1,6 +1,3 @@
-# shell to launch
-command = "/bin/zsh -l -c 'exec nu --login'"
-
 # font configurations
 font-family = Berkeley Mono
 font-size = 11.5

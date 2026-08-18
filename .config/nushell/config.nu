@@ -57,6 +57,7 @@ if ("~/.opam" | path exists) {
 # for built-in completions.
 overlay use commands.nu as commands
 overlay use aliases.nu as aliases
+overlay use plugins.nu as plugins
 # -------------------------------------------------------------------------------------
 
 # INTERACTIVE SHELL INITIALIZATION

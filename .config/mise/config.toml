@@ -33,6 +33,7 @@ min_version = "2026.8.2"
 "~/.config/nushell/commands.nu" = { source = "~/.dotfiles/.config/nushell/commands.nu" }
 "~/.config/nushell/theme.nu" = { source = "~/.dotfiles/.config/nushell/theme.nu" }
 "~/.config/nushell/aliases.nu" = { source = "~/.dotfiles/.config/nushell/aliases.nu" }
+"~/.config/nushell/plugins.nu" = { source = "~/.dotfiles/.config/nushell/plugins.nu" }
 "~/.config/atuin/init.nu" = { source = "~/.dotfiles/.config/atuin/init.nu" }
 
 # Version control and editors
@@ -83,6 +84,7 @@ min_version = "2026.8.2"
 
 [tools]
 "aqua:dlvhdr/gh-dash" = "latest"
+"aqua:nushell/nushell" = { version = "latest", postinstall = '"$MISE_TOOL_INSTALL_PATH"/nu-*/nu --no-config-file "$HOME/.dotfiles/.config/nushell/plugins.nu"' }
 "aqua:ouch-org/ouch" = "latest"
 "aqua:skim-rs/skim" = "latest"
 ast-grep = "latest"
@@ -133,6 +135,10 @@ zoxide = "latest"
 description = "Install or refresh globally managed agent skills"
 tools = { node = "24", nub = "0.5" }
 run = "nu ~/.dotfiles/scripts/sync-skills.nu"
+
+[tasks."nu:plugins"]
+description = "Regenerate the Nushell plugin registry"
+run = "nu --no-config-file ~/.dotfiles/.config/nushell/plugins.nu"
 
 [tasks.bootstrap]
 description = "Bootstrap mutable user-level state"

@@ -26,6 +26,9 @@
 "mas:430798174" = "latest"  # HazeOver
 "mas:937984704" = "latest"  # Amphetamine
 
+[bootstrap.user]
+login_shell = "/bin/zsh"
+
 [dotfiles]
 "~/Library/Application Support/com.mitchellh.ghostty/config" = { source = "~/.dotfiles/.config/ghostty/config" }
 "~/Library/Application Support/tlrc/config.toml" = { source = "~/.dotfiles/.config/tlrc/config.toml" }

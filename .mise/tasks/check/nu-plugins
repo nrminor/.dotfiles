@@ -1,0 +1,54 @@
+#!/usr/bin/env nu
+#MISE description="Verify Nushell plugin registry synchronization"
+
+let root = $env.MISE_PROJECT_ROOT
+let module = $root | path join ".config" "nushell" "plugins.nu"
+let install_root = ^mise where aqua:nushell/nushell | str trim
+let nu_executable = ^mise which nu | str trim
+let scratch = ^mktemp -d | str trim
+let config_dir = $scratch | path join "config" "nushell"
+
+try {
+  mkdir $config_dir
+  "" | save ($config_dir | path join "config.nu")
+
+  with-env {
+    MISE_TOOL_INSTALL_PATH: $install_root
+    XDG_CONFIG_HOME: ($scratch | path join "config")
+  } {
+    ^$nu_executable --config /dev/null --env-config /dev/null $module
+  }
+
+  let registry = $scratch | path join "config" "nushell" "plugin.msgpackz"
+  let plugins = (
+    ^$nu_executable
+      --config /dev/null
+      --env-config /dev/null
+      --plugin-config $registry
+      --commands "plugin list | get name | sort | to json"
+    | from json
+  )
+
+  let expected = [formats gstat polars query]
+  if $plugins != $expected {
+    error make {
+      msg: "Nushell plugin registry contained the wrong plugins"
+      help: $"Expected ($expected | to json), found ($plugins | to json)"
+    }
+  }
+
+  let command_count = (
+    ^$nu_executable
+      --no-config-file
+      --commands $"use '($module)' *; scope commands | where name == 'nu plugins sync' | length"
+    | into int
+  )
+  if $command_count != 1 {
+    error make { msg: "The `nu plugins sync` command was not exported" }
+  }
+} catch {|error|
+  rm --recursive --force $scratch
+  error make $error.raw
+}
+
+rm --recursive --force $scratch

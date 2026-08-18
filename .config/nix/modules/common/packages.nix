@@ -64,7 +64,7 @@ in
   # pkgs.carapace --> installed and managed with mise
 
   # ===== Nushell Tooling =====
-  # Nushell and its plugins are managed together by Home Manager.
+  # Nushell and its bundled plugins are installed and managed together by mise.
   pkgs.topiary
   pkgs.nufmt
 

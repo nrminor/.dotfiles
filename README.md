@@ -12,9 +12,10 @@ small core environment:
 
 The wider system includes scientific tooling, notebook environments, language
 servers, terminal utilities, and desktop applications. System packages and
-bootstrap tools live under [`.config/nix`](.config/nix), while user-level tools
-live in [mise's global configuration](.config/mise/config.toml). Nushell
-commands and aliases live under [`.config/nushell`](.config/nushell).
+bootstrap tools live under [`.config/nix`](.config/nix), while user-level tools,
+including the complete Nushell distribution, live in
+[mise's global configuration](.config/mise/config.toml). Nushell commands and
+aliases live under [`.config/nushell`](.config/nushell).
 
 This setup is deliberately peculiar to me and changes frequently. Treat it as
 a reference or starting point rather than a general-purpose macOS distribution.
@@ -35,8 +36,8 @@ mise bootstrap --yes
 
 Bootstrap installs platform packages, pulls in some source repositories,
 applies dotfiles, installs declared tools, prepares this checkout, and finally
-synchronizes globally managed agent skills. `mise run setup` can also repeat this
-process as needed.
+synchronizes globally managed agent skills. `mise run setup` can repeat the
+checkout preparation as needed without rerunning machine bootstrap.
 
 Install Nix separately to establish the macOS system layer and enable flakes:
 
@@ -79,6 +80,27 @@ mise run v   # validate
 Run `mise tasks` to see the complete task surface. Longer workflows are
 executable Nushell file tasks under `.mise/tasks`; short leaf tasks are declared
 in `mise.toml`.
+
+### Nushell
+
+Mise installs Nushell from its official release bundle and registers the
+release-matched Polars, query, Git status, and format plugins. Update the
+distribution directly through mise:
+
+```bash
+mise up nushell
+```
+
+Plugin registration runs automatically after installation and updates. It can
+also be repaired or refreshed through either interface:
+
+```bash
+mise run nu:plugins
+nu plugins sync
+```
+
+Start a new Nushell process after refreshing the registry so it loads the new
+plugin command signatures.
 
 ### System administration
 
