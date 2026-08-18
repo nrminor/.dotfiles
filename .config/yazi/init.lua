@@ -1,5 +1,4 @@
 ---@diagnostic disable: undefined-global
--- require("git"):setup()
 
 Status:children_add(function(self)
 	local h = self._current.hovered

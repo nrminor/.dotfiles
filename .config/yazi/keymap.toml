@@ -12,8 +12,3 @@ desc = "Enter the child directory, or open the file"
 on = ["c", "m"]
 run = "plugin chmod"
 desc = "Chmod on selected files"
-
-[[mgr.prepend_keymap]]
-on = ["R"]
-run = "plugin rsync 'user@server.com'"
-desc = "Copy files using rsync to default location"

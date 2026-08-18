@@ -144,6 +144,12 @@ run = "nu --no-config-file ~/.dotfiles/.config/nushell/plugins.nu"
 [tasks."yazi:packages"]
 description = "Install locked Yazi plugins and flavors"
 run = """
+nu --no-config-file --commands '
+  for name in [plugins flavors] {
+    let path = $env.HOME | path join ".config" "yazi" $name
+    if ($path | path exists) { rm --recursive --force $path }
+  }
+'
 ya pkg install --discard
 nu --no-config-file ~/.config/nushell/theme.nu sync yazi
 """

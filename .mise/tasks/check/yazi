@@ -5,24 +5,12 @@ let root = $env.MISE_PROJECT_ROOT
 let manifest_path = $root | path join ".config" "yazi" "package.toml"
 let expected_plugins = ([
   yazi-rs/plugins:chmod
-  yazi-rs/plugins:git
-  Lil-Dank/lazygit
-  boydaihungst/mediainfo
-  yazi-rs/plugins:mime-ext
-  yazi-rs/plugins:mount
-  ndtoan96/ouch
-  GianniBYoung/rsync
   yazi-rs/plugins:smart-enter
   yazi-rs/plugins:smart-filter
-  Rolv-Apneseth/starship
-  TD-Sky/sudo
 ] | sort)
 let expected_flavors = ([
-  yazi-rs/flavors:catppuccin-frappe
   yazi-rs/flavors:catppuccin-latte
   yazi-rs/flavors:catppuccin-macchiato
-  yazi-rs/flavors:catppuccin-mocha
-  yazi-rs/flavors:dracula
 ] | sort)
 
 for executable in [yazi ya] {
@@ -43,9 +31,21 @@ if $flavors != $expected_flavors {
   error make { msg: "Yazi flavor manifest does not match the supported flavor set" }
 }
 
+let plugins_dir = $env.HOME | path join ".config" "yazi" "plugins"
+let expected_plugin_dirs = ($plugins | each {|package|
+  let name = $package | split row ":" | last | path basename
+  $"($name).yazi"
+} | sort)
+let installed_plugin_dirs = (glob ($plugins_dir | path join "*.yazi")
+  | each {|path| $path | path basename }
+  | sort)
+if $installed_plugin_dirs != $expected_plugin_dirs {
+  error make { msg: "Installed Yazi plugins do not exactly match package.toml" }
+}
+
 for package in $plugins {
   let name = $package | split row ":" | last | path basename
-  let path = $env.HOME | path join ".config" "yazi" "plugins" $"($name).yazi"
+  let path = $plugins_dir | path join $"($name).yazi"
   if not ($path | path exists) {
     error make { msg: $"Yazi plugin is not installed: ($name)" }
   }
@@ -54,9 +54,22 @@ for package in $plugins {
   }
 }
 
+let flavors_dir = $env.HOME | path join ".config" "yazi" "flavors"
+let expected_flavor_dirs = ($flavors | each {|package|
+  let name = $package | split row ":" | last | path basename
+  $"($name).yazi"
+} | sort)
+let installed_flavor_dirs = (glob ($flavors_dir | path join "*.yazi")
+  | where {|path| ($path | path basename) not-in [current-dark.yazi current-light.yazi] }
+  | each {|path| $path | path basename }
+  | sort)
+if $installed_flavor_dirs != $expected_flavor_dirs {
+  error make { msg: "Installed Yazi flavors do not exactly match package.toml" }
+}
+
 for package in $flavors {
   let name = $package | split row ":" | last | path basename
-  let path = $env.HOME | path join ".config" "yazi" "flavors" $"($name).yazi"
+  let path = $flavors_dir | path join $"($name).yazi"
   if not ($path | path exists) {
     error make { msg: $"Yazi flavor is not installed: ($name)" }
   }
@@ -65,7 +78,6 @@ for package in $flavors {
   }
 }
 
-let flavors_dir = $env.HOME | path join ".config" "yazi" "flavors"
 let theme_flavors = [
   ($flavors_dir | path join "catppuccin-latte.yazi" | path expand)
   ($flavors_dir | path join "catppuccin-macchiato.yazi" | path expand)
