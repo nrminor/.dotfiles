@@ -1,0 +1,3 @@
+[dotfiles]
+"~/.cache/nushell/carapace.nu" = { source = "~/.dotfiles/.config/nushell/carapace.nu" }
+"~/.local/share/nushell/vendor/autoload/starship.nu" = { source = "~/.dotfiles/.config/nushell/starship.nu" }

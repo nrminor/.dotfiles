@@ -87,6 +87,7 @@ giti# Ignore everything by default
 !/.config/miserc.toml
 !/.config/mise
 !/.config/mise/config.toml
+!/.config/mise/config.linux.toml
 !/.config/mise/config.macos.toml
 
 # Nix (modular cross-platform config)

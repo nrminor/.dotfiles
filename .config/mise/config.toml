@@ -80,6 +80,7 @@ min_version = "2026.8.2"
 # Mise manages its own global configuration after the repository exists.
 "~/.config/miserc.toml" = { source = "~/.dotfiles/.config/miserc.toml" }
 "~/.config/mise/config.toml" = { source = "~/.dotfiles/.config/mise/config.toml" }
+"~/.config/mise/config.linux.toml" = { source = "~/.dotfiles/.config/mise/config.linux.toml" }
 "~/.config/mise/config.macos.toml" = { source = "~/.dotfiles/.config/mise/config.macos.toml" }
 
 [tools]

@@ -179,6 +179,7 @@ interface ParsedMiseConfig {
 function miseConfigPaths(config: Config): string[] {
   return [
     join(config.dotfilesDir, ".config", "mise", "config.toml"),
+    join(config.dotfilesDir, ".config", "mise", "config.linux.toml"),
     join(config.dotfilesDir, ".config", "mise", "config.macos.toml"),
   ];
 }
