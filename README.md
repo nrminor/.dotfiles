@@ -115,6 +115,10 @@ mise run yazi:packages
 Use `ya pkg upgrade` when intentionally advancing package revisions. The
 generated `plugins/` and `flavors/` directories are owned exclusively by
 `ya pkg`; mise owns the hand-written configuration and package manifest.
+Portable preview dependencies come from official release bundles where
+available and otherwise from mise's rootless Conda backend. This keeps the same
+declarative setup across macOS and Linux without choosing a Linux distribution
+package manager or creating user-managed Conda environments.
 
 ### System administration
 

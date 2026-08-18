@@ -20,6 +20,45 @@ for executable in [yazi ya] {
   }
 }
 
+for executable in [file ffmpeg ffprobe 7zz pdftoppm magick resvg] {
+  let result = ^mise which $executable | complete
+  if $result.exit_code != 0 {
+    error make { msg: $"Mise does not provide Yazi capability: ($executable)" }
+  }
+}
+
+let capability_probes = [
+  { executable: file, args: [--version] }
+  { executable: ffmpeg, args: [-version] }
+  { executable: ffprobe, args: [-version] }
+  { executable: 7zz, args: [i] }
+  { executable: pdftoppm, args: [-v] }
+  { executable: magick, args: [-version] }
+  { executable: resvg, args: [--version] }
+]
+for probe in $capability_probes {
+  let result = ^mise exec -- $probe.executable ...$probe.args | complete
+  if $result.exit_code != 0 {
+    error make { msg: $"Yazi capability does not execute: ($probe.executable)" }
+  }
+}
+
+let mime_probe = ^mise exec -- file -bL --mime-type $manifest_path | complete
+if $mime_probe.exit_code != 0 or ($mime_probe.stdout | str trim) != "text/plain" {
+  error make { msg: "Yazi file capability cannot classify package.toml" }
+}
+
+if (sys host).name == "Linux" {
+  let location = ^mise which xclip | complete
+  if $location.exit_code != 0 {
+    error make { msg: "Mise does not provide Linux clipboard support: xclip" }
+  }
+  let probe = ^mise exec -- xclip -version | complete
+  if $probe.exit_code != 0 {
+    error make { msg: "Linux clipboard support does not execute: xclip" }
+  }
+}
+
 let manifest = open $manifest_path
 let plugins = $manifest.plugin.deps.use | sort
 let flavors = $manifest.flavor.deps.use | sort

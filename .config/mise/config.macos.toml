@@ -5,7 +5,6 @@
 "brew:lld" = "latest"
 "brew:llvm" = "latest"
 "brew:libiconv" = "latest"
-"brew:sevenzip" = "latest"
 "brew:opam" = "latest"
 
 # macOS applications managed from Homebrew cask metadata

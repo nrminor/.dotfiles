@@ -53,8 +53,6 @@ in
   pkgs.xz
   pkgs.zstd
   pkgs.bzip2
-  pkgs.p7zip
-  pkgs.xclip
   # pkgs.tailspin
 
   # ===== Shell & Prompt =====
@@ -110,9 +108,6 @@ in
   # pkgs.tree-sitter --> installed and managed with mise
 
   # ===== Media Processing =====
-  pkgs.poppler
-  pkgs.ffmpeg
-  pkgs.imagemagick
   pkgs.ghostscript
   pkgs.graphviz
 
