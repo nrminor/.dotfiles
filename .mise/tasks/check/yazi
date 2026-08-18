@@ -1,0 +1,81 @@
+#!/usr/bin/env nu
+#MISE description="Verify the mise and ya-pkg-owned Yazi distribution"
+
+let root = $env.MISE_PROJECT_ROOT
+let manifest_path = $root | path join ".config" "yazi" "package.toml"
+let expected_plugins = ([
+  yazi-rs/plugins:chmod
+  yazi-rs/plugins:git
+  Lil-Dank/lazygit
+  boydaihungst/mediainfo
+  yazi-rs/plugins:mime-ext
+  yazi-rs/plugins:mount
+  ndtoan96/ouch
+  GianniBYoung/rsync
+  yazi-rs/plugins:smart-enter
+  yazi-rs/plugins:smart-filter
+  Rolv-Apneseth/starship
+  TD-Sky/sudo
+] | sort)
+let expected_flavors = ([
+  yazi-rs/flavors:catppuccin-frappe
+  yazi-rs/flavors:catppuccin-latte
+  yazi-rs/flavors:catppuccin-macchiato
+  yazi-rs/flavors:catppuccin-mocha
+  yazi-rs/flavors:dracula
+] | sort)
+
+for executable in [yazi ya] {
+  let result = ^mise which $executable | complete
+  if $result.exit_code != 0 {
+    error make { msg: $"Mise does not provide ($executable)" }
+  }
+}
+
+let manifest = open $manifest_path
+let plugins = $manifest.plugin.deps.use | sort
+let flavors = $manifest.flavor.deps.use | sort
+
+if $plugins != $expected_plugins {
+  error make { msg: "Yazi plugin manifest does not match the supported plugin set" }
+}
+if $flavors != $expected_flavors {
+  error make { msg: "Yazi flavor manifest does not match the supported flavor set" }
+}
+
+for package in $plugins {
+  let name = $package | split row ":" | last | path basename
+  let path = $env.HOME | path join ".config" "yazi" "plugins" $"($name).yazi"
+  if not ($path | path exists) {
+    error make { msg: $"Yazi plugin is not installed: ($name)" }
+  }
+  if ($path | path type) != "dir" {
+    error make { msg: $"Yazi plugin is not ya-pkg-owned: ($name)" }
+  }
+}
+
+for package in $flavors {
+  let name = $package | split row ":" | last | path basename
+  let path = $env.HOME | path join ".config" "yazi" "flavors" $"($name).yazi"
+  if not ($path | path exists) {
+    error make { msg: $"Yazi flavor is not installed: ($name)" }
+  }
+  if ($path | path type) != "dir" {
+    error make { msg: $"Yazi flavor is not ya-pkg-owned: ($name)" }
+  }
+}
+
+let flavors_dir = $env.HOME | path join ".config" "yazi" "flavors"
+let theme_flavors = [
+  ($flavors_dir | path join "catppuccin-latte.yazi" | path expand)
+  ($flavors_dir | path join "catppuccin-macchiato.yazi" | path expand)
+]
+for name in [current-dark.yazi current-light.yazi] {
+  let link = $flavors_dir | path join $name
+  if ($link | path type) != "symlink" {
+    error make { msg: $"Yazi runtime flavor is not a symlink: ($name)" }
+  }
+  if ($link | path expand) not-in $theme_flavors {
+    error make { msg: $"Yazi runtime flavor has an unexpected target: ($name)" }
+  }
+}

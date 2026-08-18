@@ -79,9 +79,7 @@ in
   # pkgs.tmux --> installed and managed with mise
 
   # ===== File Management =====
-  pkgs.yazi
-  # Note: yazi plugins are in common/plugins.nix and symlinked via activation scripts
-  # They're not installed as packages because they conflict in buildEnv
+  # pkgs.yazi --> installed and managed with mise
 
   # ===== Git & Version Control =====
   pkgs.git

@@ -51,9 +51,8 @@ min_version = "2026.8.2"
 
 # Shared application trees preserve unmanaged neighbors.
 "~/.config/yazi" = { source = "~/.dotfiles/.config/yazi", mode = "symlink-each", exclude = [
-  "flavors/catppuccin-frappe.yazi",
-  "flavors/catppuccin-mocha.yazi",
-  "flavors/dracula.yazi",
+  "plugins",
+  "flavors",
 ] }
 "~/.config/opencode" = { source = "~/.dotfiles/.config/opencode", mode = "symlink-each", exclude = [
   "command",
@@ -88,6 +87,7 @@ min_version = "2026.8.2"
 "aqua:nushell/nushell" = { version = "latest", postinstall = '"$MISE_TOOL_INSTALL_PATH"/nu-*/nu --no-config-file "$HOME/.dotfiles/.config/nushell/plugins.nu"' }
 "aqua:ouch-org/ouch" = "latest"
 "aqua:skim-rs/skim" = "latest"
+"aqua:sxyazi/yazi" = "latest"
 ast-grep = "latest"
 atuin = "latest"
 aube = "latest"
@@ -141,6 +141,13 @@ run = "nu ~/.dotfiles/scripts/sync-skills.nu"
 description = "Regenerate the Nushell plugin registry"
 run = "nu --no-config-file ~/.dotfiles/.config/nushell/plugins.nu"
 
+[tasks."yazi:packages"]
+description = "Install locked Yazi plugins and flavors"
+run = """
+ya pkg install --discard
+nu --no-config-file ~/.config/nushell/theme.nu sync yazi
+"""
+
 [tasks.bootstrap]
 description = "Bootstrap mutable user-level state"
-run = [{ task = "setup" }, { task = "skills:sync" }]
+run = [{ task = "setup" }, { task = "yazi:packages" }, { task = "skills:sync" }]

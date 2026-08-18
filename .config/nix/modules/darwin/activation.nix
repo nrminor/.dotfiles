@@ -11,9 +11,6 @@
 
 let
   userHome = "/Users/${username}";
-
-  # Import common plugin lists
-  plugins = import ../common/plugins.nix { inherit pkgs; };
 in
 {
   system.activationScripts = {
@@ -77,39 +74,6 @@ in
           chown -R ${username}:staff ${userHome}/Documents/screenshots
         fi
 
-      '';
-
-    # Plugin symlinks (runs after system setup)
-    postActivation.text =
-      let
-        yaziPluginsDir = "${userHome}/.config/yazi/plugins";
-      in
-      ''
-        # ===== Yazi Plugins =====
-        echo "Setting up Yazi plugins..." >&2
-
-        mkdir -p "${yaziPluginsDir}"
-
-        # Remove old nix-managed plugin symlinks (preserve ya pkg managed ones)
-        for plugin in "${yaziPluginsDir}"/*.yazi; do
-          if [ -L "$plugin" ] && readlink "$plugin" | grep -q "^/nix/store"; then
-            echo "Removing old Nix plugin symlink: $plugin" >&2
-            rm "$plugin"
-          fi
-        done
-
-        # Create symlinks for each plugin
-        ${pkgs.lib.concatMapStringsSep "\n" (plugin: ''
-          full_name=$(basename "${plugin}")
-          # Extract plugin name: hash-name.yazi-version -> name.yazi
-          temp="''${full_name#*-}"
-          plugin_name="''${temp%%.yazi-*}.yazi"
-          echo "Linking $plugin_name..." >&2
-          ln -sf "${plugin}" "${yaziPluginsDir}/$plugin_name"
-          chown -h ${username}:staff "${yaziPluginsDir}/$plugin_name"
-        '') plugins.yazi}
-
-        echo "Yazi plugins setup complete!" >&2
       '';
   };
 }

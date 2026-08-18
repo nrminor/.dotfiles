@@ -102,6 +102,20 @@ nu plugins sync
 Start a new Nushell process after refreshing the registry so it loads the new
 plugin command signatures.
 
+### Yazi
+
+Mise installs Yazi and its `ya` package manager from the same official release.
+The tracked `package.toml` pins plugins and flavors by revision and content hash;
+machine bootstrap restores them automatically. Repeat that convergence with:
+
+```bash
+mise run yazi:packages
+```
+
+Use `ya pkg upgrade` when intentionally advancing package revisions. The
+generated `plugins/` and `flavors/` directories are owned exclusively by
+`ya pkg`; mise owns the hand-written configuration and package manifest.
+
 ### System administration
 
 The `nix:*` namespace keeps less-frequent operations explicit:
