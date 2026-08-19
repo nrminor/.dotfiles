@@ -46,9 +46,6 @@
   # Nix daemon configuration
   nix = {
     settings.experimental-features = "nix-command flakes";
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
 
     # Automatic garbage collection
     gc = {

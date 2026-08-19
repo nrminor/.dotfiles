@@ -1,5 +1,5 @@
 {
-  description = "NRM cross-platform Nix configuration";
+  description = "NRM macOS nix-darwin configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -34,7 +34,6 @@
       # Helper function to create a darwin system configuration
       mkDarwin =
         {
-          hostname,
           system ? "aarch64-darwin",
           username ? "nickminor",
         }:
@@ -64,10 +63,7 @@
     {
       # macOS configurations
       darwinConfigurations = {
-        "starter" = mkDarwin { hostname = "starter"; };
+        "starter" = mkDarwin { };
       };
-
-      # Expose the package set for convenience
-      darwinPackages = self.darwinConfigurations."starter".pkgs;
     };
 }

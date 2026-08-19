@@ -23,9 +23,7 @@ in
   pkgs.gettext
 
   # ===== Editors =====
-  # pkgs.neovim  # Installed and managed with mise
   pkgs.helix
-  # pkgs.ghostty
 
   # ===== Core CLI Tools =====
   pkgs.less
@@ -33,71 +31,33 @@ in
   pkgs.parallel
   pkgs.curl
   pkgs.wget
-  # pkgs.rclone --> installed and managed with mise
-  # pkgs.zoxide --> installed and managed with mise
   pkgs.unixtools.watch
-  # pkgs.jq --> installed and managed with mise
-  # pkgs.ripgrep --> installed and managed with mise
-  # pkgs.ripgrep-all --> installed and managed with mise
-  # pkgs.ast-grep --> installed and managed with mise
-  # pkgs.fd --> installed and managed with mise
-  # pkgs.skim --> installed and managed with mise
-  # pkgs.television --> installed and managed with mise
-  # pkgs.fzf --> installed and managed with mise
   pkgs.fzf-make
-  # pkgs.bat --> installed and managed with mise
-  # pkgs.eza --> installed and managed with mise
   pkgs.tokei
-  # pkgs.hyperfine --> installed and managed with mise
-  # pkgs.ouch --> installed and managed with mise
   pkgs.xz
   pkgs.zstd
   pkgs.bzip2
   # pkgs.tailspin
 
-  # ===== Shell & Prompt =====
-  # pkgs.fastfetch --> installed and managed with mise
-  # pkgs.starship --> installed and managed with mise
-  # pkgs.atuin # --> moved to installation & management by mise
-  # pkgs.carapace --> installed and managed with mise
-
   # ===== Nushell Tooling =====
-  # Nushell and its bundled plugins are installed and managed together by mise.
   pkgs.topiary
   pkgs.nufmt
 
   # ===== Disk Usage & Monitoring =====
-  # pkgs.dust --> installed and managed with mise
-  # pkgs.dua --> installed and managed with mise
   pkgs.btop
   pkgs.htop
   # pkgs.bottom
 
-  # ===== Terminal Multiplexer =====
-  # pkgs.tmux --> installed and managed with mise
-
-  # ===== File Management =====
-  # pkgs.yazi --> installed and managed with mise
-
   # ===== Git & Version Control =====
   pkgs.git
-  # pkgs.gh --> installed and managed with mise
-  # pkgs.gh-dash --> installed and managed with mise
-  # pkgs.jujutsu --> installed and managed with mise
-  # pkgs.lazygit --> installed and managed with mise
-  pkgs.difftastic
   inputs.oyui.packages.${pkgs.stdenv.hostPlatform.system}.default
-  pkgs.wrkflw
   inputs.jj-starship.packages.${pkgs.stdenv.hostPlatform.system}.jj-starship
   pkgs.mergiraf
-  # pkgs.git-cliff --> installed and managed with mise
   pkgs.gitlogue # for funzies
 
   # ===== Development Tools =====
   pkgs.just
   # pkgs.mask
-  pkgs-stable.direnv
-  pkgs.mise
   pkgs.usage
   pkgs.watchexec
   pkgs-stable.watchman
@@ -105,7 +65,6 @@ in
   # pkgs.gnuplot
   pkgs.tlrc
   pkgs.binsider
-  # pkgs.tree-sitter --> installed and managed with mise
 
   # ===== Media Processing =====
   pkgs.ghostscript
@@ -131,8 +90,6 @@ in
   pkgs-stable.bash-language-server
   pkgs.shellcheck
   pkgs.shfmt
-  pkgs.zsh-autosuggestions
-  pkgs.zsh-syntax-highlighting
 
   # ===== Awk =====
   pkgs.gawk
@@ -162,7 +119,6 @@ in
   pkgs.cargo-sweep
   pkgs.cargo-cache
   pkgs.cargo-semver-checks
-  # pkgs-stable.release-plz --> installed and managed with mise
   pkgs.crate2nix
   pkgs.dioxus-cli
   pkgs.rust-cbindgen
@@ -178,10 +134,6 @@ in
 
   # ===== Python Ecosystem =====
   pkgs.python313
-  # pkgs.uv --> installed & managed with mise
-  # pkgs.pixi --> installed & managed with mise
-  # pkgs.ruff --> installed and managed with uv/uvx
-  # pkgs.ty --> installed and managed with uv/uvx
 
   # ===== Go Ecosystem =====
   pkgs.go
@@ -228,7 +180,6 @@ in
 
   # ===== OCaml =====
   pkgs.ocaml
-  # pkgs.opam
 
   # ===== Haskell =====
   # pkgs.haskellPackages.ghcup
