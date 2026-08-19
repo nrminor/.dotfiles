@@ -1,0 +1,5 @@
+#!/usr/bin/env nu
+#MISE description="Format portable and optional Nix files"
+
+^mise run format
+^mise run format:nix

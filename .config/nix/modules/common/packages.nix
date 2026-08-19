@@ -81,7 +81,6 @@ in
   # ===== Bash/Zsh =====
   pkgs-stable.bash-language-server
   pkgs.shellcheck
-  pkgs.shfmt
 
   # ===== Awk =====
   pkgs.gawk
