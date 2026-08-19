@@ -13,15 +13,15 @@ export use theme.nu *
 
 # Copy the current working directory to the system clipboard
 #
-# Copies the absolute path of the current directory to the macOS clipboard
-# using pbcopy and prints a confirmation message.
+# Copies the absolute path of the current directory through the active
+# terminal or desktop clipboard provider and prints a confirmation message.
 #
 # Examples:
 #   > pwd copy                      # Copy current directory path
 #   > path copy                     # Same thing (via alias)
 #   > pwd clip                      # Same thing (via alias)
 export def "pwd copy" [] {
-  $env.PWD | ^pbcopy
+  $env.PWD | ^clipcopy
   print $"Copied: ($env.PWD)"
 }
 export def "pwd clip" [] { pwd copy }

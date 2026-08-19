@@ -60,6 +60,7 @@ min_version = "2026.8.2"
 ] }
 
 # Terminal and command-line applications
+"~/.local/bin/clipcopy" = { source = "~/.dotfiles/scripts/clipcopy.nu" }
 "~/.config/herdr/config.toml" = { source = "~/.dotfiles/.config/herdr/config.toml" }
 "~/.config/tuicr/config.toml" = { source = "~/.dotfiles/.config/tuicr/config.toml" }
 "~/.config/atuin/config.toml" = { source = "~/.dotfiles/.config/atuin/config.toml" }

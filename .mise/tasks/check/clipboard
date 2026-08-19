@@ -1,0 +1,18 @@
+#!/usr/bin/env nu
+#MISE description="Verify terminal clipboard copying"
+
+use std/assert
+
+let root = $env.MISE_PROJECT_ROOT
+let helper = $root | path join "scripts" "clipcopy.nu"
+let result = with-env {
+  SSH_TTY: "/dev/pts/1"
+  SSH_CONNECTION: "192.0.2.1 12345 192.0.2.2 22"
+  DISPLAY: ":0"
+  WAYLAND_DISPLAY: "wayland-0"
+} {
+  "hello" | ^nu --no-config-file $helper | complete
+}
+
+assert equal $result.exit_code 0
+assert equal ($result.stdout | encode hex) "1B5D35323B633B614756736247383D07"

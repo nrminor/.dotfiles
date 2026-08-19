@@ -6,4 +6,5 @@
 ^mise run check:typescript
 ^mise run check:nu
 ^mise run check:nu-plugins
+^mise run check:clipboard
 ^mise run check:yazi

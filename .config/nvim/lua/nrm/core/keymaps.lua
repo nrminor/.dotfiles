@@ -10,11 +10,25 @@ local function map(mode, lhs, rhs, description, options)
 	)
 end
 
+local function copy_buffer_path()
+	local path = vim.api.nvim_buf_get_name(0)
+	if path == "" then
+		vim.notify("Current buffer has no file path", vim.log.levels.WARN)
+		return
+	end
+
+	path = vim.fs.normalize(path)
+	vim.fn.setreg("+", path)
+	vim.notify("Copied: " .. path)
+end
+
 map("n", "<Space>", "<Nop>")
 map("n", "L", "$", "Jump End of [L]ine")
 map("n", "H", "^", "Jump Start of [L]ine")
 map("n", "U", "<C-r>", "Redo")
 map("n", "<C-s>", "<Cmd>write<CR>", "Save Current Buffer")
+map("n", "<D-p>", copy_buffer_path, "Copy Buffer Path")
+map("n", "<D-c>", copy_buffer_path, "Copy Buffer Path")
 map("n", "<Leader>no", "<Cmd>nohlsearch<CR>", "[N]o Highlight")
 map("n", "<Leader>w", "<Cmd>write<CR>", "[W]rite Buffer", { silent = false })
 map("n", "<Leader>q", "<Cmd>quit<CR>", "[Q]uit Buffer", { silent = false })
