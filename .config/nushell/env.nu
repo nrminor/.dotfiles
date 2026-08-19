@@ -25,9 +25,13 @@ $env.LANG = "en_US.UTF-8"
 $env.XDG_CONFIG_HOME = ($env.HOME | path join ".config")
 
 # ============================================================================
-# MISE-MANAGED FORMULA PREFIX
+# MACOS FORMULA PREFIX
 # ============================================================================
-$env.BREW_PREFIX = "/opt/homebrew"
+let is_macos = $nu.os-info.name == "macos"
+
+if $is_macos {
+  $env.BREW_PREFIX = "/opt/homebrew"
+}
 
 # ============================================================================
 # PATH CONSTRUCTION
@@ -36,29 +40,28 @@ $env.BREW_PREFIX = "/opt/homebrew"
 # Priority order: first items have highest priority
 # Using 'prepend' adds to the front (highest priority)
 
+let platform_paths = if $is_macos {
+  [
+    ($env.BREW_PREFIX | path join "bin")
+    ($env.BREW_PREFIX | path join "sbin")
+    "/run/current-system/sw/bin"
+  ] | where {|path| $path | path exists }
+} else {
+  []
+}
+
+let user_paths = [
+  "/usr/local/bin"
+  ($env.HOME | path join ".cargo" "bin") # Rust
+  ($env.HOME | path join ".pixi" "bin") # Pixi (Python)
+  ($env.HOME | path join "go" "bin") # Go
+  ($env.HOME | path join ".local" "bin") # Local scripts
+]
+
 $env.PATH = (
   $env.PATH
   | split row (char esep) # Split existing PATH by OS-appropriate separator
-  | prepend [
-    # User binaries (highest priority)
-    "/usr/local/bin"
-    ($env.HOME | path join ".cargo" "bin") # Rust
-    ($env.HOME | path join ".pixi" "bin") # Pixi (Python)
-
-    # Formulae installed directly by mise
-    ($env.BREW_PREFIX | path join "bin")
-    ($env.BREW_PREFIX | path join "sbin")
-
-    # Runtime environments
-    ($env.HOME | path join "go" "bin") # Go
-    ($env.HOME | path join ".local" "bin") # Local scripts
-
-    # Nix (if present)
-    ($env.HOME | path join ".nix-profile" "bin")
-    "/etc/profiles/per-user/nickminor/bin" # home-manager packages
-    "/run/current-system/sw/bin"
-    "/nix/var/nix/profiles/default/bin"
-  ]
+  | prepend ($user_paths | append $platform_paths)
   | uniq # Remove duplicates while preserving order
 )
 

@@ -23,9 +23,11 @@ export LANG=en_US.UTF-8
 # ---------------------------------------------------------------------------
 export XDG_CONFIG_HOME="$HOME/.config"
 
-# MISE-MANAGED FORMULA PREFIX
+# MACOS FORMULA PREFIX
 # ---------------------------------------------------------------------------
-export BREW_PREFIX=/opt/homebrew
+if [[ "$OSTYPE" == darwin* ]]; then
+	export BREW_PREFIX=/opt/homebrew
+fi
 
 # PATH CONSTRUCTION
 # ---------------------------------------------------------------------------
@@ -43,12 +45,6 @@ export BREW_PREFIX=/opt/homebrew
 # 	# Runtime environments
 # 	$HOME/go/bin     # Go
 # 	$HOME/.local/bin # Local scripts
-#
-# 	# Nix (if present)
-# 	$HOME/.nix-profile/bin
-# 	/etc/profiles/per-user/$USER/bin # home-manager packages
-# 	/run/current-system/sw/bin
-# 	/nix/var/nix/profiles/default/bin
 #
 # 	# System paths (lowest priority)
 # 	$path # Preserve existing system paths

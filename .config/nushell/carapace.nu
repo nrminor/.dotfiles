@@ -1,5 +1,3 @@
-$env.PATH = ($env.PATH | split row (char esep) | where { $in != "/Users/nickminor/.config/carapace/bin" } | prepend "/Users/nickminor/.config/carapace/bin")
-
 def --env get-env [name] { $env | get $name }
 def --env set-env [name value] { load-env {$name: $value} }
 def --env unset-env [name] { hide-env $name }

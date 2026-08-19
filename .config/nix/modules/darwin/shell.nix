@@ -2,7 +2,6 @@
 #
 # Zsh setup with plugins for SSH sessions and fallback use.
 # The actual dotfiles (.zshrc, etc.) are managed by mise bootstrap.
-# Direnv is configured in home-manager (modules/home/programs.nix).
 { pkgs, ... }:
 
 {
