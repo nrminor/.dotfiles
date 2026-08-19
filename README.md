@@ -102,6 +102,21 @@ nu plugins sync
 Start a new Nushell process after refreshing the registry so it loads the new
 plugin command signatures.
 
+### Tool lockfiles
+
+The repository has one lockfile per mise configuration scope. `mise.lock`
+pins the repository tools declared in `mise.toml`; `.config/mise/mise.lock`
+pins the global user environment declared in `.config/mise/config.toml`. Both
+cover macOS ARM64, Linux x86_64, and Linux ARM64 and belong in version control.
+
+Refresh the existing versions and platform metadata without changing the TOML
+declarations:
+
+```bash
+mise lock
+GITHUB_TOKEN="$(gh auth token)" mise lock --global
+```
+
 ### Yazi
 
 Mise installs Yazi and its `ya` package manager from the same official release.
