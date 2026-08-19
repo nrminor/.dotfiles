@@ -49,6 +49,7 @@ repos:
         language: system
         files: '\.nix$'
         pass_filenames: true
+        stages: [manual]
 
       # Ensure TOML files are formatted
       - id: taplo-format

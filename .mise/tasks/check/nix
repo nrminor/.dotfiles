@@ -1,9 +1,10 @@
 #!/usr/bin/env nu
-#MISE description="Lint and evaluate the nix-darwin configuration"
+#MISE description="Format, lint, and evaluate the optional Nix configuration"
 
 let root = $env.MISE_PROJECT_ROOT
 let flake = $root | path join ".config" "nix"
 
+^prek run nixfmt-check --all-files --hook-stage manual
 ^statix check $root
 cd $flake
 ^nix flake check

@@ -136,9 +136,6 @@ in
   # ===== YAML =====
   pkgs.yaml-language-server
 
-  # ===== TOML =====
-  pkgs.taplo
-
   # ===== Nix Tooling =====
   pkgs.nixd
   pkgs.nixfmt

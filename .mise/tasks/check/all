@@ -1,0 +1,5 @@
+#!/usr/bin/env nu
+#MISE description="Run portable and optional Nix verification"
+
+^mise run check
+^mise run check:nix
