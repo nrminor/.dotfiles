@@ -70,8 +70,6 @@ export alias ff = fastfetch
 export alias y = yazi-themed
 export alias o. = ^open . # open the current directory in Finder on macOS
 export alias sg = ast-grep
-export alias pterm = presenterm
-export alias present = presenterm
 
 # ============================================================================
 # GIT/JUJUTSU & VERSION CONTROL
@@ -156,16 +154,6 @@ export alias py = uvx --with polars --with biopython --with pysam --with polars-
 # OCAML
 # ============================================================================
 export alias u = utop
-
-# ============================================================================
-# BIOINFORMATICS
-# ============================================================================
-export alias sq = seqkit
-export alias mm = minimap2
-export alias bt = bedtools
-export alias st = samtools
-export alias bcf = bcftools
-export alias nf = nextflow
 
 # ============================================================================
 # DOTFILES & SYSTEM

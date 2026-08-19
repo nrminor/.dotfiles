@@ -1177,7 +1177,7 @@ export def seqstats [
   if ($output | is-not-empty) {
     ^seqkit stats -b -a -T -j 1 ...$files | save -f $output
   } else {
-    ^seqkit stats -b -a -T -j 1 ...$files | ^csvtk pretty -t --style 3line
+    ^seqkit stats -b -a -T -j 1 ...$files | from tsv
   }
 }
 

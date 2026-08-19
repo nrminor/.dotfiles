@@ -22,9 +22,6 @@ in
   pkgs.llvm
   pkgs.gettext
 
-  # ===== Editors =====
-  pkgs.helix
-
   # ===== Core CLI Tools =====
   pkgs.less
   pkgs.tree
@@ -44,7 +41,6 @@ in
   pkgs.nufmt
 
   # ===== Disk Usage & Monitoring =====
-  pkgs.btop
   pkgs.htop
   # pkgs.bottom
 
@@ -71,7 +67,6 @@ in
   pkgs.graphviz
 
   # ===== Bioinformatics =====
-  pkgs.seqkit
   pkgs.minimap2
   pkgs.bedtools
   pkgs.samtools

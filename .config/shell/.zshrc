@@ -266,11 +266,16 @@ seqstats() {
 		return 1
 	fi
 
-	shopt -s extglob nullglob
-	local files=()
-	for f in "$dir"/*.+(fa|fasta|fq|fastq)?(.gz); do
-		[[ -e "$f" ]] && files+=("$f")
-	done
+	local files=(
+		"$dir"/*.fa(N)
+		"$dir"/*.fasta(N)
+		"$dir"/*.fq(N)
+		"$dir"/*.fastq(N)
+		"$dir"/*.fa.gz(N)
+		"$dir"/*.fasta.gz(N)
+		"$dir"/*.fq.gz(N)
+		"$dir"/*.fastq.gz(N)
+	)
 
 	# If there are no matching files, let the user know and exit
 	if (($#files == 0)); then
@@ -281,7 +286,7 @@ seqstats() {
 	if [ -n "$output_file" ]; then
 		seqkit stats -b -a -T -j 1 "${files[@]}" >"$output_file"
 	else
-		seqkit stats -b -a -T -j 1 "${files[@]}" | csvtk pretty -t --style 3line
+		seqkit stats -b -a -T -j 1 "${files[@]}" | nu --no-config-file --commands 'open --raw /dev/stdin | from tsv'
 	fi
 }
 
@@ -390,12 +395,6 @@ alias uvv='uv sync --all-extras && source .venv/bin/activate'
 alias uvs='uv sync --all-extras'
 alias a='source .venv/bin/activate'
 alias d='deactivate'
-alias sq='seqkit'
-alias mm='minimap2'
-alias bt='bedtools'
-alias st='samtools'
-alias bcf='bcftools'
-alias nf='nextflow'
 alias k="clear"
 alias zr="source $HOME/.zshenv && source $HOME/.zshrc"
 alias zrl="source $HOME/.zshenv && source $HOME/.zshrc"
