@@ -3,4 +3,4 @@
 #MISE alias="u"
 
 ^mise run nix:update-lock
-^mise run rebuild
+^mise run nix:darwin:rebuild

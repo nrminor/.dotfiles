@@ -57,14 +57,14 @@ nix run nix-darwin -- switch --flake ~/.dotfiles/.config/nix#starter
 
 ## Work with the system day to day
 
-The common workflows are intentionally short:
+The common workflows are explicit:
 
 ```bash
-mise run rebuild       # rebuild and activate nix-darwin
-mise run update        # update the system flake, then rebuild
-mise run dots          # apply managed dotfiles
-mise run dots:dry      # preview dotfile changes
-mise run dots:status   # report missing or drifted dotfiles
+mise run nix:darwin:rebuild   # rebuild and activate nix-darwin
+mise run nix:darwin:update    # update the system flake, then rebuild
+mise run dots                  # apply managed dotfiles
+mise run dots:dry              # preview dotfile changes
+mise run dots:status           # report missing or drifted dotfiles
 ```
 
 The corresponding high-frequency aliases are available through mise:
@@ -122,24 +122,25 @@ package manager or creating user-managed Conda environments.
 
 ### System administration
 
-The `nix:*` namespace keeps less-frequent operations explicit:
+Darwin system operations live under `nix:darwin:*`; cross-platform Nix
+operations remain under `nix:*`:
 
 ```bash
-mise run nix:build
+mise run nix:darwin:build
+mise run nix:darwin:generations
+mise run nix:darwin:rollback
+mise run nix:darwin:switch-generation 42
 mise run nix:update-lock
 mise run nix:update-input nixpkgs
-mise run nix:generations
-mise run nix:rollback
-mise run nix:switch-generation 42
 ```
 
 Manual cleanup remains available for periods of heavy Nix iteration:
 
 ```bash
 mise run nix:gc
-mise run nix:clean-generations
-mise run nix:clean
 mise run nix:store-size
+mise run nix:darwin:clean-generations
+mise run nix:darwin:clean
 ```
 
 Automatic garbage collection still runs through nix-darwin; these tasks are

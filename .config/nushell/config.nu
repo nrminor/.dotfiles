@@ -67,26 +67,6 @@ print ""
 fastfetch
 print ""
 
-# Nix Flake Update Reminder
-if (which nix | is-not-empty) {
-  let flake_dir = ($env.XDG_CONFIG_HOME | path join "nix")
-  let flake_lock = ($flake_dir | path join "flake.lock")
-
-  if ($flake_lock | path exists) {
-    # Follow symlink to get the real file's modification time
-    let real_lock = ($flake_lock | path expand)
-    let lock_info = (ls -l $real_lock | first)
-    let lock_age = ($lock_info.modified | into int) / 1_000_000_000 # Convert to seconds
-    let now = (date now | into int) / 1_000_000_000
-    let age_days = (($now - $lock_age) / 86400 | math floor)
-
-    if $age_days > 7 {
-      print $"💡 Tip: Your nix flake hasn't been updated in ($age_days) days."
-      print $"   Run: sysupdate"
-    }
-  }
-}
-
 # Nushell config settings
 $env.config = {
   # buffer_editor: "hx"

@@ -68,7 +68,6 @@ export alias n. = nvim .
 export alias b = btop-themed
 export alias ff = fastfetch
 export alias y = yazi-themed
-export alias o. = ^open . # open the current directory in Finder on macOS
 export alias sg = ast-grep
 
 # ============================================================================
@@ -173,5 +172,3 @@ export alias agent = opencode
 # "CUTE STUFF"
 # ============================================================================
 export alias noise = ^relax-player
-export alias bearcli = /Applications/Bear.app/Contents/MacOS/bearcli
-export alias bear = bearcli

@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 #MISE description="Clean generations, collect garbage, and optimize the Nix store"
 
-^mise run nix:clean-generations
+^mise run nix:darwin:clean-generations
 ^mise run nix:gc
 ^nix store optimise

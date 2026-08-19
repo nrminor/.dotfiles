@@ -32,4 +32,5 @@ login_shell = "/bin/zsh"
 "~/Library/Application Support/com.mitchellh.ghostty/config" = { source = "~/.dotfiles/.config/ghostty/config" }
 "~/Library/Application Support/tlrc/config.toml" = { source = "~/.dotfiles/.config/tlrc/config.toml" }
 "~/Library/Application Support/nushell/vendor/autoload/starship.nu" = { source = "~/.dotfiles/.config/nushell/starship.nu" }
+"~/Library/Application Support/nushell/vendor/autoload/macos.nu" = { source = "~/.dotfiles/.config/nushell/macos.nu" }
 "~/Library/Caches/nushell/carapace.nu" = { source = "~/.dotfiles/.config/nushell/carapace.nu" }
