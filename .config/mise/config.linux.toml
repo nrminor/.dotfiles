@@ -4,3 +4,16 @@
 [dotfiles]
 "~/.cache/nushell/carapace.nu" = { source = "~/.dotfiles/.config/nushell/carapace.nu" }
 "~/.local/share/nushell/vendor/autoload/starship.nu" = { source = "~/.dotfiles/.config/nushell/starship.nu" }
+"~/.bashrc/nushell" = { block = '''
+if [[ $- == *i* ]]; then
+  if [[ ! -x "$HOME/.local/bin/mise" ]]; then
+    return
+  fi
+  _mise_parent_shell="${MISE_SHELL:-}"
+  eval "$("$HOME/.local/bin/mise" activate bash)"
+  if [[ "$_mise_parent_shell" != "nu" ]] && command -v nu >/dev/null 2>&1; then
+    exec nu
+  fi
+  unset _mise_parent_shell
+fi
+''', comment = "#" }

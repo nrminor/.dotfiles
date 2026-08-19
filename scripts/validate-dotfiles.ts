@@ -210,6 +210,51 @@ function extractDotfileDeclarations(config: Config): DotfileDeclaration[] {
         const exclude = Array.isArray(entry.exclude)
           ? entry.exclude.filter((item): item is string => typeof item === "string")
           : [];
+        const isEdit = ["block", "line", "template", "comment"].some(
+          (property) => property in entry
+        );
+
+        if (isEdit) {
+          const separator = target.lastIndexOf("/");
+          const id = separator >= 0 ? target.slice(separator + 1) : "";
+          const block = typeof entry.block === "string" ? entry.block : undefined;
+          const line = typeof entry.line === "string" ? entry.line : undefined;
+
+          if (separator <= 1 || !id) problems.push("edit target must end with an id path segment");
+          if (id && !/^[A-Za-z0-9_.-]+$/.test(id)) {
+            problems.push("edit id may only contain letters, digits, '_', '-', and '.'");
+          }
+          if ("block" in entry && block === undefined) problems.push("block must be a string");
+          if ("line" in entry && line === undefined) problems.push("line must be a string");
+          if (line?.includes("\n")) problems.push("line must not contain a newline");
+          if ("source" in entry && !source) problems.push("source must be a non-empty string");
+          if (block !== undefined && source !== undefined) {
+            problems.push("block and source are mutually exclusive");
+          }
+          if (line !== undefined && (block !== undefined || source !== undefined)) {
+            problems.push("line is mutually exclusive with block and source");
+          }
+          if (block === undefined && line === undefined && source === undefined) {
+            problems.push("edit requires block, line, or source");
+          }
+          if ("template" in entry && entry.template !== "tera") {
+            problems.push('template must be "tera"');
+          }
+          if ("comment" in entry && typeof entry.comment !== "string") {
+            problems.push("comment must be a string");
+          }
+          if ("mode" in entry || "exclude" in entry) {
+            problems.push("edit entries do not support mode or exclude");
+          }
+
+          return {
+            target,
+            source,
+            exclude: [],
+            problems,
+            configFile,
+          };
+        }
 
         if (!source) problems.push("source must be a non-empty string");
         if ("content" in entry) problems.push("content entries are not supported here");

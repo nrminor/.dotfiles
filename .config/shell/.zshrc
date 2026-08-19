@@ -7,27 +7,6 @@
 # -------------------------------------------------------------------------------------
 # These only run in interactive shells, not scripts
 
-# Initialize completion system (currently commented out because nix already runs it through /etc/zshrc)
-# autoload -Uz compinit
-# zcompdump="${HOME}/.zcompdump"
-
-# if [[ -f "$zcompdump" ]]; then
-# 	# File exists, check age
-# 	cache_age_seconds=$(($(date +%s) - $(stat -f %m "$zcompdump" 2>/dev/null ||
-# 		echo 0)))
-# 	if ((cache_age_seconds > 86400)); then
-# 		# Cache is old (>24 hours), rebuild
-# 		compinit
-# 	else
-# 		# Cache is fresh, use it
-# 		compinit -C
-# 	fi
-# else
-# 	# No cache file, create it
-# 	compinit
-# fi
-# -------------------------------------------------------------------------------------
-
 # EXTERNAL TOOL INITIALIZATION (the slow stuff)
 # -------------------------------------------------------------------------------------
 # Only initialize these for interactive shells
@@ -40,10 +19,19 @@ fi
 typeset _mise_parent_shell="${MISE_SHELL:-}"
 eval "$("$HOME/.local/bin/mise" activate zsh)"
 
-if [[ "${TERM_PROGRAM:-}" == "ghostty" && -o interactive && "$_mise_parent_shell" != "nu" ]] && command -v nu >/dev/null 2>&1; then
-	exec nu --login
+if [[ -o interactive && "$_mise_parent_shell" != "nu" ]] && command -v nu >/dev/null 2>&1; then
+	if [[ "${TERM_PROGRAM:-}" == "ghostty" ]]; then
+		exec nu --login
+	elif [[ "$OSTYPE" == linux* ]]; then
+		exec nu
+	fi
 fi
 unset _mise_parent_shell
+
+if ((!$+functions[compdef])); then
+	autoload -Uz compinit
+	compinit
+fi
 
 # nicer tab completions
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'

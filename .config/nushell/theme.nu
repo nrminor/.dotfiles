@@ -5,6 +5,7 @@
 # This module resolves the effective theme mode using the following precedence:
 #   1. Manual override written by `theme set light` or `theme set dark`
 #   2. macOS appearance via `defaults read -g AppleInterfaceStyle`
+#   3. Dark on other operating systems
 #
 # The exported `theme ...` commands are intended for interactive use from Nushell
 # and for non-interactive use via `nu ~/.config/nushell/theme.nu ...`.
@@ -25,11 +26,15 @@ def ensure-theme-state-dir [] {
 }
 
 def theme-system-mode [] {
-  let result = (do -i { ^defaults read -g AppleInterfaceStyle } | complete)
-  if $result.exit_code == 0 and ($result.stdout | str trim) == "Dark" {
-    "dark"
+  if $nu.os-info.name == "macos" and (which defaults | is-not-empty) {
+    let result = (^defaults read -g AppleInterfaceStyle | complete)
+    if $result.exit_code == 0 and ($result.stdout | str trim) == "Dark" {
+      "dark"
+    } else {
+      "light"
+    }
   } else {
-    "light"
+    "dark"
   }
 }
 
