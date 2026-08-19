@@ -16,8 +16,13 @@ export GIT_EDITOR=nvim
 
 # LOCALE SETTINGS
 # ---------------------------------------------------------------------------
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
+if [[ -z "${LANG:-}" ]]; then
+	if [[ "$OSTYPE" == darwin* ]]; then
+		export LANG=en_US.UTF-8
+	else
+		export LANG=C.UTF-8
+	fi
+fi
 
 # XDG BASE DIRECTORY
 # ---------------------------------------------------------------------------

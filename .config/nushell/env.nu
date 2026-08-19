@@ -16,8 +16,11 @@ $env.GIT_EDITOR = "nvim"
 # ============================================================================
 # LOCALE SETTINGS
 # ============================================================================
-$env.LC_ALL = "en_US.UTF-8"
-$env.LANG = "en_US.UTF-8"
+let is_macos = $nu.os-info.name == "macos"
+
+if (($env.LANG? | default "") | is-empty) {
+  $env.LANG = if $is_macos { "en_US.UTF-8" } else { "C.UTF-8" }
+}
 
 # ============================================================================
 # XDG BASE DIRECTORY
@@ -27,8 +30,6 @@ $env.XDG_CONFIG_HOME = ($env.HOME | path join ".config")
 # ============================================================================
 # MACOS FORMULA PREFIX
 # ============================================================================
-let is_macos = $nu.os-info.name == "macos"
-
 if $is_macos {
   $env.BREW_PREFIX = "/opt/homebrew"
 }
