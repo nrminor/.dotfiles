@@ -112,6 +112,8 @@ git-cliff = "latest"
 "github:astral-sh/hawk" = "latest"
 "github:bahdotsh/wrkflw" = "latest"
 "github:bede/skope" = "latest"
+"github:dmmulroy/jj-starship" = { version = "latest", postinstall = 'chmod +x "$MISE_TOOL_INSTALL_PATH/jj-starship"' }
+"github:emilien-jegou/oyui" = "latest"
 "github:jnsahaj/lumen" = "latest"
 "github:linebender/resvg" = "latest"
 "github:shenwei356/seqkit" = "latest"

@@ -46,8 +46,6 @@ in
 
   # ===== Git & Version Control =====
   pkgs.git
-  inputs.oyui.packages.${pkgs.stdenv.hostPlatform.system}.default
-  inputs.jj-starship.packages.${pkgs.stdenv.hostPlatform.system}.jj-starship
   pkgs.mergiraf
   pkgs.gitlogue # for funzies
 
