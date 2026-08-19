@@ -16,8 +16,5 @@
     pkgs.nixfmt
     pkgs.nil
     pkgs.statix
-
-    pkgs.mkalias # Creates macOS aliases for Spotlight
-    pkgs.skhd # macOS hotkey daemon
   ];
 }
