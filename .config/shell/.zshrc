@@ -124,13 +124,13 @@ ycd() {
 
 fcd() {
 	local dir
-	dir=$(find "${1:-.}" -type d 2>/dev/null | fzf --height 70% --preview='tree -C {} | head -200') && cd "$dir" || exit
+	dir=$(find "${1:-.}" -type d 2>/dev/null | fzf --height 70% --preview='eza --tree --color=always {} | head -200') && cd "$dir" || exit
 }
 
 fopen() {
 	local items
 	items=$(find "${1:-.}" 2>/dev/null | fzf -m --height 70% --reverse \
-		--preview='[ -d {} ] && tree -C {} || bat -p --paging=never {} --color=always')
+		--preview='[ -d {} ] && eza --tree --color=always {} || bat -p --paging=never {} --color=always')
 	if [[ -n "$items" ]]; then
 		while IFS= read -r line; do
 			open "$line"
@@ -157,7 +157,7 @@ fco() {
 fzo() {
 	local files
 	files=$(find "${1:-.}" 2>/dev/null | fzf --height 70% -m \
-		--preview='[ -d {} ] && tree -C {} || bat -p --paging=never {} --color=always') || return
+		--preview='[ -d {} ] && eza --tree --color=always {} || bat -p --paging=never {} --color=always') || return
 
 	# If no selection was made, return with exit code 0
 	[[ -z "$files" ]] && return 0
@@ -217,7 +217,7 @@ frm() {
 	# Adjust find arguments to suit your needs (e.g., just files, recursive, etc.)
 	local files
 	files=$(find "${1:-.}" -mindepth 1 -maxdepth 1 2>/dev/null | fzf --multi --height 75% \
-		--preview='[ -d {} ] && tree -C {} || bat -p --paging=never {} --color=always') || return
+		--preview='[ -d {} ] && eza --tree --color=always {} || bat -p --paging=never {} --color=always') || return
 
 	# If no selection was made, exit
 	[[ -z "$files" ]] && return 0

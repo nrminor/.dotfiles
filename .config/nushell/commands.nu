@@ -121,7 +121,7 @@ export def --env dholk [] {
 
 # Fuzzy find and cd into a directory
 #
-# Uses fd to find directories and skim for interactive selection with tree preview.
+# Uses fd to find directories and skim for interactive selection with eza preview.
 # By default, respects .gitignore and ignores common directories like .git and node_modules.
 # Use --no-ignore to include all directories.
 #
@@ -137,13 +137,13 @@ export def --env fcd [
     ^fd --type d --no-ignore . $path
     | lines
     | to text
-    | ^sk --height 70% --preview='tree -C {} | head -200'
+    | ^sk --height 70% --preview='eza --tree --color=always {} | head -200'
     | str trim
   } else {
     ^fd --type d . $path
     | lines
     | to text
-    | ^sk --height 70% --preview='tree -C {} | head -200'
+    | ^sk --height 70% --preview='eza --tree --color=always {} | head -200'
     | str trim
   }
 
@@ -203,7 +203,7 @@ export def trash [
 # Fuzzy find and open files or directories
 #
 # Uses fd to find files and skim for interactive multi-selection.
-# Shows tree preview for directories and bat preview for files.
+# Shows eza tree preview for directories and bat preview for files.
 # Opens selected items with the system default application (in parallel!).
 #
 # Examples:
@@ -216,7 +216,7 @@ export def fopen [
     ^fd . $path
     | lines
     | to text
-    | ^sk -m --height 70% --reverse --preview='[ -d {} ] && tree -C {} || bat -p --paging=never {} --color=always'
+    | ^sk -m --height 70% --reverse --preview='[ -d {} ] && eza --tree --color=always {} || bat -p --paging=never {} --color=always'
     | lines
   )
 
@@ -242,7 +242,7 @@ export def frm [
     ^fd --max-depth 1 . $path
     | lines
     | to text
-    | ^sk --multi --height 75% --preview='[ -d {} ] && tree -C {} || bat -p --paging=never {} --color=always'
+    | ^sk --multi --height 75% --preview='[ -d {} ] && eza --tree --color=always {} || bat -p --paging=never {} --color=always'
     | str trim
     | split row "\n"
     | where $it != ""
@@ -307,7 +307,7 @@ export def fzo [
     ^fd . $path
     | lines
     | to text
-    | ^sk --height 70% -m --preview='[ -d {} ] && tree -C {} || bat -p --paging=never {} --color=always'
+    | ^sk --height 70% -m --preview='[ -d {} ] && eza --tree --color=always {} || bat -p --paging=never {} --color=always'
     | str trim
     | split row "\n"
     | where $it != ""

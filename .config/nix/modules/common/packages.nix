@@ -24,7 +24,6 @@ in
 
   # ===== Core CLI Tools =====
   pkgs.less
-  pkgs.tree
   pkgs.parallel
   pkgs.curl
   pkgs.wget
