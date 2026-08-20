@@ -56,9 +56,4 @@
       options = "--delete-older-than 30d";
     };
   };
-
-  # Install fonts system-wide
-  fonts.packages = [
-    pkgs.nerd-fonts.jetbrains-mono
-  ];
 }

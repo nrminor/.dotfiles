@@ -17,6 +17,7 @@
 "brew-cask:visual-studio-code" = "latest"
 "brew-cask:zoom" = "latest"
 "brew-cask:font-symbols-only-nerd-font" = "latest"
+"brew-cask:font-jetbrains-mono-nerd-font" = "latest"
 
 # Mac App Store applications
 "mas:497799835" = "latest"  # Xcode
