@@ -16,7 +16,6 @@
     ./packages.nix
     ./system.nix
     ./shell.nix
-    ./environment.nix
     ./activation.nix
   ];
 
