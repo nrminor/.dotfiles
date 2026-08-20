@@ -2,17 +2,14 @@
 #
 # Scripts that run during 'darwin-rebuild switch' to handle
 # tasks that can't be done declaratively.
-{ lib, username, ... }:
+{ lib, ... }:
 
-let
-  userHome = "/Users/${username}";
-in
 {
   system.activationScripts = {
     # Homebrew owns macOS applications; suppress nix-darwin's app copier.
     applications.text = lib.mkForce "";
 
-    userSetup.text = ''
+    xcodeSetup.text = ''
       # Require an Apple-native compiler and SDK for builds outside Nix derivations.
       if ! /usr/bin/xcrun --sdk macosx --find clang >/dev/null 2>&1; then
         echo "Xcode Command Line Tools are required for native development." >&2
@@ -30,26 +27,6 @@ in
       developer_dir=$(/usr/bin/xcode-select --print-path)
       if [ -x "$developer_dir/usr/bin/xcodebuild" ]; then
         /usr/bin/xcodebuild -license accept
-      fi
-
-      # Create standard directories
-      echo "Setting up directories..." >&2
-      if [ ! -d "${userHome}/Documents/bioinformatics" ]; then
-        echo "Creating bioinformatics directory..." >&2
-        mkdir -p "${userHome}/Documents/bioinformatics"
-        chown -R ${username}:staff ${userHome}/Documents/bioinformatics
-      fi
-
-      if [ ! -d "${userHome}/Documents/hacking" ]; then
-        echo "Creating hacking directory..." >&2
-        mkdir -p "${userHome}/Documents/hacking"
-        chown -R ${username}:staff ${userHome}/Documents/hacking
-      fi
-
-      if [ ! -d "${userHome}/Documents/screenshots" ]; then
-        echo "Creating screenshots directory..." >&2
-        mkdir -p "${userHome}/Documents/screenshots"
-        chown -R ${username}:staff ${userHome}/Documents/screenshots
       fi
     '';
   };

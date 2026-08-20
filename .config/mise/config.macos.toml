@@ -28,6 +28,18 @@
 [bootstrap.user]
 login_shell = "/bin/zsh"
 
+[bootstrap.directories."~/Documents"]
+mode = "0700"
+
+[bootstrap.directories."~/Documents/bioinformatics"]
+mode = "0755"
+
+[bootstrap.directories."~/Documents/hacking"]
+mode = "0755"
+
+[bootstrap.directories."~/Documents/screenshots"]
+mode = "0755"
+
 [dotfiles]
 "~/Library/Application Support/com.mitchellh.ghostty/config" = { source = "~/.dotfiles/.config/ghostty/config" }
 "~/Library/Application Support/tlrc/config.toml" = { source = "~/.dotfiles/.config/tlrc/config.toml" }
