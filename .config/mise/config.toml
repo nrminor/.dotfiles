@@ -61,6 +61,7 @@ min_version = "2026.8.2"
 
 # Terminal and command-line applications
 "~/.local/bin/clipcopy" = { source = "~/.dotfiles/scripts/clipcopy.nu" }
+"~/.local/bin/nextflow-language-server" = { source = "~/.dotfiles/.config/nextflow/bin/nextflow-language-server" }
 "~/.config/herdr/config.toml" = { source = "~/.dotfiles/.config/herdr/config.toml" }
 "~/.config/tuicr/config.toml" = { source = "~/.dotfiles/.config/tuicr/config.toml" }
 "~/.config/atuin/config.toml" = { source = "~/.dotfiles/.config/atuin/config.toml" }
@@ -115,11 +116,13 @@ git-cliff = "latest"
 "github:dmmulroy/jj-starship" = { version = "latest", postinstall = 'chmod +x "$MISE_TOOL_INSTALL_PATH/jj-starship"' }
 "github:emilien-jegou/oyui" = "latest"
 "github:jnsahaj/lumen" = "latest"
+"github:nextflow-io/language-server" = { version = "latest", asset_pattern = "language-server-all.jar" }
 "github:shenwei356/seqkit" = "latest"
 helix = "latest"
 herdr = "latest"
 hk = "latest"
 hyperfine = "latest"
+java = "zulu-21"
 jq = "latest"
 jujutsu = "latest"
 lazygit = "latest"

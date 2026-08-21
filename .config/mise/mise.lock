@@ -3650,6 +3650,28 @@ url_api = "https://api.github.com/repos/jnsahaj/lumen/releases/assets/479707243"
 provenance = "github-attestations"
 provenance_verified = true
 
+[[tools."github:nextflow-io/language-server"]]
+version = "26.04.3"
+backend = "github:nextflow-io/language-server"
+
+[tools."github:nextflow-io/language-server".options]
+asset_pattern = "language-server-all.jar"
+
+[tools."github:nextflow-io/language-server"."platforms.linux-arm64"]
+checksum = "sha256:20cfa34f6e202d6b8babd8d786202ce00e0d39b70ccec3290e2ab3fbd02bc016"
+url = "https://github.com/nextflow-io/language-server/releases/download/v26.04.3/language-server-all.jar"
+url_api = "https://api.github.com/repos/nextflow-io/language-server/releases/assets/500483970"
+
+[tools."github:nextflow-io/language-server"."platforms.linux-x64"]
+checksum = "sha256:20cfa34f6e202d6b8babd8d786202ce00e0d39b70ccec3290e2ab3fbd02bc016"
+url = "https://github.com/nextflow-io/language-server/releases/download/v26.04.3/language-server-all.jar"
+url_api = "https://api.github.com/repos/nextflow-io/language-server/releases/assets/500483970"
+
+[tools."github:nextflow-io/language-server"."platforms.macos-arm64"]
+checksum = "sha256:20cfa34f6e202d6b8babd8d786202ce00e0d39b70ccec3290e2ab3fbd02bc016"
+url = "https://github.com/nextflow-io/language-server/releases/download/v26.04.3/language-server-all.jar"
+url_api = "https://api.github.com/repos/nextflow-io/language-server/releases/assets/500483970"
+
 [[tools."github:shenwei356/seqkit"]]
 version = "2.13.0"
 backend = "github:shenwei356/seqkit"
@@ -3744,6 +3766,22 @@ url_api = "https://api.github.com/repos/sharkdp/hyperfine/releases/assets/317832
 checksum = "sha256:f58d0b90993fadfa122a351428c469ce24afef3865f027f0e6e86f0830d088f1"
 url = "https://github.com/sharkdp/hyperfine/releases/download/v1.20.0/hyperfine-v1.20.0-x86_64-apple-darwin.tar.gz"
 url_api = "https://api.github.com/repos/sharkdp/hyperfine/releases/assets/317832526"
+
+[[tools.java]]
+version = "zulu-21.52.203.0"
+backend = "core:java"
+
+[tools.java."platforms.linux-arm64"]
+checksum = "sha256:2a8bf9d26eaa10598242d8a4799aff1440a929d6ceacf1c161c28bb1973b003a"
+url = "https://cdn.azul.com/zulu/bin/zulu21.52.203-ca-jdk21.0.12.1-linux_aarch64.tar.gz"
+
+[tools.java."platforms.linux-x64"]
+checksum = "sha256:db0c11e13b545e64d520b4821f4ca38ea9bc1c515924eb1e7f48435df101f183"
+url = "https://cdn.azul.com/zulu/bin/zulu21.52.203-ca-jdk21.0.12.1-linux_x64.tar.gz"
+
+[tools.java."platforms.macos-arm64"]
+checksum = "sha256:042093e0895c940a02d68e727bc37b59f3958e58aa1463ec9080845d77af0a45"
+url = "https://cdn.azul.com/zulu/bin/zulu21.52.203-ca-jdk21.0.12.1-macosx_aarch64.tar.gz"
 
 [[tools.jq]]
 version = "1.8.2"

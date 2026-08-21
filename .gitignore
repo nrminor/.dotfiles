@@ -90,6 +90,11 @@ giti# Ignore everything by default
 !/.config/mise/config.linux.toml
 !/.config/mise/config.macos.toml
 
+# Nextflow
+!/.config/nextflow
+!/.config/nextflow/bin
+!/.config/nextflow/bin/nextflow-language-server
+
 # Nix (modular cross-platform config)
 !/.config/nix
 !/.config/nix/flake.nix

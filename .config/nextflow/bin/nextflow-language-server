@@ -1,0 +1,6 @@
+#!/bin/sh
+
+set -eu
+
+jar_dir="$(mise where github:nextflow-io/language-server)"
+exec mise exec java@zulu-21 -- java -jar "$jar_dir/language-server-all.jar" "$@"
