@@ -1,4 +1,6 @@
 # Source this in your ~/.config/nushell/config.nu
+# Based on `atuin init nu` from Atuin 18.19.0.
+# Unique keybinding names work around https://github.com/atuinsh/atuin/issues/3929.
 # minimum supported version = 0.93.0
 module compat {
   export def --wrapped "random uuid -v 7" [...rest] { atuin uuid }
@@ -14,6 +16,28 @@ if 'ATUIN_SESSION' not-in $env or ('ATUIN_SHLVL' not-in $env) or ($env.ATUIN_SHL
 }
 hide-env -i ATUIN_HISTORY_ID
 
+def _atuin_osc133_command_executed [] {
+    if 'ATUIN_PTY_PROXY_ACTIVE' not-in $env {
+        return
+    }
+    if 'ATUIN_HISTORY_ID' not-in $env or ($env.ATUIN_HISTORY_ID | is-empty) {
+        return
+    }
+
+    print -n $"(char -u '1b')]133;C(char bel)"
+}
+
+def _atuin_osc133_command_finished [exit_code: int] {
+    if 'ATUIN_PTY_PROXY_ACTIVE' not-in $env {
+        return
+    }
+    if 'ATUIN_HISTORY_ID' not-in $env or ($env.ATUIN_HISTORY_ID | is-empty) {
+        return
+    }
+
+    print -n $"(char -u '1b')]133;D;($exit_code);history_id=($env.ATUIN_HISTORY_ID);session_id=($env.ATUIN_SESSION)(char bel)"
+}
+
 # Magic token to make sure we don't record commands run by keybindings
 let ATUIN_KEYBINDING_TOKEN = $"# (random uuid)"
 
@@ -26,7 +50,10 @@ let _atuin_pre_execution = {||
         return
     }
     if not ($cmd | str starts-with $ATUIN_KEYBINDING_TOKEN) {
-        $env.ATUIN_HISTORY_ID = (atuin history start -- $cmd | complete | get stdout | str trim)
+        $env.ATUIN_HISTORY_ID = (with-env { ATUIN_SHELL: nu } {
+            atuin history start --hook -- $cmd | complete | get stdout | str trim
+        })
+        _atuin_osc133_command_executed
     }
 }
 
@@ -35,15 +62,13 @@ let _atuin_pre_prompt = {||
     if 'ATUIN_HISTORY_ID' not-in $env {
         return
     }
-    with-env { ATUIN_LOG: error } {
-        if (version).minor >= 104 or (version).major > 0 {
-            job spawn {
-                ^atuin history end $'--exit=($env.LAST_EXIT_CODE)' -- $env.ATUIN_HISTORY_ID | complete
-            } | ignore
-        } else {
-            do { atuin history end $'--exit=($last_exit)' -- $env.ATUIN_HISTORY_ID } | complete
-        }
-
+    _atuin_osc133_command_finished $last_exit
+    if (version).minor >= 104 or (version).major > 0 {
+        job spawn {
+            ^atuin history end --hook $'--exit=($env.LAST_EXIT_CODE)' -- $env.ATUIN_HISTORY_ID | complete
+        } | ignore
+    } else {
+        do { atuin history end --hook $'--exit=($last_exit)' -- $env.ATUIN_HISTORY_ID } | complete
     }
     hide-env -i ATUIN_HISTORY_ID
 }
@@ -53,7 +78,7 @@ def _atuin_search_cmd [...flags: string] {
         [
             $ATUIN_KEYBINDING_TOKEN,
             ([
-                `with-env { ATUIN_LOG: error, ATUIN_QUERY: (commandline), ATUIN_SHELL: nu } {`,
+                `with-env { ATUIN_QUERY: (commandline), ATUIN_SHELL: nu } {`,
                     ([
                         'let output = (run-external atuin search',
                         ($flags | append [--interactive] | each {|e| $'"($e)"'}),
@@ -71,7 +96,7 @@ def _atuin_search_cmd [...flags: string] {
         [
             $ATUIN_KEYBINDING_TOKEN,
             ([
-                `with-env { ATUIN_LOG: error, ATUIN_QUERY: (commandline) } {`,
+                `with-env { ATUIN_QUERY: (commandline) } {`,
                     'commandline edit',
                     '(run-external atuin search',
                         ($flags | append [--interactive] | each {|e| $'"($e)"'}),
@@ -95,12 +120,11 @@ $env.config = (
 )
 
 $env.config = ($env.config | default [] keybindings)
-
 $env.config = (
     $env.config | upsert keybindings (
         $env.config.keybindings
         | append {
-            name: atuin
+            name: atuin_search
             modifier: control
             keycode: char_r
             mode: [emacs, vi_normal, vi_insert]
@@ -108,12 +132,11 @@ $env.config = (
         }
     )
 )
-
 $env.config = (
     $env.config | upsert keybindings (
         $env.config.keybindings
         | append {
-            name: atuin
+            name: atuin_up
             modifier: none
             keycode: up
             mode: [emacs, vi_normal, vi_insert]

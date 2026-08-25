@@ -3,15 +3,37 @@
 # For config settings, custom commands, aliases, and tool initialization
 # ============================================================================
 
+# NUSHELL CONFIG SETTINGS
+# -------------------------------------------------------------------------------------
+$env.config.buffer_editor = "nvim"
+$env.config.show_banner = false
+
+let direnv_hook = {||
+  if (which direnv | is-empty) {
+    return
+  }
+
+  let direnv_data = (direnv export json | from json | default {})
+
+  # Handle PATH separately to keep it as a list
+  if 'PATH' in $direnv_data {
+    $env.PATH = ($direnv_data.PATH | split row (char esep))
+    let other_vars = ($direnv_data | reject PATH)
+    load-env $other_vars
+  } else {
+    load-env $direnv_data
+  }
+}
+
 # EXTERNAL TOOL INITIALIZATION
 # -------------------------------------------------------------------------------------
 # Only initialize these for interactive shells
 
-# mise!
-use ($nu.default-config-dir | path join mise.nu)
-
 # Shell history
 source ~/.config/atuin/init.nu
+
+# Tool versions and project environments
+use ($nu.default-config-dir | path join mise.nu)
 
 # Fast directory jumping
 source ~/.zoxide.nu
@@ -21,6 +43,9 @@ source ~/.zoxide.nu
 # See .config/nushell/carapace.nu in the dotfiles repo for the customized version
 # that properly defers to Nushell's internal completer for built-in commands.
 source $"($nu.cache-dir)/carapace.nu"
+
+# Let project-local Direnv state override mise's environment updates.
+$env.config.hooks.pre_prompt ++= [$direnv_hook]
 
 # Prompt (Starship)
 # One-time setup (if needed):
@@ -66,33 +91,3 @@ overlay use plugins.nu as plugins
 print ""
 fastfetch
 print ""
-
-# Nushell config settings
-$env.config = {
-  # buffer_editor: "hx"
-  buffer_editor: "nvim"
-  show_banner: false
-  # edit_mode: "vi"
-
-  hooks: {
-    pre_prompt: [
-      {||
-        # Direnv integration
-        if (which direnv | is-empty) {
-          return
-        }
-
-        let direnv_data = (direnv export json | from json | default {})
-
-        # Handle PATH separately to keep it as a list
-        if 'PATH' in $direnv_data {
-          $env.PATH = ($direnv_data.PATH | split row (char esep))
-          let other_vars = ($direnv_data | reject PATH)
-          load-env $other_vars
-        } else {
-          load-env $direnv_data
-        }
-      }
-    ]
-  }
-}
