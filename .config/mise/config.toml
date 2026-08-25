@@ -127,7 +127,7 @@ jq = "latest"
 jujutsu = "latest"
 lazygit = "latest"
 node = "latest"
-neovim = "0.12.4"
+neovim = "0.12.5"
 "npm:scriptc" = "latest"
 nub = { version = "latest", allow_builds = ["@nubjs/nub"] }
 opencode = "latest"
@@ -146,6 +146,7 @@ tree-sitter = "latest"
 uv = "latest"
 vp = "latest"
 zoxide = "latest"
+duckdb = "latest"
 
 [tasks."skills:sync"]
 description = "Install or refresh globally managed agent skills"
