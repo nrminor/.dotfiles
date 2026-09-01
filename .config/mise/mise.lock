@@ -2244,6 +2244,25 @@ checksum = "sha256:cf896717611de9608a000664b7020bb56d2ac1298b2222c356756f7f76c5e
 url = "https://conda.anaconda.org/conda-forge/osx-arm64/zstd-1.5.7-hf451053_7.conda"
 checksum = "sha256:da867f5092eb0cb746d353694f0098031fd9817a4ce7d5743121209ae0f406ca"
 
+[[tools."aqua:Feel-ix-343/markdown-oxide"]]
+version = "0.25.12"
+backend = "aqua:Feel-ix-343/markdown-oxide"
+
+[tools."aqua:Feel-ix-343/markdown-oxide"."platforms.linux-arm64"]
+checksum = "sha256:6634b644ff0bcc1b8fb27cc518f82618547ec43fe19d515a890e8e8756950020"
+url = "https://github.com/Feel-ix-343/markdown-oxide/releases/download/v0.25.12/markdown-oxide-v0.25.12-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/Feel-ix-343/markdown-oxide/releases/assets/460775180"
+
+[tools."aqua:Feel-ix-343/markdown-oxide"."platforms.linux-x64"]
+checksum = "sha256:ad4248cf5d3f0e9d9f120b579501c45dad9c46bfcb4ddec36d2cb85d68a58828"
+url = "https://github.com/Feel-ix-343/markdown-oxide/releases/download/v0.25.12/markdown-oxide-v0.25.12-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/Feel-ix-343/markdown-oxide/releases/assets/460775096"
+
+[tools."aqua:Feel-ix-343/markdown-oxide"."platforms.macos-arm64"]
+checksum = "sha256:fd851fbec60dc7cda5b21c682232e5c6ae6671c726e64bce3fe20013223c5774"
+url = "https://github.com/Feel-ix-343/markdown-oxide/releases/download/v0.25.12/markdown-oxide-v0.25.12-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/Feel-ix-343/markdown-oxide/releases/assets/460775745"
+
 [[tools."aqua:dlvhdr/gh-dash"]]
 version = "4.25.2"
 backend = "aqua:dlvhdr/gh-dash"

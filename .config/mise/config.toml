@@ -147,6 +147,7 @@ uv = "latest"
 vp = "latest"
 zoxide = "latest"
 duckdb = "latest"
+"aqua:Feel-ix-343/markdown-oxide" = "latest"
 
 [tasks."skills:sync"]
 description = "Install or refresh globally managed agent skills"
