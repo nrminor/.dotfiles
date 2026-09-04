@@ -36,24 +36,13 @@ fi
 
 # PATH CONSTRUCTION
 # ---------------------------------------------------------------------------
-# Build PATH with priority order (highest priority first)
-# path=(
-# 	# User binaries (highest priority)
-# 	/usr/local/bin
-# 	$HOME/.cargo/bin # Rust
-# 	$HOME/.pixi/bin  # Pixi (Python)
-#
-# 	# Formulae installed directly by mise
-# 	$BREW_PREFIX/bin
-# 	$BREW_PREFIX/sbin
-#
-# 	# Runtime environments
-# 	$HOME/go/bin     # Go
-# 	$HOME/.local/bin # Local scripts
-#
-# 	# System paths (lowest priority)
-# 	$path # Preserve existing system paths
-# )
+# Make Mise and its tool shims available in non-interactive shells too.
+path=(
+	"$HOME/.local/bin"
+	"$HOME/.local/share/mise/shims"
+	$path
+)
+export PATH
 
 # LIBRARY AND COMPILER PATHS
 # ---------------------------------------------------------------------------

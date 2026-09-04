@@ -54,7 +54,6 @@ let platform_paths = if $is_macos {
 let user_paths = [
   "/usr/local/bin"
   ($env.HOME | path join ".cargo" "bin") # Rust
-  ($env.HOME | path join ".pixi" "bin") # Pixi (Python)
   ($env.HOME | path join "go" "bin") # Go
   ($env.HOME | path join ".local" "bin") # Local scripts
 ]
@@ -63,6 +62,9 @@ $env.PATH = (
   $env.PATH
   | split row (char esep) # Split existing PATH by OS-appropriate separator
   | prepend ($user_paths | append $platform_paths)
+  | where {|entry| $entry != ($env.HOME | path join ".pixi" "bin") }
+  # Keep standalone Pixi tools behind Mise-managed versions.
+  | append ($env.HOME | path join ".pixi" "bin")
   | uniq # Remove duplicates while preserving order
 )
 

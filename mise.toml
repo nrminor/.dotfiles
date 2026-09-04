@@ -3,9 +3,9 @@
 min_version = "2026.8.2"
 
 [tools]
-node = "24"
-nub = "0.5"
-prek = "0.4.13"
+node = "26"
+nub = { version = "0.9", allow_builds = ["@nubjs/nub"] }
+prek = "0.5.3"
 
 [env]
 _.path = "node_modules/.bin"
