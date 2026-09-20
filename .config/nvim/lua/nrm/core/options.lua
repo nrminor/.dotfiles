@@ -1,3 +1,27 @@
+local osc52 = require("vim.ui.clipboard.osc52")
+
+if (vim.env.SSH_TTY or "") ~= "" or (vim.env.SSH_CONNECTION or "") ~= "" then
+	-- SSH: + and * share the last local copy; both send to the client's clipboard.
+	-- p uses this session's cache, never an OSC 52 read. Use terminal paste (⌘V on
+	-- macOS) for text newly copied in another application. Local providers stay native.
+	local cached = { { "" }, "v" }
+	local send = osc52.copy("+")
+	local function copy(lines, regtype)
+		cached = { vim.deepcopy(lines), regtype }
+		send(lines)
+	end
+	local function paste()
+		return cached
+	end
+
+	vim.g.clipboard = {
+		name = "OSC 52 (SSH, copy-only)",
+		copy = { ["+"] = copy, ["*"] = copy },
+		paste = { ["+"] = paste, ["*"] = paste },
+		cache_enabled = 0,
+	}
+end
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.no_ocaml_maps = 1
