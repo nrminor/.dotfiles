@@ -1,7 +1,7 @@
 ---
 description: Throws caution to the wind and innovates
 mode: all
-model: openai/gpt-5.6-sol
+model: openai/gpt-6-astra
 temperature: 0.9
 tools:
   write: false

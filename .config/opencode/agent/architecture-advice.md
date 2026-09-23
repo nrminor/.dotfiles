@@ -1,7 +1,7 @@
 ---
 description: Tasteful and intuitive codebase designer with user- and developer-experience front-of-mind
 mode: all
-model: openai/gpt-5.6-sol
+model: openai/gpt-6-sol
 reasoningEffort: high
 temperature: 0.7
 tools:

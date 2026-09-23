@@ -1,7 +1,7 @@
 ---
 description: Edits code with increased sensitivity to entropy
 mode: primary
-model: openai/gpt-5.6-sol
+model: openai/gpt-6-astra
 temperature: 0.6
 tools:
   write: true
