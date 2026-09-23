@@ -147,6 +147,7 @@ zoxide = "latest"
 duckdb = "latest"
 "aqua:Feel-ix-343/markdown-oxide" = "latest"
 watchexec = "latest"
+"github:Byron/dua-cli" = "latest"
 
 [tasks."skills:sync"]
 description = "Install or refresh globally managed agent skills"
