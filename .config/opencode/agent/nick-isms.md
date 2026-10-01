@@ -1,7 +1,7 @@
 ---
 description: Polices for the idiosyncratic preferences of this particular user
 mode: all
-model: openai/gpt-6-sol
+model: openai/gpt-6.1-sol
 reasoningEffort: high
 temperature: 0.5
 tools:
