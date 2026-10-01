@@ -78,7 +78,45 @@ vim.lsp.config("air", {
 	root_markers = { "air.toml", ".air.toml", "DESCRIPTION", ".git" },
 })
 
+local default_tsc_cmd = vim.lsp.config.tsc.cmd
+
 vim.lsp.config("tsc", {
+	cmd = function(dispatchers, config)
+		local root = config and config.root_dir
+		local manifest = root and vim.fs.joinpath(root, "package.json")
+		if not manifest or not vim.uv.fs_stat(manifest) then
+			return default_tsc_cmd(dispatchers, config)
+		end
+
+		local package = vim.json.decode(table.concat(vim.fn.readfile(manifest), "\n"))
+		local declared = false
+		for _, field in ipairs({ "dependencies", "devDependencies", "optionalDependencies", "peerDependencies" }) do
+			declared = declared or (package[field] and package[field]["@effect/tsgo"] ~= nil)
+		end
+		if not declared then
+			return default_tsc_cmd(dispatchers, config)
+		end
+
+		local cli = vim.fs.joinpath(root, "node_modules/.bin/effect-tsgo")
+		if vim.fn.executable(cli) ~= 1 then
+			error("@effect/tsgo is declared but its project-local CLI is missing: " .. cli)
+		end
+		local result = vim.system({ cli, "get-exe-path" }, { cwd = root, text = true }):wait(5000)
+		if result.code == 124 then
+			error("@effect/tsgo get-exe-path timed out after 5000ms: " .. cli)
+		end
+		if result.code ~= 0 then
+			error("@effect/tsgo get-exe-path failed: " .. vim.trim((result.stderr or "") ~= "" and result.stderr or (result.stdout or "")))
+		end
+		local exe = vim.trim(result.stdout or "")
+		if exe == "" then
+			error("@effect/tsgo get-exe-path returned no executable path: " .. cli)
+		end
+		if not vim.startswith(exe, "/") or vim.fn.executable(exe) ~= 1 then
+			error("@effect/tsgo returned a non-executable path: " .. exe)
+		end
+		return vim.lsp.rpc.start({ exe, "--lsp", "--stdio" }, dispatchers)
+	end,
 	settings = {
 		typescript = {
 			inlayHints = {
