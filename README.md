@@ -117,6 +117,37 @@ mise lock
 GITHUB_TOKEN="$(gh auth token)" mise lock --global
 ```
 
+### Pi
+
+[Pi](https://pi.dev/) is a minimal alternative to OpenCode. Global mise installs
+the pinned CLI; dotfiles deploy only its [working preferences](.config/pi/AGENTS.md)
+to `~/.pi/agent/AGENTS.md`. Pi discovers the existing `~/.agents/skills` directory
+natively, so it needs no separate skill installation. OpenCode remains unchanged.
+
+To install or reapply this setup on an existing machine:
+
+```bash
+mise install npm:@earendil-works/pi-coding-agent
+mise run dots:dry
+mise run dots
+pi
+```
+
+Use `/login` and `/model` in Pi to choose authentication and a model. Credentials,
+settings, trust decisions, and sessions stay local under `~/.pi/agent`, outside
+this repository. Node 22.19 or newer must be available, including in projects
+that override the global Node version.
+
+Start with the built-in tools: no third-party extensions, MCP servers, subagents,
+goal tracking, or custom prompt templates are configured. Skills load their
+full instructions on demand; `/skill:name` invokes one explicitly. Some shared
+skills assume another harness's tools and may need adaptation.
+
+The working preferences are guidance, not enforced permissions. Pi does not
+inherit OpenCode's ask/deny rules and runs tools with the current user's OS
+permissions. Update its executable through mise rather than Pi's self-updater;
+change the version pin deliberately and refresh the global lockfile.
+
 ### Yazi
 
 Mise installs Yazi and its `ya` package manager from the same official release.
