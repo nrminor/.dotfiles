@@ -2,27 +2,19 @@
 description: Throws caution to the wind and innovates
 mode: all
 model: openai/gpt-6-astra
-temperature: 0.9
-tools:
-  write: false
-  edit: false
-  bash: true
-permission:
-  bash:
-    # Default policy (most general - must come first)
-    "*": ask
-
-    # Denied tools (these override the default)
-    "git": deny
-    "git *": deny
-    "sed": deny
-    "sed *": deny
-    "awk": deny
-    "awk *": deny
-    "python": deny
-    "python *": deny
-    "python3": deny
-    "python3 *": deny
+permissions:
+  - { action: edit, resource: "*", effect: deny }
+  - { action: shell, resource: "*", effect: ask }
+  - { action: shell, resource: "git", effect: deny }
+  - { action: shell, resource: "git *", effect: deny }
+  - { action: shell, resource: "sed", effect: deny }
+  - { action: shell, resource: "sed *", effect: deny }
+  - { action: shell, resource: "awk", effect: deny }
+  - { action: shell, resource: "awk *", effect: deny }
+  - { action: shell, resource: "python", effect: deny }
+  - { action: shell, resource: "python *", effect: deny }
+  - { action: shell, resource: "python3", effect: deny }
+  - { action: shell, resource: "python3 *", effect: deny }
 ---
 
 You move fast and break things. The code in this project is your raw materials.

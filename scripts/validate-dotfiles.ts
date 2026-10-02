@@ -562,9 +562,10 @@ const Rules = {
   /** Rule: Mutable OpenCode commands come from bootstrap-managed repositories. */
   opencodeCommandsExternal: (config: Config): ValidationResult => {
     const issues: Issue[] = [];
-    const commandTarget = normalizeTarget("~/.config/opencode/command");
+    const commandTarget = normalizeTarget("~/.config/opencode/commands");
+    const legacyTarget = normalizeTarget("~/.config/opencode/command");
     const vendoredCommands = getTrackedFiles(config).filter((filepath) =>
-      filepath.startsWith(".config/opencode/command/")
+      /^\.config\/opencode\/commands?\//.test(filepath)
     );
 
     for (const filepath of vendoredCommands) {
@@ -580,6 +581,13 @@ const Rules = {
       const declarations = extractDotfileDeclarations(config);
       for (const declaration of declarations) {
         const target = normalizeTarget(declaration.target);
+        if (isWithin(legacyTarget, target)) {
+          issues.push({
+            severity: "error",
+            message: `OpenCode commands must use the V2 commands directory: ${declaration.target}`,
+            file: relative(config.dotfilesDir, declaration.configFile),
+          });
+        }
         if (!isWithin(commandTarget, target)) continue;
 
         const source = resolveSource(declaration);
@@ -622,7 +630,7 @@ const Rules = {
       const staticOpenCode = declarations.find(
         (declaration) => normalizeTarget(declaration.target) === normalizeTarget("~/.config/opencode")
       );
-      for (const required of ["command", "plugin"]) {
+      for (const required of ["commands", "plugins"]) {
         if (!staticOpenCode?.exclude.includes(required)) {
           issues.push({
             severity: "error",

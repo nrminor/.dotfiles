@@ -177,12 +177,12 @@ giti# Ignore everything by default
 !/.config/opencode
 !/.config/opencode/opencode.json
 !/.config/opencode/opencode.jsonc
-!/.config/opencode/tui.json
-!/.config/opencode/agent
-!/.config/opencode/agent/*.md
-!/.config/opencode/plugin
-!/.config/opencode/plugin/*.ts
-!/.config/opencode/plugin/*.js
+!/.config/opencode/cli.json
+!/.config/opencode/agents
+!/.config/opencode/agents/*.md
+!/.config/opencode/plugins
+!/.config/opencode/plugins/*.ts
+!/.config/opencode/plugins/*.js
 
 # Pi instructions and settings; credentials and sessions stay outside the repo.
 !/.config/pi

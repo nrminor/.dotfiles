@@ -1,21 +1,13 @@
 ---
 description: Senior engineering advisor for code reviews, architecture decisions, complex debugging, and planning. Invoke when you need deeper analysis before acting — reviews, trade-offs, debugging race conditions, planning refactors. Prompt with precise problem + files. Ask for concrete outcomes. NOTE that this agent is very slow and token expensive and may sometimes be overkill.
 mode: subagent
-model: openai/gpt-6-astra
-# Extended thinking - maxed out for deepest reasoning
-reasoningEffort: xhigh
-# options:
-# thinking:
-#   type: enabled
-#   budgetTokens: 31999
-# Strict read-only permissions (mirrors Amp's allowMcp:false, allowToolbox:false)
-permission:
-  "*": deny
-  read: allow
-  grep: allow
-  glob: allow
-  webfetch: allow
-  lsp: allow
+model: openai/gpt-6-astra#xhigh
+permissions:
+  - { action: "*", resource: "*", effect: deny }
+  - { action: read, resource: "*", effect: allow }
+  - { action: grep, resource: "*", effect: allow }
+  - { action: glob, resource: "*", effect: allow }
+  - { action: webfetch, resource: "*", effect: allow }
 ---
 
 You are the Oracle - an expert AI advisor with advanced reasoning capabilities.

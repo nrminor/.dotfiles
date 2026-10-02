@@ -1,31 +1,47 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "careful",
-  "agent": {
+  "agents": {
     "general": {
       "model": "openai/gpt-6.1-sol",
     },
   },
+  "providers": {
+    "openai": {
+      "models": {
+        "gpt-6.1-sol": {
+          "variants": [
+            { "id": "high", "settings": { "reasoningEffort": "high" } },
+          ],
+        },
+        "gpt-6-astra": {
+          "variants": [
+            { "id": "xhigh", "settings": { "reasoningEffort": "xhigh" } },
+          ],
+        },
+        "gpt-6-luna": {
+          "variants": [
+            { "id": "low", "settings": { "reasoningEffort": "low" } },
+          ],
+        },
+      },
+    },
+  },
   "mcp": {
-    "paper": {
-      "type": "remote",
-      "url": "http://127.0.0.1:29979/mcp",
-      "enabled": true,
-    },
-    "bear": {
-      "command": [
-        "/Applications/Bear.app/Contents/MacOS/bearcli",
-        "mcp-server",
-      ],
-      "enabled": true,
-      "type": "local",
+    "servers": {
+      "paper": {
+        "type": "remote",
+        "url": "http://127.0.0.1:29979/mcp",
+        "disabled": false,
+      },
+      "bear": {
+        "type": "local",
+        "command": [
+          "/Applications/Bear.app/Contents/MacOS/bearcli",
+          "mcp-server",
+        ],
+        "disabled": false,
+      },
     },
   },
-  "experimental": {
-    "disable_paste_summary": true,
-    "batch_tool": true,
-    "openTelemetry": true,
-    "continue_loop_on_deny": true,
-  },
-  "plugin": ["@prevalentware/opencode-goal-plugin"],
 }

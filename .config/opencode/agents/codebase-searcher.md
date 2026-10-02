@@ -1,77 +1,57 @@
 ---
 description: Fast, token-efficient codebase search engine. Finds definitions, call sites, imports, and code patterns using ast-grep (structural) and ripgrep (textual fallback) with VCS-aware tooling. Invoke when you need precise answers about what's in a codebase and where, but not for autonomous exploration, decision-making, or advise. Treat this agent as little more than a syntax-aware, semantics-aware, efficient search engine.
 mode: all
-model: openai/gpt-6-luna
-reasoningEffort: low
-temperature: 0.1
-tools:
-  write: false
-  edit: false
-permission:
-  bash:
-    # Default: deny everything, then allow specific tools
-    "*": deny
-
-    # --- Structural search (Tier 1) ---
-    "sg": allow
-    "sg *": allow
-    "ast-grep": allow
-    "ast-grep *": allow
-
-    # --- Textual search (Tier 2) ---
-    "rg": allow
-    "rg *": allow
-
-    # --- Structural diff ---
-    "difft": allow
-    "difft *": allow
-
-    # --- Git: read-only + clone (clone requires approval) ---
-    "git status": allow
-    "git status *": allow
-    "git log": allow
-    "git log *": allow
-    "git diff": allow
-    "git diff *": allow
-    "git show": allow
-    "git show *": allow
-    "git blame": allow
-    "git blame *": allow
-    "git bisect": allow
-    "git bisect *": allow
-    "git -c diff.external=difft *": allow
-    "git clone": ask
-    "git clone *": ask
-
-    # --- Jujutsu: read-only + clone (clone requires approval) ---
-    "jj log": allow
-    "jj log *": allow
-    "jj diff": allow
-    "jj diff *": allow
-    "jj show": allow
-    "jj show *": allow
-    "jj status": allow
-    "jj status *": allow
-    "jj file annotate": allow
-    "jj file annotate *": allow
-    "jj git clone": ask
-    "jj git clone *": ask
-
-    # --- Read-only file inspection ---
-    "file": allow
-    "file *": allow
-    "wc": allow
-    "wc *": allow
-    "ls": allow
-    "ls *": allow
-
-    # --- Build tool inspection (read-only) ---
-    "just --list": allow
-    "just --summary": allow
-    "make -n": allow
-    "make -n *": allow
-    "make --dry-run": allow
-    "make --dry-run *": allow
+model: openai/gpt-6-luna#low
+permissions:
+  - { action: edit, resource: "*", effect: deny }
+  - { action: shell, resource: "*", effect: deny }
+  - { action: shell, resource: "sg", effect: allow }
+  - { action: shell, resource: "sg *", effect: allow }
+  - { action: shell, resource: "ast-grep", effect: allow }
+  - { action: shell, resource: "ast-grep *", effect: allow }
+  - { action: shell, resource: "rg", effect: allow }
+  - { action: shell, resource: "rg *", effect: allow }
+  - { action: shell, resource: "difft", effect: allow }
+  - { action: shell, resource: "difft *", effect: allow }
+  - { action: shell, resource: "git status", effect: allow }
+  - { action: shell, resource: "git status *", effect: allow }
+  - { action: shell, resource: "git log", effect: allow }
+  - { action: shell, resource: "git log *", effect: allow }
+  - { action: shell, resource: "git diff", effect: allow }
+  - { action: shell, resource: "git diff *", effect: allow }
+  - { action: shell, resource: "git show", effect: allow }
+  - { action: shell, resource: "git show *", effect: allow }
+  - { action: shell, resource: "git blame", effect: allow }
+  - { action: shell, resource: "git blame *", effect: allow }
+  - { action: shell, resource: "git bisect", effect: allow }
+  - { action: shell, resource: "git bisect *", effect: allow }
+  - { action: shell, resource: "git -c diff.external=difft *", effect: allow }
+  - { action: shell, resource: "git clone", effect: ask }
+  - { action: shell, resource: "git clone *", effect: ask }
+  - { action: shell, resource: "jj log", effect: allow }
+  - { action: shell, resource: "jj log *", effect: allow }
+  - { action: shell, resource: "jj diff", effect: allow }
+  - { action: shell, resource: "jj diff *", effect: allow }
+  - { action: shell, resource: "jj show", effect: allow }
+  - { action: shell, resource: "jj show *", effect: allow }
+  - { action: shell, resource: "jj status", effect: allow }
+  - { action: shell, resource: "jj status *", effect: allow }
+  - { action: shell, resource: "jj file annotate", effect: allow }
+  - { action: shell, resource: "jj file annotate *", effect: allow }
+  - { action: shell, resource: "jj git clone", effect: ask }
+  - { action: shell, resource: "jj git clone *", effect: ask }
+  - { action: shell, resource: "file", effect: allow }
+  - { action: shell, resource: "file *", effect: allow }
+  - { action: shell, resource: "wc", effect: allow }
+  - { action: shell, resource: "wc *", effect: allow }
+  - { action: shell, resource: "ls", effect: allow }
+  - { action: shell, resource: "ls *", effect: allow }
+  - { action: shell, resource: "just --list", effect: allow }
+  - { action: shell, resource: "just --summary", effect: allow }
+  - { action: shell, resource: "make -n", effect: allow }
+  - { action: shell, resource: "make -n *", effect: allow }
+  - { action: shell, resource: "make --dry-run", effect: allow }
+  - { action: shell, resource: "make --dry-run *", effect: allow }
 ---
 
 First, load the **codebase-searcher** skill.

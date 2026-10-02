@@ -2,196 +2,153 @@
 description: Exceptionally thorough test designer and executor across Rust, Python, and Node ecosystems
 mode: all
 model: openai/gpt-6.1-sol
-temperature: 0.7
-tools:
-  write: true
-  edit: true
-permission:
-  bash:
-    # =======================================================================
-    # ORDERING: most general → most specific (last matching rule wins)
-    # =======================================================================
-
-    # Default policy (most general - must come first)
-    "*": ask
-
-    # --- Git: deny by default, then allow specific read-only commands ---
-    "git": deny
-    "git *": deny
-    "git status": allow
-    "git status *": allow
-    "git log": allow
-    "git log *": allow
-    "git diff": allow
-    "git diff *": allow
-    "git show": allow
-    "git show *": allow
-    "git branch": allow
-    "git branch *": allow
-    "git ls-files": allow
-    "git ls-files *": allow
-
-    # --- Jujutsu: deny by default, then allow specific read-only commands ---
-    "jj": deny
-    "jj *": deny
-    "jj log": allow
-    "jj log *": allow
-    "jj diff": allow
-    "jj diff *": allow
-    "jj show": allow
-    "jj show *": allow
-    "jj status": allow
-    "jj status *": allow
-
-    # --- Cargo: allow by default, then restrict specific commands ---
-    "cargo *": allow
-    "cargo add": ask
-    "cargo remove": ask
-    "cargo install": deny
-    "rustc": allow
-    "rustc *": allow
-
-    # --- Python testing via uv: ask by default, allow specific test commands ---
-    "uv *": ask
-    "uv sync": allow
-    "uv sync *": allow
-    "uv run pytest": allow
-    "uv run pytest *": allow
-    "uv run python": allow
-    "uv run python *": allow
-    "uv run coverage": allow
-    "uv run coverage *": allow
-
-    # --- Python testing via pixi: ask by default, allow specific test commands ---
-    "pixi *": ask
-    "pixi install": allow
-    "pixi install *": allow
-    "pixi run pytest": allow
-    "pixi run pytest *": allow
-    "pixi run python": allow
-    "pixi run python *": allow
-    "pixi run coverage": allow
-    "pixi run coverage *": allow
-
-    # --- Node testing via Nub/Node: ask by default, allow tests, deny installs ---
-    "nub *": ask
-    "nub run": allow
-    "nub run *": allow
-    "nub run test": allow
-    "nub run test *": allow
-    "nub add": ask
-    "nub remove": ask
-    "nub install": deny
-    "nub i": deny
-    "nub ci": deny
-    "node *": ask
-    "node --test": allow
-    "node --test *": allow
-
-    # --- npm test commands ---
-    "npm test": allow
-    "npm run test": allow
-    "npm run test *": allow
-
-    # --- Build tools (safe to run) ---
-    "just": allow
-    "just *": allow
-    "make": allow
-    "make *": allow
-
-    # --- Read-only file operations ---
-    "cat": allow
-    "cat *": allow
-    "head": allow
-    "head *": allow
-    "tail": allow
-    "tail *": allow
-    "less": allow
-    "less *": allow
-    "more": allow
-    "more *": allow
-    "grep": allow
-    "grep *": allow
-    "rg": allow
-    "rg *": allow
-
-    # --- Find: allow by default, deny dangerous flags ---
-    "find": allow
-    "find *": allow
-    "find * -delete": deny
-    "find * -exec": deny
-    "find * -execdir": deny
-
-    # --- Directory navigation/listing ---
-    "ls": allow
-    "ls *": allow
-    "pwd": allow
-    "tree": allow
-    "tree *": allow
-    "file": allow
-    "file *": allow
-    "stat": allow
-    "stat *": allow
-    "wc": allow
-    "wc *": allow
-
-    # --- Safe utilities ---
-    "echo": allow
-    "echo *": allow
-    "printf": allow
-    "printf *": allow
-    "which": allow
-    "which *": allow
-    "whereis": allow
-    "whereis *": allow
-    "env": allow
-    "printenv": allow
-    "printenv *": allow
-    "date": allow
-    "uname": allow
-    "uname *": allow
-
-    # --- Diff/comparison tools ---
-    "diff": allow
-    "diff *": allow
-    "cmp": allow
-    "cmp *": allow
-
-    # --- Compression (read operations only) ---
-    "tar -t": allow
-    "tar -t *": allow
-    "unzip -l": allow
-    "unzip -l *": allow
-    "gzip -l": allow
-    "gzip -l *": allow
-
-    # --- Editing tools (complete deny) ---
-    "sed": deny
-    "sed *": deny
-    "awk": deny
-    "awk *": deny
-    "perl": deny
-    "perl *": deny
-    "python": deny
-    "python *": deny
-    "python3": deny
-    "python3 *": deny
-
-    # --- Destructive file operations ---
-    "rm -rf": deny
-    "rm -rf *": deny
-    "dd": deny
-    "dd *": deny
-    "truncate": deny
-    "truncate *": deny
-
-    # --- Dangerous remote execution ---
-    "curl * | sh": deny
-    "curl * | bash": deny
-    "wget * | sh": deny
-    "wget * | bash": deny
-    "eval": deny
-    "eval *": deny
+permissions:
+  - { action: edit, resource: "*", effect: allow }
+  - { action: shell, resource: "*", effect: ask }
+  - { action: shell, resource: "git", effect: deny }
+  - { action: shell, resource: "git *", effect: deny }
+  - { action: shell, resource: "git status", effect: allow }
+  - { action: shell, resource: "git status *", effect: allow }
+  - { action: shell, resource: "git log", effect: allow }
+  - { action: shell, resource: "git log *", effect: allow }
+  - { action: shell, resource: "git diff", effect: allow }
+  - { action: shell, resource: "git diff *", effect: allow }
+  - { action: shell, resource: "git show", effect: allow }
+  - { action: shell, resource: "git show *", effect: allow }
+  - { action: shell, resource: "git branch", effect: allow }
+  - { action: shell, resource: "git branch *", effect: allow }
+  - { action: shell, resource: "git ls-files", effect: allow }
+  - { action: shell, resource: "git ls-files *", effect: allow }
+  - { action: shell, resource: "jj", effect: deny }
+  - { action: shell, resource: "jj *", effect: deny }
+  - { action: shell, resource: "jj log", effect: allow }
+  - { action: shell, resource: "jj log *", effect: allow }
+  - { action: shell, resource: "jj diff", effect: allow }
+  - { action: shell, resource: "jj diff *", effect: allow }
+  - { action: shell, resource: "jj show", effect: allow }
+  - { action: shell, resource: "jj show *", effect: allow }
+  - { action: shell, resource: "jj status", effect: allow }
+  - { action: shell, resource: "jj status *", effect: allow }
+  - { action: shell, resource: "cargo *", effect: allow }
+  - { action: shell, resource: "cargo add", effect: ask }
+  - { action: shell, resource: "cargo remove", effect: ask }
+  - { action: shell, resource: "cargo install", effect: deny }
+  - { action: shell, resource: "rustc", effect: allow }
+  - { action: shell, resource: "rustc *", effect: allow }
+  - { action: shell, resource: "uv *", effect: ask }
+  - { action: shell, resource: "uv sync", effect: allow }
+  - { action: shell, resource: "uv sync *", effect: allow }
+  - { action: shell, resource: "uv run pytest", effect: allow }
+  - { action: shell, resource: "uv run pytest *", effect: allow }
+  - { action: shell, resource: "uv run python", effect: allow }
+  - { action: shell, resource: "uv run python *", effect: allow }
+  - { action: shell, resource: "uv run coverage", effect: allow }
+  - { action: shell, resource: "uv run coverage *", effect: allow }
+  - { action: shell, resource: "pixi *", effect: ask }
+  - { action: shell, resource: "pixi install", effect: allow }
+  - { action: shell, resource: "pixi install *", effect: allow }
+  - { action: shell, resource: "pixi run pytest", effect: allow }
+  - { action: shell, resource: "pixi run pytest *", effect: allow }
+  - { action: shell, resource: "pixi run python", effect: allow }
+  - { action: shell, resource: "pixi run python *", effect: allow }
+  - { action: shell, resource: "pixi run coverage", effect: allow }
+  - { action: shell, resource: "pixi run coverage *", effect: allow }
+  - { action: shell, resource: "nub *", effect: ask }
+  - { action: shell, resource: "nub run", effect: allow }
+  - { action: shell, resource: "nub run *", effect: allow }
+  - { action: shell, resource: "nub run test", effect: allow }
+  - { action: shell, resource: "nub run test *", effect: allow }
+  - { action: shell, resource: "nub add", effect: ask }
+  - { action: shell, resource: "nub remove", effect: ask }
+  - { action: shell, resource: "nub install", effect: deny }
+  - { action: shell, resource: "nub i", effect: deny }
+  - { action: shell, resource: "nub ci", effect: deny }
+  - { action: shell, resource: "node *", effect: ask }
+  - { action: shell, resource: "node --test", effect: allow }
+  - { action: shell, resource: "node --test *", effect: allow }
+  - { action: shell, resource: "npm test", effect: allow }
+  - { action: shell, resource: "npm run test", effect: allow }
+  - { action: shell, resource: "npm run test *", effect: allow }
+  - { action: shell, resource: "just", effect: allow }
+  - { action: shell, resource: "just *", effect: allow }
+  - { action: shell, resource: "make", effect: allow }
+  - { action: shell, resource: "make *", effect: allow }
+  - { action: shell, resource: "cat", effect: allow }
+  - { action: shell, resource: "cat *", effect: allow }
+  - { action: shell, resource: "head", effect: allow }
+  - { action: shell, resource: "head *", effect: allow }
+  - { action: shell, resource: "tail", effect: allow }
+  - { action: shell, resource: "tail *", effect: allow }
+  - { action: shell, resource: "less", effect: allow }
+  - { action: shell, resource: "less *", effect: allow }
+  - { action: shell, resource: "more", effect: allow }
+  - { action: shell, resource: "more *", effect: allow }
+  - { action: shell, resource: "grep", effect: allow }
+  - { action: shell, resource: "grep *", effect: allow }
+  - { action: shell, resource: "rg", effect: allow }
+  - { action: shell, resource: "rg *", effect: allow }
+  - { action: shell, resource: "find", effect: allow }
+  - { action: shell, resource: "find *", effect: allow }
+  - { action: shell, resource: "find * -delete", effect: deny }
+  - { action: shell, resource: "find * -exec", effect: deny }
+  - { action: shell, resource: "find * -execdir", effect: deny }
+  - { action: shell, resource: "ls", effect: allow }
+  - { action: shell, resource: "ls *", effect: allow }
+  - { action: shell, resource: "pwd", effect: allow }
+  - { action: shell, resource: "tree", effect: allow }
+  - { action: shell, resource: "tree *", effect: allow }
+  - { action: shell, resource: "file", effect: allow }
+  - { action: shell, resource: "file *", effect: allow }
+  - { action: shell, resource: "stat", effect: allow }
+  - { action: shell, resource: "stat *", effect: allow }
+  - { action: shell, resource: "wc", effect: allow }
+  - { action: shell, resource: "wc *", effect: allow }
+  - { action: shell, resource: "echo", effect: allow }
+  - { action: shell, resource: "echo *", effect: allow }
+  - { action: shell, resource: "printf", effect: allow }
+  - { action: shell, resource: "printf *", effect: allow }
+  - { action: shell, resource: "which", effect: allow }
+  - { action: shell, resource: "which *", effect: allow }
+  - { action: shell, resource: "whereis", effect: allow }
+  - { action: shell, resource: "whereis *", effect: allow }
+  - { action: shell, resource: "env", effect: allow }
+  - { action: shell, resource: "printenv", effect: allow }
+  - { action: shell, resource: "printenv *", effect: allow }
+  - { action: shell, resource: "date", effect: allow }
+  - { action: shell, resource: "uname", effect: allow }
+  - { action: shell, resource: "uname *", effect: allow }
+  - { action: shell, resource: "diff", effect: allow }
+  - { action: shell, resource: "diff *", effect: allow }
+  - { action: shell, resource: "cmp", effect: allow }
+  - { action: shell, resource: "cmp *", effect: allow }
+  - { action: shell, resource: "tar -t", effect: allow }
+  - { action: shell, resource: "tar -t *", effect: allow }
+  - { action: shell, resource: "unzip -l", effect: allow }
+  - { action: shell, resource: "unzip -l *", effect: allow }
+  - { action: shell, resource: "gzip -l", effect: allow }
+  - { action: shell, resource: "gzip -l *", effect: allow }
+  - { action: shell, resource: "sed", effect: deny }
+  - { action: shell, resource: "sed *", effect: deny }
+  - { action: shell, resource: "awk", effect: deny }
+  - { action: shell, resource: "awk *", effect: deny }
+  - { action: shell, resource: "perl", effect: deny }
+  - { action: shell, resource: "perl *", effect: deny }
+  - { action: shell, resource: "python", effect: deny }
+  - { action: shell, resource: "python *", effect: deny }
+  - { action: shell, resource: "python3", effect: deny }
+  - { action: shell, resource: "python3 *", effect: deny }
+  - { action: shell, resource: "rm -rf", effect: deny }
+  - { action: shell, resource: "rm -rf *", effect: deny }
+  - { action: shell, resource: "dd", effect: deny }
+  - { action: shell, resource: "dd *", effect: deny }
+  - { action: shell, resource: "truncate", effect: deny }
+  - { action: shell, resource: "truncate *", effect: deny }
+  - { action: shell, resource: "curl * | sh", effect: deny }
+  - { action: shell, resource: "curl * | bash", effect: deny }
+  - { action: shell, resource: "wget * | sh", effect: deny }
+  - { action: shell, resource: "wget * | bash", effect: deny }
+  - { action: shell, resource: "eval", effect: deny }
+  - { action: shell, resource: "eval *", effect: deny }
 ---
 
 You are a testing specialist with an almost paranoid attention to correctness.

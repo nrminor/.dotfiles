@@ -2245,23 +2245,23 @@ url = "https://github.com/ouch-org/ouch/releases/download/0.8.3/ouch-x86_64-appl
 url_api = "https://api.github.com/repos/ouch-org/ouch/releases/assets/561447589"
 
 [[tools."aqua:skim-rs/skim"]]
-version = "5.7.2"
+version = "5.7.3"
 backend = "aqua:skim-rs/skim"
 
 [tools."aqua:skim-rs/skim"."platforms.linux-arm64"]
-checksum = "sha256:f3742500962ba6f397f404eb0b72856885efbdf2ffcebe4c0ee0c15b8d3d7cf7"
-url = "https://github.com/skim-rs/skim/releases/download/v5.7.2/skim-aarch64-unknown-linux-gnu.tar.xz"
-url_api = "https://api.github.com/repos/skim-rs/skim/releases/assets/592966430"
+checksum = "sha256:b3ebb1c9161c00acd0a59060b056f0676e1a58d6f0c0ba968d0cee62c1df6dd5"
+url = "https://github.com/skim-rs/skim/releases/download/v5.7.3/skim-aarch64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/skim-rs/skim/releases/assets/605204490"
 
 [tools."aqua:skim-rs/skim"."platforms.linux-x64"]
-checksum = "sha256:62ec884c8789699e4f2509f54ab05c2d55c4a98670d294c747098b088ef6d079"
-url = "https://github.com/skim-rs/skim/releases/download/v5.7.2/skim-x86_64-unknown-linux-gnu.tar.xz"
-url_api = "https://api.github.com/repos/skim-rs/skim/releases/assets/592966469"
+checksum = "sha256:2ef256a8cf06b238b6200a398a10dbae8924fdc71d320091e83d758cc1557a1f"
+url = "https://github.com/skim-rs/skim/releases/download/v5.7.3/skim-x86_64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/skim-rs/skim/releases/assets/605204534"
 
 [tools."aqua:skim-rs/skim"."platforms.macos-arm64"]
-checksum = "sha256:caa8bb68b3796e4a39f60cc48ebfa571ef126599dcea5af5aa68a272b83c3846"
-url = "https://github.com/skim-rs/skim/releases/download/v5.7.2/skim-aarch64-apple-darwin.tar.xz"
-url_api = "https://api.github.com/repos/skim-rs/skim/releases/assets/592966422"
+checksum = "sha256:dd4b7facc9300930da32377e2a4c01c44d0d1adc203ebc47610034a92543e86e"
+url = "https://github.com/skim-rs/skim/releases/download/v5.7.3/skim-aarch64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/skim-rs/skim/releases/assets/605204474"
 
 [[tools."aqua:sxyazi/yazi"]]
 version = "26.9.1"
@@ -3696,27 +3696,26 @@ url = "https://github.com/agavra/tuicr/releases/download/v0.27.0/tuicr-0.27.0-aa
 url_api = "https://api.github.com/repos/agavra/tuicr/releases/assets/584424400"
 
 [[tools."github:astral-sh/hawk"]]
-version = "0.1.14"
+version = "0.1.15"
 backend = "github:astral-sh/hawk"
 
 [tools."github:astral-sh/hawk"."platforms.linux-arm64"]
-checksum = "sha256:2a36ed6244a7b646ada0c7e9bc90cbc1757f17cc4af6675ecb32eec29d7dde23"
-url = "https://github.com/astral-sh/hawk/releases/download/0.1.14/cargo-hawk-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/hawk/releases/assets/544384043"
+checksum = "sha256:541c2321b68e162261367450af7fa7d7114e7967f3673036ddf4df73d4c4f12a"
+url = "https://github.com/astral-sh/hawk/releases/download/0.1.15/cargo-hawk-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/hawk/releases/assets/603454975"
 provenance = "github-attestations"
 
 [tools."github:astral-sh/hawk"."platforms.linux-x64"]
-checksum = "sha256:6cc8b57e0d91edbdf70388254c73e2dcf7653929d83081e47dc2a6d6c85b0369"
-url = "https://github.com/astral-sh/hawk/releases/download/0.1.14/cargo-hawk-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/hawk/releases/assets/544384072"
+checksum = "sha256:c50189129c43f026b19a0e7da2a405ab2599ff9426a826f7db8ab64d7274d1d5"
+url = "https://github.com/astral-sh/hawk/releases/download/0.1.15/cargo-hawk-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/hawk/releases/assets/603454993"
 provenance = "github-attestations"
 
 [tools."github:astral-sh/hawk"."platforms.macos-arm64"]
-checksum = "sha256:a1379620245ba56d53bca3727f57b1db959b6085b4a64dc42a56f12367fd64c6"
-url = "https://github.com/astral-sh/hawk/releases/download/0.1.14/cargo-hawk-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/hawk/releases/assets/544384048"
+checksum = "sha256:4574a0b6fbf392173204535b1c8e016e916b4a55310608330b0f0b9962f2a430"
+url = "https://github.com/astral-sh/hawk/releases/download/0.1.15/cargo-hawk-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/hawk/releases/assets/603454970"
 provenance = "github-attestations"
-provenance_verified = true
 
 [[tools."github:bahdotsh/wrkflw"]]
 version = "0.8.0"
@@ -4043,35 +4042,23 @@ url = "https://nodejs.org/dist/v26.10.0/node-v26.10.0-darwin-arm64.tar.gz"
 version = "1.0.0"
 backend = "npm:@earendil-works/pi-coding-agent"
 
+[[tools."npm:@opencode/cli"]]
+version = "2.0.21"
+backend = "npm:@opencode/cli"
+
+[tools."npm:@opencode/cli".options]
+allow_builds = '["@opencode/cli"]'
+
 [[tools."npm:scriptc"]]
 version = "0.0.36"
 backend = "npm:scriptc"
 
 [[tools.nub]]
-version = "0.9.5"
+version = "0.9.6"
 backend = "npm:@nubjs/nub"
 
 [tools.nub.options]
 allow_builds = '["@nubjs/nub"]'
-
-[[tools.opencode]]
-version = "1.18.33"
-backend = "aqua:anomalyco/opencode"
-
-[tools.opencode."platforms.linux-arm64"]
-checksum = "sha256:c63486624621924bf43be5c01abd252885661a734814224f6d70188a33aea858"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.18.33/opencode-linux-arm64.tar.gz"
-url_api = "https://api.github.com/repos/anomalyco/opencode/releases/assets/594449121"
-
-[tools.opencode."platforms.linux-x64"]
-checksum = "sha256:e546123213ae47909a4268692aa4b94950d011afe9cac9938753a2194f1c16d5"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.18.33/opencode-linux-x64.tar.gz"
-url_api = "https://api.github.com/repos/anomalyco/opencode/releases/assets/594449176"
-
-[tools.opencode."platforms.macos-arm64"]
-checksum = "sha256:24b12873e605b3db3387cb355f43ba7451cd6065c180d8c188663337d2eeb553"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.18.33/opencode-darwin-arm64.zip"
-url_api = "https://api.github.com/repos/anomalyco/opencode/releases/assets/594449070"
 
 [[tools.pixi]]
 version = "0.81.0"
@@ -4097,25 +4084,25 @@ provenance = "github-attestations"
 provenance_verified = true
 
 [[tools.pnpm]]
-version = "12.8.1"
+version = "12.9.0"
 backend = "aqua:pnpm/pnpm"
 
 [tools.pnpm."platforms.linux-arm64"]
-checksum = "sha256:75c5e34d3164fe3d3549580b1b1b59c9dd16543e558dec722b686193cdb7dfa1"
-url = "https://github.com/pnpm/pnpm/releases/download/v12.8.1/pnpm-linux-arm64.tar.gz"
-url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/595935899"
+checksum = "sha256:499d0fb80dcbf92f4347bbae592dfb9852c48e5f758bfe413f0f9a68a3e5afaa"
+url = "https://github.com/pnpm/pnpm/releases/download/v12.9.0/pnpm-linux-arm64.tar.gz"
+url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/606603784"
 provenance = "github-attestations"
 
 [tools.pnpm."platforms.linux-x64"]
-checksum = "sha256:db3906881f63e41b655e3b97d473603dc26326c2470d0b1b8083689e1bcbd1e8"
-url = "https://github.com/pnpm/pnpm/releases/download/v12.8.1/pnpm-linux-x64.tar.gz"
-url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/595935887"
+checksum = "sha256:df37180e8b3d964e08e8a6bf3bff1374dcf37108fbce1ef7ddc9b70f7cad141f"
+url = "https://github.com/pnpm/pnpm/releases/download/v12.9.0/pnpm-linux-x64.tar.gz"
+url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/606603786"
 provenance = "github-attestations"
 
 [tools.pnpm."platforms.macos-arm64"]
-checksum = "sha256:8eeeae4cd714b2f1755750d303f5b1bcfe23d95ed7245536305d0c3877c5ce41"
-url = "https://github.com/pnpm/pnpm/releases/download/v12.8.1/pnpm-darwin-arm64.tar.gz"
-url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/595935883"
+checksum = "sha256:12d792463ed8f30cc80e6de4035c37d0d0d78ba57dfb27d8e82bf0fd24d98372"
+url = "https://github.com/pnpm/pnpm/releases/download/v12.9.0/pnpm-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/pnpm/pnpm/releases/assets/606603785"
 provenance = "github-attestations"
 
 [[tools.rclone]]
@@ -4309,25 +4296,25 @@ url_api = "https://api.github.com/repos/tree-sitter/tree-sitter/releases/assets/
 provenance = "github-attestations"
 
 [[tools.uv]]
-version = "0.12.21"
+version = "0.12.23"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv."platforms.linux-arm64"]
-checksum = "sha256:030b69227b40af8c1981b7301793dc66e71ed3c796ea8688209dd268bd91ec51"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.21/uv-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/599237845"
+checksum = "sha256:6524bd338177ed50d035d39354e12545e993bbeba2ecbddf0480c5b3a81d313f"
+url = "https://github.com/astral-sh/uv/releases/download/0.12.23/uv-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/608232491"
 provenance = "github-attestations"
 
 [tools.uv."platforms.linux-x64"]
-checksum = "sha256:23f02075b652bb1df64178cfae41b5caf160822e720e2663568f3f5d63bc52c0"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.21/uv-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/599238020"
+checksum = "sha256:9167d72b3319674b6303c4cbe071854bba13ebdf3d76b1a7cbdc175471fb66d6"
+url = "https://github.com/astral-sh/uv/releases/download/0.12.23/uv-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/608232628"
 provenance = "github-attestations"
 
 [tools.uv."platforms.macos-arm64"]
-checksum = "sha256:b88bda573e566ef9bced66b155fe0408626fbbc053aee1c30ba686f0728c9447"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.21/uv-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/599237829"
+checksum = "sha256:50487ae565ccd96e499056b4674d438f4c53170202617b4c759defe0c6a1b544"
+url = "https://github.com/astral-sh/uv/releases/download/0.12.23/uv-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/608232483"
 provenance = "github-attestations"
 
 [[tools.vp]]
@@ -4335,23 +4322,23 @@ version = "1.0.0"
 backend = "npm:vite-plus"
 
 [[tools.watchexec]]
-version = "2.7.3"
+version = "2.7.4"
 backend = "aqua:watchexec/watchexec"
 
 [tools.watchexec."platforms.linux-arm64"]
-checksum = "sha256:80bd9acfc25e4035624d99585b2f920add5ecbdc0c732c4e42fa1451b63d80a5"
-url = "https://github.com/watchexec/watchexec/releases/download/v2.7.3/watchexec-2.7.3-aarch64-unknown-linux-musl.tar.xz"
-url_api = "https://api.github.com/repos/watchexec/watchexec/releases/assets/565495670"
+checksum = "sha256:b649cf89bda51ba060abb9e9765ea585823ee94b9bf2e2ad86081323a13a81c4"
+url = "https://github.com/watchexec/watchexec/releases/download/v2.7.4/watchexec-2.7.4-aarch64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/watchexec/watchexec/releases/assets/605904467"
 
 [tools.watchexec."platforms.linux-x64"]
-checksum = "sha256:b5bcd00ae3ebb53f7ea5d499fdf98bda14711589a7ecc0619e1847586beaa24d"
-url = "https://github.com/watchexec/watchexec/releases/download/v2.7.3/watchexec-2.7.3-x86_64-unknown-linux-musl.tar.xz"
-url_api = "https://api.github.com/repos/watchexec/watchexec/releases/assets/565495691"
+checksum = "sha256:6d7e89e8815ac1b4eafb9497ed0a8ada986117fbba460b2f9282e0e160f776dd"
+url = "https://github.com/watchexec/watchexec/releases/download/v2.7.4/watchexec-2.7.4-x86_64-unknown-linux-gnu.tar.xz"
+url_api = "https://api.github.com/repos/watchexec/watchexec/releases/assets/605904460"
 
 [tools.watchexec."platforms.macos-arm64"]
-checksum = "sha256:bb2a3acc02de5c64f87779fc0226274d47d79026c6df969c8c1034a110b2efad"
-url = "https://github.com/watchexec/watchexec/releases/download/v2.7.3/watchexec-2.7.3-aarch64-apple-darwin.tar.xz"
-url_api = "https://api.github.com/repos/watchexec/watchexec/releases/assets/565495664"
+checksum = "sha256:1e5052fe1f0690cd04d13d59f2d6bb0b090985d88c7406acadacd1198f58706e"
+url = "https://github.com/watchexec/watchexec/releases/download/v2.7.4/watchexec-2.7.4-aarch64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/watchexec/watchexec/releases/assets/605904470"
 
 [[tools.zoxide]]
 version = "0.10.0"

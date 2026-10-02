@@ -5,7 +5,7 @@ min_version = "2026.8.2"
 "~/.local/share/agent-sources/nrminor-skills" = { url = "https://github.com/nrminor/skills.git" }
 
 [dotfiles]
-"~/.config/opencode/command" = { source = "~/.local/share/agent-sources/autoresearch/.opencode/commands", mode = "symlink-each", exclude = [
+"~/.config/opencode/commands" = { source = "~/.local/share/agent-sources/autoresearch/.opencode/commands", mode = "symlink-each", exclude = [
   "complete-next-task.md",
   "describe-commit.md",
   "query.md",
@@ -13,12 +13,12 @@ min_version = "2026.8.2"
   "tidy-commit-graph.md",
   "update-working-document.md",
 ] }
-"~/.config/opencode/command/complete-next-task.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/complete-next-task.md" }
-"~/.config/opencode/command/describe-commit.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/describe-commit.md" }
-"~/.config/opencode/command/query.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/query.md" }
-"~/.config/opencode/command/run-multiphase-review.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/run-multiphase-review.md" }
-"~/.config/opencode/command/tidy-commit-graph.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/tidy-commit-graph.md" }
-"~/.config/opencode/command/update-working-document.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/update-working-document.md" }
+"~/.config/opencode/commands/complete-next-task.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/complete-next-task.md" }
+"~/.config/opencode/commands/describe-commit.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/describe-commit.md" }
+"~/.config/opencode/commands/query.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/query.md" }
+"~/.config/opencode/commands/run-multiphase-review.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/run-multiphase-review.md" }
+"~/.config/opencode/commands/tidy-commit-graph.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/tidy-commit-graph.md" }
+"~/.config/opencode/commands/update-working-document.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/update-working-document.md" }
 "~/.pi/agent/AGENTS.md" = { source = "~/.dotfiles/.config/pi/AGENTS.md" }
 "~/.pi/agent/settings.json" = { source = "~/.dotfiles/.config/pi/settings.json" }
 
@@ -57,8 +57,8 @@ min_version = "2026.8.2"
   "flavors",
 ] }
 "~/.config/opencode" = { source = "~/.dotfiles/.config/opencode", mode = "symlink-each", exclude = [
-  "command",
-  "plugin",
+  "commands",
+  "plugins",
 ] }
 
 # Terminal and command-line applications
@@ -131,7 +131,7 @@ node = "latest"
 neovim = "0.12.5"
 "npm:@earendil-works/pi-coding-agent" = "1.0.0"
 nub = { version = "latest", allow_builds = ["@nubjs/nub"] }
-opencode = "latest"
+"npm:@opencode/cli" = { version = "2", allow_builds = ["@opencode/cli"] }
 pixi = "latest"
 pnpm = "latest"
 rclone = "latest"

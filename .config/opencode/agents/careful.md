@@ -2,174 +2,135 @@
 description: Edits code with increased sensitivity to entropy
 mode: primary
 model: openai/gpt-6-astra
-temperature: 0.6
-tools:
-  write: true
-  edit: true
-permission:
-  bash:
-    # =======================================================================
-    # ORDERING: most general → most specific (last matching rule wins)
-    # =======================================================================
-
-    # Default policy (most general - must come first)
-    "*": ask
-
-    # --- Git: deny by default, then allow specific read-only commands ---
-    "git": deny
-    "git *": deny
-    "git push": deny
-    "git status": allow
-    "git status *": allow
-    "git log": allow
-    "git log *": allow
-    "git diff": allow
-    "git diff *": allow
-    "git show": allow
-    "git show *": allow
-    "git branch": allow
-    "git branch *": allow
-    "git ls-files": allow
-    "git ls-files *": allow
-
-    # --- Jujutsu: ask by default, then allow specific read-only commands ---
-    "jj": ask
-    "jj *": ask
-    "jj git push": deny
-    "jj log": allow
-    "jj log *": allow
-    "jj diff": allow
-    "jj diff *": allow
-    "jj show": allow
-    "jj show *": allow
-    "jj status": allow
-    "jj status *": allow
-
-    # --- Cargo: allow by default, then restrict specific commands ---
-    "cargo *": allow
-    "cargo add": ask
-    "cargo remove": ask
-    "cargo install": deny
-
-    # --- Other build tools (safe to run) ---
-    "rustc": allow
-    "rustc *": allow
-    "just": allow
-    "just *": allow
-    "make": allow
-    "make *": allow
-
-    # --- Testing (safe to run) ---
-    "pytest": allow
-    "pytest *": allow
-    "uv run pytest *": allow
-    "nub run test": allow
-    "nub run test *": allow
-    "node --test": allow
-    "node --test *": allow
-
-    # --- Read-only file operations ---
-    "cat": allow
-    "cat *": allow
-    "head": allow
-    "head *": allow
-    "tail": allow
-    "tail *": allow
-    "less": allow
-    "less *": allow
-    "more": allow
-    "more *": allow
-    "grep": allow
-    "grep *": allow
-    "rg": allow
-    "rg *": allow
-
-    # --- Find: allow by default, deny dangerous flags ---
-    "find": allow
-    "find *": allow
-    "find * -delete": deny
-    "find * -exec": deny
-    "find * -execdir": deny
-
-    # --- Directory navigation/listing ---
-    "ls": allow
-    "ls *": allow
-    "pwd": allow
-    "tree": allow
-    "tree *": allow
-    "file": allow
-    "file *": allow
-    "stat": allow
-    "stat *": allow
-    "wc": allow
-    "wc *": allow
-
-    # --- Safe utilities ---
-    "echo": allow
-    "echo *": allow
-    "printf": allow
-    "printf *": allow
-    "which": allow
-    "which *": allow
-    "whereis": allow
-    "whereis *": allow
-    "env": allow
-    "printenv": allow
-    "printenv *": allow
-    "date": allow
-    "uname": allow
-    "uname *": allow
-
-    # --- Diff/comparison tools ---
-    "diff": allow
-    "diff *": allow
-    "cmp": allow
-    "cmp *": allow
-
-    # --- Compression (read operations only) ---
-    "tar -t": allow
-    "tar -t *": allow
-    "unzip -l": allow
-    "unzip -l *": allow
-    "gzip -l": allow
-    "gzip -l *": allow
-
-    # --- Editing tools (complete deny) ---
-    "sed": deny
-    "sed *": deny
-    "awk": deny
-    "awk *": deny
-    "perl": deny
-    "perl *": deny
-    "python": deny
-    "python *": deny
-    "python3": deny
-    "python3 *": deny
-    "uv run *": ask
-
-    # --- Node dependency hell avoidance ---
-    "npm install": deny
-    "npm i": deny
-    "npm": deny
-    "npm *": deny
-    "npx": deny
-    "npx *": deny
-
-    # --- Destructive file operations ---
-    "rm -rf": deny
-    "rm -rf *": deny
-    "dd": deny
-    "dd *": deny
-    "truncate": deny
-    "truncate *": deny
-
-    # --- Dangerous remote execution ---
-    "curl * | sh": deny
-    "curl * | bash": deny
-    "wget * | sh": deny
-    "wget * | bash": deny
-    "eval": deny
-    "eval *": deny
+permissions:
+  - { action: edit, resource: "*", effect: allow }
+  - { action: shell, resource: "*", effect: ask }
+  - { action: shell, resource: "git", effect: deny }
+  - { action: shell, resource: "git *", effect: deny }
+  - { action: shell, resource: "git push", effect: deny }
+  - { action: shell, resource: "git status", effect: allow }
+  - { action: shell, resource: "git status *", effect: allow }
+  - { action: shell, resource: "git log", effect: allow }
+  - { action: shell, resource: "git log *", effect: allow }
+  - { action: shell, resource: "git diff", effect: allow }
+  - { action: shell, resource: "git diff *", effect: allow }
+  - { action: shell, resource: "git show", effect: allow }
+  - { action: shell, resource: "git show *", effect: allow }
+  - { action: shell, resource: "git branch", effect: allow }
+  - { action: shell, resource: "git branch *", effect: allow }
+  - { action: shell, resource: "git ls-files", effect: allow }
+  - { action: shell, resource: "git ls-files *", effect: allow }
+  - { action: shell, resource: "jj", effect: ask }
+  - { action: shell, resource: "jj *", effect: ask }
+  - { action: shell, resource: "jj git push", effect: deny }
+  - { action: shell, resource: "jj log", effect: allow }
+  - { action: shell, resource: "jj log *", effect: allow }
+  - { action: shell, resource: "jj diff", effect: allow }
+  - { action: shell, resource: "jj diff *", effect: allow }
+  - { action: shell, resource: "jj show", effect: allow }
+  - { action: shell, resource: "jj show *", effect: allow }
+  - { action: shell, resource: "jj status", effect: allow }
+  - { action: shell, resource: "jj status *", effect: allow }
+  - { action: shell, resource: "cargo *", effect: allow }
+  - { action: shell, resource: "cargo add", effect: ask }
+  - { action: shell, resource: "cargo remove", effect: ask }
+  - { action: shell, resource: "cargo install", effect: deny }
+  - { action: shell, resource: "rustc", effect: allow }
+  - { action: shell, resource: "rustc *", effect: allow }
+  - { action: shell, resource: "just", effect: allow }
+  - { action: shell, resource: "just *", effect: allow }
+  - { action: shell, resource: "make", effect: allow }
+  - { action: shell, resource: "make *", effect: allow }
+  - { action: shell, resource: "pytest", effect: allow }
+  - { action: shell, resource: "pytest *", effect: allow }
+  - { action: shell, resource: "uv run pytest *", effect: allow }
+  - { action: shell, resource: "nub run test", effect: allow }
+  - { action: shell, resource: "nub run test *", effect: allow }
+  - { action: shell, resource: "node --test", effect: allow }
+  - { action: shell, resource: "node --test *", effect: allow }
+  - { action: shell, resource: "cat", effect: allow }
+  - { action: shell, resource: "cat *", effect: allow }
+  - { action: shell, resource: "head", effect: allow }
+  - { action: shell, resource: "head *", effect: allow }
+  - { action: shell, resource: "tail", effect: allow }
+  - { action: shell, resource: "tail *", effect: allow }
+  - { action: shell, resource: "less", effect: allow }
+  - { action: shell, resource: "less *", effect: allow }
+  - { action: shell, resource: "more", effect: allow }
+  - { action: shell, resource: "more *", effect: allow }
+  - { action: shell, resource: "grep", effect: allow }
+  - { action: shell, resource: "grep *", effect: allow }
+  - { action: shell, resource: "rg", effect: allow }
+  - { action: shell, resource: "rg *", effect: allow }
+  - { action: shell, resource: "find", effect: allow }
+  - { action: shell, resource: "find *", effect: allow }
+  - { action: shell, resource: "find * -delete", effect: deny }
+  - { action: shell, resource: "find * -exec", effect: deny }
+  - { action: shell, resource: "find * -execdir", effect: deny }
+  - { action: shell, resource: "ls", effect: allow }
+  - { action: shell, resource: "ls *", effect: allow }
+  - { action: shell, resource: "pwd", effect: allow }
+  - { action: shell, resource: "tree", effect: allow }
+  - { action: shell, resource: "tree *", effect: allow }
+  - { action: shell, resource: "file", effect: allow }
+  - { action: shell, resource: "file *", effect: allow }
+  - { action: shell, resource: "stat", effect: allow }
+  - { action: shell, resource: "stat *", effect: allow }
+  - { action: shell, resource: "wc", effect: allow }
+  - { action: shell, resource: "wc *", effect: allow }
+  - { action: shell, resource: "echo", effect: allow }
+  - { action: shell, resource: "echo *", effect: allow }
+  - { action: shell, resource: "printf", effect: allow }
+  - { action: shell, resource: "printf *", effect: allow }
+  - { action: shell, resource: "which", effect: allow }
+  - { action: shell, resource: "which *", effect: allow }
+  - { action: shell, resource: "whereis", effect: allow }
+  - { action: shell, resource: "whereis *", effect: allow }
+  - { action: shell, resource: "env", effect: allow }
+  - { action: shell, resource: "printenv", effect: allow }
+  - { action: shell, resource: "printenv *", effect: allow }
+  - { action: shell, resource: "date", effect: allow }
+  - { action: shell, resource: "uname", effect: allow }
+  - { action: shell, resource: "uname *", effect: allow }
+  - { action: shell, resource: "diff", effect: allow }
+  - { action: shell, resource: "diff *", effect: allow }
+  - { action: shell, resource: "cmp", effect: allow }
+  - { action: shell, resource: "cmp *", effect: allow }
+  - { action: shell, resource: "tar -t", effect: allow }
+  - { action: shell, resource: "tar -t *", effect: allow }
+  - { action: shell, resource: "unzip -l", effect: allow }
+  - { action: shell, resource: "unzip -l *", effect: allow }
+  - { action: shell, resource: "gzip -l", effect: allow }
+  - { action: shell, resource: "gzip -l *", effect: allow }
+  - { action: shell, resource: "sed", effect: deny }
+  - { action: shell, resource: "sed *", effect: deny }
+  - { action: shell, resource: "awk", effect: deny }
+  - { action: shell, resource: "awk *", effect: deny }
+  - { action: shell, resource: "perl", effect: deny }
+  - { action: shell, resource: "perl *", effect: deny }
+  - { action: shell, resource: "python", effect: deny }
+  - { action: shell, resource: "python *", effect: deny }
+  - { action: shell, resource: "python3", effect: deny }
+  - { action: shell, resource: "python3 *", effect: deny }
+  - { action: shell, resource: "uv run *", effect: ask }
+  - { action: shell, resource: "npm install", effect: deny }
+  - { action: shell, resource: "npm i", effect: deny }
+  - { action: shell, resource: "npm", effect: deny }
+  - { action: shell, resource: "npm *", effect: deny }
+  - { action: shell, resource: "npx", effect: deny }
+  - { action: shell, resource: "npx *", effect: deny }
+  - { action: shell, resource: "rm -rf", effect: deny }
+  - { action: shell, resource: "rm -rf *", effect: deny }
+  - { action: shell, resource: "dd", effect: deny }
+  - { action: shell, resource: "dd *", effect: deny }
+  - { action: shell, resource: "truncate", effect: deny }
+  - { action: shell, resource: "truncate *", effect: deny }
+  - { action: shell, resource: "curl * | sh", effect: deny }
+  - { action: shell, resource: "curl * | bash", effect: deny }
+  - { action: shell, resource: "wget * | sh", effect: deny }
+  - { action: shell, resource: "wget * | bash", effect: deny }
+  - { action: shell, resource: "eval", effect: deny }
+  - { action: shell, resource: "eval *", effect: deny }
 ---
 
 While you have write and edit permissions, with great power comes great responsibility. All lines of code are liable to become technical debt. Your role may _eventually_ be to change code, but your expectation is not that you will spend most tokens changing code. Rather, your default is only to touch code after sufficient discussion with the user has made it clear that the code you're adding will have benefits that outweigh maintenance cost. Your bar for what counts as "sufficient" is high and is part of what distinguishes you from other agents. Indeed, if you find yourself saying "Actually, I'm not sure we're ready to implement yet. Let's discuss a bit more," you've done a good job.

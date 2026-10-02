@@ -2,126 +2,97 @@
 description: Designs creative, rigorous measurements to inform engineering decisions. Asks what would change your mind, identifies what to measure (and what not to), writes benchmark scripts, and interprets results with statistical context. Invoke when you need data to choose between approaches.
 mode: all
 model: openai/gpt-6-luna
-temperature: 0.7
-tools:
-  edit: false
-permission:
-  bash:
-    # Default: deny everything, then allow specific tools
-    "*": deny
-
-    # --- Benchmarking tools ---
-    "hyperfine": allow
-    "hyperfine *": allow
-    "time": allow
-    "time *": allow
-
-    # --- Code metrics ---
-    "tokei": allow
-    "tokei *": allow
-    "wc": allow
-    "wc *": allow
-
-    # --- Resource measurement ---
-    "dust": allow
-    "dust *": allow
-    "dua": allow
-    "dua *": allow
-    "ls -l": allow
-    "ls -l *": allow
-    "ls -la": allow
-    "ls -la *": allow
-    "stat": allow
-    "stat *": allow
-
-    # --- Cargo: build, test, bench, analysis ---
-    "cargo build": allow
-    "cargo build *": allow
-    "cargo check": allow
-    "cargo check *": allow
-    "cargo test": allow
-    "cargo test *": allow
-    "cargo bench": allow
-    "cargo bench *": allow
-    "cargo bloat": allow
-    "cargo bloat *": allow
-    "cargo tree": allow
-    "cargo tree *": allow
-    "cargo metadata": allow
-    "cargo metadata *": allow
-    # Deny dependency modification
-    "cargo add": deny
-    "cargo add *": deny
-    "cargo remove": deny
-    "cargo remove *": deny
-    "cargo install": deny
-    "cargo install *": deny
-    "cargo update": deny
-    "cargo update *": deny
-
-    # --- Rust compiler analysis ---
-    "rustc": allow
-    "rustc *": allow
-
-    # --- Python/Node benchmarking ---
-    "uv run": allow
-    "uv run *": allow
-    "pixi run": allow
-    "pixi run *": allow
-    "nub": allow
-    "nub *": allow
-    "node": allow
-    "node *": allow
-
-    # --- DuckDB for analyzing benchmark output ---
-    "duckdb": allow
-    "duckdb *": allow
-
-    # --- Read-only file operations ---
-    "cat": allow
-    "cat *": allow
-    "head": allow
-    "head *": allow
-    "tail": allow
-    "tail *": allow
-    "file": allow
-    "file *": allow
-
-    # --- Search tools ---
-    "rg": allow
-    "rg *": allow
-
-    # --- Directory listing ---
-    "ls": allow
-    "ls *": allow
-    "tree": allow
-    "tree *": allow
-
-    # --- Build tool inspection ---
-    "just --list": allow
-    "just --summary": allow
-    "just --evaluate": allow
-    "just --evaluate *": allow
-    "make -n": allow
-    "make -n *": allow
-
-    # --- VCS: read-only ---
-    "git status": allow
-    "git status *": allow
-    "git log": allow
-    "git log *": allow
-    "git diff": allow
-    "git diff *": allow
-    "git show": allow
-    "git show *": allow
-    "jj log": allow
-    "jj log *": allow
-    "jj diff": allow
-    "jj diff *": allow
-    "jj show": allow
-    "jj show *": allow
-    "jj status": allow
-    "jj status *": allow
+permissions:
+  - { action: edit, resource: "*", effect: deny }
+  - { action: shell, resource: "*", effect: deny }
+  - { action: shell, resource: "hyperfine", effect: allow }
+  - { action: shell, resource: "hyperfine *", effect: allow }
+  - { action: shell, resource: "time", effect: allow }
+  - { action: shell, resource: "time *", effect: allow }
+  - { action: shell, resource: "tokei", effect: allow }
+  - { action: shell, resource: "tokei *", effect: allow }
+  - { action: shell, resource: "wc", effect: allow }
+  - { action: shell, resource: "wc *", effect: allow }
+  - { action: shell, resource: "dust", effect: allow }
+  - { action: shell, resource: "dust *", effect: allow }
+  - { action: shell, resource: "dua", effect: allow }
+  - { action: shell, resource: "dua *", effect: allow }
+  - { action: shell, resource: "ls -l", effect: allow }
+  - { action: shell, resource: "ls -l *", effect: allow }
+  - { action: shell, resource: "ls -la", effect: allow }
+  - { action: shell, resource: "ls -la *", effect: allow }
+  - { action: shell, resource: "stat", effect: allow }
+  - { action: shell, resource: "stat *", effect: allow }
+  - { action: shell, resource: "cargo build", effect: allow }
+  - { action: shell, resource: "cargo build *", effect: allow }
+  - { action: shell, resource: "cargo check", effect: allow }
+  - { action: shell, resource: "cargo check *", effect: allow }
+  - { action: shell, resource: "cargo test", effect: allow }
+  - { action: shell, resource: "cargo test *", effect: allow }
+  - { action: shell, resource: "cargo bench", effect: allow }
+  - { action: shell, resource: "cargo bench *", effect: allow }
+  - { action: shell, resource: "cargo bloat", effect: allow }
+  - { action: shell, resource: "cargo bloat *", effect: allow }
+  - { action: shell, resource: "cargo tree", effect: allow }
+  - { action: shell, resource: "cargo tree *", effect: allow }
+  - { action: shell, resource: "cargo metadata", effect: allow }
+  - { action: shell, resource: "cargo metadata *", effect: allow }
+  - { action: shell, resource: "cargo add", effect: deny }
+  - { action: shell, resource: "cargo add *", effect: deny }
+  - { action: shell, resource: "cargo remove", effect: deny }
+  - { action: shell, resource: "cargo remove *", effect: deny }
+  - { action: shell, resource: "cargo install", effect: deny }
+  - { action: shell, resource: "cargo install *", effect: deny }
+  - { action: shell, resource: "cargo update", effect: deny }
+  - { action: shell, resource: "cargo update *", effect: deny }
+  - { action: shell, resource: "rustc", effect: allow }
+  - { action: shell, resource: "rustc *", effect: allow }
+  - { action: shell, resource: "uv run", effect: allow }
+  - { action: shell, resource: "uv run *", effect: allow }
+  - { action: shell, resource: "pixi run", effect: allow }
+  - { action: shell, resource: "pixi run *", effect: allow }
+  - { action: shell, resource: "nub", effect: allow }
+  - { action: shell, resource: "nub *", effect: allow }
+  - { action: shell, resource: "node", effect: allow }
+  - { action: shell, resource: "node *", effect: allow }
+  - { action: shell, resource: "duckdb", effect: allow }
+  - { action: shell, resource: "duckdb *", effect: allow }
+  - { action: shell, resource: "cat", effect: allow }
+  - { action: shell, resource: "cat *", effect: allow }
+  - { action: shell, resource: "head", effect: allow }
+  - { action: shell, resource: "head *", effect: allow }
+  - { action: shell, resource: "tail", effect: allow }
+  - { action: shell, resource: "tail *", effect: allow }
+  - { action: shell, resource: "file", effect: allow }
+  - { action: shell, resource: "file *", effect: allow }
+  - { action: shell, resource: "rg", effect: allow }
+  - { action: shell, resource: "rg *", effect: allow }
+  - { action: shell, resource: "ls", effect: allow }
+  - { action: shell, resource: "ls *", effect: allow }
+  - { action: shell, resource: "tree", effect: allow }
+  - { action: shell, resource: "tree *", effect: allow }
+  - { action: shell, resource: "just --list", effect: allow }
+  - { action: shell, resource: "just --summary", effect: allow }
+  - { action: shell, resource: "just --evaluate", effect: allow }
+  - { action: shell, resource: "just --evaluate *", effect: allow }
+  - { action: shell, resource: "make -n", effect: allow }
+  - { action: shell, resource: "make -n *", effect: allow }
+  - { action: shell, resource: "git status", effect: allow }
+  - { action: shell, resource: "git status *", effect: allow }
+  - { action: shell, resource: "git log", effect: allow }
+  - { action: shell, resource: "git log *", effect: allow }
+  - { action: shell, resource: "git diff", effect: allow }
+  - { action: shell, resource: "git diff *", effect: allow }
+  - { action: shell, resource: "git show", effect: allow }
+  - { action: shell, resource: "git show *", effect: allow }
+  - { action: shell, resource: "jj log", effect: allow }
+  - { action: shell, resource: "jj log *", effect: allow }
+  - { action: shell, resource: "jj diff", effect: allow }
+  - { action: shell, resource: "jj diff *", effect: allow }
+  - { action: shell, resource: "jj show", effect: allow }
+  - { action: shell, resource: "jj show *", effect: allow }
+  - { action: shell, resource: "jj status", effect: allow }
+  - { action: shell, resource: "jj status *", effect: allow }
 ---
 
 You are the measurement guru. Your purpose is to help engineers make better
