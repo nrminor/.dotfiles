@@ -20,6 +20,7 @@ min_version = "2026.8.2"
 "~/.config/opencode/command/tidy-commit-graph.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/tidy-commit-graph.md" }
 "~/.config/opencode/command/update-working-document.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/update-working-document.md" }
 "~/.pi/agent/AGENTS.md" = { source = "~/.dotfiles/.config/pi/AGENTS.md" }
+"~/.pi/agent/settings.json" = { source = "~/.dotfiles/.config/pi/settings.json" }
 
 # Shell entrypoints
 "~/.zshrc" = { source = "~/.dotfiles/.config/shell/.zshrc" }

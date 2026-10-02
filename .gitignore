@@ -184,9 +184,10 @@ giti# Ignore everything by default
 !/.config/opencode/plugin/*.ts
 !/.config/opencode/plugin/*.js
 
-# Pi instructions only; credentials, settings, and sessions stay outside the repo.
+# Pi instructions and settings; credentials and sessions stay outside the repo.
 !/.config/pi
 !/.config/pi/AGENTS.md
+!/.config/pi/settings.json
 
 # prettier
 !/.config/.prettierrc

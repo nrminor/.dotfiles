@@ -1,0 +1,14 @@
+{
+  "defaultProvider": "openai",
+  "defaultModel": "gpt-6.1-sol",
+  "quietStartup": true,
+  "warnings": {
+    "anthropicExtraUsage": false
+  },
+  "tuiMode": "fullscreen",
+  "packages": [
+    "npm:pi-catppuccin@0.1.0"
+  ],
+  "theme": "catppuccin-latte/catppuccin-macchiato",
+  "lastChangelogVersion": "1.0.0"
+}

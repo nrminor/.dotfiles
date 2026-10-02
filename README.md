@@ -120,9 +120,13 @@ GITHUB_TOKEN="$(gh auth token)" mise lock --global
 ### Pi
 
 [Pi](https://pi.dev/) is a minimal alternative to OpenCode. Global mise installs
-the pinned CLI; dotfiles deploy only its [working preferences](.config/pi/AGENTS.md)
-to `~/.pi/agent/AGENTS.md`. Pi discovers the existing `~/.agents/skills` directory
-natively, so it needs no separate skill installation. OpenCode remains unchanged.
+the pinned CLI; dotfiles deploy its [working preferences](.config/pi/AGENTS.md)
+and [settings](.config/pi/settings.json) to `~/.pi/agent`. The default model is
+`openai/gpt-6.1-sol`. The pinned community package
+[`pi-catppuccin`](https://github.com/madeleineostoja/pi-catppuccin) supplies Latte
+for light terminals and Macchiato for dark terminals, switching automatically.
+Pi discovers the existing `~/.agents/skills` directory natively, so it needs no
+separate skill installation. OpenCode remains unchanged.
 
 To install or reapply this setup on an existing machine:
 
@@ -133,10 +137,11 @@ mise run dots
 pi
 ```
 
-Use `/login` and `/model` in Pi to choose authentication and a model. Credentials,
-settings, trust decisions, and sessions stay local under `~/.pi/agent`, outside
-this repository. Node 22.19 or newer must be available, including in projects
-that override the global Node version.
+Use `/login` to authenticate and `/model` to change the current model. Credentials,
+trust decisions, and sessions stay local under `~/.pi/agent`, outside this
+repository. Pi can write preferences and runtime metadata back to the deployed
+settings file; review those changes before committing. Node 22.19 or newer must
+be available, including in projects that override the global Node version.
 
 Start with the built-in tools: no third-party extensions, MCP servers, subagents,
 goal tracking, or custom prompt templates are configured. Skills load their
