@@ -29,11 +29,6 @@
   },
   "mcp": {
     "servers": {
-      "paper": {
-        "type": "remote",
-        "url": "http://127.0.0.1:29979/mcp",
-        "disabled": false,
-      },
       "bear": {
         "type": "local",
         "command": [
