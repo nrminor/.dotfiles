@@ -35,22 +35,66 @@ const antithesis_skills = [
 ]
 
 const matt_pocock_skills = [
+  ask-matt
+  code-review
+  codebase-design
+  diagnosing-bugs
   domain-modeling
   grill-me
   grill-with-docs
   grilling
   handoff
+  implement
+  implement-spec
   improve-codebase-architecture
-  prototype
+  pr
+  # prototype # Use Emil Kowalski's prototype instead; both share the same name.
   research
+  retro
   setup-matt-pocock-skills
   tdd
   teach
   to-spec
   to-tickets
+  to-questionnaire
+  triage
   wait-what
   wayfinder
+  wizard
   writing-for-agents
+
+  # Optional: miscellaneous (uncomment to enable)
+  # git-guardrails-claude-code
+  # migrate-to-shoehorn
+  # scaffold-exercises
+  # setup-pre-commit
+
+  # Optional: in-progress (uncomment to enable)
+  # chief-of-staff
+  # claude-handoff
+  # loop-me
+  # setup-ts-deep-modules
+  # writing-beats
+  # writing-fragments
+  # writing-shape
+]
+
+const emil_kowalski_skills = [
+  animate
+  animate-expo
+  animation-performance
+  animation-vocabulary
+  apple-design
+  ask-sonner
+  break-ui
+  emil-design-eng
+  find-animation-opportunities
+  improve-animations
+  mobile-native
+  pick-ui-library
+  prototype
+  review-animations
+  write-swift
 ]
 
 const nrminor_skills = [
@@ -76,7 +120,7 @@ install-skills "anthropics/skills" "opencode" $anthropic_skills
 install-skills "antithesishq/antithesis-skills" "opencode" $antithesis_skills
 install-skills "dmmulroy/anti-slop" "opencode" [install-anti-slop]
 install-skills "mattpocock/skills" "opencode" $matt_pocock_skills
-install-skills "emilkowalski/skills" "opencode" [emil-design-eng]
+install-skills "emilkowalski/skills" "opencode" $emil_kowalski_skills
 install-skills "herdrdev/herdr" "opencode" [herdr]
 install-skills "humanlayer/skills" "opencode" [show-me]
 install-skills "snarktank/ralph" "opencode" [prd ralph]
