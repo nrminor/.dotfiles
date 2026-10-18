@@ -173,7 +173,14 @@ Snacks.setup({
 					Snacks.picker.smart()
 				end,
 			},
-			lsp_symbols = { filter = { ocaml = true, ocamlinterface = true } },
+			lsp_symbols = {
+				filter = {
+					ocaml = true,
+					ocamlinterface = true,
+					typescript = true,
+					typescriptreact = true,
+				},
+			},
 		},
 	},
 })
