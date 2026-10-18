@@ -102,7 +102,6 @@ atuin = "latest"
 bat = "latest"
 carapace = "latest"
 dua = "latest"
-dust = "latest"
 eza = "latest"
 fd = "latest"
 fzf = "latest"
@@ -126,8 +125,8 @@ jujutsu = "latest"
 lazygit = "latest"
 node = "latest"
 neovim = "0.12.6"
-"npm:@earendil-works/pi-coding-agent" = "1.2.0"
-nub = { version = "latest", allow_builds = ["@nubjs/nub"] }
+"npm:@earendil-works/pi-coding-agent" = "1.4.0"
+nub = { version = "latest" }
 "npm:@opencode/cli" = { version = "2", allow_builds = ["@opencode/cli"] }
 pixi = "latest"
 pnpm = "latest"
@@ -151,6 +150,9 @@ watchexec = "latest"
 "cargo:https://github.com/bluenote-1577/sylph" = "tag:v1.0.0"
 "npm:vscode-langservers-extracted" = "latest"
 "aqua:fastfetch-cli/fastfetch" = "2.69.0"
+"github:bootandy/dust" = "latest"
+rust = { version = "latest", mr_boxington = true }
+mr-boxington = { version = "latest", workflow = "release.yml@refs/heads/main" }
 
 [tasks."skills:sync"]
 description = "Install or refresh globally managed agent skills"
