@@ -17,11 +17,26 @@ checksum = "sha256:d916511b55965e91be7a88e17f88d895b6793ceaba3e6c9b194aefe51c2c6
 url = "https://nodejs.org/dist/v26.11.1/node-v26.11.1-darwin-arm64.tar.gz"
 
 [[tools.nub]]
-version = "0.9.6"
-backend = "npm:@nubjs/nub"
+version = "0.9.7"
+backend = "github:nubjs/nub"
 
-[tools.nub.options]
-allow_builds = '["@nubjs/nub"]'
+[tools.nub."platforms.linux-arm64"]
+checksum = "sha256:2373f530e5449af22c95108435d907c26e8899734badafda6b45a45860339af7"
+checksum_source = "mise-versions"
+url = "https://github.com/nubjs/nub/releases/download/v0.9.7/nub-linux-arm64.tar.gz"
+url_api = "https://api.github.com/repos/nubjs/nub/releases/assets/657276770"
+
+[tools.nub."platforms.linux-x64"]
+checksum = "sha256:ee07bc58ad904cee969916e1f1cdd849129e699c87757a3173dbabb6b3f512ee"
+checksum_source = "mise-versions"
+url = "https://github.com/nubjs/nub/releases/download/v0.9.7/nub-linux-x64.tar.gz"
+url_api = "https://api.github.com/repos/nubjs/nub/releases/assets/657276437"
+
+[tools.nub."platforms.macos-arm64"]
+checksum = "sha256:9e312ac27f2f816adfd2de2999fc8f415ff06c98949cf94e101c24ceff81bb43"
+checksum_source = "mise-versions"
+url = "https://github.com/nubjs/nub/releases/download/v0.9.7/nub-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/nubjs/nub/releases/assets/657276149"
 
 [[tools.prek]]
 version = "0.5.5"
