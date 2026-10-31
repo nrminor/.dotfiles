@@ -90,6 +90,10 @@ giti# Ignore everything by default
 !/.config/mise/config.linux.toml
 !/.config/mise/config.macos.toml
 
+# mbx policy; generated shims and cache stay outside the repository.
+!/.config/mbx
+!/.config/mbx/config.toml
+
 # Nextflow
 !/.config/nextflow
 !/.config/nextflow/bin

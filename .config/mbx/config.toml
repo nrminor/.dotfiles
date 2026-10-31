@@ -1,0 +1,2 @@
+[gc]
+min_free_size = "20GiB"

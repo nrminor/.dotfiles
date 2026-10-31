@@ -42,6 +42,7 @@ mode = "0755"
 mode = "0755"
 
 [dotfiles]
+"~/Library/Application Support/mbx/config.toml" = { source = "~/.dotfiles/.config/mbx/config.toml" }
 "~/Library/Application Support/com.mitchellh.ghostty/config" = { source = "~/.dotfiles/.config/ghostty/config" }
 "~/Library/Application Support/tlrc/config.toml" = { source = "~/.dotfiles/.config/tlrc/config.toml" }
 "~/Library/Application Support/nushell/vendor/autoload/starship.nu" = { source = "~/.dotfiles/.config/nushell/starship.nu" }
