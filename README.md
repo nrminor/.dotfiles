@@ -117,6 +117,30 @@ mise lock
 GITHUB_TOKEN="$(gh auth token)" mise lock --global
 ```
 
+### Browser access
+
+Global mise installs the pinned official `@opencode/browse` package; the managed
+OpenCode configuration runs its MCP server through mise. Bootstrap installs the
+CLI and applies that configuration without opening a browser. On each machine,
+run:
+
+```bash
+mise run browse:setup
+```
+
+Install the extension from the printed Chrome Web Store link in Helium (or
+another supported Chromium browser), unless it is already installed. In its
+Options, enter the pairing code printed by the task. Pairing keys and
+browser state remain local in browse's XDG directories, outside this repository.
+Check the connection with `browse status --json`.
+
+Browse's self-updater is disabled so mise owns CLI upgrades. Change the version
+in `.config/mise/config.toml`, then run `mise install npm:@opencode/browse` and
+`mise lock --global npm:@opencode/browse`. Chrome manages extension updates
+separately. Node.js 22.19 or newer is required, including in projects that override
+the global Node version. Use the pairing task rather than `browse install`, which
+can install another npm-global copy and rewrite agent configuration.
+
 ### Pi
 
 [Pi](https://pi.dev/) is a minimal alternative to OpenCode. Global mise installs
