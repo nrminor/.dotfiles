@@ -2479,25 +2479,25 @@ url = "https://github.com/ast-grep/ast-grep/releases/download/0.51.0/app-aarch64
 url_api = "https://api.github.com/repos/ast-grep/ast-grep/releases/assets/644256001"
 
 [[tools.atuin]]
-version = "18.24.3"
+version = "18.24.4"
 backend = "aqua:atuinsh/atuin"
 
 [tools.atuin."platforms.linux-arm64"]
-checksum = "sha256:fb9b67771736bfd47ddbe2cf49a2c0c57f50b1f74e396b579833a977551104d4"
-url = "https://github.com/atuinsh/atuin/releases/download/v18.24.3/atuin-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/687132645"
+checksum = "sha256:5216c5fc98d46c0f99106699f88f122e4a5332e8151f481fdaac408329e3d0c6"
+url = "https://github.com/atuinsh/atuin/releases/download/v18.24.4/atuin-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/690584609"
 provenance = "github-attestations"
 
 [tools.atuin."platforms.linux-x64"]
-checksum = "sha256:f26874cae03d6436a6f5997d9bcebef3b37237eedf9aedee12eed7421f90b847"
-url = "https://github.com/atuinsh/atuin/releases/download/v18.24.3/atuin-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/687132780"
+checksum = "sha256:d5ed5958ef04a4c20cb876feaa7fbad965f6ccd7b997e7ed54e862adec9ce0fc"
+url = "https://github.com/atuinsh/atuin/releases/download/v18.24.4/atuin-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/690584795"
 provenance = "github-attestations"
 
 [tools.atuin."platforms.macos-arm64"]
-checksum = "sha256:dd266366b1b00c298d689b0613c1acbe82855f04eb47d3f3f96262b148d8ebb9"
-url = "https://github.com/atuinsh/atuin/releases/download/v18.24.3/atuin-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/687132647"
+checksum = "sha256:edd06294377599bf4d85ca3337abc802256a991262260bdd980d1b649583553d"
+url = "https://github.com/atuinsh/atuin/releases/download/v18.24.4/atuin-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/690584610"
 provenance = "github-attestations"
 
 [[tools.bat]]
@@ -3809,25 +3809,25 @@ url = "https://github.com/agavra/tuicr/releases/download/v0.28.0/tuicr-0.28.0-aa
 url_api = "https://api.github.com/repos/agavra/tuicr/releases/assets/677485838"
 
 [[tools."github:astral-sh/hawk"]]
-version = "0.1.15"
+version = "0.1.17"
 backend = "github:astral-sh/hawk"
 
 [tools."github:astral-sh/hawk"."platforms.linux-arm64"]
-checksum = "sha256:541c2321b68e162261367450af7fa7d7114e7967f3673036ddf4df73d4c4f12a"
-url = "https://github.com/astral-sh/hawk/releases/download/0.1.15/cargo-hawk-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/hawk/releases/assets/603454975"
+checksum = "sha256:951d5885c209b9875196f2ccb92e295fdadf06c2db2b6ea07f60edf3ba8b478b"
+url = "https://github.com/astral-sh/hawk/releases/download/0.1.17/cargo-hawk-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/hawk/releases/assets/692225581"
 provenance = "github-attestations"
 
 [tools."github:astral-sh/hawk"."platforms.linux-x64"]
-checksum = "sha256:c50189129c43f026b19a0e7da2a405ab2599ff9426a826f7db8ab64d7274d1d5"
-url = "https://github.com/astral-sh/hawk/releases/download/0.1.15/cargo-hawk-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/hawk/releases/assets/603454993"
+checksum = "sha256:f5a76a43aa6be1e55e44f5eac13310193ba77729673799250065f1d201018016"
+url = "https://github.com/astral-sh/hawk/releases/download/0.1.17/cargo-hawk-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/hawk/releases/assets/692225619"
 provenance = "github-attestations"
 
 [tools."github:astral-sh/hawk"."platforms.macos-arm64"]
-checksum = "sha256:4574a0b6fbf392173204535b1c8e016e916b4a55310608330b0f0b9962f2a430"
-url = "https://github.com/astral-sh/hawk/releases/download/0.1.15/cargo-hawk-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/hawk/releases/assets/603454970"
+checksum = "sha256:b16fa5522e9cfe3866710b37bfe3c78253a813817296c72fe804574da7be4090"
+url = "https://github.com/astral-sh/hawk/releases/download/0.1.17/cargo-hawk-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/hawk/releases/assets/692225591"
 provenance = "github-attestations"
 
 [[tools."github:bahdotsh/wrkflw"]]
@@ -4009,22 +4009,22 @@ url = "https://github.com/herdrdev/herdr/releases/download/v0.9.5/herdr-macos-aa
 url_api = "https://api.github.com/repos/herdrdev/herdr/releases/assets/640898230"
 
 [[tools.hk]]
-version = "2.10.0"
+version = "2.11.0"
 backend = "packslip:github.com/jdx/hk"
 
 [tools.hk."platforms.linux-arm64"]
-checksum = "sha256:98772b6290cad5ba5fe77a203fd717c82f47bde2a9aa5b295bea22139ba4f602"
-url = "https://github.com/jdx/hk/releases/download/v2.10.0/hk-aarch64-unknown-linux-gnu.tar.gz"
+checksum = "sha256:49cbba44159c17a760319ccfcca0fe4a07fa716f217c157ea734923160b8acb9"
+url = "https://github.com/jdx/hk/releases/download/v2.11.0/hk-aarch64-unknown-linux-gnu.tar.gz"
 signer = "sigstore-oidc:https://github.com/jdx/hk/.github/workflows/release.yml"
 
 [tools.hk."platforms.linux-x64"]
-checksum = "sha256:3a1d580ba031d684307a88ce07f1751d792325f2fdace7d24dfc59b816766ad5"
-url = "https://github.com/jdx/hk/releases/download/v2.10.0/hk-x86_64-unknown-linux-gnu.tar.gz"
+checksum = "sha256:a461eb97df8e60c4447d1fdaa74a3d31598d7aba0d7a68ceebad0ff0405c3b5b"
+url = "https://github.com/jdx/hk/releases/download/v2.11.0/hk-x86_64-unknown-linux-gnu.tar.gz"
 signer = "sigstore-oidc:https://github.com/jdx/hk/.github/workflows/release.yml"
 
 [tools.hk."platforms.macos-arm64"]
-checksum = "sha256:ab54862e724bd4a1ef9180ef535cfeef7f7ff98ace911bd5ea36bb41fa4ebc94"
-url = "https://github.com/jdx/hk/releases/download/v2.10.0/hk-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:65cc3490e93522b55abe8ae42c2b5ffe452f9fe58282455ad59d10bc0deab272"
+url = "https://github.com/jdx/hk/releases/download/v2.11.0/hk-aarch64-apple-darwin.tar.gz"
 signer = "sigstore-oidc:https://github.com/jdx/hk/.github/workflows/release.yml"
 
 [[tools.hyperfine]]
@@ -4047,20 +4047,20 @@ url = "https://github.com/sharkdp/hyperfine/releases/download/v2.0.0/hyperfine-v
 url_api = "https://api.github.com/repos/sharkdp/hyperfine/releases/assets/619836081"
 
 [[tools.java]]
-version = "zulu-21.54.107.0"
+version = "zulu-21.54.109.0"
 backend = "core:java"
 
 [tools.java."platforms.linux-arm64"]
-checksum = "sha256:783460592bc66c9290b14c32a537b29da812bd62ad53bf6cb565355bca7ea563"
-url = "https://cdn.azul.com/zulu/bin/zulu21.54.107-ca-jdk21.0.13-linux_aarch64.tar.gz"
+checksum = "sha256:eb6b89b23b9eb5661b29a4e8c09e8e91952cbdfa87045d36e9078e37388c2dc3"
+url = "https://cdn.azul.com/zulu/bin/zulu21.54.109-ca-jdk21.0.13.0.3-linux_aarch64.tar.gz"
 
 [tools.java."platforms.linux-x64"]
-checksum = "sha256:dd8cf0628cfb8c369b7d4fe96783e2b516482b37d2b3e140b208c91deabf1169"
-url = "https://cdn.azul.com/zulu/bin/zulu21.54.107-ca-jdk21.0.13-linux_x64.tar.gz"
+checksum = "sha256:abe544103f1c4f0cc4b8997c0cac847eb1e842382eef57ce361c982fb0a3de11"
+url = "https://cdn.azul.com/zulu/bin/zulu21.54.109-ca-jdk21.0.13.0.3-linux_x64.tar.gz"
 
 [tools.java."platforms.macos-arm64"]
-checksum = "sha256:7682fcbbc3a164352d36c09c96b2aa91841c8bbafdb9a9a7f5f04db6d290a624"
-url = "https://cdn.azul.com/zulu/bin/zulu21.54.107-ca-jdk21.0.13-macosx_aarch64.tar.gz"
+checksum = "sha256:3fb0c7b00d48e833ad7a1ab1001c9d44cd130be20c198a4744f318592d83af40"
+url = "https://cdn.azul.com/zulu/bin/zulu21.54.109-ca-jdk21.0.13.0.3-macosx_aarch64.tar.gz"
 
 [[tools.jq]]
 version = "1.8.2"
@@ -4123,22 +4123,22 @@ url = "https://github.com/jesseduffield/lazygit/releases/download/v0.66.2/lazygi
 url_api = "https://api.github.com/repos/jesseduffield/lazygit/releases/assets/646837816"
 
 [[tools.mr-boxington]]
-version = "1.29.0"
+version = "1.29.1"
 backend = "packslip:github.com/jdx/mr-boxington"
 
 [tools.mr-boxington."platforms.linux-arm64"]
-checksum = "sha256:eeee519621082424fae16799949514b6000ba733a2d809c709a3d3ae4a0b18f7"
-url = "https://github.com/jdx/mr-boxington/releases/download/v1.29.0/mbx-aarch64-unknown-linux-gnu.tar.gz"
+checksum = "sha256:92e5554096a9b0c083aaf3d461262d31e3f7a0aa3d38ed2972c62c2b9a953c41"
+url = "https://github.com/jdx/mr-boxington/releases/download/v1.29.1/mbx-aarch64-unknown-linux-gnu.tar.gz"
 signer = "sigstore-oidc:https://github.com/jdx/mr-boxington/.github/workflows/release.yml"
 
 [tools.mr-boxington."platforms.linux-x64"]
-checksum = "sha256:b713e1a3b8e7a8696b7e365ef222a5b4bb45b18ad6c30b6f86972194294c31ae"
-url = "https://github.com/jdx/mr-boxington/releases/download/v1.29.0/mbx-x86_64-unknown-linux-gnu.tar.gz"
+checksum = "sha256:ca95f28c77711845c0455839792ca3f3070bdf007979ab75bf7e10c03b07fe3f"
+url = "https://github.com/jdx/mr-boxington/releases/download/v1.29.1/mbx-x86_64-unknown-linux-gnu.tar.gz"
 signer = "sigstore-oidc:https://github.com/jdx/mr-boxington/.github/workflows/release.yml"
 
 [tools.mr-boxington."platforms.macos-arm64"]
-checksum = "sha256:5675b2a3b16059757933448b8fd70579716f356cae311766becd9da38c983ab5"
-url = "https://github.com/jdx/mr-boxington/releases/download/v1.29.0/mbx-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:2c19baafcda87ad948f071c571f57b2cf9eaeee2c971c5536b93ae3a036d5e75"
+url = "https://github.com/jdx/mr-boxington/releases/download/v1.29.1/mbx-aarch64-apple-darwin.tar.gz"
 signer = "sigstore-oidc:https://github.com/jdx/mr-boxington/.github/workflows/release.yml"
 
 [[tools.neovim]]
@@ -4194,7 +4194,7 @@ version = "1.4.0"
 backend = "npm:@earendil-works/pi-coding-agent"
 
 [[tools."npm:@opencode/cli"]]
-version = "2.2.1"
+version = "2.2.5"
 backend = "npm:@opencode/cli"
 
 [tools."npm:@opencode/cli".options]
@@ -4356,7 +4356,7 @@ url = "https://github.com/phiresky/ripgrep-all/releases/download/v0.10.10/ripgre
 url_api = "https://api.github.com/repos/phiresky/ripgrep-all/releases/assets/314432965"
 
 [[tools.rust]]
-version = "1.98.1"
+version = "1.99.1"
 backend = "core:rust"
 
 [[tools.shfmt]]
@@ -4398,23 +4398,25 @@ url = "https://github.com/starship/starship/releases/download/v1.27.0/starship-a
 url_api = "https://api.github.com/repos/starship/starship/releases/assets/650074353"
 
 [[tools.superhtml]]
-version = "0.7.0"
+version = "0.7.1"
 backend = "github:kristoff-it/superhtml"
 
 [tools.superhtml."platforms.linux-arm64"]
-checksum = "sha256:9fa2ed1ec830464c38929531693e7129ae6df3ccb1bb3f01fec3322ed5759fc5"
-url = "https://github.com/kristoff-it/superhtml/releases/download/v0.7.0/aarch64-linux.tar.xz"
-url_api = "https://api.github.com/repos/kristoff-it/superhtml/releases/assets/442843838"
+checksum = "sha256:9ed5bbf8e61a94b13db68eca1666403c654ff4a12c12a458e217331f869394b3"
+checksum_source = "mise-versions"
+url = "https://github.com/kristoff-it/superhtml/releases/download/v0.7.1/aarch64-linux.tar.xz"
+url_api = "https://api.github.com/repos/kristoff-it/superhtml/releases/assets/692417834"
 
 [tools.superhtml."platforms.linux-x64"]
-checksum = "sha256:b75c6eeef539416096eac38729ee54e5f3b248f039cab4f57660f29a88742f68"
-url = "https://github.com/kristoff-it/superhtml/releases/download/v0.7.0/x86_64-linux-musl.tar.xz"
-url_api = "https://api.github.com/repos/kristoff-it/superhtml/releases/assets/442843882"
+checksum = "sha256:e5493cb412ea50e3686972f6e114137f0d4f612388d8041a294c8314efa55b35"
+checksum_source = "mise-versions"
+url = "https://github.com/kristoff-it/superhtml/releases/download/v0.7.1/x86_64-linux-musl.tar.xz"
+url_api = "https://api.github.com/repos/kristoff-it/superhtml/releases/assets/692417982"
 
 [tools.superhtml."platforms.macos-arm64"]
-checksum = "sha256:3846e475290f917dbf5cde8f35faff85c4402279f6ad8a8f95a861bc6523a154"
-url = "https://github.com/kristoff-it/superhtml/releases/download/v0.7.0/aarch64-macos.zip"
-url_api = "https://api.github.com/repos/kristoff-it/superhtml/releases/assets/442843867"
+checksum = "sha256:0e8a0ecf349ffcb079c336f566817a1a86c8d513331a997c70206b2f583c2086"
+url = "https://github.com/kristoff-it/superhtml/releases/download/v0.7.1/aarch64-macos.zip"
+url_api = "https://api.github.com/repos/kristoff-it/superhtml/releases/assets/692417884"
 
 [[tools.taplo]]
 version = "0.10.0"

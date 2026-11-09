@@ -78,6 +78,34 @@ vim.lsp.config("air", {
 	root_markers = { "air.toml", ".air.toml", "DESCRIPTION", ".git" },
 })
 
+local default_oxlint_cmd = vim.lsp.config.oxlint.cmd
+
+vim.lsp.config("oxlint", {
+	cmd = function(dispatchers, config)
+		local root = config and config.root_dir
+		local manifest = root and vim.fs.joinpath(root, "package.json")
+		if not manifest or not vim.uv.fs_stat(manifest) then
+			return default_oxlint_cmd(dispatchers, config)
+		end
+
+		local package = vim.json.decode(table.concat(vim.fn.readfile(manifest), "\n"))
+		if type(package) ~= "table" or (package.scripts ~= nil and type(package.scripts) ~= "table") then
+			error("Invalid package.json scripts in: " .. manifest)
+		end
+		local script = package.scripts and package.scripts["lint:lsp"]
+		if script == nil then
+			return default_oxlint_cmd(dispatchers, config)
+		end
+		if type(script) ~= "string" or script == "" then
+			error("Invalid lint:lsp script in: " .. manifest)
+		end
+		if type(package.packageManager) ~= "string" or not package.packageManager:match("^pnpm@.+") then
+			error("lint:lsp requires an explicit pnpm packageManager in: " .. manifest)
+		end
+		return vim.lsp.rpc.start({ "pnpm", "--silent", "run", "lint:lsp" }, dispatchers, { cwd = root })
+	end,
+})
+
 local default_tsc_cmd = vim.lsp.config.tsc.cmd
 
 vim.lsp.config("tsc", {

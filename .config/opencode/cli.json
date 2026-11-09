@@ -10,5 +10,8 @@
   "scroll": {
     "speed": 3,
     "acceleration": true
+  },
+  "session": {
+    "permissions": "autoaccept"
   }
 }
