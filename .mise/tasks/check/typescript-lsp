@@ -1,0 +1,5 @@
+#!/usr/bin/env nu
+#MISE description="Check Neovim's project-local TypeScript server selection"
+
+cd $env.MISE_PROJECT_ROOT
+^nvim --headless -n -i NONE -u .config/nvim/init.lua "+lua dofile('scripts/check-typescript-lsp.lua')"

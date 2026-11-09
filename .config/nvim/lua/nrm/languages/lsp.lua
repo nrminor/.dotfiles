@@ -106,23 +106,81 @@ vim.lsp.config("oxlint", {
 	end,
 })
 
-local default_tsc_cmd = vim.lsp.config.tsc.cmd
+local function uses_effect_tsgo(root)
+	local manifest = vim.fs.joinpath(root, "package.json")
+	if not vim.uv.fs_stat(manifest) then
+		return false
+	end
+	local package = vim.json.decode(table.concat(vim.fn.readfile(manifest), "\n"))
+	for _, field in ipairs({ "dependencies", "devDependencies", "optionalDependencies", "peerDependencies" }) do
+		if package[field] and package[field]["@effect/tsgo"] ~= nil then
+			return true
+		end
+	end
+	return false
+end
+
+local function typescript_major(root)
+	local manifest = vim.fs.joinpath(root, "node_modules/typescript/package.json")
+	if not vim.uv.fs_stat(manifest) then
+		return nil
+	end
+	local package = vim.json.decode(table.concat(vim.fn.readfile(manifest), "\n"))
+	local major = tonumber(tostring(package.version):match("^(%d+)%."))
+	assert(major, "Invalid installed TypeScript version in: " .. manifest)
+	return major
+end
+
+local function typescript_root(server)
+	local upstream_root = vim.lsp.config[server].root_dir
+	return function(buffer, on_dir)
+		upstream_root(buffer, function(root)
+			local classic = false
+			if not uses_effect_tsgo(root) then
+				local major = typescript_major(root)
+				classic = major ~= nil and major < 7
+			end
+			if (server == "ts_ls") == classic then
+				on_dir(root)
+			end
+		end)
+	end
+end
+
+vim.lsp.config("ts_ls", {
+	root_dir = typescript_root("ts_ls"),
+	cmd = function(dispatchers, config)
+		local cli = vim.fs.joinpath(config.root_dir, "node_modules/.bin/typescript-language-server")
+		if vim.fn.executable(cli) ~= 1 then
+			error("Install typescript-language-server as a project devDependency: " .. cli)
+		end
+		local tsserver = vim.fs.joinpath(config.root_dir, "node_modules/typescript/lib/tsserver.js")
+		if vim.fn.filereadable(tsserver) ~= 1 then
+			error("Project-local TypeScript server is missing: " .. tsserver)
+		end
+		return vim.lsp.rpc.start({ cli, "--stdio" }, dispatchers)
+	end,
+	init_options = { disableAutomaticTypingAcquisition = true },
+	before_init = function(params, config)
+		params.initializationOptions.tsserver = {
+			path = vim.fs.joinpath(config.root_dir, "node_modules/typescript/lib/tsserver.js"),
+		}
+	end,
+})
 
 vim.lsp.config("tsc", {
+	root_dir = typescript_root("tsc"),
 	cmd = function(dispatchers, config)
-		local root = config and config.root_dir
-		local manifest = root and vim.fs.joinpath(root, "package.json")
-		if not manifest or not vim.uv.fs_stat(manifest) then
-			return default_tsc_cmd(dispatchers, config)
-		end
-
-		local package = vim.json.decode(table.concat(vim.fn.readfile(manifest), "\n"))
-		local declared = false
-		for _, field in ipairs({ "dependencies", "devDependencies", "optionalDependencies", "peerDependencies" }) do
-			declared = declared or (package[field] and package[field]["@effect/tsgo"] ~= nil)
-		end
-		if not declared then
-			return default_tsc_cmd(dispatchers, config)
+		local root = config.root_dir
+		if not uses_effect_tsgo(root) then
+			local major = typescript_major(root)
+			for _, binary in ipairs({ "tsc", "tsgo" }) do
+				local cli = vim.fs.joinpath(root, "node_modules/.bin", binary)
+				if (binary == "tsgo" or (major and major >= 7)) and vim.fn.executable(cli) == 1 then
+					return vim.lsp.rpc.start({ cli, "--lsp", "--stdio" }, dispatchers)
+				end
+			end
+			error("Install a project-local TypeScript compiler in: " .. root)
 		end
 
 		local cli = vim.fs.joinpath(root, "node_modules/.bin/effect-tsgo")
@@ -200,6 +258,7 @@ vim.lsp.enable({
 	"yamlls",
 	"zls",
 	"tsc",
+	"ts_ls",
 	"eslint",
 	"oxlint",
 	"oyui_ls",

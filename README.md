@@ -223,3 +223,12 @@ Mise supplies Neovim and deploys the ordinary Lua configuration under
 revisions in `nvim-pack-lock.json`. Language servers, formatters, linters, and
 additional Tree-sitter parsers come from the active development environment or
 explicit editor installation rather than from the editor bootstrap.
+
+TypeScript servers use workspace-local dependencies, never a global compiler or
+language server. Classic TypeScript projects need `typescript-language-server`
+as a development dependency alongside `typescript`; Neovim selects `ts_ls` and
+passes the local `typescript/lib/tsserver.js` path. Native TypeScript projects use
+their local `tsc` or `tsgo` LSP. A declared `@effect/tsgo` takes precedence and keeps
+its Effect-specific integration. Missing local tools produce an error rather than
+an automatic installation or global fallback. Run `mise run check:typescript-lsp`
+to verify selection, launch commands, missing dependencies, and Deno exclusion.
