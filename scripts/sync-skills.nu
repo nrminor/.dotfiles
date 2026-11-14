@@ -87,12 +87,16 @@ const emil_kowalski_skills = [
   apple-design
   ask-sonner
   break-ui
+  choreograph
   emil-design-eng
   find-animation-opportunities
+  gestures
   improve-animations
+  learn-taste
   mobile-native
   pick-ui-library
   prototype
+  remove-animations
   review-animations
   write-swift
 ]
