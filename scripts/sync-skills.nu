@@ -114,6 +114,7 @@ const nrminor_skills = [
   logging
   performance-design
   self-doubt
+  speak-in-code
 ]
 
 def install-skills [source: string agent: string skills: list<string>] {
@@ -122,6 +123,7 @@ def install-skills [source: string agent: string skills: list<string>] {
 
 install-skills "anthropics/skills" "opencode" $anthropic_skills
 install-skills "antithesishq/antithesis-skills" "opencode" $antithesis_skills
+install-skills "brianbell-x/codehygiene" "opencode" [codehygiene]
 install-skills "dmmulroy/anti-slop" "opencode" [install-anti-slop]
 install-skills "mattpocock/skills" "opencode" $matt_pocock_skills
 install-skills "emilkowalski/skills" "opencode" $emil_kowalski_skills
