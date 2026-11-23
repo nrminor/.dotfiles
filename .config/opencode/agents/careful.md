@@ -1,7 +1,7 @@
 ---
 description: Edits code with increased sensitivity to entropy
 mode: primary
-model: openai/gpt-6.1-sol
+model: openai/gpt-6-astra
 permissions:
   - { action: edit, resource: "*", effect: allow }
   - { action: shell, resource: "*", effect: ask }
