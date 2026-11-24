@@ -208,4 +208,13 @@ nu --no-config-file ~/.config/nushell/theme.nu sync yazi
 
 [tasks.bootstrap]
 description = "Bootstrap mutable user-level state"
-run = [{ task = "setup" }, { task = "yazi:packages" }, { task = "skills:sync" }]
+run = [
+  { task = "setup" },
+  { task = "yazi:packages" },
+  { task = "skills:sync" },
+  { task = "rex:bootstrap" },
+]
+
+[tasks."rex:bootstrap"]
+description = "Install Rex on macOS and report the interactive setup step"
+run = "nu --no-config-file ~/.dotfiles/scripts/rex.nu bootstrap"

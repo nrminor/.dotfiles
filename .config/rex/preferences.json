@@ -1,0 +1,19 @@
+{
+  "interface.appearance.scheme": "dark",
+  "interface.appearance.style": "glass",
+  "interface.appearance.tint": true,
+  "interface.appearance.glass": true,
+  "interface.panes.density": "compact",
+  "interface.panes.headers": "on_hover",
+  "interface.active_panes.fade": "off",
+  "terminal.typography.font": "Berkeley Mono",
+  "terminal.typography.size": 11.5,
+  "terminal.advanced_fonts.smoothing": true,
+  "terminal.keyboard.option": "left_sends_alt",
+  "terminal.keyboard.sequence_hints": true,
+  "terminal.cursor.style": "block",
+  "terminal.cursor.blink": "off",
+  "terminal.selection.copy_on_select": true,
+  "terminal.colors.palette": false,
+  "notifications.macos.terminal_notifications": true
+}

@@ -59,6 +59,12 @@ giti# Ignore everything by default
 !/.config/ghostty
 !/.config/ghostty/config
 
+# Rex server configuration and Mac preference inputs
+!/.config/rex
+!/.config/rex/init.lua
+!/.config/rex/preferences.json
+!/.config/rex/Catppuccin Macchiato
+
 # Git
 !/.config/git
 !/.config/git/.gitconfig

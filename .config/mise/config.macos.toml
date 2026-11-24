@@ -42,9 +42,23 @@ mode = "0755"
 mode = "0755"
 
 [dotfiles]
+"~/.config/rex/init.lua" = { source = "~/.dotfiles/.config/rex/init.lua" }
+"~/.local/bin/rex" = { source = "~/.dotfiles/scripts/rex.sh" }
 "~/Library/Application Support/mbx/config.toml" = { source = "~/.dotfiles/.config/mbx/config.toml" }
 "~/Library/Application Support/com.mitchellh.ghostty/config" = { source = "~/.dotfiles/.config/ghostty/config" }
 "~/Library/Application Support/tlrc/config.toml" = { source = "~/.dotfiles/.config/tlrc/config.toml" }
 "~/Library/Application Support/nushell/vendor/autoload/starship.nu" = { source = "~/.dotfiles/.config/nushell/starship.nu" }
 "~/Library/Application Support/nushell/vendor/autoload/macos.nu" = { source = "~/.dotfiles/.config/nushell/macos.nu" }
 "~/Library/Caches/nushell/carapace.nu" = { source = "~/.dotfiles/.config/nushell/carapace.nu" }
+
+[tasks."rex:install"]
+description = "Install Rex Beta if missing; leave existing installations and updates alone"
+run = "sh ~/.dotfiles/scripts/install-rex.sh"
+
+[tasks."rex:setup"]
+description = "Apply Rex preferences to the connected Mac client"
+run = "nu --no-config-file ~/.dotfiles/scripts/rex.nu setup"
+
+[tasks."rex:check"]
+description = "Check deployed Rex configuration and connected client capabilities"
+run = "nu --no-config-file ~/.dotfiles/scripts/rex.nu check"
