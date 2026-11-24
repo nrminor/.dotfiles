@@ -10,5 +10,7 @@
     "npm:pi-catppuccin@0.1.0"
   ],
   "theme": "catppuccin-latte/catppuccin-macchiato",
-  "lastChangelogVersion": "1.0.0"
+  "lastChangelogVersion": "1.6.0",
+  "deviceId": "95acbe0a-c15c-4a5d-adab-ec3dd9518f54",
+  "showHardwareCursor": true
 }
