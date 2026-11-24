@@ -63,6 +63,7 @@ giti# Ignore everything by default
 !/.config/rex
 !/.config/rex/init.lua
 !/.config/rex/preferences.json
+!/.config/rex/sdk-source.json
 !/.config/rex/Catppuccin Macchiato
 
 # Git
@@ -202,6 +203,9 @@ giti# Ignore everything by default
 !/.config/opencode/plugins
 !/.config/opencode/plugins/*.ts
 !/.config/opencode/plugins/*.js
+!/.config/opencode/plugins/rex
+!/.config/opencode/plugins/rex/package.json
+!/.config/opencode/plugins/rex/pnpm-lock.yaml
 
 # Pi configuration and curated extensions; credentials and sessions stay outside the repo.
 !/.config/pi
@@ -209,6 +213,9 @@ giti# Ignore everything by default
 !/.config/pi/settings.json
 !/.config/pi/extensions
 !/.config/pi/extensions/mpl
+!/.config/pi/extensions/rex
+!/.config/pi/extensions/rex/package.json
+!/.config/pi/extensions/rex/pnpm-lock.yaml
 !/.config/pi/extensions/mpl/*.ts
 !/.config/pi/extensions/mpl/package.json
 !/.config/pi/extensions/mpl/nub.lock

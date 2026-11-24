@@ -210,7 +210,7 @@ nu --no-config-file ~/.config/nushell/theme.nu sync yazi
 [tasks.bootstrap]
 description = "Bootstrap mutable user-level state"
 run = [
-  { task = "setup" },
+  'mise -C "$HOME/.dotfiles" run setup',
   { task = "yazi:packages" },
   { task = "skills:sync" },
   { task = "rex:bootstrap" },

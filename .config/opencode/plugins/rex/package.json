@@ -1,0 +1,9 @@
+{
+  "name": "opencode-rex",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "rex-sdk": "file:../../../../.cache/rex-sdk/d5da158e92c0776104de8b3bc333c5a53553580b"
+  }
+}

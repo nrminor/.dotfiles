@@ -15,10 +15,14 @@ description = "Install project tools declared in mise.toml"
 run = "mise install"
 
 [tasks."deps:install"]
-description = "Install locked project dependencies with Nub"
+description = "Install locked dependencies and build the pinned Rex SDK"
+tools = { pnpm = "12.16.1" }
 run = [
   "nub install --frozen-lockfile",
   "nub --cwd .config/pi/extensions/mpl install --frozen-lockfile",
+  "nu --no-config-file scripts/install-rex-sdk.nu",
+  "nub --cwd .config/opencode/plugins/rex install --frozen-lockfile",
+  "nub --cwd .config/pi/extensions/rex install --frozen-lockfile",
 ]
 
 [tasks."hooks:install"]
