@@ -213,8 +213,13 @@ run = [
   { task = "yazi:packages" },
   { task = "skills:sync" },
   { task = "rex:bootstrap" },
+  { task = "herdr:desktop:bootstrap" },
 ]
 
 [tasks."rex:bootstrap"]
 description = "Install Rex on macOS and report the interactive setup step"
 run = "nu --no-config-file ~/.dotfiles/scripts/rex.nu bootstrap"
+
+[tasks."herdr:desktop:bootstrap"]
+description = "Install Herdr Desktop on macOS without starting or restarting sessions"
+run = "nu --no-config-file ~/.dotfiles/scripts/herdr-desktop.nu bootstrap"

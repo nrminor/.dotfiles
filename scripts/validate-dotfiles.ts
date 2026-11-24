@@ -210,7 +210,7 @@ function extractDotfileDeclarations(config: Config): DotfileDeclaration[] {
         const exclude = Array.isArray(entry.exclude)
           ? entry.exclude.filter((item): item is string => typeof item === "string")
           : [];
-        const isEdit = ["block", "line", "template", "comment"].some(
+        const isEdit = ["block", "line", "template", "comment", "merge"].some(
           (property) => property in entry
         );
 
@@ -226,6 +226,14 @@ function extractDotfileDeclarations(config: Config): DotfileDeclaration[] {
           }
           if ("block" in entry && block === undefined) problems.push("block must be a string");
           if ("line" in entry && line === undefined) problems.push("line must be a string");
+          if ("merge" in entry) {
+            if (entry.merge !== true && entry.merge !== "missing") {
+              problems.push('merge must be true or "missing"');
+            }
+            if ("block" in entry || "line" in entry || "comment" in entry) {
+              problems.push("merge is mutually exclusive with block, line, and comment");
+            }
+          }
           if (line?.includes("\n")) problems.push("line must not contain a newline");
           if ("source" in entry && !source) problems.push("source must be a non-empty string");
           if (block !== undefined && source !== undefined) {

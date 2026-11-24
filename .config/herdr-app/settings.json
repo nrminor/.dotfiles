@@ -1,0 +1,13 @@
+{
+  "font": "Berkeley Mono",
+  "font_size": 14.375,
+  "zoom": 0.8,
+  "appearance": "dark",
+  "theme": "catppuccin-macchiato",
+  "terminal_line_height": 1.18,
+  "terminal_scroll_speed": 2,
+  "option_as_alt": "left",
+  "pane_scrollbars": false,
+  "copy_on_select": true,
+  "minimum_contrast": 1
+}

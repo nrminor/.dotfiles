@@ -1,0 +1,1 @@
+shell = ["{{env.HOME}}/.local/bin/nu-login"]

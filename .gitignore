@@ -163,6 +163,15 @@ giti# Ignore everything by default
 !/.config/herdr
 !/.config/herdr/config.toml
 
+# Herdr Desktop inputs; session state and shipped layouts stay local.
+!/.config/herdr-core
+!/.config/herdr-core/config.toml
+!/.config/herdr-app
+!/.config/herdr-app/settings.json
+!/.config/herdr-app/keys.json
+!/.config/herdr-app/themes
+!/.config/herdr-app/themes/*.json
+
 # tuicr
 !/.config/tuicr
 !/.config/tuicr/config.toml

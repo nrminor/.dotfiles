@@ -1,3 +1,5 @@
+min_version = "2026.10.22"
+
 [bootstrap.packages]
 # Homebrew formulae managed by mise during the staged migration from nix-darwin.
 "brew:mas" = "latest"
@@ -44,6 +46,10 @@ mode = "0755"
 [dotfiles]
 "~/.config/rex/init.lua" = { source = "~/.dotfiles/.config/rex/init.lua" }
 "~/.local/bin/rex" = { source = "~/.dotfiles/scripts/rex.sh" }
+"~/.config/herdr-core/config.toml/shell" = { source = "~/.dotfiles/.config/herdr-core/config.toml", merge = true, template = "tera" }
+"~/.config/herdr-app/settings.json/preferences" = { source = "~/.dotfiles/.config/herdr-app/settings.json", merge = true }
+"~/.config/herdr-app/keys.json/shortcuts" = { source = "~/.dotfiles/.config/herdr-app/keys.json", merge = true }
+"~/.config/herdr-app/themes/catppuccin-macchiato.json" = { source = "~/.dotfiles/.config/herdr-app/themes/catppuccin-macchiato.json" }
 "~/Library/Application Support/mbx/config.toml" = { source = "~/.dotfiles/.config/mbx/config.toml" }
 "~/Library/Application Support/com.mitchellh.ghostty/config" = { source = "~/.dotfiles/.config/ghostty/config" }
 "~/Library/Application Support/tlrc/config.toml" = { source = "~/.dotfiles/.config/tlrc/config.toml" }
@@ -62,3 +68,15 @@ run = "nu --no-config-file ~/.dotfiles/scripts/rex.nu setup"
 [tasks."rex:check"]
 description = "Check deployed Rex configuration and connected client capabilities"
 run = "nu --no-config-file ~/.dotfiles/scripts/rex.nu check"
+
+[tasks."herdr:desktop:install"]
+description = "Install Herdr Desktop if missing, leaving the TUI and existing apps alone"
+run = "nu --no-config-file ~/.dotfiles/scripts/herdr-desktop.nu install"
+
+[tasks."herdr:desktop:setup"]
+description = "Back up and merge managed Herdr Desktop preferences"
+run = "nu --no-config-file ~/.dotfiles/scripts/herdr-desktop.nu setup"
+
+[tasks."herdr:desktop:check"]
+description = "Check Herdr Desktop bindings and deployed preferences"
+run = "nu --no-config-file ~/.dotfiles/scripts/herdr-desktop.nu check"

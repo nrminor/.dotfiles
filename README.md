@@ -202,6 +202,89 @@ closed (`defaults import com.superlogical.rex /path/to/preferences.plist`),
 then reopen it. Removing deployment declarations does not uninstall the app or
 remove existing deployed files.
 
+### Herdr Desktop
+
+Herdr Desktop is independent of the existing Ghostty + Herdr TUI setup:
+
+```text
+Ghostty -> Nushell -> herdr (legacy TUI server)
+Rex     -> Rex server -> nu-login -> Nushell
+Herdr   -> herdr-core -> nu-login -> Nushell
+```
+
+`herdr-app` arranges spaces, tabs, and panes; `hc` runs their persistent
+terminals. Neither is the legacy `herdr` command. The desktop uses its shipped
+`main` layout, not a port of the TUI's plugins or prefix bindings.
+
+```bash
+mise run herdr:desktop:install          # official installer, only if missing
+mise run dots                         # includes the shared nu-login launcher
+mise run herdr:desktop:setup --dry-run
+mise run herdr:desktop:setup            # back up and merge preferences
+mise run herdr:desktop:check
+mise run check:herdr-desktop            # isolated deployment regression tests
+```
+
+Bootstrap installs a missing app without opening it. Existing installations
+are retained; use Herdr's Updates UI for subsequent app/core updates. The
+official installer is downloaded over HTTPS and follows the current release,
+not a pinned artifact. Do not use `hc server stop` as an update command.
+
+Mise merges the managed settings, shortcuts, and core shell setting into real
+files, preserving unrelated keys. The Macchiato theme is a symlink. Setup saves
+previous files under `~/.local/state/dotfiles/backups/herdr-desktop-*`; it does
+not deploy session state, credentials, shipped layouts, or generated guides.
+Preferences reload live, and core reads the shell setting on each new launch.
+Existing terminal processes retain their environment.
+
+The terminal font is Berkeley Mono at an effective 11.5 points
+(`14.375 × 0.8` app zoom), with 1.18 line height, Macchiato, left Option as Alt,
+and copy-on-select. Changing app zoom changes effective font size. Rerunning
+setup reasserts managed settings rather than preserving edits to those keys.
+
+| Shortcut | Action |
+| --- | --- |
+| Cmd+N / Cmd+T | New space / tab |
+| Cmd+D / Cmd+Shift+D | Split right / down |
+| Cmd+[ / Cmd+] | Focus left / right pane |
+| Cmd+Option+arrows | Directional pane focus |
+| Cmd+Shift+Enter | Zoom pane |
+| Cmd+B | Toggle sidebar (not a prefix) |
+| Cmd+Ctrl+[ / Cmd+Ctrl+] | Previous / next agent |
+| Cmd+Option+B / Y / R | Btop / Yazi / Tuicr in a tab |
+| Cmd+Option+O / P | OpenCode / Pi in a tab |
+| Shift+Enter | Literal newline |
+| Ctrl+V | Native image paste |
+
+Utility and agent shortcuts inherit the terminal's directory, launch through
+`nu-login --interactive --execute`, and return to configured Nushell when the
+tool quits. Close the tab with Cmd+W when finished. These launchers assume
+local tools; remote machines need their own shell and tool setup. Unlike Rex,
+these utility shortcuts create tabs, not floating terminal layers.
+
+Editing `keys.json` takes ownership of the whole keymap: Herdr no longer adds
+new default shortcuts automatically. The tracked baseline is from 0.1.17;
+review upstream shortcuts when upgrading. Mise preserves extra local bindings,
+but reasserts keys listed in the tracked file.
+Because mise merges objects recursively, setup/check refuse extra fields inside
+a managed object-valued shortcut. Back up `keys.json` and remove the conflicting
+field before applying. Plain `mise run dots` bypasses that preflight, so follow
+it with `herdr:desktop:check`.
+
+OpenCode and Pi startup and idle reporting were verified through `hc get`,
+without sending a model request. Full working/blocked/done transitions, image
+paste, physical keyboard shortcuts, and logout/reboot recovery still need a
+hands-on trial. Kept terminals recover to a shell after process loss; they do
+not replay an agent task. Resume conversations through the agent itself.
+Quitting the desktop window is different from closing a tab or stopping core.
+
+For troubleshooting, use `herdr-app status`, `herdr-app ls`, and `hc get <id>`.
+The installed `~/.config/herdr-app/AGENTS.md` describes the current app.
+The TUI's Jujutsu worktree plugin is not shared with Desktop's Git-oriented
+worktree UI; use `jj workspace add` and open a space in that directory.
+To undo preferences, restore the backed-up files with the app closed and
+remove the relevant mise declarations before the next deployment.
+
 ### Tool lockfiles
 
 The repository has one lockfile per mise configuration scope. `mise.lock`

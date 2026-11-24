@@ -1,0 +1,4 @@
+#!/usr/bin/env nu
+#MISE description="Check isolated Herdr Desktop merges, command bindings and dry-run safety"
+
+^$nu.current-exe --no-config-file ($env.MISE_PROJECT_ROOT | path join scripts/check-herdr-desktop.nu)
