@@ -206,6 +206,13 @@ giti# Ignore everything by default
 !/.config/opencode/plugins/rex
 !/.config/opencode/plugins/rex/package.json
 !/.config/opencode/plugins/rex/pnpm-lock.yaml
+!/.config/opencode/plugins/rex/*.ts
+!/.config/opencode/plugins/rex/tsconfig.json
+!/.config/opencode/plugins/rex/vendor
+!/.config/opencode/plugins/rex/vendor/*.ts
+!/.config/opencode/plugins/rex/vendor/LICENSE
+!/.config/opencode/plugins/rex/tests
+!/.config/opencode/plugins/rex/tests/*.ts
 
 # Pi configuration and curated extensions; credentials and sessions stay outside the repo.
 !/.config/pi

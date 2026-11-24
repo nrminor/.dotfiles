@@ -1,4 +1,5 @@
 #!/usr/bin/env nu
-#MISE description="Typecheck and test Rex agent adapters without connecting to Rex"
+#MISE description="Typecheck and test OpenCode and Pi Rex adapters without connecting to Rex"
 
+^nub --cwd ($env.MISE_PROJECT_ROOT | path join .config/opencode/plugins/rex) run check
 ^nub --cwd ($env.MISE_PROJECT_ROOT | path join .config/pi/extensions/rex) run check
