@@ -172,15 +172,17 @@ esac
 }
 
 def main [] {
+  let source = open --raw ($root | path join .config/rex/init.lua)
+  assert (not ($source =~ 'rex\.bind\("(shift\+enter|cmd\+\[|cmd\+\])"')) "Keep Shift+Enter and pane cycling native"
   let cli = $env.HOME | path join .local/bin/rex
   if ($cli | path exists) {
     let checked = ^$cli --autostart=false config check ($root | path join .config/rex/init.lua) --json | complete
     assert equal $checked.exit_code 0 $checked.stderr
     let config = $checked.stdout | from json
     assert equal $config.diagnostics []
-    assert equal [$config.bindings $config.removals $config.modes] [44 0 1]
+    assert equal [$config.bindings $config.removals $config.modes] [50 0 1]
     assert equal ($config.actions | get name | sort) [open_btop open_opencode open_pi open_tuicr open_yazi]
-    print "PASS real Rex loads Lua: 44 bindings, native shortcuts retained, resize mode, five utility actions"
+    print "PASS real Rex loads Lua: 50 bindings, no native shortcut overrides, resize mode, five utility actions"
   } else {
     print "SKIP real Rex Lua check: CLI not installed"
   }

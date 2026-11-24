@@ -1,14 +1,13 @@
 -- Keep Rex's native shortcuts, with Herdr-style navigation on Cmd+B.
-rex.bind("cmd+[", "pane.focus", { direction = "left" })
-rex.bind("cmd+]", "pane.focus", { direction = "right" })
-rex.bind("shift+enter", "pane.send_key", { key = "ctrl+j" })
-
 for key, direction in pairs({ h = "left", j = "down", k = "up", l = "right" }) do
   rex.bind("cmd+b>" .. key, "pane.focus", { direction = direction })
+  rex.bind("cmd+b>shift+" .. key, "pane.move", { direction = direction })
   rex.bind("resize/" .. key, "pane.resize", { direction = direction, amount = 5 })
+  rex.bind("resize/shift+" .. key, "pane.resize", { direction = direction, amount = 15 })
 end
 rex.mode("resize", { exclusive = true })
 rex.bind("cmd+b>r", "client.mode.enter", { name = "resize" })
+rex.bind("resize/=", "pane.balance")
 rex.bind("resize/esc", "client.mode.exit")
 rex.bind("resize/enter", "client.mode.exit")
 rex.bind("cmd+b>v", "pane.split", { direction = "right" })
