@@ -216,6 +216,13 @@ giti# Ignore everything by default
 !/.config/pi/extensions/rex
 !/.config/pi/extensions/rex/package.json
 !/.config/pi/extensions/rex/pnpm-lock.yaml
+!/.config/pi/extensions/rex/*.ts
+!/.config/pi/extensions/rex/tsconfig.json
+!/.config/pi/extensions/rex/vendor
+!/.config/pi/extensions/rex/vendor/*.ts
+!/.config/pi/extensions/rex/vendor/LICENSE
+!/.config/pi/extensions/rex/test
+!/.config/pi/extensions/rex/test/*.ts
 !/.config/pi/extensions/mpl/*.ts
 !/.config/pi/extensions/mpl/package.json
 !/.config/pi/extensions/mpl/nub.lock

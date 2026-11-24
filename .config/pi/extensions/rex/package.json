@@ -3,7 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit && nub run test",
+    "test": "node --test test/*.test.ts"
+  },
   "dependencies": {
+    "effect": "4.1.0",
     "rex-sdk": "file:../../../../.cache/rex-sdk/d5da158e92c0776104de8b3bc333c5a53553580b"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "1.6.0",
+    "@types/node": "26.6.6",
+    "typebox": "1.3.27",
+    "typescript": "7.0.2"
   }
 }
