@@ -203,10 +203,23 @@ giti# Ignore everything by default
 !/.config/opencode/plugins/*.ts
 !/.config/opencode/plugins/*.js
 
-# Pi instructions and settings; credentials and sessions stay outside the repo.
+# Pi configuration and curated extensions; credentials and sessions stay outside the repo.
 !/.config/pi
 !/.config/pi/AGENTS.md
 !/.config/pi/settings.json
+!/.config/pi/extensions
+!/.config/pi/extensions/mpl
+!/.config/pi/extensions/mpl/*.ts
+!/.config/pi/extensions/mpl/package.json
+!/.config/pi/extensions/mpl/nub.lock
+!/.config/pi/extensions/mpl/tsconfig.json
+!/.config/pi/extensions/mpl/ATTRIBUTION
+!/.config/pi/extensions/mpl/LICENSE-mpl
+!/.config/pi/extensions/mpl/THIRD_PARTY_NOTICES-mpl.md
+!/.config/pi/extensions/mpl/styles
+!/.config/pi/extensions/mpl/styles/*.mplstyle
+!/.config/pi/extensions/mpl/test
+!/.config/pi/extensions/mpl/test/*.ts
 
 # prettier
 !/.config/.prettierrc

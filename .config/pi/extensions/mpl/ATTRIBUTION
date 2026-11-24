@@ -1,0 +1,8 @@
+index.ts, render.ts, replay.ts, styles/*.mplstyle, test/mpl.test.ts, and
+tsconfig.json are copied unchanged from dmmulroy/.dotfiles at commit
+81c277ba516ef303b1752b4e3e7f6efdaa6a9dd0, home/.pi/agent/extensions/mpl/.
+No repository or extension license was identified in that upstream revision.
+
+replay.ts is adapted upstream from mpl/tools/replay-core.ts. mpl is
+copyright 2026 Ivar Vong and distributed under the ISC license in
+LICENSE-mpl. THIRD_PARTY_NOTICES-mpl.md contains mpl's own notices.

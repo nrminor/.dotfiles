@@ -16,7 +16,10 @@ run = "mise install"
 
 [tasks."deps:install"]
 description = "Install locked project dependencies with Nub"
-run = "nub install --frozen-lockfile"
+run = [
+  "nub install --frozen-lockfile",
+  "nub --cwd .config/pi/extensions/mpl install --frozen-lockfile",
+]
 
 [tasks."hooks:install"]
 description = "Install repository hooks with Prek"

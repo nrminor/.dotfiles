@@ -1,0 +1,4 @@
+#!/usr/bin/env nu
+#MISE description="Typecheck and test the Pi plotting extension"
+
+^nub --cwd ($env.MISE_PROJECT_ROOT | path join ".config/pi/extensions/mpl") run check

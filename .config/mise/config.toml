@@ -27,6 +27,7 @@ OPENCODE_BROWSER_AUTO_UPDATE = "off"
 "~/.config/opencode/commands/update-working-document.md" = { source = "~/.local/share/agent-sources/nrminor-skills/.opencode/commands/update-working-document.md" }
 "~/.pi/agent/AGENTS.md" = { source = "~/.dotfiles/.config/pi/AGENTS.md" }
 "~/.pi/agent/settings.json" = { source = "~/.dotfiles/.config/pi/settings.json" }
+"~/.pi/agent/extensions/mpl" = { source = "~/.dotfiles/.config/pi/extensions/mpl", mode = "symlink" }
 
 # Shell entrypoints
 "~/.local/bin/nu-login" = { source = "~/.dotfiles/scripts/nu-login.sh" }

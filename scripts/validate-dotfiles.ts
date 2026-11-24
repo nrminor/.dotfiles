@@ -345,6 +345,7 @@ function bootstrapRepoRoots(config: Config): string[] {
 
 function collectFiles(directory: string): string[] {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    if (entry.name === "node_modules" && entry.isDirectory()) return [];
     const path = join(directory, entry.name);
     return entry.isDirectory() ? collectFiles(path) : [path];
   });
