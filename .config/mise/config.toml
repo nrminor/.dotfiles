@@ -161,6 +161,21 @@ watchexec = "latest"
 rust = { version = "latest", mr_boxington = true }
 mr-boxington = { version = "latest", workflow = "release.yml@refs/heads/main" }
 
+[tasks."cleanup:mise"]
+description = "Preview unused mise versions and stale config records"
+run = "mise prune --dry-run"
+
+[tasks."cleanup:mise:apply"]
+description = "Remove unused mise versions and stale config records"
+depends = ["cleanup:mise"]
+confirm = "Remove the unused mise versions listed above?"
+run = "mise prune"
+
+[tasks."cleanup:mise-cache"]
+description = "Clear mise caches without removing installed tools"
+confirm = "Clear mise caches, including cached task artifacts?"
+run = "mise cache clear"
+
 [tasks."skills:sync"]
 description = "Install or refresh globally managed agent skills"
 tools = { node = "24", nub = "0.5" }
